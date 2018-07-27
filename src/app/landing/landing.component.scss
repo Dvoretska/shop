@@ -56,6 +56,18 @@
   color: black;
   width: 70%;
 }
+.row {
+  margin-top: 70px;
+}
+.text-heading-logo {
+  margin: 0 auto;
+  background-image: url('../../assets/newAssets/Frame1/Logo.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center center;
+  height: 70px;
+  width: 50%;
+}
 .central-row {
   margin: 100px 0;
   width: 80%;
@@ -100,15 +112,6 @@
       font-size: 36px;
       color: black;
       padding-top: 1em;
-    }
-    .text-heading-logo {
-      margin: 0 auto;
-      background-image: url('../../assets/newAssets/Frame1/Logo.png');
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      background-position: center center;
-      height: 70px;
-      width: 50%;
     }
     .section-inner-img {
       background-image: url('../../assets/newAssets/Frame1/Frame1.png');
@@ -427,6 +430,48 @@
   }
 }
 
+.last-section {
+  @include full-size-img-with-border('../../assets/newAssets/Frame8/Frame-8.png');
+  .section-border {
+    @include curly-border;
+    @include flex-column-center;
+    .central-block {
+      background-image: url('../../assets/newAssets/Frame8/BEGIN.png');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-position: center center;
+      width: 30%;
+      height: 100px;
+      background-color: white;
+      border: 2px solid black;
+      position: relative;
+      margin: 100px 0;
+      &:before, &:after {
+        content: "";
+        display: block;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center center;
+        width: 50%;
+        height: 50%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      &:before {
+        background-image: url('../../assets/newAssets/Frame2/picture-arrow-up.png');
+        top: -47%;
+      }
+      &:after {
+        background-image: url('../../assets/newAssets/Frame2/picture-arrow-down.png');
+        top: 97%;
+      }
+    }
+    .last-section-text {
+      @include section-text;
+    }
+  }
+}
 @media screen and (min-width:2000px){
   .my-col {
     height: 60vh;
