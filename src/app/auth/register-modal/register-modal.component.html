@@ -1,0 +1,57 @@
+<form (ngSubmit)="onSignup(appForm)" #appForm="ngForm">
+  <div class="modal-header">
+    <h5 class="modal-title">Register</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        id="email"
+        aria-describedby="emailHelp"
+        placeholder="Enter email"
+        autocomplete="email"
+        ngModel
+        required
+        email
+        #email="ngModel"
+        [ngClass]="{'input-error': !email.valid && email.touched}">
+    </div>
+    <div *ngIf="!email.valid && email.touched" class="validate-error" #errorDiv>Please enter a valid value</div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        placeholder="Password"
+        autocomplete="new-password"
+        ngModel
+        required
+        #password="ngModel"
+        [ngClass]="{'input-error': passwordMatchError() && password2.value}">
+    </div>
+    <!--<div *ngIf="errors.password && errors.password.length" class="validate-error">{{ errors }}</div>-->
+    <div class="form-group">
+      <label for="password2">Confirm Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password2"
+        name="password2"
+        autocomplete="new-password"
+        placeholder="Confirm Password"
+        ngModel
+        #password2="ngModel"
+        [ngClass]="{'input-error': passwordMatchError() && password2.value}">
+    </div>
+    <div *ngIf="passwordMatchError() && password2.value" class="validate-error">Passwords don't match</div>
+    <button type="submit" [disabled]="isDisabled()" class="btn btn-primary">Sign up</button>
+  </div>
+</form>

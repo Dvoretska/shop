@@ -1,0 +1,27 @@
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { AuthService } from '../auth.service';
+
+@Component({
+  selector: 'app-login-modal',
+  templateUrl: './login-modal.component.html',
+  styleUrls: ['./login-modal.component.css']
+})
+export class LoginModalComponent implements OnInit {
+  errors = {};
+  constructor(public modalRef: BsModalRef, private authService: AuthService) { }
+
+  ngOnInit() {
+  }
+
+  onLogin(form: NgForm) {
+    const email = form.value.email;
+    const password = form.value.password;
+    this.authService.signupUser(email, password)
+      .subscribe((res)=>{},
+        (err)=>{
+          this.errors = err.error
+        })
+  }
+}

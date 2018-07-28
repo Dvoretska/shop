@@ -2,11 +2,18 @@
   <a class="nav-link" href="#">
   	<div class="logo-icon"></div>
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          [attr.aria-expanded]="!isCollapsed"
+          aria-label="Toggle navigation"
+          (click)="isCollapsed = !isCollapsed">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" [collapse]="isCollapsed" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="#">ABOUT<span class="sr-only">(current)</span></a>
@@ -47,6 +54,12 @@
         <a class="nav-link" href="#">
         	<div class="nav-icon-cart nav-icon"></div>
         </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#" (click)="openModalRegister()">Register</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#" (click)="openModalLogin()">Login</a>
       </li>
       <li class="nav-item dropdown" dropdown>
         <a class="nav-link dropdown-toggle" dropdownToggle href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

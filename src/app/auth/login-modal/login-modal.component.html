@@ -1,0 +1,41 @@
+<form (ngSubmit)="onLogin(appForm)" #appForm="ngForm">
+  <div class="modal-header">
+    <h5 class="modal-title">Login</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        id="email"
+        aria-describedby="emailHelp"
+        placeholder="Enter email"
+        autocomplete="email"
+        ngModel
+        required
+        email
+        #email="ngModel">
+    </div>
+    <div *ngIf="!email.valid && email.touched">Please enter a valid value</div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        placeholder="Password"
+        autocomplete="current-password"
+        ngModel
+        required
+        #password="ngModel">
+    </div>
+    <div *ngIf="errors.password && errors.password.length">{{ errors }}</div>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </div>
+</form>
