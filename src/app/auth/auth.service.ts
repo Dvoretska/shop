@@ -9,6 +9,10 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  public getToken(): string {
+    return localStorage.getItem('token');
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errMsg: string;
     const err = error.message || JSON.stringify(error.error);
@@ -20,10 +24,20 @@ export class AuthService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
-        // 'Authorization': 'my-auth-token'
       })
     };
     return this.http.post(`${this.API_URL}/register`,
+      {email: email, password: password}, httpOptions).pipe(
+        catchError(this.handleError)
+    )
+  }
+  loginUser(email: string, password: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this.http.post(`${this.API_URL}/login`,
       {email: email, password: password}, httpOptions).pipe(
         catchError(this.handleError)
     )

@@ -22,7 +22,8 @@
         #email="ngModel"
         [ngClass]="{'input-error': !email.valid && email.touched}">
     </div>
-    <div *ngIf="!email.valid && email.touched" class="validate-error" #errorDiv>Please enter a valid value</div>
+    <div *ngIf="!email.valid && email.touched" class="validate-error">Please enter a valid value</div>
+    <div *ngIf="errors && errors.email" class="validate-error">{{errors.email}}</div>
     <div class="form-group">
       <label for="password">Password</label>
       <input
@@ -37,7 +38,7 @@
         #password="ngModel"
         [ngClass]="{'input-error': passwordMatchError() && password2.value}">
     </div>
-    <!--<div *ngIf="errors.password && errors.password.length" class="validate-error">{{ errors }}</div>-->
+    <div *ngIf="errors && errors.password" class="validate-error">{{errors.password}}</div>
     <div class="form-group">
       <label for="password2">Confirm Password</label>
       <input

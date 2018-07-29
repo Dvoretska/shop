@@ -28,9 +28,12 @@ export class RegisterModalComponent implements OnInit {
     const email = form.value.email;
     const password = form.value.password;
     this.authService.signupUser(email, password)
-      .subscribe((res)=>{},
-        (err)=>{
-          this.errors = err.error
-        })
+      .subscribe((res)=>{
+      //   this.modalRef.hide();
+      //   localStorage.setItem('token', res);
+      // },
+      // (err)=>{
+      //   this.errors = err.error;
+      })
   }
 }

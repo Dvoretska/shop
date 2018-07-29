@@ -15,5 +15,7 @@ form {
       box-shadow: 0 0 0 1px red;
     }
   }
-
+  button[disabled] {
+    cursor: not-allowed;
+  }
 }

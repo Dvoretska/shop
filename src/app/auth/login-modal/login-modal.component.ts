@@ -6,7 +6,7 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-login-modal',
   templateUrl: './login-modal.component.html',
-  styleUrls: ['./login-modal.component.css']
+  styleUrls: ['./login-modal.component.scss']
 })
 export class LoginModalComponent implements OnInit {
   errors = {};
@@ -18,10 +18,16 @@ export class LoginModalComponent implements OnInit {
   onLogin(form: NgForm) {
     const email = form.value.email;
     const password = form.value.password;
-    this.authService.signupUser(email, password)
-      .subscribe((res)=>{},
-        (err)=>{
-          this.errors = err.error
-        })
+    this.authService.loginUser(email, password)
+      .subscribe((res)=>{
+        console.log(res['token'])
+         if (res) {
+           localStorage.setItem('user', JSON.stringify(res));
+         }
+        this.modalRef.hide();
+      },
+      (err)=>{
+        this.errors = err.error
+      })
   }
 }

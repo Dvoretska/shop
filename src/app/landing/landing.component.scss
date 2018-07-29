@@ -56,6 +56,9 @@
   color: black;
   width: 70%;
 }
+body{
+  background-color: red;
+}
 .row {
   margin-top: 70px;
 }
@@ -101,7 +104,7 @@
   }
 }
 .my-col {
-  height: 100vh;
+  height: 80vh;
 }
 .heading-section {
   @include full-size-img-with-border('../../assets/newAssets/Frame1/back1.png');
@@ -494,6 +497,7 @@
   }
 
 }
+
 @media screen and (max-width:992px){
   .begin-section {
     .section-border {

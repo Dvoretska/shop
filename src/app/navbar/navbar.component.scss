@@ -1,0 +1,37 @@
+nav {
+  margin-top: 40px;
+  border: 1px solid transparent;
+  border-image: url('../../assets/newAssets/header.png') 200 80 200 80 round;
+  border-image-outset: 35px;
+  border-image-width: 35px;
+  padding:0 10px 0 0;
+  background-color: white;
+  .logo-icon {
+    background-image: url('../../assets/TAODress.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 40px;
+    width: 200px;
+  }
+  .nav-icon-head {
+    background-image: url('../../assets/MenuIcons/Homepage-Vector.gif');
+  }
+  .nav-icon-heart {
+    background-image: url('../../assets/MenuIcons/Wishlist-Vector.gif');
+  }
+  .nav-icon-settings {
+    background-image: url('../../assets/MenuIcons/Settings-Vector.gif');
+  }
+  .nav-icon-cart {
+    background-image: url('../../assets/MenuIcons/Cart-Vector.gif');
+  }
+  .nav-icon {
+    background-size: 80px 80px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 40px;
+    height: 40px;
+  }
+}
+
