@@ -1,3 +1,7 @@
+button:focus {
+  outline: none;
+  outline-color: transparent;
+}
 body {
   background-image: url('assets/newAssets/7671.jpg');
   background-position: center;
@@ -5,4 +9,6 @@ body {
   background-repeat: repeat-y;
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
 }
+

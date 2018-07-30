@@ -12,26 +12,49 @@ nav {
     background-size: cover;
     background-position: center center;
     height: 40px;
-    width: 200px;
+    width: 140px;
   }
   .nav-icon-head {
-    background-image: url('../../assets/MenuIcons/Homepage-Vector.gif');
+    background-image: url('../../assets/MenuIcons/head.png');
   }
   .nav-icon-heart {
-    background-image: url('../../assets/MenuIcons/Wishlist-Vector.gif');
+    background-image: url('../../assets/MenuIcons/heart.png');
   }
   .nav-icon-settings {
-    background-image: url('../../assets/MenuIcons/Settings-Vector.gif');
+    background-image: url('../../assets/MenuIcons/settings.png');
   }
   .nav-icon-cart {
-    background-image: url('../../assets/MenuIcons/Cart-Vector.gif');
+    background-image: url('../../assets/MenuIcons/cart.png');
   }
   .nav-icon {
-    background-size: 80px 80px;
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center center;
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media screen and (max-width:992px){
+  nav{
+    ul.navbar-nav {
+      padding-left: 20px;
+      li.nav-item {
+        a.nav-link {
+          padding: 5px;
+          font-size: 14px
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 576px) {
+  nav {
+    margin-top: 40px;
+    border: 2px solid black;
+    border-image: none;
+    padding:0 10px 0 0;
+    background-color: white;
   }
 }
 
