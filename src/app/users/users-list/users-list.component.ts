@@ -13,13 +13,11 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUsers().subscribe(
-      (res) => {
-      console.log(res);
+      (res: {results: any[], meta: any[]}) => {
         this.users = res.results;
       },
       (err) => {
         console.log(err)
       })
   }
-
 }
