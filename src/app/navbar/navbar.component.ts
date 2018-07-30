@@ -11,7 +11,7 @@ import { LoginModalComponent } from '../auth/login-modal/login-modal.component';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  isCollapsed = false;
+  isCollapsed = true;
   modalRef: BsModalRef;
   constructor(private modalService: BsModalService) {}
 

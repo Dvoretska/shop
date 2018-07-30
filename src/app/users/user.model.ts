@@ -3,5 +3,5 @@ export class User {
               public email: string,
               public password_digest: string,
               public image: string,
-              public role_id: Object) {}
+              public role_id: {role:string}) {}
 }

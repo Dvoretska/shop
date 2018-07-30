@@ -20,10 +20,7 @@ export class LoginModalComponent implements OnInit {
     const password = form.value.password;
     this.authService.loginUser(email, password)
       .subscribe((res)=>{
-        console.log(res['token'])
-         if (res) {
-           localStorage.setItem('user', JSON.stringify(res));
-         }
+        localStorage.setItem('user', JSON.stringify(res));
         this.modalRef.hide();
       },
       (err)=>{

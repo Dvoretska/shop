@@ -5,7 +5,7 @@ import { User } from '../user.model';
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.css']
+  styleUrls: ['./users-list.components.scss']
 })
 export class UsersListComponent implements OnInit {
   users: User[];
@@ -13,9 +13,9 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUsers().subscribe(
-      (res: User[]) => {
-      console.log(res)
-        this.users = res;
+      (res) => {
+      console.log(res);
+        this.users = res.results;
       },
       (err) => {
         console.log(err)
