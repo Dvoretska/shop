@@ -422,11 +422,8 @@ body{
   @include full-size-img-with-border('../../assets/newAssets/Frame8/Frame-8.png');
 }
 
-//@media screen and (min-width:1200px) and (max-width: 2000px) {
-//  .my-col {
-//    height: 700px;
-//  }
-//}
+
+//Media rules
 
 @media screen and (min-width:992px){
   .my-col {
@@ -487,6 +484,11 @@ body{
       .option-block {
         width: 30%;
       }
+    }
+  }
+  .colours-section {
+    .color-block-wrapper {
+      margin: 0 10px;
     }
   }
   .symbols-section {
@@ -698,7 +700,66 @@ body{
   }
 }
 @media screen and (max-width: 450px) {
+  .row {
+    margin-top: 25px;
+  }
   .section-text {
     font-size: 16px;
+  }
+  .text-heading-logo {
+    width: 240px;
+    height: 40px;
+  }
+  .begin-section {
+    .begin-section-border {
+      .central-row-wrapper {
+        height: 50px;
+        .central-row {
+          &:before, &:after {
+            content: none;
+          }
+        }
+      }
+    }
+  }
+  .artistic-section {
+    .central-row {
+      .artistic-symbols {
+        height: 40px;
+      }
+    }
+  }
+  .options-section {
+    .options-row {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .option-block {
+        width: 50%;
+        height: 50px;
+        &:before, &:after {
+          content: none;
+        }
+        &:nth-child(2) {
+          margin: 10px 0;
+        }
+        .option-block-subtitle {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  .combine-section {
+    .curly-border {
+      .blocks-wrapper {
+        .artistic-block {
+          width: 30%;
+          height: 200px;
+          &:nth-child(2) {
+            margin: 0 10px;
+          }
+        }
+      }
+    }
   }
 }
