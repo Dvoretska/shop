@@ -9,15 +9,19 @@ import { User } from '../user.model';
 })
 export class UsersListComponent implements OnInit {
   users: User[];
+  roles: any[];
+  errorMsg: string = '';
   constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.userService.getUsers().subscribe(
       (res: {results: any[], meta: any[]}) => {
+        console.log(res)
         this.users = res.results;
+        this.roles = res.meta;
       },
       (err) => {
-        console.log(err)
+        this.errorMsg = err.error;
       })
   }
 }

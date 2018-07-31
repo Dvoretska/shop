@@ -1,3 +1,14 @@
-<td>{{user.id}}</td>
 <td>{{user.email}}</td>
-<td>{{user.role_id.role}}</td>
+<td>
+  <select [(ngModel)]="selectedValue">
+    <option *ngFor="let role of roles"
+          [ngValue]="role.role">{{ role.role }}
+    </option>
+  </select>
+</td>
+<td>
+  <button class="action">Save changes</button>
+</td>
+<td>
+  <button class="action">Delete user</button>
+</td>

@@ -1,19 +1,18 @@
-<div class="row">
-  <div class="col-12 my-col">
-    <div class="table-wrapper">
-      <nav class="navbar-user">
-        <button>+CREATE</button>
-      </nav>
-      <table style="width:100%">
-      <tr>
-        <th>User</th>
-        <th>User Role</th>
-        <th>Save changes</th>
-        <th>Delete user</th>
-      </tr>
-      <tr app-user *ngFor="let user of users" [user]="user"></tr>
-    </table>
-    </div>
-  </div>
+<div class="table-wrapper">
+  <nav class="navbar-user">
+    <button *ngIf="!errorMsg">+CREATE</button>
+  </nav>
+  <table style="width:100%">
+  <tr>
+    <th>User</th>
+    <th>User Role</th>
+    <th>Save changes</th>
+    <th>Delete user</th>
+  </tr>
+  <tr *ngIf="errorMsg; else usersList">
+    <td colspan="4" class="td-error">{{ errorMsg }}</td>
+  </tr>
+  <tr app-user *ngFor="let user of users" [user]="user" [roles]="roles" #usersList></tr>
+</table>
 </div>
 

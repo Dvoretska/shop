@@ -1,3 +1,23 @@
-<p>
-  profile works!
-</p>
+<app-navbar></app-navbar>
+<div class="profile-wrapper">
+  <div class="photo">
+    <img [src]="url" class="avatar">
+    <input type="file"
+           name="file"
+           id="file"
+           class="inputfile"
+           (change)="onFileChanged($event)">
+    <label for="file">Choose a file</label>
+  </div>
+  <div class="info">
+    <div class="username">Username: </div>
+     <label>
+      <span class="password">New Password: </span>
+      <input type="text" [(ngModel)]="newPassword">
+    </label>
+  </div>
+  <div class="save-wrapper">
+    <button class="btn btn-success" (click)="onSave()">Save changes</button>
+  </div>
+</div>
+
