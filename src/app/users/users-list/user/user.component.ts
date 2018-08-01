@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.selectedValue = this.user.role_id.role;
+    // this.selectedValue = this.user.role_id.role;
   }
 
 }

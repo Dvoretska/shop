@@ -8,16 +8,17 @@
            class="inputfile"
            (change)="onFileChanged($event)">
     <label for="file">Choose a file</label>
+    <span *ngIf="errorMsgImg" class="error">{{ errorMsgImg }}</span>
   </div>
   <div class="info">
-    <div class="username">Username: </div>
+    <div class="username"><strong>Username:</strong> {{ username }}</div>
      <label>
       <span class="password">New Password: </span>
-      <input type="text" [(ngModel)]="newPassword">
+      <input type="password" [(ngModel)]="newPassword">
     </label>
   </div>
   <div class="save-wrapper">
-    <button class="btn btn-success" (click)="onSave()">Save changes</button>
+    <button class="btn btn-success" (click)="onSave()" [disabled]="!isChanged && !newPassword">Save changes</button>
   </div>
 </div>
 

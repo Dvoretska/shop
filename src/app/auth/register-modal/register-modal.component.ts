@@ -29,6 +29,7 @@ export class RegisterModalComponent implements OnInit {
     const password = form.value.password;
     this.authService.signupUser(email, password)
       .subscribe((res)=>{
+        console.log(res)
         localStorage.setItem('user', JSON.stringify(res));
         this.modalRef.hide();
       },

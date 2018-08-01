@@ -32,13 +32,13 @@
       </li>
     </ul>
      <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">
+      <li class="nav-item" *ngIf="isAuthorized()">
+        <a class="nav-link"  routerLink="/profile">
         	<div class="nav-icon-head nav-icon"></div>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/profile">
+        <a class="nav-link" href="#">
         	<div class="nav-icon-settings nav-icon"></div>
         </a>
       </li>
@@ -52,11 +52,14 @@
         	<div class="nav-icon-cart nav-icon"></div>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!isAuthorized()">
         <a class="nav-link" (click)="openModalRegister()">REGISTER</a>
       </li>
-       <li class="nav-item">
+       <li class="nav-item" *ngIf="!isAuthorized()">
         <a class="nav-link" (click)="openModalLogin()">LOGIN</a>
+      </li>
+       <li class="nav-item" *ngIf="isAuthorized()">
+        <a class="nav-link" (click)="onLogout()">LOGOUT</a>
       </li>
       <!--<li class="nav-item dropdown" dropdown>-->
         <!--<a class="nav-link dropdown-toggle" dropdownToggle href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -7,29 +8,45 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  isChanged: boolean = false;
   selectedFile: File;
   newPassword: string = '';
   API_URL = 'http://localhost:3000';
   url: string = '../../assets/default-picture_0_0.png';
-  constructor(private http: HttpClient) { }
+  errorMsgImg: string = '';
+  username: string = '';
+  constructor(private http: HttpClient, private toastr: ToastrService) { }
 
   ngOnInit() {
-    const image = JSON.parse(localStorage.getItem('user')).image;
-    if (image) {
+    if(this.getObject('user').image) {
+      const image = this.getObject('user').image;
       this.url = `${this.API_URL}/${image}`;
     }
-  }
-  onFileChanged(event) {
-    this.selectedFile = event.target.files[0];
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.url = event.target.result;
-      };
-      reader.readAsDataURL(this.selectedFile);
+    if(this.getObject('user').email) {
+      let lastIndex = this.getObject('user').email.lastIndexOf('@');
+      this.username = this.getObject('user').email.substring(0, lastIndex);
     }
   }
+
+  setObject(key, obj) {
+    localStorage.setItem(key, JSON.stringify(obj));
+  }
+
+  getObject(key) {
+    return JSON.parse(localStorage.getItem(key));
+  }
+
+  updateItem(key, property, value) {
+    var obj = this.getObject(key);
+    obj[property] = value;
+    this.setObject(key, obj);
+  }
+  onFileChanged(event) {
+    this.isChanged = true
+    this.selectedFile = event.target.files[0];
+  }
   onSave() {
+    this.errorMsgImg = '';
     const savedData:FormData = new FormData();
     savedData.append('file', this.selectedFile);
     savedData.append('newPassword', this.newPassword);
@@ -39,9 +56,17 @@ export class ProfileComponent implements OnInit {
       })
     };
     this.http.post(`${this.API_URL}/profile`, savedData)
-      .subscribe(event => {
-        console.log(event);
-      });
+      .subscribe(
+        (res: {image?: string}) => {
+          if(res.image) {
+            this.updateItem('user', 'image', res.image)
+            this.url = `${this.API_URL}/${res.image}`;
+          }
+          this.toastr.success(' Your changes have been successfully saved!');
+        },
+        (err) => {
+          this.errorMsgImg = err.error;
+        });
   }
 
 }

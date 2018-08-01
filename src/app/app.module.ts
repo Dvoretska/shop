@@ -20,6 +20,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserComponent } from './users/users-list/user/user.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
 import { UserUpdateComponent } from './users/user-update/user-update.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -47,7 +49,12 @@ const appRoutes: Routes = [
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     CollapseModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    })
   ],
   providers: [AuthService, {
       provide: HTTP_INTERCEPTORS,
