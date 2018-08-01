@@ -14,6 +14,10 @@ export class ProfileComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    const image = JSON.parse(localStorage.getItem('user')).image;
+    if (image) {
+      this.url = `${this.API_URL}/${image}`;
+    }
   }
   onFileChanged(event) {
     this.selectedFile = event.target.files[0];
@@ -26,12 +30,18 @@ export class ProfileComponent implements OnInit {
     }
   }
   onSave() {
-    const savedData = new FormData();
-    savedData.append('myFile', this.selectedFile, this.newPassword);
-    // this.http.post(`${this.API_URL}/register`, savedData)
-    //   .subscribe(event => {
-    //     console.log(event);
-    //   });
+    const savedData:FormData = new FormData();
+    savedData.append('file', this.selectedFile);
+    savedData.append('newPassword', this.newPassword);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'multipart/form-data'
+      })
+    };
+    this.http.post(`${this.API_URL}/profile`, savedData)
+      .subscribe(event => {
+        console.log(event);
+      });
   }
 
 }
