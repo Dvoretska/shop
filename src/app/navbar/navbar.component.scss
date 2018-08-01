@@ -14,6 +14,9 @@ nav {
     height: 40px;
     width: 140px;
   }
+  a.nav-link {
+    cursor: pointer;
+  }
   .nav-icon-head {
     background-image: url('../../assets/MenuIcons/head.png');
   }
@@ -43,7 +46,6 @@ nav {
         a.nav-link {
           padding: 5px;
           font-size: 14px;
-          cursor: pointer;
         }
       }
     }

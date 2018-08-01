@@ -44,11 +44,18 @@ export class ProfileComponent implements OnInit {
   onFileChanged(event) {
     this.isChanged = true
     this.selectedFile = event.target.files[0];
+    let reader = new FileReader();
+    reader.onload = () => {
+      this.url = reader.result;
+    };
+    reader.readAsDataURL(this.selectedFile);
   }
   onSave() {
     this.errorMsgImg = '';
     const savedData:FormData = new FormData();
-    savedData.append('file', this.selectedFile);
+    if(this.selectedFile) {
+     savedData.append('file', this.selectedFile);
+    }
     savedData.append('newPassword', this.newPassword);
     const httpOptions = {
       headers: new HttpHeaders({
@@ -58,13 +65,13 @@ export class ProfileComponent implements OnInit {
     this.http.post(`${this.API_URL}/profile`, savedData)
       .subscribe(
         (res: {image?: string}) => {
-          if(res.image) {
-            this.updateItem('user', 'image', res.image)
-            this.url = `${this.API_URL}/${res.image}`;
-          }
+          // if(res.image) {
+          //   this.updateItem('user', 'image', res.image);
+          // }
           this.toastr.success(' Your changes have been successfully saved!');
         },
         (err) => {
+          console.log(err)
           this.errorMsgImg = err.error;
         });
   }
