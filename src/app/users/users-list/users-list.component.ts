@@ -18,11 +18,15 @@ export class UsersListComponent implements OnInit {
     this.userService.getUsers().subscribe(
       (res: {results: User[], meta: Role[]}) => {
         this.users = res.results;
-        console.log(res)
         this.roles = res.meta;
       },
       (err) => {
         this.errorMsg = err.error;
       })
+  }
+  onClearUsers(email) {
+    this.users = this.users.filter((user) => {
+      return user.email !== email
+    })
   }
 }

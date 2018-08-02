@@ -29,17 +29,11 @@ export class ProfileComponent implements OnInit {
       this.url = this.defaultImageUrl;
     }
     if(this.getObject('user').email) {
-      let lastIndex = this.getObject('user').email.lastIndexOf('@');
-      this.username = this.getObject('user').email.substring(0, lastIndex);
+      this.username = this.getObject('user').email.substring(0, this.getObject('user').email.lastIndexOf('@'));
     }
   }
   getObject(key) {
     return JSON.parse(localStorage.getItem(key));
-  }
-  updateItem(key, property, value) {
-    var obj = this.getObject(key);
-    obj[property] = value;
-    localStorage.setItem(key, JSON.stringify(obj));
   }
 
   onFileChanged(event) {

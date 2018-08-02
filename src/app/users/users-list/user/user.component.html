@@ -3,10 +3,10 @@
 </td>
 <td (click)="onSelectUser()">{{user.email}}</td>
 <td>
-  <input type="password">
+  <input type="password" [(ngModel)]="newPassword">
 </td>
 <td>
-  <select [(ngModel)]="selectedValue">
+  <select [(ngModel)]="selectedRole">
     <option *ngFor="let role of roles"
           [ngValue]="role.role">
           {{ role.role }}
@@ -14,8 +14,8 @@
   </select>
 </td>
 <td>
-  <button class="action">Save changes</button>
+  <button class="action" (click)="onSaveChanges()">Save changes</button>
 </td>
 <td>
-  <button class="action">Delete user</button>
+  <button class="action" (click)="onDeleteUser()">Delete user</button>
 </td>

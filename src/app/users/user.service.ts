@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from './user.model';
@@ -18,9 +18,20 @@ export class UserService {
     return throwError(error);
   };
 
-
   getUsers() {
     return this.http.get(`${this.API_URL}/users`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteUser(email: string) {
+     let options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {email},
+    };
+    return this.http.delete(`${this.API_URL}/delete`, options).pipe(
       catchError(this.handleError)
     );
   }
