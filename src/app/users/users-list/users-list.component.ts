@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from '../user.model';
+import { Role } from '../role.model';
 
 @Component({
   selector: 'app-users-list',
@@ -9,15 +10,15 @@ import { User } from '../user.model';
 })
 export class UsersListComponent implements OnInit {
   users: User[];
-  roles: any[];
+  roles: Role[];
   errorMsg: string = '';
   constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.userService.getUsers().subscribe(
-      (res: {results: any[], meta: any[]}) => {
-        console.log(res)
+      (res: {results: User[], meta: Role[]}) => {
         this.users = res.results;
+        console.log(res)
         this.roles = res.meta;
       },
       (err) => {

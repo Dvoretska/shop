@@ -1,22 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, Subject, ReplaySubject, from, of, range } from 'rxjs';
-import { map, filter, catchError } from 'rxjs/operators';
-
-// export interface User {
-//   id: number;
-//   email: string;
-//   password_digest: string;
-//   image: any;
-//   role_id: {
-//     id: number,
-//     role: string
-//   }
-// }
+import { Injectable, EventEmitter } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { User } from './user.model';
 
 @Injectable()
 export class UserService {
   API_URL = 'http://localhost:3000';
+  userSelected = new EventEmitter<User>();
 
   constructor(private http: HttpClient) {}
 

@@ -1,8 +1,15 @@
-<td>{{user.email}}</td>
+<td>
+  <img [src]="imagePath" class="avatar">
+</td>
+<td (click)="onSelectUser()">{{user.email}}</td>
+<td>
+  <input type="password">
+</td>
 <td>
   <select [(ngModel)]="selectedValue">
     <option *ngFor="let role of roles"
-          [ngValue]="role.role">{{ role.role }}
+          [ngValue]="role.role">
+          {{ role.role }}
     </option>
   </select>
 </td>

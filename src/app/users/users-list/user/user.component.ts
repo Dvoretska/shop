@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { User } from '../../user.model';
+import { Role } from '../../role.model';
+import { UserService } from '../../user.service';
 
 @Component({
   selector: '[app-user]',
@@ -8,12 +10,20 @@ import { User } from '../../user.model';
 })
 export class UserComponent implements OnInit {
   @Input() user: User[];
-  @Input() roles: any[];
+  @Input() roles: Role[];
+  imagePath: string;
+  API_URL = 'http://localhost:3000';
   selectedValue: string = '';
-  constructor() { }
+
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
-    // this.selectedValue = this.user.role_id.role;
+    this.imagePath = `${this.API_URL}/${this.user['image']}`
+    this.selectedValue = this.user['role_id']['role'];
+  }
+
+  onSelectUser() {
+    this.userService.userSelected.emit(this.user);
   }
 
 }

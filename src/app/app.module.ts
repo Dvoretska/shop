@@ -14,6 +14,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { RegisterModalComponent } from './auth/register-modal/register-modal.component';
 import { LoginModalComponent } from './auth/login-modal/login-modal.component';
 import { AuthService } from './auth/auth.service';
+import { StorageService } from './storage.service';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { UsersComponent } from './users/users.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -57,11 +58,12 @@ const appRoutes: Routes = [
     })
   ],
   providers: [AuthService, {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }],
+              provide: HTTP_INTERCEPTORS,
+              useClass: TokenInterceptor,
+              multi: true
+            },
+            StorageService],
   bootstrap: [AppComponent],
-  entryComponents: [RegisterModalComponent, LoginModalComponent]
+  entryComponents: [RegisterModalComponent, LoginModalComponent, UserUpdateComponent]
 })
 export class AppModule { }
