@@ -35,6 +35,12 @@
       font-size: 18px;
       line-height: 40px;
       padding: 0 10px;
+      transition: all .3s ease;
+      &:hover {
+        border: 2px solid white;
+        background: rgb(77, 144, 254);
+        color: white;
+      }
     }
   }
   table {

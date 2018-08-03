@@ -16,7 +16,6 @@ import { LoginModalComponent } from './auth/login-modal/login-modal.component';
 import { AuthService } from './auth/auth.service';
 import { StorageService } from './storage.service';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { UsersComponent } from './users/users.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserComponent } from './users/users-list/user/user.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
@@ -27,7 +26,7 @@ import { UserCreateComponent } from './users/user-create/user-create.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
-  { path: 'users', component: UsersComponent },
+  { path: 'users', component: UsersListComponent },
   { path: 'profile', component: ProfileComponent }
 ];
 
@@ -38,7 +37,6 @@ const appRoutes: Routes = [
     LandingComponent,
     RegisterModalComponent,
     LoginModalComponent,
-    UsersComponent,
     ProfileComponent,
     UserComponent,
     UsersListComponent,

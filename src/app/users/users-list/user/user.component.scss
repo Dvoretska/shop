@@ -27,7 +27,10 @@ td {
     border: none;
     background: transparent;
     cursor: pointer;
-    color: dodgerblue;
+    color: #419af4;
+    &:hover {
+      color: #5942f4;
+    }
   }
   input {
     border: 1px solid grey;
