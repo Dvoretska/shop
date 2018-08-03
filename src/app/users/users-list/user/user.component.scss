@@ -2,13 +2,27 @@ td {
   border: 1px solid black;
   cursor: pointer;
   padding: 5px;
-  .avatar {
-    width: 40px;
-    height: 40px;
-    overflow: hidden;
-    border-radius: 50%;
-    object-fit: cover;
-  }
+  .inputfile {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+    .inputfile + label {
+      background-color: transparent;
+      display: inline-block;
+      cursor: pointer;
+      margin-bottom: 0;
+      .avatar {
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
   button.action {
     border: none;
     background: transparent;
@@ -20,13 +34,20 @@ td {
     border-radius: 5px;
     width: 100%;
     min-width: 150px;
+    max-width: 250px;
     height: 30px;
     padding: 0 7px;
     &:focus {
       outline: none;
-      border: 2px solid rgb(77, 144, 254);
+      border: 1px solid rgb(77, 144, 254);
+      box-shadow: 0 0 0 1px rgb(77, 144, 254);
       border-radius: 5px;
     }
+  }
+  .error {
+    font-size: 12px;
+    color: red;
+    margin-top: 5px;
   }
   select {
     cursor: pointer;

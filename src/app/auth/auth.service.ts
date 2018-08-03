@@ -21,24 +21,14 @@ export class AuthService {
   };
 
   signupUser(email: string, password: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
     return this.http.post(`${this.API_URL}/register`,
-      {email: email, password: password}, httpOptions).pipe(
+      {email: email, password: password}).pipe(
         catchError(this.handleError)
     )
   }
   loginUser(email: string, password: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
     return this.http.post(`${this.API_URL}/login`,
-      {email: email, password: password}, httpOptions).pipe(
+      {email: email, password: password}).pipe(
         catchError(this.handleError)
     )
   }

@@ -1,9 +1,17 @@
-<td>
-  <img [src]="imagePath" class="avatar">
+<td> 
+  <input type="file"
+           name="file"
+           class="inputfile"
+           #inputFile
+           (change)="onFileChanged($event)">
+  <label (click)="openFileBrowser($event)">
+    <img [src]="user.image" class="avatar">
+  </label>
 </td>
-<td (click)="onSelectUser()">{{user.email}}</td>
+<td>{{user.email}}</td>
 <td>
   <input type="password" [(ngModel)]="newPassword">
+  <div *ngIf="error && error.password" class="error">{{ error.password }}</div>
 </td>
 <td>
   <select [(ngModel)]="selectedRole">

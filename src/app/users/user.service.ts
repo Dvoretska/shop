@@ -7,7 +7,6 @@ import { User } from './user.model';
 @Injectable()
 export class UserService {
   API_URL = 'http://localhost:3000';
-  userSelected = new EventEmitter<User>();
 
   constructor(private http: HttpClient) {}
 
@@ -20,6 +19,19 @@ export class UserService {
 
   getUsers() {
     return this.http.get(`${this.API_URL}/users`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  createUser(email: string, password: string, selectedRole: string) {
+    return this.http.post(`${this.API_URL}/create`,
+    {email: email, password: password, userRole: selectedRole}).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  updateUser(savedData: FormData) {
+    return this.http.post(`${this.API_URL}/update`, savedData).pipe(
       catchError(this.handleError)
     );
   }

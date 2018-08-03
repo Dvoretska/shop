@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
   API_URL = 'http://localhost:3000';
   url: string;
   defaultImageUrl: string = '../../assets/default-picture_0_0.png';
-  errorMsgImg: string = '';
+  error: Object = {};
   username: string = '';
   constructor(private http: HttpClient,
               private toastr: ToastrService,
@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onFileChanged(event) {
-    this.errorMsgImg = '';
+    this.error = {};
     this.isChanged = true;
     this.selectedFile = event.target.files[0];
     if (/\.(jpe?g|png|gif)$/i.test(event.target.files[0].name)) {
@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSave() {
-    this.errorMsgImg = '';
+    this.error = {};
     const savedData:FormData = new FormData();
     if(this.selectedFile) {
      savedData.append('file', this.selectedFile);
@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit {
         },
         (err) => {
           console.log(err)
-          this.errorMsgImg = err.error;
+          this.error = err.error;
         });
   }
 

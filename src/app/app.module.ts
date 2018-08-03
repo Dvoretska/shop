@@ -20,9 +20,10 @@ import { UsersComponent } from './users/users.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserComponent } from './users/users-list/user/user.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
-import { UserUpdateComponent } from './users/user-update/user-update.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { UserService } from './users/user.service';
+import { UserCreateComponent } from './users/user-create/user-create.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -41,7 +42,7 @@ const appRoutes: Routes = [
     ProfileComponent,
     UserComponent,
     UsersListComponent,
-    UserUpdateComponent
+    UserCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -62,8 +63,9 @@ const appRoutes: Routes = [
               useClass: TokenInterceptor,
               multi: true
             },
-            StorageService],
+            StorageService,
+            UserService],
   bootstrap: [AppComponent],
-  entryComponents: [RegisterModalComponent, LoginModalComponent, UserUpdateComponent]
+  entryComponents: [RegisterModalComponent, LoginModalComponent, UserCreateComponent]
 })
 export class AppModule { }

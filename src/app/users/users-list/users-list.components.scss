@@ -1,7 +1,7 @@
 .table-wrapper {
   margin-top: 70px;
   width: 100%;
-  min-height: 50px;
+  min-height: 150px;
   background-color: white;
   border: 2px solid black;
    margin-bottom: 25px;
@@ -11,15 +11,29 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 50px;
-    background-color: grey;
+    height: 55px;
+    background-color: gray;
+    .my-role {
+      margin-right: 15px;
+      color: white;
+    }
+    .my-avatar {
+      width: 35px;
+      height: 35px;
+      overflow: hidden;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 15px;
+    }
     button {
       border: 2px solid black;
       background: white;
       color: black;
       border-radius: 5px;
-      padding: 5px 15px;
+      height: 40px;
       cursor: pointer;
+      font-size: 18px;
+      line-height: 40px;
     }
   }
   table {
