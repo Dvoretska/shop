@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { UserService } from '../user.service';
@@ -16,7 +16,7 @@ export class UserCreateComponent implements OnInit {
   roles: Role[];
   selectedRole: string = 'user';
   error = {};
-  // @Output() action = new EventEmitter();
+  @Output() action = new EventEmitter<any>();
   constructor(public modalRef: BsModalRef, private userService: UserService, private toastr: ToastrService) { }
 
   ngOnInit() {
@@ -34,9 +34,9 @@ export class UserCreateComponent implements OnInit {
     const email = form.value.email;
     const password = form.value.password;
     this.userService.createUser(email, password, this.selectedRole)
-      .subscribe((res)=>{
+      .subscribe((res: {result: any})=>{
         this.modalRef.hide();
-        // his.action.emit({});
+        this.action.emit(res.result);
         this.toastr.success('User was created successfully!');
       },
       (err)=>{

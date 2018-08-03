@@ -1,4 +1,21 @@
-select {
+form {
+  padding: 15px;
+  .form-control:focus {
+    box-shadow: 0 0 0 1px rgba(0,123,255,.25);
+  }
+  .validate-error {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+  .input-error {
+    border: 1px solid red;
+    &:focus {
+      box-shadow: 0 0 0 1px red;
+    }
+  }
+  select {
     cursor: pointer;
     max-width: 150px;
     width: 100%;
@@ -19,3 +36,7 @@ select {
       box-shadow: 0 0 0 1px rgb(77, 144, 254);
     }
   }
+  button[disabled] {
+    cursor: not-allowed;
+  }
+}

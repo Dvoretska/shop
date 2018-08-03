@@ -63,7 +63,6 @@ export class UserComponent implements OnInit {
           this.toastr.success(' Your changes have been successfully saved!');
         },
         (err) => {
-          console.log(err);
           this.error = err.error;
           if(this.error['rights']) {
             this.toastr.error(`${this.error['rights']}`);
@@ -78,7 +77,7 @@ export class UserComponent implements OnInit {
         this.toastr.success('User was deleted successfully!');
       },
       (err) => {
-        console.log(err)
+        this.toastr.error(`${err.error}`);
       })
   }
 

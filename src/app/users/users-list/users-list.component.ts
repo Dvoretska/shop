@@ -40,7 +40,10 @@ export class UsersListComponent implements OnInit {
   }
 
   onCreateUser() {
-     this.modalRef = this.modalService.show(UserCreateComponent);
+    this.modalRef = this.modalService.show(UserCreateComponent);
+    this.modalRef.content.action.subscribe(data => {
+      this.users.push(data);
+   });
   }
 
   onClearUsers(email) {
