@@ -32,6 +32,9 @@ td {
       color: #5942f4;
     }
   }
+  button[disabled] {
+    cursor: not-allowed;
+  }
   input {
     border: 1px solid grey;
     border-radius: 5px;

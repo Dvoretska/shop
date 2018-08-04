@@ -80,4 +80,8 @@ export class UserComponent implements OnInit {
       })
   }
 
+  isCurrentUser() {
+    return this.user.email == JSON.parse(localStorage.getItem('user')).email
+  }
+
 }

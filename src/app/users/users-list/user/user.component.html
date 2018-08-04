@@ -1,4 +1,4 @@
-<td> 
+<td>
   <input type="file"
            name="file"
            class="inputfile"
@@ -22,8 +22,8 @@
   </select>
 </td>
 <td>
-  <button class="action" (click)="onSaveChanges()">Save changes</button>
+  <button class="action" (click)="onSaveChanges()" [disabled]="isCurrentUser()">Save changes</button>
 </td>
 <td>
-  <button class="action" (click)="onDeleteUser()">Delete user</button>
+  <button class="action" (click)="onDeleteUser()" [disabled]="isCurrentUser()">Delete user</button>
 </td>
