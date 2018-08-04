@@ -16,7 +16,7 @@ export class UserCreateComponent implements OnInit {
   roles: Role[];
   selectedRole: string = 'user';
   error = {};
-  @Output() action = new EventEmitter<any>();
+  @Output() createdUser = new EventEmitter<any>();
   constructor(public modalRef: BsModalRef, private userService: UserService, private toastr: ToastrService) { }
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class UserCreateComponent implements OnInit {
     this.userService.createUser(email, password, this.selectedRole)
       .subscribe((res: {result: any})=>{
         this.modalRef.hide();
-        this.action.emit(res.result);
+        this.createdUser.emit(res.result);
         this.toastr.success('User was created successfully!');
       },
       (err)=>{

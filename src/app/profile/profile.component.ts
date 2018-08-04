@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from '../storage.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -12,9 +13,8 @@ export class ProfileComponent implements OnInit {
   isChanged: boolean = false;
   selectedFile: File;
   newPassword: string = '';
-  API_URL = 'http://localhost:3000';
   url: string;
-  defaultImageUrl: string = '../../assets/default-picture_0_0.png';
+  defaultImageUrl: string = 'src/assets/default-picture_0_0.png';
   error: Object = {};
   username: string = '';
   constructor(private http: HttpClient,
@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     if(this.getObject('user').image) {
       const image = this.getObject('user').image;
-      this.url = `${this.API_URL}/${image}`;
+      this.url = `${environment.API_URL}/${image}`;
     } else {
       this.url = this.defaultImageUrl;
     }
@@ -46,8 +46,6 @@ export class ProfileComponent implements OnInit {
         this.url = reader.result;
       };
       reader.readAsDataURL(this.selectedFile);
-    } else {
-      this.url = this.defaultImageUrl;
     }
   }
 
@@ -58,16 +56,15 @@ export class ProfileComponent implements OnInit {
      savedData.append('file', this.selectedFile);
     }
     savedData.append('newPassword', this.newPassword);
-    this.http.post(`${this.API_URL}/profile`, savedData)
+    this.http.post(`${environment.API_URL}/profile`, savedData)
       .subscribe(
         (res: {image?: string}) => {
           if(res.image) {
             this.storageService.updateItem('user', 'image', res.image);
           }
-          this.toastr.success(' Your changes have been successfully saved!');
+          this.toastr.success('Your changes have been successfully saved!');
         },
         (err) => {
-          console.log(err)
           this.error = err.error;
         });
   }

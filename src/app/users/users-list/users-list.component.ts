@@ -5,6 +5,7 @@ import { Role } from '../role.model';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { UserCreateComponent } from '../user-create/user-create.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-users-list',
@@ -18,32 +19,37 @@ export class UsersListComponent implements OnInit {
   myRole: string;
   myAvatarUrl: string;
   modalRef: BsModalRef;
-  API_URL = 'http://localhost:3000';
   defaultImageUrl: string = '../../assets/default-picture_0_0.png';
   constructor(private userService: UserService, private modalService: BsModalService) { }
 
   ngOnInit() {
-    this.myRole = JSON.parse(localStorage.getItem('user')).role.charAt(0).toUpperCase() + JSON.parse(localStorage.getItem('user')).role.slice(1);
-    if(JSON.parse(localStorage.getItem('user')).image) {
-      this.myAvatarUrl = `${this.API_URL}/${JSON.parse(localStorage.getItem('user')).image}`;
-    } else {
-      this.myAvatarUrl = this.defaultImageUrl;
+    if(this.isAuthorized()) {
+      this.myRole = JSON.parse(localStorage.getItem('user')).role.charAt(0).toUpperCase() + JSON.parse(localStorage.getItem('user')).role.slice(1);
+      if (JSON.parse(localStorage.getItem('user')).image) {
+        this.myAvatarUrl = `${environment.API_URL}/${JSON.parse(localStorage.getItem('user')).image}`;
+      } else {
+        this.myAvatarUrl = this.defaultImageUrl;
+      }
+      this.userService.getUsers().subscribe(
+        (res: {results: User[], meta: Role[]}) => {
+          this.users = res.results;
+          this.roles = res.meta;
+        },
+        (err) => {
+          this.errorMsg = err.error;
+        })
     }
-    this.userService.getUsers().subscribe(
-      (res: {results: User[], meta: Role[]}) => {
-        this.users = res.results;
-        this.roles = res.meta;
-      },
-      (err) => {
-        this.errorMsg = err.error;
-      })
   }
 
   onCreateUser() {
     this.modalRef = this.modalService.show(UserCreateComponent);
-    this.modalRef.content.action.subscribe(data => {
+    this.modalRef.content.createdUser.subscribe(data => {
       this.users.push(data);
    });
+  }
+
+  isAuthorized() {
+    return !!localStorage.getItem('user');
   }
 
   onClearUsers(email) {

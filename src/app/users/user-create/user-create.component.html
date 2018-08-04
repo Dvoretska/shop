@@ -20,9 +20,10 @@
         required
         email
         #email="ngModel"
-        [ngClass]="{'input-error': !email.valid && email.touched || error.non_field_error}">
+        [ngClass]="{'input-error': !email.valid && email.touched || error.email}">
     </div>
     <div *ngIf="!email.valid && email.touched" class="validate-error">Please enter a valid value</div>
+    <div *ngIf="error && error.email" class="validate-error">{{error.email}}</div>
     <div class="form-group">
       <label for="password">Password</label>
       <input
@@ -35,9 +36,9 @@
         ngModel
         required
         #password="ngModel"
-        [ngClass]="{'input-error': error.non_field_error}">
+        [ngClass]="{'input-error': error.password}">
     </div>
-    <div *ngIf="error && error.non_field_error" class="validate-error">{{error.non_field_error}}</div>
+    <div *ngIf="error && error.password" class="validate-error">{{error.password}}</div>
     <div class="form-group">
       <label for="password">Role</label>
       <select [(ngModel)]="selectedRole" name="selectedRole">

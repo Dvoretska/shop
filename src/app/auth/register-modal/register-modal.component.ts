@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {NgForm, NgModel} from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm, NgModel } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { AuthService } from '../auth.service';
 
@@ -29,7 +29,6 @@ export class RegisterModalComponent implements OnInit {
     const password = form.value.password;
     this.authService.signupUser(email, password)
       .subscribe((res)=>{
-        console.log(res)
         localStorage.setItem('user', JSON.stringify(res));
         this.modalRef.hide();
       },

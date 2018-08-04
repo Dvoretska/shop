@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { RegisterModalComponent } from '../auth/register-modal/register-modal.component';
 import { LoginModalComponent } from '../auth/login-modal/login-modal.component';
 import { StorageService } from '../storage.service';
+import { environment } from 'src/environments/environment';
 
 export interface CurrentUser {
   email: string;
@@ -25,7 +26,6 @@ export class NavbarComponent implements OnInit {
   currentUser: CurrentUser;
   username: string;
   imageUrl: string = '';
-  API_URL = 'http://localhost:3000';
   constructor(private modalService: BsModalService,
               private router: Router,
               private storageService: StorageService) {}
@@ -37,16 +37,13 @@ export class NavbarComponent implements OnInit {
     });
   }
   getCurrentUser() {
-    this.currentUser = this.getObject('user');
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
     if(this.currentUser) {
       if(this.currentUser.image) {
-        this.imageUrl = `${this.API_URL}/${this.currentUser.image}`;
+        this.imageUrl = `${environment.API_URL}/${this.currentUser.image}`;
       }
       this.username = this.currentUser.email.substring(0, this.currentUser.email.lastIndexOf('@'));
     }
-  }
-  getObject(key) {
-    return JSON.parse(localStorage.getItem(key));
   }
   openModalRegister() {
     this.modalRef = this.modalService.show(RegisterModalComponent);

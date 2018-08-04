@@ -19,7 +19,7 @@
         <a class="nav-link" href="#">BLOG<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/users">USERS</a>
+        <a class="nav-link" routerLink="/users" *ngIf="isAuthorized()">USERS</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">LEARN</a>
@@ -63,16 +63,6 @@
        <li class="nav-item" *ngIf="isAuthorized()">
         <a class="nav-link" (click)="onLogout()">LOGOUT</a>
       </li>
-      <!--<li class="nav-item dropdown" dropdown>-->
-        <!--<a class="nav-link dropdown-toggle" dropdownToggle href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-          <!--Dropdown-->
-        <!--</a>-->
-        <!--<div class="dropdown-menu" aria-labelledby="navbarDropdown" *dropdownMenu>-->
-          <!--<a class="dropdown-item" href="#">User</a>-->
-          <!--<a class="dropdown-item" href="#">Premium user</a>-->
-          <!--<a class="dropdown-item" href="#">Admin</a>-->
-        <!--</div>-->
-      <!--</li>-->
     </ul>
   </div>
 </nav>
