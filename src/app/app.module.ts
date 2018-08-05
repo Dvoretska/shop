@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http'
-import { Routes, RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 
@@ -23,12 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { UserService } from './users/user.service';
 import { UserCreateComponent } from './users/user-create/user-create.component';
-
-const appRoutes: Routes = [
-  { path: '', component: LandingComponent },
-  { path: 'users', component: UsersListComponent },
-  { path: 'profile', component: ProfileComponent }
-];
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -48,8 +42,8 @@ const appRoutes: Routes = [
     FormsModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
+    AppRoutingModule,
     CollapseModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-center',
@@ -57,12 +51,12 @@ const appRoutes: Routes = [
     })
   ],
   providers: [AuthService, {
-              provide: HTTP_INTERCEPTORS,
-              useClass: TokenInterceptor,
-              multi: true
-            },
-            StorageService,
-            UserService],
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  },
+  StorageService,
+  UserService],
   bootstrap: [AppComponent],
   entryComponents: [RegisterModalComponent, LoginModalComponent, UserCreateComponent]
 })
