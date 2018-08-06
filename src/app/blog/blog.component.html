@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+<div class="posts-wrapper">
+  <header>
+    <h2><span class="first-letter">D</span>ISCOVER THE WORLD OF THE TRUE ROMANTIC</h2>
+    <nav>
+      <ul>
+        <li>SHOP</li>
+        <li>LEARN</li>
+        <li  [routerLink]="['posts']">DISCOVER</li>
+        <li [routerLink]="['create-post']">CREATE POST</li>
+      </ul>
+    </nav>
+  </header>
+  <div class="posts-container">
+    <span class="top-right-corner corner"></span>
+    <span class="top-left-corner corner"></span>
+    <span class="bottom-right-corner corner"></span>
+    <span class="bottom-left-corner corner"></span>
+    <router-outlet></router-outlet>
+  </div>
+</div>

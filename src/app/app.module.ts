@@ -23,6 +23,20 @@ import { ToastrModule } from 'ngx-toastr';
 import { UserService } from './users/user.service';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { AppRoutingModule } from './app-routing.module';
+import { CreatePostComponent } from './blog/create-post/create-post.component';
+import { PostsComponent } from './blog/posts/posts.component';
+import { PostComponent } from './blog/posts/post/post.component';
+import { BlogComponent } from './blog/blog.component';
+import { QuillModule } from 'ngx-quill';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import {NgxPageScrollModule} from 'ngx-page-scroll';
+import { InViewportModule } from 'ng-in-viewport';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   declarations: [
@@ -34,7 +48,11 @@ import { AppRoutingModule } from './app-routing.module';
     ProfileComponent,
     UserComponent,
     UsersListComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    CreatePostComponent,
+    PostsComponent,
+    PostComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,15 +66,24 @@ import { AppRoutingModule } from './app-routing.module';
     ToastrModule.forRoot({
       positionClass: 'toast-top-center',
       preventDuplicates: true,
-    })
+    }),
+    QuillModule,
+    PerfectScrollbarModule,
+    NgxPageScrollModule,
+    InViewportModule
   ],
   providers: [AuthService, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
-  },
+    },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    },
   StorageService,
-  UserService],
+  UserService,
+  { provide: 'Window',  useValue: window }],
   bootstrap: [AppComponent],
   entryComponents: [RegisterModalComponent, LoginModalComponent, UserCreateComponent]
 })

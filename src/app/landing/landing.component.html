@@ -1,175 +1,183 @@
-<app-navbar></app-navbar>
-<div class="row">
+<app-navbar id="nav" id="firstDiv"></app-navbar>
+<div class="row first-row">
 	<div class="col-12 my-col">
-		<div class="heading-section">
-      <div class="heading-section-border curly-border">
-        <h3 class="text-heading">Welcome to</h3>
-        <div class="text-heading-logo"></div>
-        <div class="section-inner-img">
-           <div class="inner-img-icon"></div>
-        </div>
-      </div>
-    </div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-12 my-col">
-		<div class="begin-section">
-      <div class="begin-section-border curly-border">
-        <p class="section-text"><span class="capital-letter"></span>n earth we have gravity, magnetism and all the realities of nature.
-          We live within the world of these realities.</p>
-        <div class="central-row-wrapper">
-          <div class="central-block central-row"></div>
-        </div>
-        <p class="section-text">The Art of Dress defines inner realities that manifest in your physical body,
-        allowing you to navigate life with understanding and intention.</p>
-      </div>
-    </div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-12 my-col">
-		<div class="options-section">
-      <div class="curly-border">
-        <h3 class="section-title">THE ART OF DRESS</h3>
-        <div class="options-row">
-          <div class="option-block">
-            <span class="option-block-title">STYLE</span>
-            <span class="option-block-subtitle">Reflects Your Body</span>
-          </div>
-          <div class="option-block">
-            <span class="option-block-title">COLOUR</span>
-            <span class="option-block-subtitle">Projects Your Soul</span>
-          </div>
-          <div class="option-block">
-            <span class="option-block-title">ARTISTRY</span>
-            <span class="option-block-subtitle">Embraces Your Spirit</span>
+      <div class="heading-section">
+        <div class="heading-section-border curly-border">
+          <h3 class="text-heading">Welcome to</h3>
+          <div class="text-heading-logo"></div>
+          <div class="section-inner-img">
+             <div class="inner-img-icon"></div>
           </div>
         </div>
       </div>
-    </div>
 	</div>
 </div>
+<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)"></div>
 <div class="row">
 	<div class="col-12 my-col">
-		<div class="symbols-section">
-      <div class="curly-border">
-        <h3 class="section-title">THERE ARE THIRTEEN STYLES</h3>
-        <div class="central-row-wrapper">
-          <div class="central-row">
-            <img src="../../assets/newAssets/Frame4/1-Style-Symbol-Refined-Dramatic.png" class="symbol-img" alt="">
-            <img src="../../assets/newAssets/Frame4/2-Style-Symbol-True-Dramatic.png" class="symbol-img" alt="">
-            <img src="../../assets/newAssets/Frame4/3-Style-Symbol-Elaborate-Natural.png" class="symbol-img" alt="">
-            <img src="../../assets/newAssets/Frame4/4-Style-Symbol-Elaborate-Gamine.png" class="symbol-img" alt="">
-            <img src="../../assets/newAssets/Frame4/5-Style-Symbol-Elaborate-Classic.png" class="symbol-img" alt="">
-            <img src="../../assets/newAssets/Frame4/6-Style-Symbol-True-Natural.png" class="symbol-img" alt="">
-            <img src="../../assets/newAssets/Frame4/7-Style-Symbol-True-Classic.png" class="symbol-img" alt="">
-            <img src="../../assets/newAssets/Frame4/8-Style-Symbol-True-Gamine.png" class="symbol-img" alt="">
-            <img src="../../assets/newAssets/Frame4/9-Style-Symbol-Refined-Natural.png" class="symbol-img" alt="">
-            <img src="../../assets/newAssets/Frame4/10-Style-Symbol-Refined-Classic.png" class="symbol-img" alt="">
-            <img src="../../assets/newAssets/Frame4/11-Style-Symbol-Refined-Gamine.png" class="symbol-img" alt="">
-            <img src="../../assets/newAssets/Frame4/12-Style-Symbol-True-Romantic.png" class="symbol-img" alt="">
-            <img src="../../assets/newAssets/Frame4/13-Style-Symbol-Elaborate-Romantic.png" class="symbol-img" alt="">
+      <div class="begin-section">
+        <div class="begin-section-border curly-border">
+          <p class="section-text"><span class="capital-letter"></span>n earth we have gravity, magnetism and all the realities of nature.
+            We live within the world of these realities.</p>
+          <div class="central-row-wrapper">
+            <div class="central-block central-row"></div>
           </div>
+          <p class="section-text">The Art of Dress defines inner realities that manifest in your physical body,
+          allowing you to navigate life with understanding and intention.</p>
         </div>
-        <p class="section-text">In Our Styles We Connect to Our Bodies, Our Most Sacred Possessions.</p>
       </div>
-    </div>
 	</div>
 </div>
+<a pageScroll href="#firstDiv">Take me to the awesomeness</a>
+<div class="separator inactive" inViewport [inViewportOptions]="{ threshold: [0] }" (inViewportAction)="onIntersection($event)"></div>
 <div class="row">
 	<div class="col-12 my-col">
-		<div class="colours-section">
-      <div class="curly-border">
-        <h3 class="section-title">THERE ARE TWELVE PRIME COLOURS</h3>
-        <div class="central-row-wrapper">
-          <div class="central-row">
-            <div class="color-block-wrapper">
-              <div class="colour-block colour1"></div>
-              <div class="colour-block colour2"></div>
-              <div class="colour-block colour3"></div>
+      <div class="options-section">
+        <div class="curly-border">
+          <h3 class="section-title">THE ART OF DRESS</h3>
+          <div class="options-row">
+            <div class="option-block">
+              <span class="option-block-title">STYLE</span>
+              <span class="option-block-subtitle">Reflects Your Body</span>
             </div>
-            <div class="color-block-wrapper">
-              <div class="colour-block colour4"></div>
-              <div class="colour-block colour5"></div>
-              <div class="colour-block colour6"></div>
+            <div class="option-block">
+              <span class="option-block-title">COLOUR</span>
+              <span class="option-block-subtitle">Projects Your Soul</span>
             </div>
-            <div class="color-block-wrapper">
-              <div class="colour-block colour7"></div>
-              <div class="colour-block colour8"></div>
-              <div class="colour-block colour9"></div>
-            </div>
-            <div class="color-block-wrapper">
-              <div class="colour-block colour10"></div>
-              <div class="colour-block colour11"></div>
-              <div class="colour-block colour12"></div>
-            </div>
-          </div>
-        </div>
-        <p class="section-text">In Our Colours We Connect to Our Inner Being, Also Called Our Soul.</p>
-      </div>
-    </div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-12 my-col">
-		<div class="artistic-section">
-      <div class="curly-border">
-        <h3 class="section-title">THERE ARE FOUR ARTISTIC TYPES</h3>
-        <div class="central-row-wrapper">
-          <div class="central-row">
-            <img src="../../assets/newAssets/Frame6/Artistry-Architectural.png" class="artistic-symbols" alt="">
-            <img src="../../assets/newAssets/Frame6/Artistry-Sculptural.png" class="artistic-symbols" alt="">
-            <img src="../../assets/newAssets/Frame6/Artistry-Harmonic.png" class="artistic-symbols" alt="">
-            <img src="../../assets/newAssets/Frame6/Artistry-Composite.png" class="artistic-symbols" alt="">
-          </div>
-        </div>
-        <p class="section-text">In Our Artistries We Connect to Our Surroundings,
-          Taking Our Place in the World of Art.</p>
-      </div>
-    </div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-12 my-col">
-		<div class="combine-section">
-      <div class="curly-border">
-        <h3 class="section-title">YOU PERSONALLY COMBINE</h3>
-          <div class="blocks-wrapper">
-            <div class="artistic-block">
-              <span class="artistic-block-title">ONE</span>
-              <span class="artistic-block-subtitle">Style</span>
-              <img src="../../assets/newAssets/Frame7/imageedit_28_5079204615.png" alt="">
-              <span class="artistic-block-description">Your Represent 1 of 13 Styles</span>
-            </div>
-            <div class="artistic-block">
-              <span class="artistic-block-title">ONE</span>
-              <span class="artistic-block-subtitle">Colour Element</span>
-              <img src="../../assets/newAssets/Frame7/imageedit_26_4722908876.png" alt="">
-              <span class="artistic-block-description">Fire, Air, Water or Earth</span>
-            </div>
-            <div class="artistic-block">
-              <span class="artistic-block-title">ONE</span>
-              <span class="artistic-block-subtitle">Artistic Type</span>
-              <img src="../../assets/newAssets/Frame7/imageedit_30_8106844067.png" alt="">
-              <span class="artistic-block-description">You are 1 of 4 Artistic Types</span>
+            <div class="option-block">
+              <span class="option-block-title">ARTISTRY</span>
+              <span class="option-block-subtitle">Embraces Your Spirit</span>
             </div>
           </div>
       </div>
     </div>
 	</div>
 </div>
+<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)"></div>
 <div class="row">
 	<div class="col-12 my-col">
-		<div class="last-section">
-      <div class="last-section-border curly-border">
-        <div class="text-heading-logo"></div>
-        <div class="central-row-wrapper">
-          <div class="central-block central-row"></div>
+      <div class="symbols-section">
+        <div class="curly-border">
+          <h3 class="section-title">THERE ARE THIRTEEN STYLES</h3>
+          <div class="central-row-wrapper">
+            <div class="central-row">
+              <img src="../../assets/newAssets/Frame4/1-Style-Symbol-Refined-Dramatic.png" class="symbol-img" alt="">
+              <img src="../../assets/newAssets/Frame4/2-Style-Symbol-True-Dramatic.png" class="symbol-img" alt="">
+              <img src="../../assets/newAssets/Frame4/3-Style-Symbol-Elaborate-Natural.png" class="symbol-img" alt="">
+              <img src="../../assets/newAssets/Frame4/4-Style-Symbol-Elaborate-Gamine.png" class="symbol-img" alt="">
+              <img src="../../assets/newAssets/Frame4/5-Style-Symbol-Elaborate-Classic.png" class="symbol-img" alt="">
+              <img src="../../assets/newAssets/Frame4/6-Style-Symbol-True-Natural.png" class="symbol-img" alt="">
+              <img src="../../assets/newAssets/Frame4/7-Style-Symbol-True-Classic.png" class="symbol-img" alt="">
+              <img src="../../assets/newAssets/Frame4/8-Style-Symbol-True-Gamine.png" class="symbol-img" alt="">
+              <img src="../../assets/newAssets/Frame4/9-Style-Symbol-Refined-Natural.png" class="symbol-img" alt="">
+              <img src="../../assets/newAssets/Frame4/10-Style-Symbol-Refined-Classic.png" class="symbol-img" alt="">
+              <img src="../../assets/newAssets/Frame4/11-Style-Symbol-Refined-Gamine.png" class="symbol-img" alt="">
+              <img src="../../assets/newAssets/Frame4/12-Style-Symbol-True-Romantic.png" class="symbol-img" alt="">
+              <img src="../../assets/newAssets/Frame4/13-Style-Symbol-Elaborate-Romantic.png" class="symbol-img" alt="">
+            </div>
+          </div>
+          <p class="section-text">In Our Styles We Connect to Our Bodies, Our Most Sacred Possessions.</p>
         </div>
-        <p class="section-text">Self-Determine Your Style, Colour Element & Artistry. Deepen Your Understanding of Self.</p>
       </div>
-    </div>
+	</div>
+</div>
+<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)"></div>
+<div class="row">
+	<div class="col-12 my-col">
+      <div class="colours-section">
+        <div class="curly-border">
+          <h3 class="section-title">THERE ARE TWELVE PRIME COLOURS</h3>
+          <div class="central-row-wrapper">
+            <div class="central-row">
+              <div class="color-block-wrapper">
+                <div class="colour-block colour1"></div>
+                <div class="colour-block colour2"></div>
+                <div class="colour-block colour3"></div>
+              </div>
+              <div class="color-block-wrapper">
+                <div class="colour-block colour4"></div>
+                <div class="colour-block colour5"></div>
+                <div class="colour-block colour6"></div>
+              </div>
+              <div class="color-block-wrapper">
+                <div class="colour-block colour7"></div>
+                <div class="colour-block colour8"></div>
+                <div class="colour-block colour9"></div>
+              </div>
+              <div class="color-block-wrapper">
+                <div class="colour-block colour10"></div>
+                <div class="colour-block colour11"></div>
+                <div class="colour-block colour12"></div>
+              </div>
+            </div>
+          </div>
+          <p class="section-text">In Our Colours We Connect to Our Inner Being, Also Called Our Soul.</p>
+        </div>
+      </div>
+	</div>
+</div>
+<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)"></div>
+<div class="row">
+	<div class="col-12 my-col">
+      <div class="artistic-section">
+        <div class="curly-border">
+          <h3 class="section-title">THERE ARE FOUR ARTISTIC TYPES</h3>
+          <div class="central-row-wrapper">
+            <div class="central-row">
+              <img src="../../assets/newAssets/Frame6/Artistry-Architectural.png" class="artistic-symbols" alt="">
+              <img src="../../assets/newAssets/Frame6/Artistry-Sculptural.png" class="artistic-symbols" alt="">
+              <img src="../../assets/newAssets/Frame6/Artistry-Harmonic.png" class="artistic-symbols" alt="">
+              <img src="../../assets/newAssets/Frame6/Artistry-Composite.png" class="artistic-symbols" alt="">
+            </div>
+          </div>
+          <p class="section-text">In Our Artistries We Connect to Our Surroundings,
+            Taking Our Place in the World of Art.</p>
+        </div>
+      </div>
+	</div>
+</div>
+<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)"></div>
+<div class="row">
+	<div class="col-12 my-col">
+      <div class="combine-section">
+        <div class="curly-border">
+          <h3 class="section-title">YOU PERSONALLY COMBINE</h3>
+            <div class="blocks-wrapper">
+              <div class="artistic-block">
+                <span class="artistic-block-title">ONE</span>
+                <span class="artistic-block-subtitle">Style</span>
+                <img src="../../assets/newAssets/Frame7/imageedit_28_5079204615.png" alt="">
+                <span class="artistic-block-description">Your Represent 1 of 13 Styles</span>
+              </div>
+              <div class="artistic-block">
+                <span class="artistic-block-title">ONE</span>
+                <span class="artistic-block-subtitle">Colour Element</span>
+                <img src="../../assets/newAssets/Frame7/imageedit_26_4722908876.png" alt="">
+                <span class="artistic-block-description">Fire, Air, Water or Earth</span>
+              </div>
+              <div class="artistic-block">
+                <span class="artistic-block-title">ONE</span>
+                <span class="artistic-block-subtitle">Artistic Type</span>
+                <img src="../../assets/newAssets/Frame7/imageedit_30_8106844067.png" alt="">
+                <span class="artistic-block-description">You are 1 of 4 Artistic Types</span>
+              </div>
+            </div>
+        </div>
+      </div>
+	</div>
+</div>
+<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)"></div>
+<div class="row">
+	<div class="col-12 my-col">
+      <div class="last-section">
+        <div class="last-section-border curly-border">
+          <div class="text-heading-logo"></div>
+          <div class="central-row-wrapper">
+            <div class="central-block central-row"></div>
+          </div>
+          <p class="section-text">Self-Determine Your Style, Colour Element & Artistry. Deepen Your Understanding of Self.</p>
+        </div>
+      </div>
 	</div>
 </div>
 
