@@ -28,15 +28,15 @@ import { PostsComponent } from './blog/posts/posts.component';
 import { PostComponent } from './blog/posts/post/post.component';
 import { BlogComponent } from './blog/blog.component';
 import { QuillModule } from 'ngx-quill';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+// import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+// import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+// import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import {NgxPageScrollModule} from 'ngx-page-scroll';
 import { InViewportModule } from 'ng-in-viewport';
 
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
+// const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+//   suppressScrollX: true
+// };
 
 @NgModule({
   declarations: [
@@ -68,7 +68,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       preventDuplicates: true,
     }),
     QuillModule,
-    PerfectScrollbarModule,
+    // PerfectScrollbarModule,
     NgxPageScrollModule,
     InViewportModule
   ],
@@ -77,10 +77,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     useClass: TokenInterceptor,
     multi: true
     },
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    },
+    // {
+    //   provide: PERFECT_SCROLLBAR_CONFIG,
+    //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    // },
   StorageService,
   UserService,
   { provide: 'Window',  useValue: window }],
