@@ -13,8 +13,8 @@ const appRoutes: Routes = [
   { path: 'users', component: UsersListComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'blog', component: BlogComponent, children: [
-    { path: 'create-post', component: CreatePostComponent },
-    { path: 'posts', component: PostsComponent }
+    { path: '', component: PostsComponent },
+    { path: 'create-post', component: CreatePostComponent }
   ]}
 ];
 

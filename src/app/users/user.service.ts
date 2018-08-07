@@ -33,11 +33,11 @@ export class UserService {
   }
 
   deleteUser(email: string) {
-     let options = {
+    let options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
-      body: {email},
+      body: {email}
     };
     return this.http.delete(`${environment.API_URL}/delete`, options).pipe(
       catchError(this.handleError)

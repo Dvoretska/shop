@@ -48,6 +48,40 @@ body{
   margin: 20px auto;
   transition: opacity .5s ease-in-out;
   cursor: pointer;
+}
+.scroll-up {
+  background-color: #2c3544;
+  color: white;
+  z-index: 999;
+  right: 20px;
+  bottom: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  transition: opacity .5s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  &:hover .arrow-up-icon {
+    transform: scale(1.2);
+  }
+  .arrow-up-icon {
+    background: url('/assets/up-arrow.svg') no-repeat center center;
+    background-size: 20px 20px;
+    width: 20px;
+    height: 20px;
+  }
+  .top {
+    margin-top: 3px;
+    font-size: 14px;
+    line-height: 14px;
+  }
+}
+.separator, .scroll-up {
   &.inactive {
    opacity: 0;
   }

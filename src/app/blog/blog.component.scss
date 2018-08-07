@@ -45,11 +45,45 @@
       align-items: center;
       background-color: white;
       li {
-        font-family: 'goudy_old_stylebold';
-        font-size: 22px;
-        line-height: 20px;
         cursor: pointer;
         margin: 0 25px;
+        border: 1px solid transparent;     
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span {
+          font-family: 'goudy_old_stylebold';
+          font-size: 22px;
+          line-height: 22px;
+          padding-top: 2px;
+        }
+        &:focus {
+          outline: none;
+        }
+        &.active-link {
+          border: 1px solid black;
+          position: relative;
+          &:before, &:after {
+            content: "";
+            display: block;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-position: center center;
+            width: 60px;
+            height: 20px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+          &:before {
+            background-image: url('../../assets/newAssets/picture-arrow-up.png');
+            top: -18px;
+          }
+          &:after {
+            background-image: url('../../assets/newAssets/picture-arrow-down.png');
+            top: 22px;
+          }
+        }
       }
     }
   }

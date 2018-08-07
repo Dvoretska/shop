@@ -6,8 +6,12 @@
       <ul>
         <li>SHOP</li>
         <li>LEARN</li>
-        <li  [routerLink]="['posts']">DISCOVER</li>
-        <li [routerLink]="['create-post']">CREATE POST</li>
+        <li [routerLink]="['./']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+          <span>DISCOVER</span>
+        </li>
+        <li [routerLink]="['create-post']" routerLinkActive="active-link">
+          <span>CREATE POST</span>
+        </li>
       </ul>
     </nav>
   </header>

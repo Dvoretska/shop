@@ -1,4 +1,4 @@
-<app-navbar id="nav" id="firstDiv"></app-navbar>
+<app-navbar id="nav" id="topPage"></app-navbar>
 <div class="row first-row">
 	<div class="col-12 my-col">
       <div class="heading-section">
@@ -12,8 +12,8 @@
       </div>
 	</div>
 </div>
-<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)"></div>
-<div class="row">
+<div class="separator" inViewport (inViewportAction)="onIntersection($event)" pageScroll href="#beginSection"></div>
+<div class="row" #triggerSection id="beginSection">
 	<div class="col-12 my-col">
       <div class="begin-section">
         <div class="begin-section-border curly-border">
@@ -28,9 +28,12 @@
       </div>
 	</div>
 </div>
-<a pageScroll href="#firstDiv">Take me to the awesomeness</a>
-<div class="separator inactive" inViewport [inViewportOptions]="{ threshold: [0] }" (inViewportAction)="onIntersection($event)"></div>
-<div class="row">
+<button class="scroll-up" pageScroll href="#topPage" [ngClass]="state ==='show' ? 'active' : 'inactive'">
+  <span class="arrow-up-icon"></span>
+  <span class="top">TOP</span>
+</button>
+<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)" pageScroll href="#optionsSection"></div>
+<div class="row" id="optionsSection">
 	<div class="col-12 my-col">
       <div class="options-section">
         <div class="curly-border">
@@ -53,8 +56,8 @@
     </div>
 	</div>
 </div>
-<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)"></div>
-<div class="row">
+<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)" pageScroll href="#symbolsSection"></div>
+<div class="row" id="symbolsSection">
 	<div class="col-12 my-col">
       <div class="symbols-section">
         <div class="curly-border">
@@ -81,8 +84,8 @@
       </div>
 	</div>
 </div>
-<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)"></div>
-<div class="row">
+<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)" pageScroll href="#coloursSection"></div>
+<div class="row" id="coloursSection">
 	<div class="col-12 my-col">
       <div class="colours-section">
         <div class="curly-border">
@@ -116,8 +119,8 @@
       </div>
 	</div>
 </div>
-<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)"></div>
-<div class="row">
+<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)" pageScroll href="#artisticSection"></div>
+<div class="row" id="artisticSection">
 	<div class="col-12 my-col">
       <div class="artistic-section">
         <div class="curly-border">
@@ -136,8 +139,8 @@
       </div>
 	</div>
 </div>
-<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)"></div>
-<div class="row">
+<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)" pageScroll href="#combineSection"></div>
+<div class="row" id="combineSection">
 	<div class="col-12 my-col">
       <div class="combine-section">
         <div class="curly-border">
@@ -166,8 +169,8 @@
       </div>
 	</div>
 </div>
-<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)"></div>
-<div class="row">
+<div class="separator inactive" inViewport (inViewportAction)="onIntersection($event)" pageScroll href="#lastSection"></div>
+<div class="row" id="lastSection">
 	<div class="col-12 my-col">
       <div class="last-section">
         <div class="last-section-border curly-border">
