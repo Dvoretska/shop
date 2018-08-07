@@ -33,10 +33,9 @@
     </ul>
      <ul class="navbar-nav">
       <li class="nav-item" *ngIf="isAuthorized()">
-        <a class="nav-link"  routerLink="/profile">
-          <img [src]="imageUrl" class="user-avatar" alt="avatar" *ngIf="imageUrl">
-          <span *ngIf="imageUrl" class="username">{{ username }}</span>
-        	<div class="nav-icon-head nav-icon" *ngIf="!imageUrl"></div>
+        <a class="nav-link nav-link-profile"  routerLink="/profile">
+          <img [src]="imageUrl" class="user-avatar" alt="avatar">
+          <span class="username">{{ username }}</span>
         </a>
       </li>
       <li class="nav-item">

@@ -78,19 +78,11 @@
     text-align: center;
     flex-basis: 100%;
     margin-top: 30px;
-    .save {
-      border: 2px solid rgb(77, 144, 254);
-      background: white;
-      color: black;
-      border-radius: 5px;
-      padding: 5px 15px;
-      cursor: pointer;
-      &:focus, &:active {
-        outline: none;
-      }
-    }
     .btn:focus, .btn-success:focus {
       box-shadow: none;
+    }
+    button[disabled] {
+      cursor: not-allowed;
     }
   }
 }

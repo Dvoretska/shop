@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit {
   currentUser: CurrentUser;
   username: string;
   imageUrl: string = '';
+  defaultImageUrl: string = 'src/assets/default-picture_0_0.png';
   constructor(private modalService: BsModalService,
               private router: Router,
               private storageService: StorageService) {}
@@ -41,6 +42,8 @@ export class NavbarComponent implements OnInit {
     if(this.currentUser) {
       if(this.currentUser.image) {
         this.imageUrl = `${environment.API_URL}/${this.currentUser.image}`;
+      } else {
+        this.imageUrl = this.defaultImageUrl;
       }
       this.username = this.currentUser.email.substring(0, this.currentUser.email.lastIndexOf('@'));
     }
@@ -52,7 +55,7 @@ export class NavbarComponent implements OnInit {
     this.modalRef = this.modalService.show(LoginModalComponent);
   }
   isAuthorized() {
-    return !!localStorage.getItem('user');
+    return localStorage.getItem('user');
   }
   onLogout() {
     localStorage.removeItem('user');

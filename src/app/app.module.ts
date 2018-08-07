@@ -21,6 +21,7 @@ import { UsersListComponent } from './users/users-list/users-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { UserService } from './users/user.service';
+import { BlogService } from './blog/blog.service';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CreatePostComponent } from './blog/create-post/create-post.component';
@@ -71,6 +72,7 @@ import { InViewportModule } from 'ng-in-viewport';
     },
   StorageService,
   UserService,
+  BlogService,
   { provide: 'Window',  useValue: window }],
   bootstrap: [AppComponent],
   entryComponents: [RegisterModalComponent, LoginModalComponent, UserCreateComponent]

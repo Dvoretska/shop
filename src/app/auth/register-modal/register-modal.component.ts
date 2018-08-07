@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { AuthService } from '../auth.service';
+import { StorageService } from '../../storage.service';
 
 @Component({
   selector: 'app-register-modal',
@@ -13,7 +14,7 @@ export class RegisterModalComponent implements OnInit {
   @ViewChild('password2') password2: NgModel;
   @ViewChild('email') email: NgModel;
   errors = {};
-  constructor(public modalRef: BsModalRef, private authService: AuthService) { }
+  constructor(public modalRef: BsModalRef, private authService: AuthService, private storageService: StorageService) { }
 
   ngOnInit() {
   }
@@ -29,7 +30,7 @@ export class RegisterModalComponent implements OnInit {
     const password = form.value.password;
     this.authService.signupUser(email, password)
       .subscribe((res)=>{
-        localStorage.setItem('user', JSON.stringify(res));
+        this.storageService.setItem('user', JSON.stringify(res));
         this.modalRef.hide();
       },
       (err)=>{
