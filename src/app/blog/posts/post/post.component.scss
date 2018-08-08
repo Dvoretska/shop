@@ -1,0 +1,56 @@
+@font-face {
+  font-family: 'goudy_old_style_small_caps_Rg';
+  src: url('/assets/Fonts/goudy-caps/goudy_old_style_small_caps__ol_regular-webfont.woff2') format('woff2'),
+  url('/assets/Fonts/goudy-caps/goudy_old_style_small_caps__ol_regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+/deep/ .masonry-item {
+  width: 330px;
+  cursor: pointer;
+}
+.post-image {
+  max-width: 320px;
+  height: auto;
+  margin: 5px;
+  position: relative;
+  z-index: 1;
+  &:before, &:after {
+    content: "";
+    display: block;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center center;
+    width: 320px;
+    height: 70px;
+    position: absolute;
+    left: 0;
+    z-index: 3;
+  }
+  &:before {
+    background-image: url('/assets//land-bor2.png');
+    top: 0px;
+  }
+  &:after {
+    background-image: url('/assets//land-bor2.png');
+    top: 90px;
+  }
+}
+.post-title {
+  display: inline-block;
+  padding: 8px;
+  word-break: break-word;
+  max-height: 63px;
+  font-size: 16px;
+  overflow: hidden;
+  width: 70%;
+  background-color: rgba(255, 255, 255, .8);
+  border: 2px solid black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-family: 'goudy_old_style_small_caps_Rg';
+  text-transform: uppercase;
+}

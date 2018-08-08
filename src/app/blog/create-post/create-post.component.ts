@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { BlogService } from '../blog.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-post',
@@ -7,7 +9,6 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./create-post.component.scss']
 })
 export class CreatePostComponent implements OnInit {
-  // @ViewChild('text') text: NgModel;
   text: '';
   selectedFile: File;
   url: string;
@@ -22,7 +23,7 @@ export class CreatePostComponent implements OnInit {
 	[{ 'font': [] }]
   ];
 
-  constructor() { }
+  constructor(private blogService: BlogService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -43,18 +44,14 @@ export class CreatePostComponent implements OnInit {
     savedData.append('title', form.value.title);
     savedData.append('text', this.text);
     savedData.append('file', this.selectedFile);
-    
-    // this.http.post(`${environment.API_URL}/profile`, savedData)
-    //   .subscribe(
-    //     (res: {image?: string}) => {
-    //       if(res.image) {
-    //         this.storageService.updateItem('user', 'image', res.image);
-    //       }
-    //       this.toastr.success('Your changes have been successfully saved!');
-    //     },
-    //     (err) => {
-    //       this.error = err.error;
-    //     });
+    this.blogService.createPost(savedData).subscribe(
+      (res) => {
+        console.log(res);
+        this.router.navigate(['/blog']);
+      },
+      (err) => {
+        console.log(err)
+      })
    
   }
 

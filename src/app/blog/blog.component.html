@@ -9,7 +9,7 @@
         <li [routerLink]="['./']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
           <span>DISCOVER</span>
         </li>
-        <li [routerLink]="['create-post']" routerLinkActive="active-link">
+        <li [routerLink]="['create-post']" routerLinkActive="active-link" *ngIf="myRole !== 'admin'">
           <span>CREATE POST</span>
         </li>
       </ul>

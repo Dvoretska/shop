@@ -31,6 +31,8 @@ import { BlogComponent } from './blog/blog.component';
 import { QuillModule } from 'ngx-quill';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { InViewportModule } from 'ng-in-viewport';
+import { NgxMasonryModule } from 'ngx-masonry';
+
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { InViewportModule } from 'ng-in-viewport';
     }),
     QuillModule,
     NgxPageScrollModule,
-    InViewportModule
+    InViewportModule,
+    NgxMasonryModule
   ],
   providers: [AuthService, {
     provide: HTTP_INTERCEPTORS,

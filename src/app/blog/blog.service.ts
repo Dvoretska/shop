@@ -13,16 +13,16 @@ export class BlogService {
     return throwError(error);
   };
 
-  // signupUser(email: string, password: string) {
-  //   return this.http.post(`${environment.API_URL}/register`,
-  //     {email: email, password: password}).pipe(
-  //       catchError(this.handleError)
-  //   )
-  // }
-  // loginUser(email: string, password: string) {
-  //   return this.http.post(`${environment.API_URL}/login`,
-  //     {email: email, password: password}).pipe(
-  //       catchError(this.handleError)
-  //   )
-  // }
+  createPost(savedData: FormData) {
+    return this.http.post(`${environment.API_URL}/create-post`, savedData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getPosts() {
+    return this.http.get(`${environment.API_URL}/posts`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 }
