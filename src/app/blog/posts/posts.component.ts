@@ -8,14 +8,14 @@ import { BlogService } from '../blog.service';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
-  posts:[]any;
+  posts:any[];
 
   constructor(private blogService: BlogService) { }
 
   ngOnInit() {
     this.blogService.getPosts().subscribe(
       (res) => {
-        this.posts = res.results;
+        this.posts = res['results'];
       },
       (err) => {
         console.log(err)

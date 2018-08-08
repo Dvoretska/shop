@@ -1,6 +1,7 @@
 <!--<app-post *ngFor="let post of posts" [post]="post"></app-post>-->
-
-<ngx-masonry class="masonry-container" *ngIf="posts">
-  <app-post *ngFor="let post of posts" [post]="post"></app-post>
-</ngx-masonry>
+<div *ngIf="posts">
+  <ngx-masonry class="masonry-container">
+    <app-post *ngFor="let post of posts" [post]="post"></app-post>
+  </ngx-masonry>
+</div>
 
