@@ -27,4 +27,5 @@ export class PostComponent implements OnInit {
     return Math.floor((Math.random()*41) + 30);
   }
 
+
 }
