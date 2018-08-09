@@ -1,16 +1,4 @@
-
-<!--<div class="modal-header">-->
-    <!--<h5 class="modal-title">hghgf</h5>-->
-    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">-->
-      <!--<span aria-hidden="true">&times;</span>-->
-    <!--</button>-->
-  <!--</div>-->
-  <!--<div class="modal-body">-->
-    <!--<img [src]="url + '/' + post['image']" alt="">-->
-  <!--</div>-->
-
-
-  <div class="modal-body" *ngIf="post">
+<div class="modal-body" *ngIf="post">
     <h5 class="modal-title">{{ post.title }}</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
@@ -37,7 +25,7 @@
         <button class="cta">Submit</button>
       </div>
     </div>
-  </div>
+</div>
 <div class="modal-footer">
   <div class="post-nav">
     <div class="arrow-left" (click)="previousPost()"></div>
