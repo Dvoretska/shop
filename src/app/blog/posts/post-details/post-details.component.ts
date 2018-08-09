@@ -13,6 +13,8 @@ import { environment } from "src/environments/environment";
 })
 export class PostDetailsComponent implements OnInit {
   @Input() id: number;
+  @Input() postsIds: number[];
+  @Input() modalIndex: number;
   post: Post;
   comments: Comment[];
   url: string = environment.API_URL;
@@ -21,7 +23,11 @@ export class PostDetailsComponent implements OnInit {
   constructor(public modalRef: BsModalRef, private blogService: BlogService) { }
 
   ngOnInit() {
-    this.blogService.getPostDetails(this.id).subscribe(
+    this.getPostDetails();
+  }
+
+  getPostDetails() {
+    this.blogService.getPostDetails(this.postsIds[this.modalIndex]).subscribe(
       (res:{post: Post, comments: Comment[]}) => {
         console.log(res);
         this.post = res.post;
@@ -31,9 +37,22 @@ export class PostDetailsComponent implements OnInit {
         console.log(err)
       })
   }
-
   toggleComments() {
     this.displayComments = !this.displayComments;
+  }
+
+  nextPost() {
+    if(this.modalIndex < this.postsIds.length - 1) {
+      this.modalIndex++;
+      this.getPostDetails();
+    }
+  }
+
+  previousPost() {
+    if(this.modalIndex > 0) {
+      this.modalIndex--;
+      this.getPostDetails();
+    }
   }
 
 }

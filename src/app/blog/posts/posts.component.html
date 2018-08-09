@@ -1,7 +1,7 @@
 <div *ngIf="posts">
   <ngx-masonry class="masonry-container" [useImagesLoaded]="true">
-    <ngxMasonryItem *ngFor="let post of posts" class="masonry-item">
-      <app-post [post]="post"></app-post>
+    <ngxMasonryItem *ngFor="let post of posts; let modalIndex = index" class="masonry-item">
+      <app-post [post]="post" [postsIds]="postsIds" [modalIndex]="modalIndex"></app-post>
     </ngxMasonryItem>
   </ngx-masonry>
 </div>

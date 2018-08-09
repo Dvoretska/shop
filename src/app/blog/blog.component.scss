@@ -89,6 +89,7 @@
       background-size: contain;
       background-repeat: no-repeat;
       z-index: 10;
+      pointer-events: none;
     }
     .bottom-left-corner {
       background-image: url('/assets/land-bor-b-l.png');

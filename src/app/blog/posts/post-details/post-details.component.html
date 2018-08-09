@@ -25,7 +25,7 @@
       <ng-container *ngIf="comments.length !== 0">
         <div class="comments-wrapper" *ngFor="let comment of comments">
           <div class="comment-heading">
-            <span class="heading-item"></span>
+            <span class="heading-item">{{ comment.created }}</span>
             <span class="heading-item"></span>
           </div>
           <div class="comments-body"></div>
@@ -40,8 +40,8 @@
   </div>
 <div class="modal-footer">
   <div class="post-nav">
-    <div class="arrow-left"></div>
-    <div class="arrow-right"></div>
+    <div class="arrow-left" (click)="previousPost()"></div>
+    <div class="arrow-right" (click)="nextPost()"></div>
   </div>
 </div>
 

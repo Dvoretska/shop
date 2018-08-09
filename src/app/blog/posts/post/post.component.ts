@@ -12,6 +12,8 @@ import { PostDetailsComponent } from '../post-details/post-details.component';
 })
 export class PostComponent implements OnInit {
   @Input() post: Post[];
+  @Input() postsIds: number[];
+  @Input() modalIndex: number;
   @ViewChild('changedBlock') changedBlock: ElementRef;
 
   imageUrl: string;
@@ -33,7 +35,7 @@ export class PostComponent implements OnInit {
   }
 
   openPostDetails() {
-    const initialState = { title: this.post['title'], image: this.post['image'], id: this.post['id']};
+    const initialState = { title: this.post['title'], image: this.post['image'], id: this.post['id'], postsIds: this.postsIds, modalIndex: this.modalIndex};
     this.modalRef = this.modalService.show(PostDetailsComponent,  { initialState });
   }
 
