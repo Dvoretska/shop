@@ -32,6 +32,7 @@ import { QuillModule } from 'ngx-quill';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { InViewportModule } from 'ng-in-viewport';
 import { NgxMasonryModule } from 'ngx-masonry';
+import { PostDetailsComponent } from './blog/posts/post-details/post-details.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { NgxMasonryModule } from 'ngx-masonry';
     CreatePostComponent,
     PostsComponent,
     PostComponent,
-    BlogComponent
+    BlogComponent,
+    PostDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -78,6 +80,6 @@ import { NgxMasonryModule } from 'ngx-masonry';
   BlogService,
   { provide: 'Window',  useValue: window }],
   bootstrap: [AppComponent],
-  entryComponents: [RegisterModalComponent, LoginModalComponent, UserCreateComponent]
+  entryComponents: [RegisterModalComponent, LoginModalComponent, UserCreateComponent, PostDetailsComponent]
 })
 export class AppModule { }

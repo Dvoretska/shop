@@ -1,5 +1,9 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import {environment} from "../../../../environments/environment";
+import { Post } from '../../post.model';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { PostDetailsComponent } from '../post-details/post-details.component';
 
 @Component({
   selector: 'app-post',
@@ -7,12 +11,13 @@ import {environment} from "../../../../environments/environment";
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-  @Input() post: any;
+  @Input() post: Post[];
   @ViewChild('changedBlock') changedBlock: ElementRef;
 
   imageUrl: string;
+  modalRef: BsModalRef;
 
-  constructor(private renderer: Renderer2) { }
+  constructor(private modalService: BsModalService, private renderer: Renderer2) { }
 
   ngOnInit() {
     this.imageUrl = `${environment.API_URL}/${this.post['image']}`;
@@ -25,6 +30,11 @@ export class PostComponent implements OnInit {
 
   getRandomTopPosition() {
     return Math.floor((Math.random()*41) + 30);
+  }
+
+  openPostDetails() {
+    const initialState = { title: this.post['title'], image: this.post['image'], id: this.post['id']};
+    this.modalRef = this.modalService.show(PostDetailsComponent,  { initialState });
   }
 
 

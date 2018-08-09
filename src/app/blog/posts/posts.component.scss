@@ -1,3 +1,8 @@
 /deep/ .masonry-container {
   text-align: center;
 }
+/deep/ .masonry-item {
+  width: 330px;
+  cursor: pointer;
+  z-index: 1;
+}

@@ -1,6 +1,6 @@
 <div *ngIf="posts">
   <ngx-masonry class="masonry-container" [useImagesLoaded]="true">
-    <ngxMasonryItem *ngFor="let post of posts" >
+    <ngxMasonryItem *ngFor="let post of posts" class="masonry-item">
       <app-post [post]="post"></app-post>
     </ngxMasonryItem>
   </ngx-masonry>

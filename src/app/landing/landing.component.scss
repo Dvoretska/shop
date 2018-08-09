@@ -1,25 +1,4 @@
-@font-face {
-    font-family: 'goudy_old_stylebold';
-    src: url('../../assets/Fonts/goudy-style-bold/911fonts.com_goudyoldstylebold__-_911fonts.com_fonts_6fnh-webfont.woff2') format('woff2'),
-         url('../../assets/Fonts/goudy-style-bold/911fonts.com_goudyoldstylebold__-_911fonts.com_fonts_6fnh-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'goudy_old_stylebold_italic';
-    src: url('../../assets/Fonts/goudy-style-bold-italic/goudy_old_style_bold_italic-webfont.woff2') format('woff2'),
-         url('../../assets/Fonts/goudy-style-bold-italic/goudy_old_style_bold_italic-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'goudy_old_style_small_caps_Rg';
-    src: url('../../assets/Fonts/goudy-caps/goudy_old_style_small_caps__ol_regular-webfont.woff2') format('woff2'),
-         url('../../assets/Fonts/goudy-caps/goudy_old_style_small_caps__ol_regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@mixin full-size-img-with-border($url) {
+@mixin full-size-img($url) {
   height: 100%;
   width: 100%;
   position: relative;
@@ -34,10 +13,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-body{
-  background-color: red;
 }
 .separator {
   background-image: url('../../assets/newAssets/picture-arrow-down.png');
@@ -194,7 +169,7 @@ body{
 }
 
 .heading-section {
-  @include full-size-img-with-border('../../assets/newAssets/Frame1/back1.png');
+  @include full-size-img('../../assets/newAssets/Frame1/back1.png');
   .text-heading {
     font-family: 'goudy_old_stylebold';
     font-size: 36px;
@@ -233,7 +208,7 @@ body{
 }
 
 .begin-section {
-  @include full-size-img-with-border('../../assets/newAssets/Frame2/Frame-2.png');
+  @include full-size-img('../../assets/newAssets/Frame2/Frame-2.png');
   .begin-section-border {
     .capital-letter {
       display: inline-block;
@@ -267,7 +242,7 @@ body{
   }
 }
 .options-section {
-  @include full-size-img-with-border('../../assets/newAssets/Frame3/Frame-3.png');
+  @include full-size-img('../../assets/newAssets/Frame3/Frame-3.png');
   .options-row {
     width: 100%;
     display: flex;
@@ -326,7 +301,7 @@ body{
   }
 }
 .symbols-section {
-  @include full-size-img-with-border('../../assets/newAssets/Frame4/Frame-4.png');
+  @include full-size-img('../../assets/newAssets/Frame4/Frame-4.png');
   .symbol-img {
     width: auto;
     height: 40px;
@@ -334,7 +309,7 @@ body{
 }
 
 .colours-section {
-  @include full-size-img-with-border('../../assets/newAssets/Frame5/Frame-5.png');
+  @include full-size-img('../../assets/newAssets/Frame5/Frame-5.png');
   .color-block-wrapper {
     width: calc(100%/4);
     height: 80px;
@@ -387,7 +362,7 @@ body{
   }
 }
 .artistic-section {
-  @include full-size-img-with-border('../../assets/newAssets/Frame6/Frame-6.png');
+  @include full-size-img('../../assets/newAssets/Frame6/Frame-6.png');
   .central-row {
     width: 80%;
     margin: 0 auto;
@@ -398,7 +373,7 @@ body{
   }
 }
 .combine-section {
-  @include full-size-img-with-border('../../assets/newAssets/Frame7/Frame-7.gif');
+  @include full-size-img('../../assets/newAssets/Frame7/Frame-7.gif');
   .curly-border {
     padding-top: 60px;
     .blocks-wrapper {
@@ -471,7 +446,7 @@ body{
 }
 
 .last-section {
-  @include full-size-img-with-border('../../assets/newAssets/Frame8/Frame-8.png');
+  @include full-size-img('../../assets/newAssets/Frame8/Frame-8.png');
 }
 
 

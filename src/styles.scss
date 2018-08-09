@@ -1,4 +1,32 @@
-button:focus {
+@font-face {
+  font-family: 'goudy_old_stylebold';
+  src: url('/assets/Fonts/goudy-style-bold/911fonts.com_goudyoldstylebold__-_911fonts.com_fonts_6fnh-webfont.woff2') format('woff2'),
+  url('/assets/Fonts/goudy-style-bold/911fonts.com_goudyoldstylebold__-_911fonts.com_fonts_6fnh-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'goudy_old_stylebold_italic';
+  src: url('/assets/Fonts/goudy-style-bold-italic/goudy_old_style_bold_italic-webfont.woff2') format('woff2'),
+  url('/assets/Fonts/goudy-style-bold-italic/goudy_old_style_bold_italic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'goudy_old_style_small_caps_Rg';
+  src: url('/assets/Fonts/goudy-caps/goudy_old_style_small_caps__ol_regular-webfont.woff2') format('woff2'),
+  url('/assets/Fonts/goudy-caps/goudy_old_style_small_caps__ol_regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'preciousregular';
+  src: url('/assets/Fonts/precious/precious-webfont.woff2') format('woff2'),
+  url('/assets/Fonts/precious/precious-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+button:focus, input:focus {
   outline: none;
   outline-color: transparent;
 }

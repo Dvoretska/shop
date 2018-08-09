@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../blog.service';
+import { Post } from '../post.model';
 
 
 @Component({
@@ -8,14 +9,15 @@ import { BlogService } from '../blog.service';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
-  posts:any[];
+  posts: Post[];
 
   constructor(private blogService: BlogService) { }
 
   ngOnInit() {
     this.blogService.getPosts().subscribe(
-      (res) => {
-        this.posts = res['results'];
+      (res: Post[]) => {
+        console.log(res)
+        this.posts = res;
       },
       (err) => {
         console.log(err)

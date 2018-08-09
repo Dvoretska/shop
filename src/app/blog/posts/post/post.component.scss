@@ -1,15 +1,3 @@
-@font-face {
-  font-family: 'goudy_old_style_small_caps_Rg';
-  src: url('/assets/Fonts/goudy-caps/goudy_old_style_small_caps__ol_regular-webfont.woff2') format('woff2'),
-  url('/assets/Fonts/goudy-caps/goudy_old_style_small_caps__ol_regular-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-/deep/ .masonry-item {
-  width: 330px;
-  cursor: pointer;
-  z-index: 1;
-}
 .post-image {
   max-width: 320px;
   height: auto;
