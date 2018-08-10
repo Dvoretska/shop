@@ -4,6 +4,7 @@ import { BlogService } from "../../blog.service";
 import { Post } from "../../post.model";
 import { Comment } from "../../comment.model";
 import { environment } from "src/environments/environment";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -20,7 +21,7 @@ export class PostDetailsComponent implements OnInit {
   url: string = environment.API_URL;
   displayComments: boolean = false;
 
-  constructor(public modalRef: BsModalRef, private blogService: BlogService) { }
+  constructor(public modalRef: BsModalRef, private blogService: BlogService, private router: Router) { }
 
   ngOnInit() {
     this.getPostDetails();
@@ -53,6 +54,12 @@ export class PostDetailsComponent implements OnInit {
       this.modalIndex--;
       this.getPostDetails();
     }
+  }
+
+  onEditPost() {
+    this.router.navigate(['blog/edit-post']);
+    this.modalRef.hide();
+    this.blogService.emitPostSelected(this.id)
   }
 
 }

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
@@ -33,6 +33,7 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { InViewportModule } from 'ng-in-viewport';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { PostDetailsComponent } from './blog/posts/post-details/post-details.component';
+import { EditPostComponent } from './blog/edit-post/edit-post.component';
 
 
 @NgModule({
@@ -50,12 +51,14 @@ import { PostDetailsComponent } from './blog/posts/post-details/post-details.com
     PostsComponent,
     PostComponent,
     BlogComponent,
-    PostDetailsComponent
+    PostDetailsComponent,
+    EditPostComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     AppRoutingModule,

@@ -60,6 +60,7 @@ export class UserComponent implements OnInit {
     this.userService.updateUser(savedData).subscribe(
       () => {
         this.toastr.success(' Your changes have been successfully saved!');
+        this.newPassword = '';
       },
       (err) => {
         this.error = err.error;

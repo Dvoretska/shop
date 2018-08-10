@@ -15,12 +15,10 @@ export class CreatePostComponent implements OnInit {
 
   optToolbar = [
   	['bold', 'italic', 'underline', 'strike'],
-  	[{ 'size': ['small', false, 'large', 'huge'] }],
-	[{ 'list': 'ordered'}, { 'list': 'bullet' }],
-	[{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-	[{ 'align': [] }],
-	[{ 'color': [] }, { 'background': [] }],
-	[{ 'font': [] }]
+  	[{ 'size': ['small', 'large', 'huge'] }],
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'align': [] }]
   ];
 
   constructor(private blogService: BlogService, private router: Router) { }

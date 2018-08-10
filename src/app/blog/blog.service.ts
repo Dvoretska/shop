@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { throwError} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Post } from './post.model';
 
 @Injectable()
 export class BlogService {
+  postSelected = new EventEmitter<number>();
 
   constructor(private http: HttpClient) {}
 
@@ -31,6 +33,10 @@ export class BlogService {
     return this.http.get(`${environment.API_URL}/post`, {params}).pipe(
       catchError(this.handleError)
     );
+  }
+
+  emitPostSelected(id) {
+    this.postSelected.emit(id)
   }
 
 }

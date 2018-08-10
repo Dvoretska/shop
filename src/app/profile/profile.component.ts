@@ -63,6 +63,7 @@ export class ProfileComponent implements OnInit {
             this.storageService.updateItem('user', 'image', res.image);
           }
           this.toastr.success('Your changes have been successfully saved!');
+          this.newPassword = '';
         },
         (err) => {
           this.error = err.error;

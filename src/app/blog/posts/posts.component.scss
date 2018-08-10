@@ -1,8 +1,55 @@
 /deep/ .masonry-container {
-  text-align: center;
+  margin: 0 auto;
+  //max-width: 768px;
+  column-count: 4;
+  column-gap: 1.5em;
 }
 /deep/ .masonry-item {
-  width: 330px;
-  cursor: pointer;
-  z-index: 1;
+  //width: 330px;
+  max-width: 100%;
+  //cursor: pointer;
+  //z-index: 1;
+  //margin: 5px;
 }
+
+@media screen and (min-width:990px) and (max-width:1200px){
+  ///deep/ .masonry-container {
+  //  margin-left: 75px;
+  //}
+
+}
+
+@media screen and (max-width:991px){
+  /deep/ .masonry-container {
+    column-count: 3;
+    column-gap: 1em;
+  }
+  ///deep/ .masonry-container {
+  //  margin-left: 0;
+  //}
+  ///deep/ .masonry-item {
+  //  width: 290px;
+  //}
+}
+@media screen and (max-width:767px){
+  ///deep/ .masonry-item {
+  //  width: 230px;
+  //}
+}
+@media screen and (max-width: 576px) {
+  ///deep/ .masonry-container {
+  //  margin-left: 60px;
+  //}
+  ///deep/ .masonry-item {
+  //  width: 330px;
+  //}
+}
+@media screen and (max-width: 450px) {
+  ///deep/ .masonry-container {
+  //  margin-left: 15px;
+  //}
+  ///deep/ .masonry-item {
+  //  width: 260px;
+  //}
+}
+

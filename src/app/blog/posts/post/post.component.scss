@@ -1,29 +1,10 @@
 .post-image {
-  max-width: 320px;
+  max-width: 100%;
   height: auto;
-  margin: 5px;
+  margin-botton: 30px;
   position: relative;
   z-index: 1;
-  &:before, &:after {
-    content: "";
-    display: block;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center center;
-    width: 320px;
-    height: 70px;
-    position: absolute;
-    left: 0;
-    z-index: 3;
-  }
-  &:before {
-    background-image: url('/assets//land-bor2.png');
-    top: 0px;
-  }
-  &:after {
-    background-image: url('/assets//land-bor2.png');
-    top: 90px;
-  }
+  vertical-align: bottom;
 }
 .post-title {
   display: inline-block;
@@ -42,4 +23,29 @@
   z-index: 2;
   font-family: 'goudy_old_style_small_caps_Rg';
   text-transform: uppercase;
+}
+
+@media screen and (min-width:990px) and (max-width:1200px){
+
+}
+
+@media screen and (max-width:991px){
+  //.post-image {
+  //  max-width: 280px;
+  //}
+}
+@media screen and (max-width:768px){
+  //.post-image {
+  //  max-width: 220px;
+  //}
+}
+@media screen and (max-width: 576px) {
+  //.post-image {
+  //  max-width: 320px;
+  //}
+}
+@media screen and (max-width: 450px) {
+  //.post-image {
+  //  max-width: 250px;
+  //}
 }
