@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
 import { BlogService } from "../../blog.service";
 import { Post } from "../../post.model";
@@ -20,6 +20,9 @@ export class PostDetailsComponent implements OnInit {
   comments: Comment[];
   url: string = environment.API_URL;
   displayComments: boolean = false;
+  commentText: string = '';
+  text: string;
+  username: string;
 
   constructor(public modalRef: BsModalRef, private blogService: BlogService, private router: Router) { }
 
@@ -30,7 +33,6 @@ export class PostDetailsComponent implements OnInit {
   getPostDetails() {
     this.blogService.getPostDetails(this.postsIds[this.modalIndex]).subscribe(
       (res:{post: Post, comments: Comment[]}) => {
-        console.log(res);
         this.post = res.post;
         this.comments = res.comments;
       },
@@ -40,6 +42,18 @@ export class PostDetailsComponent implements OnInit {
   }
   toggleComments() {
     this.displayComments = !this.displayComments;
+  }
+  formattedDate(date) {
+    return new Date(date).toGMTString();
+
+  }
+  onAddComment() {
+    this.blogService.addComment(this.commentText, this.id).subscribe(
+      (res) => {
+        this.commentText = '';
+        this.comments.push(res.comment)
+      }
+    )
   }
 
   nextPost() {
@@ -57,9 +71,8 @@ export class PostDetailsComponent implements OnInit {
   }
 
   onEditPost() {
-    this.router.navigate(['blog/edit-post']);
     this.modalRef.hide();
-    this.blogService.emitPostSelected(this.id)
+    this.router.navigate(['blog/edit-post/', this.id]);
   }
 
 }

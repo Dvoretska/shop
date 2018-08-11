@@ -34,6 +34,7 @@ import { InViewportModule } from 'ng-in-viewport';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { PostDetailsComponent } from './blog/posts/post-details/post-details.component';
 import { EditPostComponent } from './blog/edit-post/edit-post.component';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { EditPostComponent } from './blog/edit-post/edit-post.component';
   StorageService,
   UserService,
   BlogService,
+  AuthGuardService,
   { provide: 'Window',  useValue: window }],
   bootstrap: [AppComponent],
   entryComponents: [RegisterModalComponent, LoginModalComponent, UserCreateComponent, PostDetailsComponent]

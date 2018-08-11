@@ -13,16 +13,15 @@
       <ng-container *ngIf="comments.length !== 0">
         <div class="comments-wrapper" *ngFor="let comment of comments">
           <div class="comment-heading">
-            <span class="heading-item">{{ comment.created }}</span>
-            <span class="heading-item"></span>
+            <span class="heading-item">{{ comment.email.substring(0, comment.email.lastIndexOf('@')) }}</span>
+            <span class="heading-item">{{ formattedDate(comment.created) }}</span>
           </div>
-          <div class="comments-body"></div>
-          <div></div>
+          <div class="comment-body">{{ comment.text }}</div>
         </div>
       </ng-container>
       <div class="input-wrapper">
-        <input type="text" placeholder="Add a comment" class="add-comment-input">
-        <button class="cta">Submit</button>
+        <input type="text" placeholder="Add a comment" class="add-comment-input" [(ngModel)]="commentText">
+        <button class="cta" (click)="onAddComment()">Submit</button>
       </div>
     </div>
 </div>
@@ -30,7 +29,7 @@
   <div class="post-nav">
     <div class="arrow-left" (click)="previousPost()"></div>
     <div class="arrow-right" (click)="nextPost()"></div>
-    <button class="edit-post" (click)="onEditPost()">Edit post</button>
+    <a class="edit-post" (click)="onEditPost()">Edit post</a>
   </div>
 </div>
 

@@ -32,9 +32,10 @@ form {
   margin: 0 auto;
 }
 /deep/ .ql-container {
-  min-height: 150px;
+  min-height: 50px;
   font-size: 18px;
 }
+
 @media screen and (max-width:767px){
   form {
     padding-top: 50px;
@@ -42,4 +43,3 @@ form {
     width: 77%;
   }
 }
-

@@ -54,7 +54,7 @@ export class UserComponent implements OnInit {
     if(this.selectedFile) {
      savedData.append('file', this.selectedFile);
     }
-    savedData.append('newPassword', this.newPassword);
+    savedData.append('password', this.newPassword);
     savedData.append('email', this.user.email);
     savedData.append('selectedRole', this.selectedRole);
     this.userService.updateUser(savedData).subscribe(

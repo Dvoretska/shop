@@ -1,4 +1,4 @@
-<!--<form>-->
+<form  *ngIf="post">
   <div class="form-group">
     <label for="title">
       <strong>Title of your post</strong>
@@ -8,23 +8,23 @@
       class="form-control"
       name="title"
       id="title"
-      [(ngModel)]="p">
+      [(ngModel)]="post.title">
   </div>
   <div class="form-group">
     <strong class="text">Text of your post</strong>
-    <quill-editor name="editor" #editor [modules]="{toolbar: optToolbar}"></quill-editor>
+    <quill-editor name="editor" #editor [modules]="{toolbar: optToolbar}" [(ngModel)]="post.content"></quill-editor>
   </div>
-  <!--<div class="form-group">-->
-    <!--<strong class="text">Image of your post</strong>-->
-    <!--<div class="image-wrapper">-->
-      <!--<input type="file"-->
-             <!--name="file"-->
-             <!--id="file"-->
-             <!--class="inputfile"-->
-             <!--(change)="onFileChanged($event)">-->
-      <!--<label for="file">Choose an image</label>-->
-      <!--<img [src]="url" class="image" *ngIf="url">-->
-    <!--</div>-->
-  <!--</div>-->
-  <button type="submit" class="btn btn-primary"></button>
-<!--</form>-->
+  <div class="form-group">
+    <strong class="text">Image of your post</strong>
+    <div class="image-wrapper">
+      <input type="file"
+             name="file"
+             id="file"
+             class="inputfile"
+             (change)="onFileChanged($event)">
+      <label for="file">Choose an image</label>
+      <img [src]="imageURL" class="image">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Save changes</button>
+</form>

@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit {
     if(this.selectedFile) {
      savedData.append('file', this.selectedFile);
     }
-    savedData.append('newPassword', this.newPassword);
+    savedData.append('password', this.newPassword);
     this.http.post(`${environment.API_URL}/profile`, savedData)
       .subscribe(
         (res: {image?: string}) => {

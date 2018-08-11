@@ -25,4 +25,8 @@ export class AuthService {
         catchError(this.handleError)
     )
   }
+
+  isAuthenticated() {
+    return !!JSON.parse(localStorage.getItem('user')) && !!JSON.parse(localStorage.getItem('user')).token;
+  }
 }

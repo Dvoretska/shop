@@ -1,10 +1,9 @@
 .post-image {
-  max-width: 100%;
+  width: 310px;
   height: auto;
-  margin-botton: 30px;
+  margin: 5px;
   position: relative;
   z-index: 1;
-  vertical-align: bottom;
 }
 .post-title {
   display: inline-block;
@@ -25,27 +24,29 @@
   text-transform: uppercase;
 }
 
-@media screen and (min-width:990px) and (max-width:1200px){
-
-}
-
 @media screen and (max-width:991px){
-  //.post-image {
-  //  max-width: 280px;
-  //}
+  .post-image {
+    max-width: 270px;
+  }
 }
-@media screen and (max-width:768px){
-  //.post-image {
-  //  max-width: 220px;
-  //}
+@media screen and (max-width:767px){
+  .post-image {
+    max-width: 210px;
+  }
 }
 @media screen and (max-width: 576px) {
-  //.post-image {
-  //  max-width: 320px;
-  //}
+  .post-image {
+    max-width: 320px;
+  }
 }
 @media screen and (max-width: 450px) {
-  //.post-image {
-  //  max-width: 250px;
-  //}
+  .post-image {
+    max-width: 250px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .post-image {
+    max-width: 200px;
+  }
 }

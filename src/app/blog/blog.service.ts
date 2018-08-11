@@ -7,7 +7,6 @@ import { Post } from './post.model';
 
 @Injectable()
 export class BlogService {
-  postSelected = new EventEmitter<number>();
 
   constructor(private http: HttpClient) {}
 
@@ -28,15 +27,16 @@ export class BlogService {
   }
 
   getPostDetails(id) {
-    const params = new HttpParams()
-      .set('id', id);
+    const params = new HttpParams().set('id', id);
     return this.http.get(`${environment.API_URL}/post`, {params}).pipe(
       catchError(this.handleError)
     );
   }
 
-  emitPostSelected(id) {
-    this.postSelected.emit(id)
+  addComment(text, id) {
+    return this.http.post(`${environment.API_URL}/comment`, {text: text, post_id: id}).pipe(
+      catchError(this.handleError)
+    );
   }
 
 }

@@ -16,7 +16,6 @@ export class PostsComponent implements OnInit {
   ngOnInit() {
     this.blogService.getPosts().subscribe(
       (res: {posts: Post[], meta: number[]}) => {
-        console.log(res);
         this.posts = res['posts'];
         this.postsIds = res['meta'];
       },

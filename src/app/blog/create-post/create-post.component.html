@@ -26,6 +26,6 @@
 		    <img [src]="url" class="image" *ngIf="url">
 	  	</div>
 	</div>
-	<button type="submit" class="btn btn-primary">Create</button>
+	<button type="submit" class="btn btn-primary" [disabled]="isDisabled(createPostForm)">Create</button>
 </form>
 

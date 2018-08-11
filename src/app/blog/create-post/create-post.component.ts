@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BlogService } from '../blog.service';
 import { Router } from '@angular/router';
@@ -44,13 +44,15 @@ export class CreatePostComponent implements OnInit {
     savedData.append('file', this.selectedFile);
     this.blogService.createPost(savedData).subscribe(
       (res) => {
-        console.log(res);
         this.router.navigate(['/blog']);
       },
       (err) => {
         console.log(err)
       })
-   
+  }
+
+  isDisabled(form: NgForm) {
+    return !(form.value.title && this.text && this.selectedFile)
   }
 
 }

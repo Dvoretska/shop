@@ -2,49 +2,31 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BlogService } from '../blog.service';
 import {Post} from "../post.model";
 import {Comment} from "../comment.model";
+import { ActivatedRoute } from "@angular/router";
+import { environment } from 'src/environments/environment';
 
 
 @Component({
   selector: 'app-edit-post',
   templateUrl: './edit-post.component.html',
-  styleUrls: ['./edit-post.component.css']
+  styleUrls: ['./edit-post.component.scss']
 })
 export class EditPostComponent implements OnInit {
-  selectedPostId: number;
-  // post: Post;
-  // @Input() postSelected: Post;
-
-  constructor(private blogService: BlogService) { }
+  post: Post;
+  imageURL: string;
+  constructor(private blogService: BlogService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-      // console.log(this.postSelected)
-    // getPostDetailsAct(id) {
-    //   const self = this;
-    //   this.blogService.getPostDetails(7).subscribe((post: Post) => {
-    //     self.myPost = post;
-    //     console.log(self.myPost)
-    //   })
-    // }
-    //
-    // this.blogService.postSelected.subscribe(
-    //   (id: number) => {
-    //     this.selectedPostId = id;
-    //   }
-    // )
+    if (this.route.snapshot.params.id && Number.isInteger(+this.route.snapshot.params.id)) {
+      this.blogService.getPostDetails(this.route.snapshot.params.id).subscribe(
+      (res:{post: Post, comments: Comment[]}) => {
+        this.post = res.post;
+        this.imageURL = `${environment.API_URL}/${this.post['image']}`;
+      },
+      (err) => {
+        console.log(err)
+      })
+    }
 
   }
-
-  // getPostDetails(id) {
-  //   this.blogService.getPostDetails(id).subscribe(
-  //     (res:{post: Post, comments: Comment[]}) => {
-  //       console.log(res);
-  //       this.post = res.post;
-  //     },
-  //     (err) => {
-  //       console.log(err)
-  //     })
-  // }
-
-
-
 }

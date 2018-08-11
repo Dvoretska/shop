@@ -12,14 +12,14 @@
     color: red;
     margin-top: 15px;
   }
-  .photo {
+  .image-wrapper {
     width: 50%;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    .avatar {
+    .image {
       width: 80%;
       max-width: 300px;
       min-width: 150px;
@@ -27,32 +27,7 @@
       max-height: 350px;
       margin: 0 auto;
       object-fit: contain;
-    }
-    .inputfile {
-      width: 0.1px;
-      height: 0.1px;
-      opacity: 0;
-      overflow: hidden;
-      position: absolute;
-      z-index: -1;
-    }
-    .inputfile + label {
-      font-size: 16px;
-      color: white;
-      background-color: grey;
-      display: inline-block;
-      cursor: pointer;
-      padding: 3px 10px;
-      border-radius: 5px;
-      margin-top: 15px;
-      transition: all .2s ease;
-      display: flex;
-      flex-wrap: wrap;
-    }
-    .inputfile:focus + label,
-    .inputfile + label:hover {
-      background-color: rgb(77, 144, 254);
-      box-shadow: 0 0 3px 2px rgba(0, 0, 0, .7);
+      margin-bottom: 15px;
     }
   }
   .info {
