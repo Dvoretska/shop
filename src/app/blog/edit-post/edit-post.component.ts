@@ -5,6 +5,7 @@ import {Comment} from "../comment.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -54,7 +55,7 @@ export class EditPostComponent implements OnInit {
   }
 
   onUpdatePost() {
-     const savedData:FormData = new FormData();
+     let savedData:FormData = new FormData();
      savedData.append('title', this.post.title);
      savedData.append('content', this.post.content);
      savedData.append('file', this.selectedFile);
