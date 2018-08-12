@@ -1,3 +1,3 @@
 export class Comment {
-  constructor(public text: string, public created: string, public user_id: number) {}
+  constructor(public id: number, public text: string, public created: string, public user: string) {}
 }

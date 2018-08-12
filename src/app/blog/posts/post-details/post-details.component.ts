@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
+import {Component, OnInit, Input } from '@angular/core';
 import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
 import { BlogService } from "../../blog.service";
 import { Post } from "../../post.model";
@@ -23,6 +23,10 @@ export class PostDetailsComponent implements OnInit {
   commentText: string = '';
   text: string;
   username: string;
+  isEditMode: boolean = false;
+  isViewMode: boolean = true;
+  selectedComment: number;
+  changedCommentText: string = '';
 
   constructor(public modalRef: BsModalRef, private blogService: BlogService, private router: Router) { }
 
@@ -43,15 +47,24 @@ export class PostDetailsComponent implements OnInit {
   toggleComments() {
     this.displayComments = !this.displayComments;
   }
+
   formattedDate(date) {
-    return new Date(date).toGMTString();
+    return new Date(date)['toGMTString']();
 
   }
   onAddComment() {
     this.blogService.addComment(this.commentText, this.id).subscribe(
-      (res) => {
+      (res: {comment: Comment}) => {
         this.commentText = '';
         this.comments.push(res.comment)
+      }
+    )
+  }
+
+  onUpdateComment() {
+    this.blogService.updateComment(this.changedCommentText, this.id).subscribe(
+      (res: {comment: Comment}) => {
+        this.commentText = res.comment.text;
       }
     )
   }
@@ -73,6 +86,13 @@ export class PostDetailsComponent implements OnInit {
   onEditPost() {
     this.modalRef.hide();
     this.router.navigate(['blog/edit-post/', this.id]);
+  }
+
+  onEditComment(id, text) {
+    this.selectedComment = id;
+    this.isViewMode = false;
+    this.isEditMode = true;
+    this.changedCommentText = text;
   }
 
 }

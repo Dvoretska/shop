@@ -1,5 +1,5 @@
-<div class="modal-body" *ngIf="post">
-    <h5 class="modal-title">{{ post.title }}</h5>
+<div class="modal-body details-modal-body" *ngIf="post">
+    <h5 class="modal-title details-modal-title">{{ post.title }}</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -14,18 +14,33 @@
         <div class="comments-wrapper" *ngFor="let comment of comments">
           <div class="comment-heading">
             <span class="heading-item">{{ comment.email.substring(0, comment.email.lastIndexOf('@')) }}</span>
-            <span class="heading-item">{{ formattedDate(comment.created) }}</span>
+            <span class="heading-item date-item">{{ formattedDate(comment.created) }}</span>
+            <img src="src/assets/cancel.svg" alt="" class="close-icon">
           </div>
-          <div class="comment-body">{{ comment.text }}</div>
+          <div class="comment-body" *ngIf="isViewMode || selectedComment !== comment.id">
+            <div>{{ comment.text }}</div>
+            <button class="cta" (click)="onEditComment(comment.id, comment.text)">Edit</button>
+          </div>
+          <div class="edit-input-wrapper" *ngIf="selectedComment == comment.id && isEditMode">
+            <input type="text"
+                   maxlength="255"
+                   placeholder="Add a comment"
+                   class="edit-comment-input"
+                   autofocus
+                   [(ngModel)]="changedCommentText">
+            <button class="edit-cta" (click)="onUpdateComment()">Save</button>
+          </div>
         </div>
       </ng-container>
+      <hr>
       <div class="input-wrapper">
-        <input type="text" placeholder="Add a comment" class="add-comment-input" [(ngModel)]="commentText">
+        <input type="text" maxlength="255" placeholder="Add a comment" class="add-comment-input"
+               [(ngModel)]="commentText" (keyup.enter)="onAddComment()">
         <button class="cta" (click)="onAddComment()">Submit</button>
       </div>
     </div>
 </div>
-<div class="modal-footer">
+<div class="modal-footer details-modal-footer">
   <div class="post-nav">
     <div class="arrow-left" (click)="previousPost()"></div>
     <div class="arrow-right" (click)="nextPost()"></div>
