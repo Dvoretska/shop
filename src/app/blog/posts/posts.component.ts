@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BlogService } from '../blog.service';
 import { Post } from '../post.model';
-
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-posts',
@@ -11,6 +11,7 @@ import { Post } from '../post.model';
 export class PostsComponent implements OnInit {
   posts: Post[];
   postsIds: number[];
+
   constructor(private blogService: BlogService) { }
 
   ngOnInit() {

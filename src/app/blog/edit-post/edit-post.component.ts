@@ -2,8 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BlogService } from '../blog.service';
 import {Post} from "../post.model";
 import {Comment} from "../comment.model";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -14,7 +15,8 @@ import { environment } from 'src/environments/environment';
 export class EditPostComponent implements OnInit {
   post: Post;
   imageURL: string;
-  constructor(private blogService: BlogService, private route: ActivatedRoute) { }
+  selectedFile: File;
+  constructor(private blogService: BlogService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) { }
 
   ngOnInit() {
     if (this.route.snapshot.params.id && Number.isInteger(+this.route.snapshot.params.id)) {
@@ -27,6 +29,48 @@ export class EditPostComponent implements OnInit {
         console.log(err)
       })
     }
-
   }
+
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0];
+    if (/\.(jpe?g|png|gif)$/i.test(event.target.files[0].name)) {
+      let reader = new FileReader();
+      reader.onload = () => {
+        this.imageURL = reader.result;
+      };
+      reader.readAsDataURL(this.selectedFile);
+    }
+  }
+
+  onDeletePost() {
+    this.blogService.deletePost(this.post.id).subscribe(
+      () => {
+        this.toastr.success('Post was deleted successfully!');
+        this.router.navigate(['blog']);
+      },
+      (err) => {
+        console.log(err);
+      });
+  }
+
+  onUpdatePost() {
+     const savedData:FormData = new FormData();
+     savedData.append('title', this.post.title);
+     savedData.append('content', this.post.content);
+     savedData.append('file', this.selectedFile);
+     savedData.append('id', this.post.id);
+     this.blogService.updatePost(savedData).subscribe(
+      () => {
+        this.toastr.success('Post was saved successfully!');
+        this.router.navigate(['blog']);
+      },
+      (err) => {
+        console.log(err);
+      });
+  }
+
+  isDisabled(form: NgForm) {
+    return !(this.post.title && this.post.content)
+  }
+
 }

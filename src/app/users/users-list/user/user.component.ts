@@ -48,6 +48,7 @@ export class UserComponent implements OnInit {
       this.user.image = this.defaultImageUrl;
     }
   }
+
   onSaveChanges() {
     this.error = {};
     const savedData:FormData = new FormData();
@@ -74,7 +75,7 @@ export class UserComponent implements OnInit {
     this.userService.deleteUser(this.user.email).subscribe(
       () => {
         this.deletedUser.emit(this.user.email);
-        this.toastr.success('User was deleted successfully!');
+        this.toastr.success('User was created successfully!');
       },
       (err) => {
         this.toastr.error(`${err.error}`);

@@ -20,7 +20,7 @@
         required
         email
         #email="ngModel"
-        [ngClass]="{'input-error': !email.valid && email.touched || errors.non_field_error}">
+        [ngClass]="{'input-error': !email.valid && email.touched || checkErrors()}">
     </div>
     <div *ngIf="!email.valid && email.touched" class="validate-error">Please enter a valid value</div>
     <div class="form-group">
@@ -35,9 +35,9 @@
         ngModel
         required
         #password="ngModel"
-        [ngClass]="{'input-error': errors.non_field_error}">
+        [ngClass]="{'input-error': checkErrors()}">
     </div>
-    <div *ngIf="errors && errors.non_field_error" class="validate-error">{{errors.non_field_error}}</div>
+    <div *ngIf="checkErrors()" class="validate-error">{{ checkErrors() }}</div>
     <button type="submit" [disabled]="!email.valid || !password.value" class="btn btn-primary">Login</button>
   </div>
 </form>

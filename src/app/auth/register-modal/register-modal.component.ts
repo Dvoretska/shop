@@ -37,4 +37,12 @@ export class RegisterModalComponent implements OnInit {
         this.errors = err.error;
       })
   }
+
+  checkErrors(type) {
+    if(this.errors && (this.errors['password'] || this.errors['email'])) {
+      return this.errors[type];
+    } else {
+      return false;
+    }
+  }
 }

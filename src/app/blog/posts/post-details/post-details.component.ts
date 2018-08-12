@@ -1,10 +1,11 @@
 import {Component, OnInit, Input } from '@angular/core';
 import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { BlogService } from "../../blog.service";
 import { Post } from "../../post.model";
 import { Comment } from "../../comment.model";
 import { environment } from "src/environments/environment";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 
 @Component({
@@ -13,9 +14,9 @@ import { Router } from "@angular/router";
   styleUrls: ['./post-details.component.scss']
 })
 export class PostDetailsComponent implements OnInit {
-  @Input() id: number;
   @Input() postsIds: number[];
   @Input() modalIndex: number;
+  id: number;
   post: Post;
   comments: Comment[];
   url: string = environment.API_URL;
@@ -28,10 +29,11 @@ export class PostDetailsComponent implements OnInit {
   selectedComment: number;
   changedCommentText: string = '';
 
-  constructor(public modalRef: BsModalRef, private blogService: BlogService, private router: Router) { }
+  constructor(public modalRef: BsModalRef, private route: ActivatedRoute, public modalService: BsModalService, private blogService: BlogService, private router: Router) { }
 
   ngOnInit() {
     this.getPostDetails();
+    this.id = this.postsIds[this.modalIndex];
   }
 
   getPostDetails() {
@@ -53,20 +55,28 @@ export class PostDetailsComponent implements OnInit {
 
   }
   onAddComment() {
-    this.blogService.addComment(this.commentText, this.id).subscribe(
+    if (this.commentText) {
+      this.blogService.addComment(this.commentText, this.id).subscribe(
       (res: {comment: Comment}) => {
         this.commentText = '';
         this.comments.push(res.comment)
-      }
-    )
+      })
+    }
   }
 
-  onUpdateComment() {
-    this.blogService.updateComment(this.changedCommentText, this.id).subscribe(
-      (res: {comment: Comment}) => {
-        this.commentText = res.comment.text;
-      }
-    )
+  onUpdateComment(id) {
+    if (this.changedCommentText) {
+      this.blogService.updateComment(this.changedCommentText, id).subscribe(
+        (res: {comment: Comment}) => {
+          let commentIndex = this.comments.findIndex((comment => comment.id == id));
+          this.comments[commentIndex].text = res.comment.text;
+          this.isEditMode = false;
+          this.isViewMode = true;
+        }
+      )
+    } else {
+      alert('You can\'t save empty comment.')
+    }
   }
 
   nextPost() {
@@ -95,5 +105,16 @@ export class PostDetailsComponent implements OnInit {
     this.changedCommentText = text;
   }
 
+  onDeleteComment(id) {
+    this.blogService.deleteComment(id).subscribe(
+      () => {
+        this.comments = this.comments.filter((comment) => {
+          return comment.id !== id
+        })
+      },
+      (err) => {
+        console.log(err)
+      })
+  }
 }
 

@@ -23,11 +23,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.imageUrl = `${environment.API_URL}/${this.post['image']}`;
-    this.renderer.setStyle(
-      this.changedBlock.nativeElement,
-      'top',
-      `${this.getRandomTopPosition()}%`
-    );
+    this.renderer.setStyle(this.changedBlock.nativeElement, 'top', `${this.getRandomTopPosition()}%`);
   }
 
   getRandomTopPosition() {
@@ -35,9 +31,8 @@ export class PostComponent implements OnInit {
   }
 
   openPostDetails() {
-    const initialState = { title: this.post['title'], image: this.post['image'], id: this.post['id'], postsIds: this.postsIds, modalIndex: this.modalIndex};
+    const initialState = { postsIds: this.postsIds, modalIndex: this.modalIndex};
     this.modalRef = this.modalService.show(PostDetailsComponent,  { initialState });
   }
-
 
 }

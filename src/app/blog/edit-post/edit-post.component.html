@@ -1,4 +1,4 @@
-<form  *ngIf="post">
+<form  *ngIf="post" #appForm="ngForm">
   <div class="form-group">
     <label for="title">
       <strong>Title of your post</strong>
@@ -26,6 +26,6 @@
       <img [src]="imageURL" class="image">
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Save changes</button>
-  <button type="submit" class="btn btn-danger">Delete post</button>
+  <button type="submit" class="btn btn-primary" (click)="onUpdatePost()"  [disabled]="isDisabled(appForm)">Save changes</button>
+  <button type="submit" class="btn btn-danger" (click)="onDeletePost()">Delete post</button>
 </form>

@@ -43,7 +43,7 @@ export class CreatePostComponent implements OnInit {
     savedData.append('text', this.text);
     savedData.append('file', this.selectedFile);
     this.blogService.createPost(savedData).subscribe(
-      (res) => {
+      () => {
         this.router.navigate(['/blog']);
       },
       (err) => {

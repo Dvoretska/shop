@@ -30,4 +30,12 @@ export class LoginModalComponent implements OnInit {
         this.errors = err.error
       })
   }
+
+  checkErrors() {
+    if(this.errors && this.errors['non_field_error']) {
+      return this.errors['non_field_error'];
+    } else {
+      return false;
+    }
+  }
 }
