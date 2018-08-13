@@ -1,4 +1,4 @@
-import {Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BlogService } from "../../blog.service";
@@ -6,6 +6,7 @@ import { Post } from "../../post.model";
 import { Comment } from "../../comment.model";
 import { environment } from "src/environments/environment";
 import { Router, ActivatedRoute } from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -23,13 +24,12 @@ export class PostDetailsComponent implements OnInit {
   displayComments: boolean = false;
   commentText: string = '';
   text: string;
-  username: string;
   isEditMode: boolean = false;
   isViewMode: boolean = true;
   selectedComment: number;
   changedCommentText: string = '';
 
-  constructor(public modalRef: BsModalRef, private route: ActivatedRoute, public modalService: BsModalService, private blogService: BlogService, private router: Router) { }
+  constructor(private toastr: ToastrService, public modalRef: BsModalRef, private route: ActivatedRoute, public modalService: BsModalService, private blogService: BlogService, private router: Router) { }
 
   ngOnInit() {
     this.getPostDetails();
@@ -60,6 +60,9 @@ export class PostDetailsComponent implements OnInit {
       (res: {comment: Comment}) => {
         this.commentText = '';
         this.comments.push(res.comment)
+      },
+      (err) => {
+        this.toastr.error(`${err.error.rights}`);
       })
     }
   }
@@ -72,10 +75,13 @@ export class PostDetailsComponent implements OnInit {
           this.comments[commentIndex].text = res.comment.text;
           this.isEditMode = false;
           this.isViewMode = true;
+        },
+        (err) => {
+          this.toastr.error(`${err.error.rights}`);
         }
       )
     } else {
-      alert('You can\'t save empty comment.')
+      this.toastr.error('You can\'t save empty comment!');
     }
   }
 

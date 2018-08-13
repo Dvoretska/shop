@@ -1,11 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BlogService } from '../blog.service';
-import {Post} from "../post.model";
-import {Comment} from "../comment.model";
+import { Post } from "../post.model";
+import { Comment } from "../comment.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 
 @Component({
@@ -17,7 +19,8 @@ export class EditPostComponent implements OnInit {
   post: Post;
   imageURL: string;
   selectedFile: File;
-  constructor(private blogService: BlogService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) { }
+  modalRef: BsModalRef;
+  constructor(private modalService: BsModalService, private blogService: BlogService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) { }
 
   ngOnInit() {
     if (this.route.snapshot.params.id && Number.isInteger(+this.route.snapshot.params.id)) {
@@ -50,7 +53,7 @@ export class EditPostComponent implements OnInit {
         this.router.navigate(['blog']);
       },
       (err) => {
-        console.log(err);
+        this.toastr.error(`${err.error.rights}`);
       });
   }
 
@@ -66,12 +69,25 @@ export class EditPostComponent implements OnInit {
         this.router.navigate(['blog']);
       },
       (err) => {
-        console.log(err);
+        this.toastr.error(`${err.error.rights}`);
       });
   }
 
   isDisabled(form: NgForm) {
     return !(this.post.title && this.post.content)
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  confirm(): void {
+    this.onDeletePost();
+    this.modalRef.hide();
+  }
+
+  decline(): void {
+    this.modalRef.hide();
   }
 
 }

@@ -26,6 +26,14 @@
       <img [src]="imageURL" class="image">
     </div>
   </div>
-  <button type="submit" class="btn btn-primary" (click)="onUpdatePost()"  [disabled]="isDisabled(appForm)">Save changes</button>
-  <button type="submit" class="btn btn-danger" (click)="onDeletePost()">Delete post</button>
+  <button type="submit" class="my-button button-update" (click)="onUpdatePost()"  [disabled]="isDisabled(appForm)">Save changes</button>
+  <button type="button" class="my-button button-delete" (click)="openModal(modalDialog)">Delete post</button>
+  <ng-template #modalDialog>
+    <div class="modal-body text-center confirm-body">
+      <p>Do you want to delete the post?</p>
+      <button type="button" class="btn btn-primary cta" (click)="confirm()">Yes</button>
+      <button type="button" class="btn btn-danger cta" (click)="decline()">No</button>
+    </div>
+  </ng-template>
 </form>
+

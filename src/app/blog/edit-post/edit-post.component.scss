@@ -26,8 +26,11 @@ form {
       margin-top: 10px;
     }
   }
-  .btn {
-    font-family: 'goudy_old_stylebold_italic';
+}
+/deep/ .confirm-body {
+  .cta {
+    display: inline-block;
+    margin: 0 7px;
   }
 }
 /deep/ .ql-toolbar, /deep/ .ql-container {
@@ -38,8 +41,34 @@ form {
   min-height: 50px;
   font-size: 18px;
 }
-.btn-danger {
+.my-button {
+  font-family: 'goudy_old_stylebold_italic';
+  background-color: #eee;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.button-delete {
+  border: 3px solid red;
   margin-left: 30px;
+  color: black;
+  &:hover {
+    color: red;
+  }
+}
+.button-update {
+  border: 3px solid blue;
+  color: black;
+  &:hover {
+    color: blue;
+  }
+}
+
+
+@media screen and (max-width:991px){
+  form {
+    width: 80%;
+  }
 }
 
 @media screen and (max-width:767px){

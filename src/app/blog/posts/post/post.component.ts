@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2 } from '@angular/core';
-import {environment} from "../../../../environments/environment";
+import { environment } from "../../../../environments/environment";
 import { Post } from '../../post.model';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -32,7 +32,7 @@ export class PostComponent implements OnInit {
 
   openPostDetails() {
     const initialState = { postsIds: this.postsIds, modalIndex: this.modalIndex};
-    this.modalRef = this.modalService.show(PostDetailsComponent,  { initialState });
+    this.modalRef = this.modalService.show(PostDetailsComponent,  { class : 'post-details-modal', initialState });
   }
 
 }

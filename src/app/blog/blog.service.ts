@@ -33,7 +33,7 @@ export class BlogService {
   }
 
   addComment(text: string, id: number) {
-    return this.http.post(`${environment.API_URL}/comment`, {text: text, post_id: id}).pipe(
+    return this.http.post(`${environment.API_URL}/comment`, {text, id}).pipe(
       catchError(this.handleError)
     );
   }
