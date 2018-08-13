@@ -35,7 +35,6 @@ import { NgxMasonryModule } from 'ngx-masonry';
 import { PostDetailsComponent } from './blog/posts/post-details/post-details.component';
 import { EditPostComponent } from './blog/edit-post/edit-post.component';
 import { AuthGuardService } from './auth/auth-guard.service';
-import { ModalDialogModule } from 'ngx-modal-dialog';
 
 
 @NgModule({
@@ -73,8 +72,7 @@ import { ModalDialogModule } from 'ngx-modal-dialog';
     QuillModule,
     NgxPageScrollModule,
     InViewportModule,
-    NgxMasonryModule,
-    ModalDialogModule.forRoot()
+    NgxMasonryModule
   ],
   providers: [AuthService, {
     provide: HTTP_INTERCEPTORS,
