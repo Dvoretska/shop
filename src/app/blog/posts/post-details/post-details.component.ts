@@ -28,12 +28,15 @@ export class PostDetailsComponent implements OnInit {
   isViewMode: boolean = true;
   selectedComment: number;
   changedCommentText: string = '';
+  user: {};
+
 
   constructor(private toastr: ToastrService, public modalRef: BsModalRef, private route: ActivatedRoute, public modalService: BsModalService, private blogService: BlogService, private router: Router) { }
 
   ngOnInit() {
     this.getPostDetails();
     this.id = this.postsIds[this.modalIndex];
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   getPostDetails() {
@@ -121,6 +124,24 @@ export class PostDetailsComponent implements OnInit {
       (err) => {
         console.log(err)
       })
+  }
+
+  isEditPostAllowed() {
+    if(this.post) {
+      return this.user['role'] == 'admin' || this.user['email'] == this.post.user_id.email;
+    }
+  }
+
+  isAddCommentAllowed() {
+    if(this.post) {
+      return this.user['role'] !== 'user' || this.user['email'] == this.post.user_id.email;
+    }
+  }
+
+  isUpdateCommentAllowed(email) {
+    if(this.post) {
+      return this.user['role'] == 'admin' || this.user['role'] == 'premium' && this.user['email'] == email;
+    }
   }
 }
 

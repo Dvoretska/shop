@@ -19,7 +19,7 @@
           </div>
           <div class="comment-body" *ngIf="isViewMode || selectedComment !== comment.id">
             <div>{{ comment.text }}</div>
-            <button class="cta" (click)="onEditComment(comment.id, comment.text)">Edit</button>
+            <button class="cta" (click)="onEditComment(comment.id, comment.text)" *ngIf="isUpdateCommentAllowed(comment.email)">Edit</button>
           </div>
           <div class="edit-input-wrapper" *ngIf="selectedComment == comment.id && isEditMode">
             <input type="text"
@@ -34,7 +34,7 @@
         </div>
       </ng-container>
       <hr>
-      <div class="input-wrapper">
+      <div class="input-wrapper" *ngIf="isAddCommentAllowed()">
         <input type="text" maxlength="255" placeholder="Add a comment" class="add-comment-input"
                [(ngModel)]="commentText" (keyup.enter)="onAddComment()">
         <button class="cta" (click)="onAddComment()" [disabled]="!commentText">Submit</button>
@@ -45,7 +45,7 @@
   <div class="post-nav">
     <div class="arrow-left" (click)="previousPost()"></div>
     <div class="arrow-right" (click)="nextPost()"></div>
-    <a class="edit-post" (click)="onEditPost()">Edit post</a>
+    <a class="edit-post" (click)="onEditPost()" *ngIf="isEditPostAllowed()">Edit post</a>
   </div>
 </div>
 

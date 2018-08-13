@@ -16,7 +16,7 @@
   <div class="collapse navbar-collapse" [collapse]="isCollapsed" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/blog">BLOG</a>
+        <a class="nav-link" routerLink="/blog" *ngIf="isAuthorized()">BLOG</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/users" *ngIf="isAuthorized()">USERS</a>

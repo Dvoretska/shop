@@ -68,6 +68,7 @@ export class UserComponent implements OnInit {
         if(this.error['rights']) {
           this.toastr.error(`${this.error['rights']}`);
         }
+        this.newPassword = '';
       });
   }
 

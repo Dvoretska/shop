@@ -49,10 +49,10 @@ export class NavbarComponent implements OnInit {
     }
   }
   openModalRegister() {
-    this.modalRef = this.modalService.show(RegisterModalComponent);
+    this.modalRef = this.modalService.show(RegisterModalComponent, { class : 'auth-modal' });
   }
   openModalLogin() {
-    this.modalRef = this.modalService.show(LoginModalComponent);
+    this.modalRef = this.modalService.show(LoginModalComponent, { class : 'auth-modal' });
   }
   isAuthorized() {
     return localStorage.getItem('user');
