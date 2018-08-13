@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
   newPassword: string = '';
   url: string;
   defaultImageUrl: string = 'src/assets/default-picture_0_0.png';
-  error: Object = {};
+  errors: {};
   username: string = '';
   constructor(private http: HttpClient,
               private toastr: ToastrService,
@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onFileChanged(event) {
-    this.error = {};
+    this.errors = {};
     this.isChanged = true;
     this.selectedFile = event.target.files[0];
     if (/\.(jpe?g|png|gif)$/i.test(event.target.files[0].name)) {
@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSave() {
-    this.error = {};
+    this.errors = {};
     const savedData:FormData = new FormData();
     if(this.selectedFile) {
      savedData.append('file', this.selectedFile);
@@ -66,8 +66,16 @@ export class ProfileComponent implements OnInit {
           this.newPassword = '';
         },
         (err) => {
-          this.error = err.error;
+          this.errors = err.error;
         });
+  }
+
+  checkErrors(type) {
+    if(this.errors && (this.errors['password'] || this.errors['image'])) {
+      return this.errors[type];
+    } else {
+      return false;
+    }
   }
 
 }

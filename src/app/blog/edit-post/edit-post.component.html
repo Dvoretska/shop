@@ -24,6 +24,7 @@
              (change)="onFileChanged($event)">
       <label for="file">Choose an image</label>
       <img [src]="imageURL" class="image">
+      <div *ngIf="errorImgMessage" class="validate-error">{{ errorImgMessage }}</div>
     </div>
   </div>
   <button type="submit" class="my-button button-update" (click)="onUpdatePost()"  [disabled]="isDisabled(appForm)">Save changes</button>

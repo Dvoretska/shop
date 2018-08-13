@@ -15,7 +15,7 @@
           <div class="comment-heading">
             <span class="heading-item">{{ comment.email.substring(0, comment.email.lastIndexOf('@')) }}</span>
             <span class="heading-item date-item">{{ formattedDate(comment.created) }}</span>
-            <img src="src/assets/cancel.svg" alt="close" class="close-icon" (click)="onDeleteComment(comment.id)">
+            <img src="src/assets/cancel.svg" alt="close" class="close-icon" *ngIf="isUpdateCommentAllowed(comment.email)" (click)="onDeleteComment(comment.id)">
           </div>
           <div class="comment-body" *ngIf="isViewMode || selectedComment !== comment.id">
             <div>{{ comment.text }}</div>
@@ -43,8 +43,8 @@
 </div>
 <div class="modal-footer details-modal-footer">
   <div class="post-nav">
-    <div class="arrow-left" (click)="previousPost()"></div>
-    <div class="arrow-right" (click)="nextPost()"></div>
+    <div class="arrow-left" (click)="previousPost()" [ngClass]="{'not-active': modalIndex == 0}"></div>
+    <div class="arrow-right" (click)="nextPost()" [ngClass]="{'not-active': modalIndex == postsIds.length - 1}"></div>
     <a class="edit-post" (click)="onEditPost()" *ngIf="isEditPostAllowed()">Edit post</a>
   </div>
 </div>

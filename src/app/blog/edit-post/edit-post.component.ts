@@ -20,6 +20,7 @@ export class EditPostComponent implements OnInit {
   imageURL: string;
   selectedFile: File;
   modalRef: BsModalRef;
+  errorImgMessage: string;
   constructor(private modalService: BsModalService, private blogService: BlogService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) { }
 
   ngOnInit() {
@@ -69,7 +70,12 @@ export class EditPostComponent implements OnInit {
         this.router.navigate(['blog']);
       },
       (err) => {
-        this.toastr.error(`${err.error.rights}`);
+        if(err.error.image) {
+          this.errorImgMessage = err.error.image;
+        }
+        if(err.error.rights) {
+          this.toastr.error(`${err.error.rights}`);
+        }
       });
   }
 
