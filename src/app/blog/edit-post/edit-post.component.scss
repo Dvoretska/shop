@@ -77,10 +77,16 @@ form {
   }
 }
 
-@media screen and (max-width:767px){
+@media screen and (max-width:768px){
   form {
     padding-top: 50px;
     padding-bottom: 50px;
     width: 77%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .button-delete {
+    margin-left: 10px;
   }
 }
