@@ -6,6 +6,7 @@
     <div class="post-wrapper">
       <img [src]="url + '/' + post['image']" alt="" class="post-image">
       <div [innerHTML]="post.content" class="post-content"></div>
+      <span class="post-owner">{{ postOwner }}</span>
     </div>
     <div class="separator" (click)="toggleComments()"></div>
     <div [ngClass]="{show: displayComments, hide: !displayComments}">
@@ -15,11 +16,17 @@
           <div class="comment-heading">
             <span class="heading-item">{{ comment.email.substring(0, comment.email.lastIndexOf('@')) }}</span>
             <span class="heading-item date-item">{{ formattedDate(comment.created) }}</span>
-            <img src="src/assets/cancel.svg" alt="close" class="close-icon" *ngIf="isUpdateCommentAllowed(comment.email)" (click)="onDeleteComment(comment.id)">
+            <img src="src/assets/cancel.svg"
+                 alt="close"
+                 class="close-icon"
+                 *ngIf="isUpdateCommentAllowed(comment.email)"
+                 (click)="onDeleteComment(comment.id)">
           </div>
           <div class="comment-body" *ngIf="isViewMode || selectedComment !== comment.id">
             <div>{{ comment.text }}</div>
-            <button class="cta" (click)="onEditComment(comment.id, comment.text)" *ngIf="isUpdateCommentAllowed(comment.email)">Edit</button>
+            <button class="cta"
+                    (click)="onEditComment(comment.id, comment.text)"
+                    *ngIf="isUpdateCommentAllowed(comment.email)">Edit</button>
           </div>
           <div class="edit-input-wrapper" *ngIf="selectedComment == comment.id && isEditMode">
             <input type="text"
@@ -35,8 +42,12 @@
       </ng-container>
       <hr>
       <div class="input-wrapper" *ngIf="isAddCommentAllowed()">
-        <input type="text" maxlength="255" placeholder="Add a comment" class="add-comment-input"
-               [(ngModel)]="commentText" (keyup.enter)="onAddComment()">
+        <input type="text"
+               maxlength="255"
+               placeholder="Add a comment"
+               class="add-comment-input"
+               [(ngModel)]="commentText"
+               (keyup.enter)="onAddComment()">
         <button class="cta" (click)="onAddComment()" [disabled]="!commentText">Submit</button>
       </div>
     </div>

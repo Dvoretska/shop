@@ -18,8 +18,9 @@ export class UserComponent implements OnInit {
   selectedRole: string = '';
   defaultImageUrl: string = '../../assets/default-picture_0_0.png';
   newPassword: string = '';
-  error: Object = {};
+  errors: {};
   selectedFile: File;
+  myRole: string = JSON.parse(localStorage.getItem('user')).role;
 
   constructor(private userService: UserService, private toastr: ToastrService) {}
 
@@ -31,12 +32,11 @@ export class UserComponent implements OnInit {
     }
     this.selectedRole = this.user['role_id']['role'];
   }
-  openFileBrowser(event) {
+  openFileBrowser() {
     let el: HTMLElement = this.inputFile.nativeElement as HTMLElement;
     el.click();
   }
   onFileChanged(event) {
-    this.error = {};
     this.selectedFile = event.target.files[0];
     if (/\.(jpe?g|png|gif)$/i.test(event.target.files[0].name)) {
       let reader = new FileReader();
@@ -50,7 +50,7 @@ export class UserComponent implements OnInit {
   }
 
   onSaveChanges() {
-    this.error = {};
+    this.errors = {};
     const savedData:FormData = new FormData();
     if(this.selectedFile) {
      savedData.append('file', this.selectedFile);
@@ -64,9 +64,9 @@ export class UserComponent implements OnInit {
         this.newPassword = '';
       },
       (err) => {
-        this.error = err.error;
-        if(this.error['rights']) {
-          this.toastr.error(`${this.error['rights']}`);
+        this.errors = err.error;
+        if(this.errors['rights']) {
+          this.toastr.error(`${this.errors['rights']}`);
         }
         this.newPassword = '';
       });
@@ -85,6 +85,14 @@ export class UserComponent implements OnInit {
 
   isCurrentUser() {
     return this.user.email == JSON.parse(localStorage.getItem('user')).email
+  }
+
+  checkErrors() {
+    if(this.errors && (this.errors['password'])) {
+      return this.errors['password'];
+    } else {
+      return false;
+    }
   }
 
 }

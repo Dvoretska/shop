@@ -29,6 +29,7 @@ export class PostDetailsComponent implements OnInit {
   selectedComment: number;
   changedCommentText: string = '';
   user: {};
+  postOwner: string;
 
 
   constructor(private toastr: ToastrService, public modalRef: BsModalRef, private route: ActivatedRoute, public modalService: BsModalService, private blogService: BlogService, private router: Router) { }
@@ -44,6 +45,7 @@ export class PostDetailsComponent implements OnInit {
       (res:{post: Post, comments: Comment[]}) => {
         this.post = res.post;
         this.comments = res.comments;
+        this.postOwner = this.post.user_id.email.substring(0, this.post.user_id.email.lastIndexOf('@'))
       },
       (err) => {
         console.log(err)

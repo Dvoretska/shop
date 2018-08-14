@@ -11,12 +11,13 @@
 <td>{{user.email}}</td>
 <td>
   <input type="password" [(ngModel)]="newPassword">
-  <div *ngIf="error && error.password" class="error">{{ error.password }}</div>
+  <div *ngIf="checkErrors()" class="error">{{ checkErrors() }}</div>
 </td>
 <td>
   <select [(ngModel)]="selectedRole">
     <option *ngFor="let role of roles"
-          [ngValue]="role.role">
+          [ngValue]="role.role"
+          [disabled]="myRole == 'premium'">
           {{ role.role }}
     </option>
   </select>

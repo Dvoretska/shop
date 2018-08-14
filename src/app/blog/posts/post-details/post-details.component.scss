@@ -83,6 +83,8 @@
 .post-wrapper {
   width: 100%;
   display: flex;
+  position: relative;
+  font-family: 'goudy_old_stylebold_italic';
   .post-image {
     max-width: 50%;
     height: auto;
@@ -90,8 +92,11 @@
     object-fit: contain;
     margin-right: 30px;
   }
-  .post-content {
-    font-family: 'goudy_old_stylebold_italic';
+  .post-owner {
+    position: absolute;
+    right: 0;
+    top: -47px;
+    color: #858fa0;
   }
 }
 .separator {
