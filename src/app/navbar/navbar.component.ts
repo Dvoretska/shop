@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { RegisterModalComponent } from '../auth/register-modal/register-modal.co
 import { LoginModalComponent } from '../auth/login-modal/login-modal.component';
 import { StorageService } from '../storage.service';
 import { environment } from 'src/environments/environment';
+import { Subscription } from 'rxjs';
 
 export interface CurrentUser {
   email: string;
@@ -20,20 +21,21 @@ export interface CurrentUser {
   styleUrls: ['./navbar.component.scss']
 })
 
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   isCollapsed = true;
   modalRef: BsModalRef;
   currentUser: CurrentUser;
   username: string;
   imageUrl: string = '';
   defaultImageUrl: string = 'src/assets/default-picture_0_0.png';
+  private subscription: Subscription;
   constructor(private modalService: BsModalService,
               private router: Router,
               private storageService: StorageService) {}
 
   ngOnInit() {
     this.getCurrentUser();
-    this.storageService.watchStorage().subscribe(() => {
+    this.subscription = this.storageService.watchStorage().subscribe(() => {
         this.getCurrentUser();
     });
   }
@@ -60,5 +62,9 @@ export class NavbarComponent implements OnInit {
   onLogout() {
     localStorage.removeItem('user');
     this.router.navigate(['/']);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

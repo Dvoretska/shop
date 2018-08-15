@@ -49,6 +49,7 @@
         &.active-link {
           border: 1px solid black;
           position: relative;
+          padding: 0 2px;
           &:before, &:after {
             content: "";
             display: block;
