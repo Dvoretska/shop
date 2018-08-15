@@ -38,6 +38,6 @@
         [ngClass]="{'input-error': checkErrors()}">
     </div>
     <div *ngIf="checkErrors()" class="validate-error">{{ checkErrors() }}</div>
-    <button type="submit" [disabled]="!email.valid || !password.value" class="btn btn-primary">Login</button>
+    <button type="submit" [disabled]="!appForm.valid" class="btn btn-primary">Login</button>
   </div>
 </form>
