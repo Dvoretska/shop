@@ -126,6 +126,7 @@ export class PostDetailsComponent implements OnInit {
       (err) => {
         this.toastr.error(`${err.error.rights}`);
       }
+    )
   }
 
   isEditPostAllowed() {
