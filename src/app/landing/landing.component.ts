@@ -1,11 +1,4 @@
 import { Component, OnInit, HostListener, ElementRef, Renderer2, ViewChild } from '@angular/core';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
 
 @Component({
   selector: 'app-landing',
@@ -14,7 +7,7 @@ import {
 })
 export class LandingComponent implements OnInit {
   @ViewChild('triggerSection') triggerSection: ElementRef;
-  state = 'hide'
+  state = 'hide';
 
   constructor(private renderer: Renderer2) { }
 
@@ -28,8 +21,8 @@ export class LandingComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
-    const componentPosition = this.triggerSection.nativeElement.offsetTop
-    const scrollPosition = window.pageYOffset
+    const componentPosition = this.triggerSection.nativeElement.offsetTop;
+    const scrollPosition = window.pageYOffset;
     if (scrollPosition >= componentPosition) {
       this.state = 'show'
     } else {

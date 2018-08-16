@@ -265,5 +265,48 @@
 
 }
 
-
-
+@media screen and (max-width: 576px) {
+  .post-nav {
+    .arrow-right, .arrow-left {
+      margin: 10px 30px;
+    }
+    .arrow-left {
+      &:before {
+        right: -15px;
+      }
+    }
+  }
+  .post-wrapper {
+    .post-owner {
+      top: -30px;
+    }
+  }
+  .details-modal-title {
+    font-size: 18px;
+  }
+  .details-modal-body {
+    padding: 50px 20px 0;
+  }
+  .post-wrapper {
+    flex-direction: column;
+    .post-image {
+      margin: 0 auto 10px;
+    }
+  }
+  .comments-wrapper {
+    .comment-heading {
+      flex-direction: column;
+      height: 50px;
+      position: relative;
+    }
+    .date-item {
+      font-size: 14px;
+      margin: 0 auto;
+    }
+    .close-icon {
+      position: absolute;
+      top: 7px;
+      right: 10px;
+    }
+  }
+}
