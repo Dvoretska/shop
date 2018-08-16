@@ -27,6 +27,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return !!JSON.parse(localStorage.getItem('user')) && !!JSON.parse(localStorage.getItem('user')).token;
+    let user = JSON.parse(localStorage.getItem('user'));
+    return !!user && !!user.token;
   }
 }

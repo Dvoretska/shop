@@ -76,7 +76,7 @@ export class UserComponent implements OnInit {
     this.userService.deleteUser(this.user.email).subscribe(
       () => {
         this.deletedUser.emit(this.user.email);
-        this.toastr.success('User was created successfully!');
+        this.toastr.success('User was deleted successfully!');
       },
       (err) => {
         this.toastr.error(`${err.error}`);

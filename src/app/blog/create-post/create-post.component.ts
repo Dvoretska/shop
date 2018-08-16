@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class CreatePostComponent implements OnInit {
   text: '';
+  title: '';
   selectedFile: File;
   url: string;
 
@@ -37,9 +38,9 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
-  onCreatePost(form: NgForm) {
+  onCreatePost() {
     const savedData:FormData = new FormData();
-    savedData.append('title', form.value.title);
+    savedData.append('title', this.title);
     savedData.append('text', this.text);
     savedData.append('file', this.selectedFile);
     this.blogService.createPost(savedData).subscribe(
@@ -51,8 +52,8 @@ export class CreatePostComponent implements OnInit {
       })
   }
 
-  isDisabled(form: NgForm) {
-    return !(form.value.title && this.text && this.selectedFile)
+  isDisabled() {
+    return !(this.title && this.text && this.selectedFile)
   }
 
 }

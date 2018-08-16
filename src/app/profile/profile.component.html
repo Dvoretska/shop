@@ -14,7 +14,9 @@
     <div class="username"><strong>Username:</strong> {{ username }}</div>
      <label>
       <span class="password">New Password: </span>
-      <input type="password" [(ngModel)]="newPassword">
+      <input type="password"
+             [(ngModel)]="newPassword"
+             [ngClass]="{'input-error': checkErrors('password')}">
       <div class="error" *ngIf="checkErrors('password')">{{ checkErrors('password') }}</div>
     </label>
   </div>

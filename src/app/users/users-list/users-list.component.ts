@@ -23,7 +23,7 @@ export class UsersListComponent implements OnInit {
   constructor(private userService: UserService, private modalService: BsModalService) { }
 
   ngOnInit() {
-    this.myRole = JSON.parse(localStorage.getItem('user')).role.charAt(0).toUpperCase() + JSON.parse(localStorage.getItem('user')).role.slice(1);
+    this.myRole = JSON.parse(localStorage.getItem('user')).role;
     if (JSON.parse(localStorage.getItem('user')).image) {
       this.myAvatarUrl = `${environment.API_URL}/${JSON.parse(localStorage.getItem('user')).image}`;
     } else {

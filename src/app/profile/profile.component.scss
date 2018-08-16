@@ -48,6 +48,13 @@
         border-radius: 5px;
       }
     }
+    .input-error {
+      border: 1px solid red;
+      &:focus {
+        box-shadow: 0 0 0 1px red;
+        border: none;
+      }
+    }
   }
   .save-wrapper {
     text-align: center;

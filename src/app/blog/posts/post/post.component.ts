@@ -26,7 +26,7 @@ export class PostComponent implements OnInit {
     this.renderer.setStyle(this.changedBlock.nativeElement, 'top', `${this.getRandomTopPosition()}%`);
   }
 
-  getRandomTopPosition() {
+  private getRandomTopPosition() {
     return Math.floor((Math.random()*41) + 30);
   }
 
