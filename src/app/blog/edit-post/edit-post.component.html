@@ -1,4 +1,4 @@
-<form  *ngIf="post" #appForm="ngForm">
+<form #appForm="ngForm">
   <div class="form-group">
     <label for="title">
       <strong>Title of your post</strong>
@@ -8,11 +8,11 @@
       class="form-control"
       name="title"
       id="title"
-      [(ngModel)]="post.title">
+      [(ngModel)]="title">
   </div>
   <div class="form-group">
     <strong class="text">Text of your post</strong>
-    <quill-editor name="editor" #editor [modules]="{toolbar: optToolbar}" [(ngModel)]="post.content"></quill-editor>
+    <quill-editor name="editor" #editor [modules]="{toolbar: optToolbar}" [(ngModel)]="text"></quill-editor>
   </div>
   <div class="form-group">
     <strong class="text">Image of your post</strong>
@@ -27,14 +27,16 @@
       <div *ngIf="errorImgMessage" class="validate-error">{{ errorImgMessage }}</div>
     </div>
   </div>
-  <button type="submit" class="my-button button-update" (click)="onUpdatePost()"  [disabled]="isDisabled(appForm)">Save changes</button>
-  <button type="button" class="my-button button-delete" (click)="openModal(modalDialog)">Delete post</button>
-  <ng-template #modalDialog>
-    <div class="modal-body text-center confirm-body">
-      <p>Do you want to delete the post?</p>
-      <button type="button" class="btn btn-primary cta" (click)="confirm()">Yes</button>
-      <button type="button" class="btn btn-danger cta" (click)="decline()">No</button>
-    </div>
-  </ng-template>
+  <button type="submit" class="my-button button-update" (click)="onSubmit()"  [disabled]="isDisabled(appForm)">Save post</button>
+  <span *ngIf="editMode">
+    <button type="button" class="my-button button-delete" (click)="openModal(modalDialog)">Delete post</button>
+    <ng-template #modalDialog>
+      <div class="modal-body text-center confirm-body">
+        <p>Do you want to delete the post?</p>
+        <button type="button" class="btn btn-primary cta" (click)="confirm()">Yes</button>
+        <button type="button" class="btn btn-danger cta" (click)="decline()">No</button>
+      </div>
+    </ng-template>
+  </span>
 </form>
 

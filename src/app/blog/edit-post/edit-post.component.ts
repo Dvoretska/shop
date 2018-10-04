@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BlogService } from '../blog.service';
 import { Post } from "../post.model";
 import { Comment } from "../comment.model";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, Params } from "@angular/router";
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
@@ -21,18 +21,43 @@ export class EditPostComponent implements OnInit {
   selectedFile: File;
   modalRef: BsModalRef;
   errorImgMessage: string;
+  editMode:boolean = false;
+  text: string;
+  title: string;
+  optToolbar = [
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ 'size': ['small', 'large', 'huge'] }],
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'align': [] }]
+  ];
+
   constructor(private modalService: BsModalService, private blogService: BlogService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) { }
 
   ngOnInit() {
-    if (this.route.snapshot.params.id && Number.isInteger(+this.route.snapshot.params.id)) {
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.editMode = params['id'] != null;
+        this.initForm();
+      }
+    );
+  }
+
+  initForm() {
+    this.text = '';
+    this.title = '';
+    this.imageURL = '';
+    if(this.editMode) {
       this.blogService.getPostDetails(this.route.snapshot.params.id).subscribe(
-      (res:{post: Post, comments: Comment[]}) => {
-        this.post = res.post;
-        this.imageURL = `${environment.API_URL}/${this.post['image']}`;
-      },
-      (err) => {
-        console.log(err)
-      })
+        (res:{post: Post, comments: Comment[]}) => {
+          this.post = res.post;
+          this.title = this.post.title;
+          this.text = this.post.content;
+          this.imageURL = `${environment.API_URL}/${this.post['image']}`;
+        },
+        (err) => {
+          console.log(err)
+        })
     }
   }
 
@@ -58,10 +83,33 @@ export class EditPostComponent implements OnInit {
       });
   }
 
+  onSubmit() {
+    if(this.editMode) {
+      this.onUpdatePost();
+    } else {
+      this.onCreatePost();
+    }
+  }
+
+  onCreatePost() {
+    const savedData:FormData = new FormData();
+    savedData.append('title', this.title);
+    savedData.append('text', this.text);
+    savedData.append('file', this.selectedFile);
+    this.blogService.createPost(savedData).subscribe(
+      () => {
+        this.router.navigate(['blog']);
+      },
+      (err) => {
+        console.log(err)
+      })
+  }
+
+
   onUpdatePost() {
      let savedData:FormData = new FormData();
-     savedData.append('title', this.post.title);
-     savedData.append('content', this.post.content);
+     savedData.append('title', this.title);
+     savedData.append('content', this.text);
      savedData.append('file', this.selectedFile);
      savedData.append('id', this.post.id);
      this.blogService.updatePost(savedData).subscribe(
@@ -80,7 +128,11 @@ export class EditPostComponent implements OnInit {
   }
 
   isDisabled(form: NgForm) {
-    return !(this.post.title && this.post.content)
+    if(this.editMode) {
+      return !(this.title && this.text)
+    } else {
+      return !(this.title && this.text && this.selectedFile)
+    }
   }
 
   openModal(template: TemplateRef<any>) {

@@ -24,7 +24,6 @@ import { UserService } from './users/user.service';
 import { BlogService } from './blog/blog.service';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CreatePostComponent } from './blog/create-post/create-post.component';
 import { PostsComponent } from './blog/posts/posts.component';
 import { PostComponent } from './blog/posts/post/post.component';
 import { BlogComponent } from './blog/blog.component';
@@ -48,7 +47,6 @@ import { AuthGuardService } from './auth/auth-guard.service';
     UserComponent,
     UsersListComponent,
     UserCreateComponent,
-    CreatePostComponent,
     PostsComponent,
     PostComponent,
     BlogComponent,
