@@ -34,6 +34,8 @@ import { NgxMasonryModule } from 'ngx-masonry';
 import { PostDetailsComponent } from './blog/posts/post-details/post-details.component';
 import { EditPostComponent } from './blog/edit-post/edit-post.component';
 import { AuthGuardService } from './auth/auth-guard.service';
+import { ShopComponent } from './shop/shop.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -51,7 +53,9 @@ import { AuthGuardService } from './auth/auth-guard.service';
     PostComponent,
     BlogComponent,
     PostDetailsComponent,
-    EditPostComponent
+    EditPostComponent,
+    ShopComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

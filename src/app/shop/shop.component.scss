@@ -1,0 +1,94 @@
+.shop-wrapper {
+  background-color: white;
+  height: 140px;
+  .heading {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    height: 100px;
+    background-color: #eee;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-family: 'goudy_old_style_small_caps_Rg';
+    .first-letter {
+      font-family: 'flaemische_kanzleischriftRg';
+      font-size: 50px;
+      line-height: 1;
+    }
+  }
+
+  .category-container {
+    background-color: white;
+    min-height: 500px;
+    border-top: 15px solid black;
+    border-bottom: 15px solid black;
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+    margin-bottom: 30px;
+    position: relative;
+    padding: 0 50px 50px;
+    h2 {
+      background-color: white;
+      margin: 0;
+    }
+    .wrapper {
+      display: flex;
+      width: 100%;
+      .filters {
+        width: 200px;
+        font-family: 'goudy_old_stylebold_italic';
+        margin-right: 50px;
+        .filter-title {
+          border-bottom: 2px solid black;
+        }
+      }
+      .content {
+        display: flex;
+        width: 100%;
+        font-family: 'goudy_old_stylebold_italic';
+        .card {
+          width: 30%;
+          .image-box {
+
+          }
+          .manage-panel {
+            border: 2px solid black;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .icon {
+              display: inline-block;
+              height: 25px;
+              width: 25px;
+              margin: 0 7px;
+              background-repeat: no-repeat;
+              background-size: 100%;
+              background-position: center;
+            }
+            .wish-icon {
+              background-image: url('/assets/shop/heart.svg');
+            }
+            .eye-icon {
+              background-image: url('/assets/shop/eye.svg');
+            }
+            .bag-icon {
+              background-image: url('/assets/shop/bag.svg');
+            }
+          }
+          .brand {
+            font-size: 24px;
+          }
+          .price {
+            font-size: 24px;
+            color: rgba(0, 0, 0, .7);
+          }
+        }
+      }
+    }
+  }
+}
+

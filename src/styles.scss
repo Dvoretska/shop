@@ -26,10 +26,22 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'flaemische_kanzleischriftRg';
+  src: url('/assets/Fonts/flaemische/flaemische_kanzleischrift-webfont.woff2') format('woff2'),
+  url('/assets/Fonts/flaemische/flaemische_kanzleischrift-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 button:focus, input:focus, .form-control:focus {
   outline: none;
   outline-color: transparent;
   box-shadow: none;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 body {
   background-image: url('assets/newAssets/7671.jpg');
@@ -52,7 +64,6 @@ body {
   font-size: 16px;
   color: white;
   background-color: grey;
-  display: inline-block;
   cursor: pointer;
   padding: 3px 10px;
   border-radius: 5px;
@@ -65,6 +76,9 @@ body {
   background-color: rgb(77, 144, 254);
   box-shadow: 0 0 3px 2px rgba(0, 0, 0, .7);
 }
+
+
+
 
 /* toast styles */
 
