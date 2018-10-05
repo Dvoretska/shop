@@ -1,0 +1,73 @@
+<form #productForm="ngForm">
+  <div class="form-group">
+    <label for="title">
+      <strong>Brand</strong>
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      name="title"
+      id="title"
+      [(ngModel)]="brand">
+  </div>
+  <div class="form-group">
+    <label for="price">
+      <strong>Price</strong>
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      name="title"
+      id="price"
+      [(ngModel)]="price">
+  </div>
+  <div class="form-group">
+    <label for="discount">
+      <strong>Discount</strong>
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      name="title"
+      id="discount"
+      [(ngModel)]="discount">
+  </div>
+  <div class="form-group">
+    <label for="material">
+      <strong>Material</strong>
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      name="title"
+      id="material"
+      [(ngModel)]="material">
+  </div>
+  <div class="form-group">
+    <strong class="text">Description</strong>
+    <quill-editor name="editor" #editor [modules]="{toolbar: optToolbar}" [(ngModel)]="text"></quill-editor>
+  </div>
+  <div class="form-group">
+    <strong>Category</strong>
+    <!--<ng-select [items]="people$ | async"-->
+               <!--bindLabel="name"-->
+               <!--bindValue="id"-->
+               <!--[(ngModel)]="selectedPersonId">-->
+    <!--</ng-select>-->
+  </div>
+  <!--<div class="form-group">-->
+    <!--<strong class="text">Image of your post</strong>-->
+    <!--<div class="image-wrapper">-->
+      <!--<input type="file"-->
+             <!--name="file"-->
+             <!--id="file"-->
+             <!--class="inputfile"-->
+             <!--(change)="onFileChanged($event)">-->
+      <!--<label for="file">Choose an image</label>-->
+      <!--<img [src]="imageURL" class="image">-->
+      <!--<div *ngIf="errorImgMessage" class="validate-error">{{ errorImgMessage }}</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <button type="submit" class="my-button button-update" (click)="onCreateProduct()">Save product</button>
+</form>
+

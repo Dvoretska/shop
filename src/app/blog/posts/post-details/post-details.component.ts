@@ -32,7 +32,12 @@ export class PostDetailsComponent implements OnInit {
   postOwner: string;
 
 
-  constructor(private toastr: ToastrService, public modalRef: BsModalRef, private route: ActivatedRoute, public modalService: BsModalService, private blogService: BlogService, private router: Router) { }
+  constructor(private toastr: ToastrService,
+              public modalRef: BsModalRef,
+              private route: ActivatedRoute,
+              public modalService: BsModalService,
+              private blogService: BlogService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getPostDetails();

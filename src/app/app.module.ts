@@ -36,6 +36,11 @@ import { EditPostComponent } from './blog/edit-post/edit-post.component';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { ShopComponent } from './shop/shop.component';
 import { HeaderComponent } from './header/header.component';
+import { CornersComponent } from './corners/corners.component';
+import { ProductComponent } from './shop/products/product/product.component';
+import { EditProductComponent } from './shop/products/edit-product/edit-product.component';
+import { ProductsComponent } from './shop/products/products.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -55,13 +60,17 @@ import { HeaderComponent } from './header/header.component';
     PostDetailsComponent,
     EditPostComponent,
     ShopComponent,
-    HeaderComponent
+    HeaderComponent,
+    CornersComponent,
+    ProductComponent,
+    EditProductComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
+    NgSelectModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     AppRoutingModule,

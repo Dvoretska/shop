@@ -10,108 +10,14 @@
     margin-bottom: 30px;
     position: relative;
     padding: 50px;
-    .corner {
-      position: absolute;
-      width: 195px;
-      height: 185px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      z-index: 10;
-      pointer-events: none;
-    }
-    .bottom-left-corner {
-      background-image: url('/assets/land-bor-b-l.png');
-      bottom: -4px;
-      left: 0;
-    }
-    .bottom-right-corner {
-      background-image: url('/assets/land-bor-b-r.png');
-      width: 188px;
-      height: 183px;
-      bottom: -1px;
-      right: 0;
-    }
-    .top-left-corner {
-      background-image: url('/assets/land-bor-t-l.png');
-      top: 0;
-      left: 0;
-    }
-    .top-right-corner {
-      background-image: url('/assets/land-bor-t-r.png');
-      top: 0;
-      right: 0;
-    }
   }
 }
 
 
-@media screen and (max-width:991px){
-  .posts-wrapper {
-    header {
-      .heading {
-        font-size: 20px;
-        padding-bottom: 0;
-        align-items: center;
-        .first-letter {
-          font-size: 30px;
-        }
-      }
-    }
-  }
-}
 @media screen and (max-width:768px){
   .posts-wrapper {
-    header {
-      height: 110px;
-      .heading {
-        font-size: 17px;
-        align-items: center;
-        height: 70px;
-        .first-letter {
-          font-size: 25px;
-        }
-      }
-      ul {
-        li {
-          margin: 0 4%;
-          span {
-            font-size: 16px;
-          }
-        }
-      }
-    }
     .blog-container {
       padding: 20px;
-    }
-  }
-}
-@media screen and (max-width: 576px) {
-  .posts-wrapper {
-    header {
-      text-align: center;
-      .heading{
-        display: block;
-        padding-top: 20px;
-        margin-bottom: 6px;
-      }
-      ul {
-        li {
-          span {
-            font-size: 14px;
-          }
-        }
-      }
-    }
-  }
-}
-@media screen and (max-width: 450px) {
-  .posts-wrapper {
-    header {
-      ul {
-        li {
-          margin: 0 2%;
-        }
-      }
     }
   }
 }

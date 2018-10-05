@@ -9,11 +9,17 @@ import { PostsComponent } from './blog/posts/posts.component';
 import { EditPostComponent } from './blog/edit-post/edit-post.component';
 import { ShopComponent } from './shop/shop.component';
 import { AuthGuardService } from './auth/auth-guard.service';
+import { EditProductComponent } from './shop/products/edit-product/edit-product.component';
+import { ProductsComponent } from './shop/products/products.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'users', component: UsersListComponent, canActivate: [AuthGuardService] },
-  { path: 'shop', component: ShopComponent },
+  { path: 'shop', component: ShopComponent, children: [
+    { path: '', component: ProductsComponent },
+    { path: 'create-product', component: EditProductComponent },
+    // { path: 'edit-post/:id', component: EditPostComponent }
+  ]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'blog', component: BlogComponent, canActivate: [AuthGuardService], children: [
     { path: '', component: PostsComponent },

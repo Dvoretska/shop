@@ -32,7 +32,11 @@ export class EditPostComponent implements OnInit {
     [{ 'align': [] }]
   ];
 
-  constructor(private modalService: BsModalService, private blogService: BlogService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) { }
+  constructor(private modalService: BsModalService,
+              private blogService: BlogService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.route.params.subscribe(

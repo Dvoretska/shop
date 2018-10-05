@@ -1,0 +1,35 @@
+.heading {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 20px;
+  margin-top: 20px;
+  height: 100px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: 'goudy_old_style_small_caps_Rg';
+  .first-letter {
+    font-family: 'flaemische_kanzleischriftRg';
+    font-size: 50px;
+    line-height: 1;
+  }
+}
+.wrapper {
+  display: flex;
+  width: 100%;
+  .filters {
+    width: 200px;
+    font-family: 'goudy_old_stylebold_italic';
+    margin-right: 50px;
+    .filter-title {
+      border-bottom: 2px solid black;
+    }
+  }
+  .content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(200px, 1fr));
+    grid-template-rows: auto [last-line];
+    font-family: 'goudy_old_stylebold_italic';
+  }
+}
