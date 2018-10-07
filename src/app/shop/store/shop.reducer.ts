@@ -1,11 +1,12 @@
 import * as actionTypes from './shop.actions';
 
 const initialState = {
-  products: []
+  products: [],
+  categories: [{name: 'Shoes', id: 0}, {name: 'Tops', id: 1}, {name: 'Dresses', id: 2}]
 };
 
 
-const productsReducer = (state=initialState, action: actionTypes) => {
+export function shopReducer(state=initialState, action: actionTypes.shopActions) {
   switch(action.type) {
     case actionTypes.ADD_PRODUCT:
       return {
@@ -15,6 +16,4 @@ const productsReducer = (state=initialState, action: actionTypes) => {
     default:
       return state;
   }
-};
-
-export default productsReducer;
+}

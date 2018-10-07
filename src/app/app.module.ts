@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { shopReducer } from './shop/store/shop.reducer';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -41,6 +43,7 @@ import { ProductComponent } from './shop/products/product/product.component';
 import { EditProductComponent } from './shop/products/edit-product/edit-product.component';
 import { ProductsComponent } from './shop/products/products.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FileUploadDirective } from './shared/file-upload.directive';
 
 
 @NgModule({
@@ -64,12 +67,14 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CornersComponent,
     ProductComponent,
     EditProductComponent,
-    ProductsComponent
+    ProductsComponent,
+    FileUploadDirective
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgSelectModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
@@ -83,7 +88,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     QuillModule,
     NgxPageScrollModule,
     InViewportModule,
-    NgxMasonryModule
+    NgxMasonryModule,
+    StoreModule.forRoot({shop: shopReducer})
   ],
   providers: [AuthService, {
     provide: HTTP_INTERCEPTORS,

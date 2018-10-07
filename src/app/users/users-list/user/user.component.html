@@ -3,7 +3,9 @@
            name="file"
            class="inputfile"
            #inputFile
-           (change)="onFileChanged($event)">
+           fileUpload
+           (imageURLUploaded)="imageUrlHandler($event)"
+           (fileUploaded)="fileUploaded($event)">
   <label (click)="openFileBrowser($event)">
     <img [src]="user.image" class="avatar">
   </label>

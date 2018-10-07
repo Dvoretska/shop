@@ -49,12 +49,37 @@
   </div>
   <div class="form-group">
     <strong>Category</strong>
-    <!--<ng-select [items]="people$ | async"-->
-               <!--bindLabel="name"-->
-               <!--bindValue="id"-->
-               <!--[(ngModel)]="selectedPersonId">-->
-    <!--</ng-select>-->
+    <ng-select [items]="categories | async"
+               bindLabel="name"
+               bindValue="id"
+               [(ngModel)]="selectedCategory" name="category" placeholder="Chose category">
+    </ng-select>
   </div>
+  <!--<div class="form-group">-->
+    <!--<label id="file-drag-drop">-->
+      <!--<div ref="fileform" class="fileform"-->
+       <!--@drop="onDrop"-->
+       <!--@dragenter="onDragEnter"-->
+       <!--@dragleave="onDragLeave"-->
+       <!--v-bind:class="{highlight: isHighlight}">-->
+          <!--<span>Click or drop your files here</span>-->
+          <!--<img src="../assets/cloud-download-interface-symbol.svg" alt="" class="icon-cloud-download">-->
+          <!--<span class="warning" v-if="warning">Download images with extension jpeg, jpg or png</span>-->
+      <!--</div>-->
+      <!--<input type="file" class="inputfile" multiple accept="image/*" ref="fileinput">-->
+    <!--</label>-->
+    <!--<div class="wrapper-file-listing">-->
+      <!--<div v-for="(file, key) in files" class="file-listing" (click)="makeMainImg(key)">-->
+        <!--<img class="preview" #previewImg [ref]="'preview'+ parseInt(key)" [class]="{'highlight-main-img': key == selectedImgKey}"/>-->
+        <!--<div class="remove-container">-->
+          <!--<a class="remove" (click)="removeFile(key)" href="#">-->
+            <!--<img src="/assets/icon-close.png" alt="" class="icon-close">-->
+          <!--</a>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
   <!--<div class="form-group">-->
     <!--<strong class="text">Image of your post</strong>-->
     <!--<div class="image-wrapper">-->

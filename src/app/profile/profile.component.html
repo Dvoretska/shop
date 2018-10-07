@@ -6,7 +6,9 @@
            name="file"
            id="file"
            class="inputfile"
-           (change)="onFileChanged($event)">
+           fileUpload
+           (imageURLUploaded)="imageUrlHandler($event)"
+           (fileUploaded)="fileUploaded($event)">
     <label for="file">Choose a file</label>
     <div *ngIf="checkErrors('image')" class="error">{{ checkErrors('image') }}</div>
   </div>

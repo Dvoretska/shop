@@ -36,17 +36,13 @@ export class ProfileComponent implements OnInit {
     return JSON.parse(localStorage.getItem(key));
   }
 
-  onFileChanged(event) {
+  imageUrlHandler($event) {
+    this.url = $event;
+  }
+  fileUploaded($event) {
     this.errors = {};
     this.isChanged = true;
-    this.selectedFile = event.target.files[0];
-    if (/\.(jpe?g|png|gif)$/i.test(event.target.files[0].name)) {
-      let reader = new FileReader();
-      reader.onload = () => {
-        this.url = reader.result;
-      };
-      reader.readAsDataURL(this.selectedFile);
-    }
+    this.selectedFile = $event;
   }
 
   onSave() {

@@ -36,17 +36,17 @@ export class UserComponent implements OnInit {
     let el: HTMLElement = this.inputFile.nativeElement as HTMLElement;
     el.click();
   }
-  onFileChanged(event) {
-    this.selectedFile = event.target.files[0];
-    if (/\.(jpe?g|png|gif)$/i.test(event.target.files[0].name)) {
-      let reader = new FileReader();
-      reader.onload = () => {
-        this.user.image = reader.result;
-      };
-      reader.readAsDataURL(this.selectedFile);
+
+  imageUrlHandler($event) {
+    if($event) {
+      this.user.image = $event;
     } else {
       this.user.image = this.defaultImageUrl;
     }
+  }
+
+  fileUploaded($event) {
+    this.selectedFile = $event;
   }
 
   onSaveChanges() {

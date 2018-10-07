@@ -26,6 +26,15 @@ form {
       margin-top: 10px;
     }
   }
+  /deep/ .ng-select.custom {
+    border:0px;
+    min-height: 0px;
+    border-radius: 0;
+}
+/deep/ .ng-select.custom .ng-select-container  {
+    min-height: 0px;
+    border-radius: 0;
+}
 }
 /deep/ .confirm-body {
   .cta {

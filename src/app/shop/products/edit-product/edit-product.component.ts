@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Store, select } from '@ngrx/store';
+import { Observable} from 'rxjs';
+
+export interface Category {
+  name: string
+}
 
 @Component({
   selector: 'app-edit-product',
@@ -12,14 +17,8 @@ export class EditProductComponent implements OnInit {
   text: '';
   material: '';
   discount: '';
-  countries = [
-    {id: 1, name: "United States"},
-    {id: 2, name: "Australia"},
-    {id: 3, name: "Canada"},
-    {id: 4, name: "Brazil"},
-    {id: 5, name: "England"}
-  ];
-  selectedValue = this.countries[0].id;
+  categories: Observable<{categories: Category[]}>;
+  selectedCategory: any;
   optToolbar = [
     ['bold', 'italic', 'underline', 'strike'],
     [{ 'size': ['small', 'large', 'huge'] }],
@@ -28,9 +27,10 @@ export class EditProductComponent implements OnInit {
     [{ 'align': [] }]
   ];
 
-  constructor() { }
+  constructor(private store: Store<{shop: {categories: Category[]}}>) { }
 
   ngOnInit() {
+   this.categories = this.store.pipe(select((state: {categories: Category[]}) => state['shop'].categories));
   }
 
   onCreateProduct() {
@@ -40,6 +40,7 @@ export class EditProductComponent implements OnInit {
     savedData.append('text', this.text);
     savedData.append('material', this.material);
     savedData.append('discount', this.discount);
+    savedData.append('category', this.selectedCategory);
     // this.blogService.updatePost(savedData).subscribe(
     //   () => {
     //     this.toastr.success('Post was saved successfully!');

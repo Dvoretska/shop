@@ -11,7 +11,6 @@ export class ShopComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    console.log(this.route)
   }
 
   onEditProduct() {
