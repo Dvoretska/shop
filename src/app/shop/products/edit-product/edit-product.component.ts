@@ -28,6 +28,7 @@ export class EditProductComponent implements OnInit {
   optToolbar;
   selectedImgKey = 0;
   test: any;
+  imageUrls = [];
 
   @ViewChildren('linkRef') linkRefs;
 
@@ -52,13 +53,12 @@ export class EditProductComponent implements OnInit {
     for(let i = 0; i < event.files.length; i++){
       if (/\.(jpe?g|png|gif)$/i.test(event.files[i].name)) {
         this.files.push(event.files[i]);
-        this.getImagePreviews();
-        console.log(this.files)
         this.warning = false
       } else {
         this.warning = true
       }
     }
+    this.getImagePreviews();
   }
 
   allowDrop(e) {
@@ -71,30 +71,31 @@ export class EditProductComponent implements OnInit {
 
   makeMainImg(key) {
     this.selectedImgKey = key
+    console.log('key', key)
   }
 
   removeFile(key, event) {
     event.preventDefault();
     event.stopPropagation();
-    console.log(this.files, key)
+    console.log('30', this.files, key)
     this.files.splice(key, 1);
+    console.log('40', this.files, key)
     this.getImagePreviews();
   }
 
   getImagePreviews() {
-
-    // for(let i =0; i < this.linkRefs._results.length; i++) {
-      console.log(this.linkRefs)
-    // }
-    // for (let i = 0; i < this.files.length; i++){
-    //   if (/\.(jpe?g|png|gif)$/i.test(this.files[i].name)) {
-    //     let reader = new FileReader()
-    //     reader.onload = () => {
-    //       this.imagePreviews.nativeElement.src = reader.result;
-    //     };
-    //     reader.readAsDataURL(this.files[i])
-    //   }
-    // }
+    console.log('>>> 1', this.files.length, this.imageUrls.length)
+    this.imageUrls = [];
+    for (let file of this.files){
+      if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+        let reader = new FileReader()
+        reader.onload = () => {
+          this.imageUrls.push(reader.result);
+          console.log('>>> 2', this.files.length, this.imageUrls.length)
+        };
+        reader.readAsDataURL(file)
+      }
+    }
   }
 
   onCreateProduct() {
