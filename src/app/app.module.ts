@@ -44,6 +44,10 @@ import { EditProductComponent } from './shop/products/edit-product/edit-product.
 import { ProductsComponent } from './shop/products/products.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FileUploadDirective } from './shared/file-upload.directive';
+import { ImagePreviewDirective } from './shared/img-preview.directive';
+import { EditorOptionsService } from './shared/editor-options.service';
+import {EffectsModule} from "@ngrx/effects";
+import {ShopEffects} from "./shop/store/shop.effects";
 
 
 @NgModule({
@@ -68,7 +72,8 @@ import { FileUploadDirective } from './shared/file-upload.directive';
     ProductComponent,
     EditProductComponent,
     ProductsComponent,
-    FileUploadDirective
+    FileUploadDirective,
+    ImagePreviewDirective
   ],
   imports: [
     BrowserModule,
@@ -89,7 +94,8 @@ import { FileUploadDirective } from './shared/file-upload.directive';
     NgxPageScrollModule,
     InViewportModule,
     NgxMasonryModule,
-    StoreModule.forRoot({shop: shopReducer})
+    StoreModule.forRoot({shop: shopReducer}),
+    EffectsModule.forRoot([ShopEffects])
   ],
   providers: [AuthService, {
     provide: HTTP_INTERCEPTORS,
@@ -100,6 +106,7 @@ import { FileUploadDirective } from './shared/file-upload.directive';
   UserService,
   BlogService,
   AuthGuardService,
+  EditorOptionsService,
   { provide: 'Window',  useValue: window }],
   bootstrap: [AppComponent],
   entryComponents: [RegisterModalComponent, LoginModalComponent, UserCreateComponent, PostDetailsComponent]

@@ -1,4 +1,4 @@
-import * as actionTypes from './shop.actions';
+import * as shopActions from './shop.actions';
 
 const initialState = {
   products: [],
@@ -6,9 +6,9 @@ const initialState = {
 };
 
 
-export function shopReducer(state=initialState, action: actionTypes.shopActions) {
+export function shopReducer(state=initialState, action: shopActions.shopActions) {
   switch(action.type) {
-    case actionTypes.ADD_PRODUCT:
+    case shopActions.ADD_PRODUCT:
       return {
         ...state,
         products: [...state.products, action.payload]

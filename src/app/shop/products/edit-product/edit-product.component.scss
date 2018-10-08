@@ -9,32 +9,85 @@ form {
     margin-bottom: 7px;
     display: inline-block;
   }
-  .image-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    .image {
-      width: 80%;
-      max-width: 300px;
-      min-width: 150px;
-      height: auto;
-      max-height: 350px;
-      object-fit: contain;
-      background-color: #eee;
-      text-align: left;
-      margin-top: 10px;
+  #file-drag-drop {
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    .fileform {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      height: 70px;
+      padding: 0 30px;
+      background: #f4f4f4;
+      border-radius: 4px;
+      border: 2px dashed #ccc;
+      margin-bottom: 10px;
+      .icon-cloud-download {
+        width: 40px;
+        height: 40px;
+        margin-left: 10px;
+      }
+      .warning {
+        width:100%;
+        color: red;
+        line-height: 16px;
+        font-size: 12px;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+    }
+    .inputfile {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+      top: 100%;
+      left: 0;
+    }
+    .highlight {
+      border: 2px dashed #7957d5;
+      background-color: #fff;
     }
   }
-  /deep/ .ng-select.custom {
-    border:0px;
-    min-height: 0px;
-    border-radius: 0;
-}
-/deep/ .ng-select.custom .ng-select-container  {
-    min-height: 0px;
-    border-radius: 0;
-}
+  .wrapper-file-list {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    .file-list {
+      width: 100px;
+      margin: 5px;
+      border-bottom: 1px solid #ddd;
+      position: relative;
+      & img {
+        height: 100px;
+        width: 100px;
+        cursor: pointer;
+      }
+      .highlight-main-img {
+        outline: 2px solid rgba(121,87,213,1);
+        outline-offset: 2px;
+      }
+      .remove-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 100;
+        width: 16px;
+        height: 16px;
+        .icon-close {
+          width: 16px;
+          height: 16px;
+          position: absolute;
+          top: 3px;
+          right: 3px;
+        }
+      }
+    }
+  }
 }
 /deep/ .confirm-body {
   .cta {
@@ -63,14 +116,6 @@ form {
   padding: 5px 10px;
   cursor: pointer;
 }
-.button-delete {
-  border: 3px solid red;
-  margin-left: 30px;
-  color: black;
-  &:hover {
-    color: red;
-  }
-}
 .button-update {
   border: 3px solid blue;
   color: black;
@@ -94,11 +139,5 @@ button[disabled] {
     padding-top: 50px;
     padding-bottom: 50px;
     width: 77%;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .button-delete {
-    margin-left: 10px;
   }
 }

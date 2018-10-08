@@ -45,7 +45,7 @@
   </div>
   <div class="form-group">
     <strong class="text">Description</strong>
-    <quill-editor name="editor" #editor [modules]="{toolbar: optToolbar}" [(ngModel)]="text"></quill-editor>
+    <quill-editor name="editor" (optToolbarInit)="optToolbarInit($event)" [modules]="{toolbar: optToolbar}" [(ngModel)]="text"></quill-editor>
   </div>
   <div class="form-group">
     <strong>Category</strong>
@@ -55,44 +55,31 @@
                [(ngModel)]="selectedCategory" name="category" placeholder="Chose category">
     </ng-select>
   </div>
-  <!--<div class="form-group">-->
-    <!--<label id="file-drag-drop">-->
-      <!--<div ref="fileform" class="fileform"-->
-       <!--@drop="onDrop"-->
-       <!--@dragenter="onDragEnter"-->
-       <!--@dragleave="onDragLeave"-->
-       <!--v-bind:class="{highlight: isHighlight}">-->
-          <!--<span>Click or drop your files here</span>-->
-          <!--<img src="../assets/cloud-download-interface-symbol.svg" alt="" class="icon-cloud-download">-->
-          <!--<span class="warning" v-if="warning">Download images with extension jpeg, jpg or png</span>-->
-      <!--</div>-->
-      <!--<input type="file" class="inputfile" multiple accept="image/*" ref="fileinput">-->
-    <!--</label>-->
-    <!--<div class="wrapper-file-listing">-->
-      <!--<div v-for="(file, key) in files" class="file-listing" (click)="makeMainImg(key)">-->
-        <!--<img class="preview" #previewImg [ref]="'preview'+ parseInt(key)" [class]="{'highlight-main-img': key == selectedImgKey}"/>-->
-        <!--<div class="remove-container">-->
-          <!--<a class="remove" (click)="removeFile(key)" href="#">-->
-            <!--<img src="/assets/icon-close.png" alt="" class="icon-close">-->
-          <!--</a>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--<div class="form-group">-->
-    <!--<strong class="text">Image of your post</strong>-->
-    <!--<div class="image-wrapper">-->
-      <!--<input type="file"-->
-             <!--name="file"-->
-             <!--id="file"-->
-             <!--class="inputfile"-->
-             <!--(change)="onFileChanged($event)">-->
-      <!--<label for="file">Choose an image</label>-->
-      <!--<img [src]="imageURL" class="image">-->
-      <!--<div *ngIf="errorImgMessage" class="validate-error">{{ errorImgMessage }}</div>-->
-    <!--</div>-->
-  <!--</div>-->
+  <div class="form-group">
+    <label id="file-drag-drop">
+      <div class="fileform"
+         (drop)="onUpload($event)"
+         (dragover)="allowDrop($event)"
+         (dragenter)="highlight()"
+         (dragleave)="highlight()"
+          [ngClass]="{highlight: isHighlight}">
+          <span>Click or drop your files here</span>
+          <img src="/assets/cloud-download-interface-symbol.svg" alt="" class="icon-cloud-download">
+          <span class="warning" *ngIf="warning">Download images with extension jpeg, jpg or png</span>
+      </div>
+      <input type="file" class="inputfile" #fileinput (change)="onUpload($event)">
+    </label>
+    <div class="wrapper-file-list">
+      <div *ngFor="let file of files; let key = index" class="file-list" (click)="makeMainImg(key)" >
+        <img image-preview-directive imageKey="preview{{key}}" [ngClass]="'preview' + key"  [ngClass]="{'highlight-main-img': key == selectedImgKey}"/>
+        <div class="remove-container">
+          <a class="remove" (click)="removeFile(key, $event)" href="#">
+            <img src="/assets/icon-close.png" alt="" class="icon-close">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
   <button type="submit" class="my-button button-update" (click)="onCreateProduct()">Save product</button>
 </form>
 
