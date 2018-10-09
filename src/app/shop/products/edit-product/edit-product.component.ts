@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable} from 'rxjs';
 import { EditorOptionsService} from '../../../shared/editor-options.service';
@@ -20,17 +20,13 @@ export class EditProductComponent implements OnInit {
   material: '';
   discount: '';
   files = [];
-  urls = [];
   warning: boolean = false;
   isHighlight: boolean = false;
   categories: Observable<{categories: Category[]}>;
   selectedCategory: any;
   optToolbar;
   selectedImgKey = 0;
-  test: any;
   imageUrls = [];
-
-  @ViewChildren('linkRef') linkRefs;
 
   constructor(private store: Store<{shop: {categories: Category[]}}>, private edOptService: EditorOptionsService) { }
 
@@ -52,7 +48,8 @@ export class EditProductComponent implements OnInit {
   uploadImages(event) {
     for(let i = 0; i < event.files.length; i++){
       if (/\.(jpe?g|png|gif)$/i.test(event.files[i].name)) {
-        this.files.push(event.files[i]);
+        this.files.push({file: event.files[i], id: i});
+        console.log('files', this.files)
         this.warning = false
       } else {
         this.warning = true
@@ -71,29 +68,26 @@ export class EditProductComponent implements OnInit {
 
   makeMainImg(key) {
     this.selectedImgKey = key
-    console.log('key', key)
   }
 
-  removeFile(key, event) {
+  removeFile(id, event) {
     event.preventDefault();
     event.stopPropagation();
-    console.log('30', this.files, key)
-    this.files.splice(key, 1);
-    console.log('40', this.files, key)
-    this.getImagePreviews();
+    this.files.splice(id, 1);
+    console.log(id, this.files)
   }
 
   getImagePreviews() {
-    console.log('>>> 1', this.files.length, this.imageUrls.length)
     this.imageUrls = [];
-    for (let file of this.files){
-      if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
-        let reader = new FileReader()
-        reader.onload = () => {
-          this.imageUrls.push(reader.result);
-          console.log('>>> 2', this.files.length, this.imageUrls.length)
-        };
-        reader.readAsDataURL(file)
+    if(this.files && this.files.length) {
+    for (let i =0; i < this.files.length ; i++){
+        if (/\.(jpe?g|png|gif)$/i.test(this.files[i].file.name)) {
+          let reader = new FileReader()
+          reader.readAsDataURL(this.files[i].file)
+          reader.onload = () => {
+            this.imageUrls[this.files[i].id] = reader.result;
+          };
+        }
       }
     }
   }
@@ -102,19 +96,22 @@ export class EditProductComponent implements OnInit {
     let savedData:FormData = new FormData();
     savedData.append('price', this.price);
     savedData.append('brand', this.brand);
-    savedData.append('text', this.text);
+    savedData.append('description', this.text);
     savedData.append('material', this.material);
     savedData.append('discount', this.discount);
-    savedData.append('category', this.selectedCategory);
+    savedData.append('category_id', this.selectedCategory);
     // if (this.files.length) {
     //   let a = this.files.splice(this.selectedImgKey, 1)
-    //   this.files.unshift(a[0])
-    //   for (var i = 0; i < this.files.length; i++) {
-    //     let file = this.files[i]
-    //     formData.append('files[' + i + ']', file)
+    //   this.files.unshift(a[0]);
+    //   for (let i = 0; i < this.files.length; i++) {
+    //     let file = this.files[i].file
+    //     savedData.append('files[' + i + ']', file);
+    //     console.log('files[' + i + ']', file)
     //   }
     // }
-    // this.store.dispatch(new shopActions.addProduct(savedData))
+    console.log('price', this.price, 'brand', this.brand,'text', this.text, 'material', this.material, 'discount', this.discount,
+      'category', this.selectedCategory)
+    this.store.dispatch(new shopActions.AddProduct(savedData))
 
     // this.blogService.updatePost(savedData).subscribe(
     //   () => {
