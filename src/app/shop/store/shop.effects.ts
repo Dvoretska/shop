@@ -24,7 +24,7 @@ export class ShopEffects {
     })
   );
 
-  @Effect()
+  // @Effect()
   // fetchCategories = this.actions$
   //   .pipe(
   //     ofType(ShopActions.ADD_PRODUCT),
