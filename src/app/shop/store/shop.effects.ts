@@ -24,6 +24,22 @@ export class ShopEffects {
     })
   );
 
+  @Effect()
+  // fetchCategories = this.actions$
+  //   .pipe(
+  //     ofType(ShopActions.ADD_PRODUCT),
+  //     map((action: ShopActions.AddProduct) => action.payload),
+  //     concatMap((payload) =>
+  //       this.http.post(`${environment.API_URL}/create-product`, payload)
+  //     ),
+  //     map((product)=>{
+  //       return new ShopActions.AddProductSuccess({product});
+  //     }),
+  //     catchError(error => {
+  //       return of(new ShopActions.AddProductFailure({error}));
+  //     })
+  //   );
+
   constructor(private actions$: Actions, private http: HttpClient) {
 
   }

@@ -2,9 +2,9 @@ import { Action } from '@ngrx/store';
 import { Product } from '../product.model';
 
 export const ADD_PRODUCT = 'ADD_PRODUCT';
-export const ADD_PRODUCT_START = 'ADD_PRODUCT_START';
 export const ADD_PRODUCT_SUCCESS = 'ADD_PRODUCT_SUCCESS';
 export const ADD_PRODUCT_FAILURE = 'ADD_PRODUCT_FAILURE';
+export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 
 
 export class AddProduct implements Action {
@@ -12,12 +12,6 @@ export class AddProduct implements Action {
 
   constructor(public payload: any) {}
 
-}
-
-export class AddProductStart implements Action {
-  readonly type = ADD_PRODUCT_START;
-
-  constructor() {}
 }
 
 export class AddProductSuccess implements Action {
@@ -32,7 +26,12 @@ export class AddProductFailure implements Action {
   constructor(public payload: {error: any}) {}
 }
 
+export class FetchCategories implements Action {
+  readonly type = FETCH_CATEGORIES;
+
+  constructor(public payload: any) {}
+}
+
 export type shopActions = AddProduct |
             AddProductSuccess |
-            AddProductFailure |
-            AddProductStart;
+            AddProductFailure;

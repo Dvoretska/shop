@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable} from 'rxjs';
+import { Observable, Subscription} from 'rxjs';
 import { EditorOptionsService} from '../../../shared/editor-options.service';
 import * as shopActions from '../../store/shop.actions';
+import * as fromRoot from '../../store/shop.reducer';
 
 export interface Category {
   name: string
@@ -28,13 +29,19 @@ export class EditProductComponent implements OnInit {
   selectedImgKey = 0;
   imageUrls = [];
   loading: boolean;
+  tagState$: Observable<fromRoot.ShopState>;
+  private tagStateSubscription: Subscription;
 
-  constructor(private store: Store<{shop}>, private edOptService: EditorOptionsService) { }
+  constructor(private store: Store<fromRoot.ShopState>, private edOptService: EditorOptionsService) {
+    this.tagState$ = this.store.pipe(select('shop'));
+  }
 
   ngOnInit() {
+    this.tagStateSubscription = this.tagState$.subscribe((state) => {
+      this.categories = state.categories;
+      this.loading = state.loading
+    });
     this.optToolbar = this.edOptService.initOptions();
-    this.categories = this.store.pipe(select((state: {categories: Category[]}) => state['shop'].categories));
-    this.store.pipe(select((state) => state['shop'].loading)).subscribe(loading=>this.loading = loading);
   }
 
   onUpload(e) {

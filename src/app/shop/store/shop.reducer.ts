@@ -1,6 +1,17 @@
 import * as shopActions from './shop.actions';
 
-const initialState = {
+
+export class ShopState {
+  constructor(
+    public products: any,
+    public loading: boolean,
+    public error: any,
+    public categories: any
+  ) { }
+}
+
+
+export const initialState: ShopState = {
   products: [],
   loading: false,
   error: null,
@@ -8,18 +19,12 @@ const initialState = {
 };
 
 
-export function shopReducer(state=initialState, action: shopActions.shopActions) {
+export function shopReducer(state: ShopState =initialState, action: shopActions.shopActions) {
   switch(action.type) {
     case shopActions.ADD_PRODUCT:
       return {
         ...state,
         loading: true
-      };
-    case shopActions.ADD_PRODUCT_START:
-      return {
-        ...state,
-        loading: true,
-        error: null
       };
     case shopActions.ADD_PRODUCT_SUCCESS:
       return {
