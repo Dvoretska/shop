@@ -1,7 +1,8 @@
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import {Injectable} from "@angular/core";
 import * as ShopActions from './shop.actions'
-import { mergeMap, map } from 'rxjs/operators';
+import { concatMap, map, catchError} from 'rxjs/operators';
+import { of } from 'rxjs';
 import {HttpClient} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 
@@ -9,11 +10,19 @@ import { environment } from 'src/environments/environment';
 export class ShopEffects {
   @Effect()
   addProduct = this.actions$
-    .pipe(ofType(ShopActions.ADD_PRODUCT), map((action: ShopActions.AddProduct) => action.payload), mergeMap((payload) => {
-      return this.http.post(`${environment.API_URL}/create-product`, payload)
-    }), map((action)=>{
-      return new ShopActions.TryTest
-    }))
+  .pipe(
+    ofType(ShopActions.ADD_PRODUCT),
+    map((action: ShopActions.AddProduct) => action.payload),
+    concatMap((payload) =>
+      this.http.post(`${environment.API_URL}/create-product`, payload)
+    ),
+    map((product)=>{
+      return new ShopActions.AddProductSuccess({product});
+    }),
+    catchError(error => {
+      return of(new ShopActions.AddProductFailure({error}));
+    })
+  );
 
   constructor(private actions$: Actions, private http: HttpClient) {
 

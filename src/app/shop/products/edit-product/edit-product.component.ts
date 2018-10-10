@@ -27,12 +27,14 @@ export class EditProductComponent implements OnInit {
   optToolbar;
   selectedImgKey = 0;
   imageUrls = [];
+  loading: boolean;
 
-  constructor(private store: Store<{shop: {categories: Category[]}}>, private edOptService: EditorOptionsService) { }
+  constructor(private store: Store<{shop}>, private edOptService: EditorOptionsService) { }
 
   ngOnInit() {
     this.optToolbar = this.edOptService.initOptions();
     this.categories = this.store.pipe(select((state: {categories: Category[]}) => state['shop'].categories));
+    this.store.pipe(select((state) => state['shop'].loading)).subscribe(loading=>this.loading = loading);
   }
 
   onUpload(e) {
@@ -49,7 +51,6 @@ export class EditProductComponent implements OnInit {
     for(let i = 0; i < event.files.length; i++){
       if (/\.(jpe?g|png|gif)$/i.test(event.files[i].name)) {
         this.files.push({file: event.files[i], id: i});
-        console.log('files', this.files)
         this.warning = false
       } else {
         this.warning = true
@@ -74,7 +75,6 @@ export class EditProductComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     this.files.splice(id, 1);
-    console.log(id, this.files)
   }
 
   getImagePreviews() {
@@ -109,8 +109,6 @@ export class EditProductComponent implements OnInit {
     //     console.log('files[' + i + ']', file)
     //   }
     // }
-    console.log('price', this.price, 'brand', this.brand,'text', this.text, 'material', this.material, 'discount', this.discount,
-      'category', this.selectedCategory)
     this.store.dispatch(new shopActions.AddProduct(savedData))
 
     // this.blogService.updatePost(savedData).subscribe(

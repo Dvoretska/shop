@@ -3,6 +3,7 @@ import * as shopActions from './shop.actions';
 const initialState = {
   products: [],
   loading: false,
+  error: null,
   categories: [{name: 'Shoes', id: 1}, {name: 'Tops', id: 2}, {name: 'Dresses', id: 3}]
 };
 
@@ -12,12 +13,26 @@ export function shopReducer(state=initialState, action: shopActions.shopActions)
     case shopActions.ADD_PRODUCT:
       return {
         ...state,
-        products: [...state.products, action.payload]
+        loading: true
       };
-    case shopActions.TRY_TEST:
+    case shopActions.ADD_PRODUCT_START:
       return {
         ...state,
-        loading: true;
+        loading: true,
+        error: null
+      };
+    case shopActions.ADD_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        products: [...state.products, action.payload.product]
+      };
+    case shopActions.ADD_PRODUCT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error
       };
     default:
       return state;
