@@ -4,6 +4,7 @@ export class Product {
               public description: string,
               public material: string,
               public discount: string,
-              public category_id: number
+              public category_id: number,
+              public files: File[]
               ) {}
 }

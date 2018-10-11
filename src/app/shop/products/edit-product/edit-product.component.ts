@@ -4,9 +4,12 @@ import { Observable, Subscription} from 'rxjs';
 import { EditorOptionsService} from '../../../shared/editor-options.service';
 import * as shopActions from '../../store/shop.actions';
 import * as fromRoot from '../../store/shop.reducer';
+import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 export interface Category {
-  name: string
+  id: number;
+  category: string;
 }
 
 @Component({
@@ -23,23 +26,30 @@ export class EditProductComponent implements OnInit {
   files = [];
   warning: boolean = false;
   isHighlight: boolean = false;
-  categories: Observable<{categories: Category[]}>;
-  selectedCategory: any;
+  categories: Category[];
+  selectedCategory: null;
   optToolbar;
   selectedImgKey = 0;
   imageUrls = [];
+  error;
+  productWasAdded;
   loading: boolean;
-  tagState$: Observable<fromRoot.ShopState>;
-  private tagStateSubscription: Subscription;
+  getState$: Observable<fromRoot.ShopState>;
+  private getStateSubscription: Subscription;
 
-  constructor(private store: Store<fromRoot.ShopState>, private edOptService: EditorOptionsService) {
-    this.tagState$ = this.store.pipe(select('shop'));
+  constructor(private store: Store<fromRoot.ShopState>,
+              private edOptService: EditorOptionsService,
+              private toastr: ToastrService,
+              private router: Router,) {
+    this.getState$ = this.store.pipe(select('shop'));
   }
 
   ngOnInit() {
-    this.tagStateSubscription = this.tagState$.subscribe((state) => {
+    this.store.dispatch(new shopActions.FetchCategories());
+    this.getStateSubscription = this.getState$.subscribe((state) => {
       this.categories = state.categories;
-      this.loading = state.loading
+      this.loading = state.loading;
+      this.error = state.error;
     });
     this.optToolbar = this.edOptService.initOptions();
   }
@@ -111,12 +121,19 @@ export class EditProductComponent implements OnInit {
     //   let a = this.files.splice(this.selectedImgKey, 1)
     //   this.files.unshift(a[0]);
     //   for (let i = 0; i < this.files.length; i++) {
-    //     let file = this.files[i].file
-    //     savedData.append('files[' + i + ']', file);
-    //     console.log('files[' + i + ']', file)
+    //     let file = this.files[i].file;
+    //     savedData.append('files', file);
     //   }
+    //
     // }
-    this.store.dispatch(new shopActions.AddProduct(savedData))
+    this.store.dispatch(new shopActions.AddProduct(savedData));
+    // this.getState$.subscribe((state) => {
+    //   this.productWasAdded = state.productWasAdded;
+    //   if(this.productWasAdded) {
+    //     this.toastr.success('Product was saved successfully!');
+    //     this.router.navigate(['shop']);
+    //   }
+    // });
 
     // this.blogService.updatePost(savedData).subscribe(
     //   () => {

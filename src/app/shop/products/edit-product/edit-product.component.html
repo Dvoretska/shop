@@ -15,7 +15,7 @@
       <strong>Price</strong>
     </label>
     <input
-      type="text"
+      type="number"
       class="form-control"
       name="title"
       id="price"
@@ -26,7 +26,7 @@
       <strong>Discount</strong>
     </label>
     <input
-      type="text"
+      type="number"
       class="form-control"
       name="title"
       id="discount"
@@ -49,8 +49,8 @@
   </div>
   <div class="form-group">
     <strong>Category</strong>
-    <ng-select [items]="categories"
-               bindLabel="name"
+    <ng-select *ngIf="categories" [items]="categories"
+               bindLabel="category"
                bindValue="id"
                [(ngModel)]="selectedCategory" name="category" placeholder="Chose category">
     </ng-select>
@@ -67,7 +67,7 @@
           <img src="/assets/cloud-download-interface-symbol.svg" alt="" class="icon-cloud-download">
           <span class="warning" *ngIf="warning">Download images with extension jpeg, jpg or png</span>
       </div>
-      <input type="file" class="inputfile" multiple="multiple" (change)="onUpload($event)">
+      <input name="file" type="file" class="inputfile" multiple="multiple" (change)="onUpload($event)">
     </label>
     <div class="wrapper-file-list" *ngIf="files.length">
       <div *ngFor="let file of files; let key = index" class="file-list" (click)="makeMainImg(key)">
