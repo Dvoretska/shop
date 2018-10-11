@@ -117,15 +117,14 @@ export class EditProductComponent implements OnInit {
     savedData.append('material', this.material);
     savedData.append('discount', this.discount);
     savedData.append('category_id', this.selectedCategory);
-    // if (this.files.length) {
-    //   let a = this.files.splice(this.selectedImgKey, 1)
-    //   this.files.unshift(a[0]);
-    //   for (let i = 0; i < this.files.length; i++) {
-    //     let file = this.files[i].file;
-    //     savedData.append('files', file);
-    //   }
-    //
-    // }
+    if (this.files.length) {
+      let a = this.files.splice(this.selectedImgKey, 1)
+      this.files.unshift(a[0]);
+      for (let i = 0; i < this.files.length; i++) {
+        let file = this.files[i].file;
+        savedData.append('file', file);
+      }
+    }
     this.store.dispatch(new shopActions.AddProduct(savedData));
     // this.getState$.subscribe((state) => {
     //   this.productWasAdded = state.productWasAdded;
