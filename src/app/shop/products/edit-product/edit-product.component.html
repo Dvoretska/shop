@@ -45,7 +45,7 @@
   </div>
   <div class="form-group">
     <strong class="text">Description</strong>
-    <quill-editor name="editor" (optToolbarInit)="optToolbarInit($event)" [modules]="{toolbar: optToolbar}" [(ngModel)]="text"></quill-editor>
+    <quill-editor name="editor" (optToolbarInit)="optToolbarInit($event)" [modules]="{toolbar: optToolbar}" [(ngModel)]="description"></quill-editor>
   </div>
   <div class="form-group">
     <strong>Category</strong>
@@ -60,8 +60,7 @@
       <div class="fileform"
          (drop)="onUpload($event)"
          (dragover)="allowDrop($event)"
-         (dragenter)="highlight()"
-         (dragleave)="highlight()"
+         (dragleave)="fade()"
           [ngClass]="{highlight: isHighlight}">
           <span>Click or drop your files here</span>
           <img src="/assets/cloud-download-interface-symbol.svg" alt="" class="icon-cloud-download">
@@ -81,6 +80,6 @@
     </div>
   </div>
   <div class="sp-wave" *ngIf="loading"></div>
-  <button type="submit" class="my-button button-update" (click)="onCreateProduct()">Save product</button>
+  <button type="submit" class="my-button button-update" (click)="onCreateProduct()" [disabled]="isFormInvalid()">Save product</button>
 </form>
 

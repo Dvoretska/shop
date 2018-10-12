@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription} from 'rxjs';
 import { EditorOptionsService} from '../../../shared/editor-options.service';
@@ -17,10 +17,10 @@ export interface Category {
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.scss']
 })
-export class EditProductComponent implements OnInit {
+export class EditProductComponent implements OnInit, OnDestroy {
   price: '';
   brand: '';
-  text: '';
+  description: '';
   material: '';
   discount: '';
   files = [];
@@ -40,7 +40,8 @@ export class EditProductComponent implements OnInit {
   constructor(private store: Store<fromRoot.ShopState>,
               private edOptService: EditorOptionsService,
               private toastr: ToastrService,
-              private router: Router,) {
+              private router: Router,)
+  {
     this.getState$ = this.store.pipe(select('shop'));
   }
 
@@ -78,10 +79,11 @@ export class EditProductComponent implements OnInit {
 
   allowDrop(e) {
     e.preventDefault();
+    this.isHighlight = true;
   }
 
-  highlight() {
-    this.isHighlight = true;
+  fade() {
+    this.isHighlight = false;
   }
 
   makeMainImg(key) {
@@ -113,9 +115,12 @@ export class EditProductComponent implements OnInit {
     let savedData:FormData = new FormData();
     savedData.append('price', this.price);
     savedData.append('brand', this.brand);
-    savedData.append('description', this.text);
+    savedData.append('description', this.description);
     savedData.append('material', this.material);
-    savedData.append('discount', this.discount);
+    if(this.discount) {
+      savedData.append('discount', this.discount);
+    }
+
     savedData.append('category_id', this.selectedCategory);
     if (this.files.length) {
       let a = this.files.splice(this.selectedImgKey, 1)
@@ -126,27 +131,21 @@ export class EditProductComponent implements OnInit {
       }
     }
     this.store.dispatch(new shopActions.AddProduct(savedData));
-    // this.getState$.subscribe((state) => {
-    //   this.productWasAdded = state.productWasAdded;
-    //   if(this.productWasAdded) {
-    //     this.toastr.success('Product was saved successfully!');
-    //     this.router.navigate(['shop']);
-    //   }
-    // });
-
-    // this.blogService.updatePost(savedData).subscribe(
-    //   () => {
-    //     this.toastr.success('Post was saved successfully!');
-    //     this.router.navigate(['blog']);
-    //   },
-    //   (err) => {
-    //     if(err.error.image) {
-    //       this.errorImgMessage = err.error.image;
-    //     }
-    //     if(err.error.rights) {
-    //       this.toastr.error(`${err.error.rights}`);
-    //     }
-    //   });
+    this.getStateSubscription = this.getState$.subscribe((state) => {
+      this.productWasAdded = state.productWasAdded;
+      if(this.productWasAdded) {
+        this.toastr.success('Product was saved successfully!');
+        this.router.navigate(['shop']);
+      }
+    });
   }
 
+  isFormInvalid() {
+    return !(this.description && this.price && this.brand && this.material && this.files.length && this.selectedCategory)
+  }
+
+  ngOnDestroy(){
+    this.store.dispatch(new shopActions.InitProductWasAdded());
+    this.getStateSubscription.unsubscribe();
+  }
 }
