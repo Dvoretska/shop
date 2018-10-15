@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Product } from '../product.model';
+
 
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const ADD_PRODUCT_SUCCESS = 'ADD_PRODUCT_SUCCESS';
@@ -67,13 +67,13 @@ export class FetchProducts implements Action {
 export class FetchProductsSuccess implements Action {
   readonly type = FETCH_PRODUCTS_SUCCESS;
 
-  constructor(public payload: {products: Product[], images: any}) {}
+  constructor(public payload: {products: any}) {}
 }
 
 export class FetchProductsFailure implements Action {
   readonly type = FETCH_PRODUCTS_FAILURE;
 
-  constructor() {}
+  constructor(public payload: {error: any}) {}
 }
 
 

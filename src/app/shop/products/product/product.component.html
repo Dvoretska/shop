@@ -1,12 +1,13 @@
 <div class="product-card">
   <div class="img-wrapper">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Dresse.jpg" alt="" class="image">
+    <img [src]="imageUrl" alt="" class="image">
   </div>
   <div class="manage-panel">
     <span class="icon wish-icon"></span>
     <span class="icon eye-icon"></span>
     <span class="icon bag-icon"></span>
   </div>
-  <div class="brand">Brand</div>
-  <div class="price">$100</div>
+  <div class="brand">{{ product.brand }}</div>
+  <div class="price" [ngStyle]="{textDecoration : product.discount ? 'line-through' : none}">${{product.price}}</div>
+  <div class="price" *ngIf="product.discount">${{product.discount}}</div>
 </div>

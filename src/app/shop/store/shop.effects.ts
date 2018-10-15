@@ -42,6 +42,22 @@ export class ShopEffects {
       )
     );
 
+  @Effect()
+  fetchProducts = this.actions$
+    .pipe(
+      ofType(ShopActions.FETCH_PRODUCTS),
+      switchMap(() =>
+        this.http.get(`${environment.API_URL}/products`).pipe(
+          map((res)=>{
+            return new ShopActions.FetchProductsSuccess({products: res['products']});
+          }),
+          catchError(error => {
+            return of(new ShopActions.FetchProductsFailure({error}));
+          })
+        )
+      )
+    );
+
   constructor(private actions$: Actions, private http: HttpClient) {
 
   }

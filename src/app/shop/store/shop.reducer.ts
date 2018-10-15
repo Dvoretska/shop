@@ -4,7 +4,7 @@ import {FETCH_PRODUCTS} from "./shop.actions";
 
 export class ShopState {
   constructor(
-    public products: any,
+    public products: any[],
     public images: any,
     public loading: boolean,
     public error: any,
@@ -78,8 +78,7 @@ export function shopReducer(state: ShopState =initialState, action: shopActions.
         ...state,
         error: null,
         loading: false,
-        products: [...action.payload.products],
-        images: [...action.payload.images]
+        products: [...action.payload.products]
       };
     default:
       return state;

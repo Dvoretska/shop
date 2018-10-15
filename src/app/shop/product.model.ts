@@ -1,10 +1,10 @@
 export class Product {
-  constructor(public price: string,
+  constructor(public price: number,
               public brand: string,
               public description: string,
               public material: string,
-              public discount?: string,
-              public category_id: number,
-              public category: any
+              public discount?: number,
+              // public category_id: number,
+              // public category: any
               ) {}
 }
