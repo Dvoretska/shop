@@ -48,6 +48,7 @@ import { ImagePreviewDirective } from './shared/img-preview.directive';
 import { EditorOptionsService } from './shared/editor-options.service';
 import {EffectsModule} from "@ngrx/effects";
 import {ShopEffects} from "./shop/store/shop.effects";
+import { ProductDetailsComponent } from './shop/products/product-details/product-details.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import {ShopEffects} from "./shop/store/shop.effects";
     EditProductComponent,
     ProductsComponent,
     FileUploadDirective,
-    ImagePreviewDirective
+    ImagePreviewDirective,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

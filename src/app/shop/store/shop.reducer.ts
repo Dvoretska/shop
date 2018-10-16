@@ -8,7 +8,8 @@ export class ShopState {
     public loading: boolean,
     public error: any,
     public categories: any,
-    public productWasAdded: boolean
+    public productWasAdded: boolean,
+    public product: any
   ) { }
 }
 
@@ -18,7 +19,8 @@ export const initialState: ShopState = {
   loading: false,
   error: null,
   categories: null,
-  productWasAdded: false
+  productWasAdded: false,
+  product: null
 };
 
 export function shopReducer(state: ShopState =initialState, action: shopActions.shopActions) {
@@ -78,6 +80,38 @@ export function shopReducer(state: ShopState =initialState, action: shopActions.
         products: state.products.concat(action.payload.products)
       };
     case shopActions.FETCH_PRODUCTS_FAILURE:
+      return {
+        ...state,
+        error: action.payload.error
+      };
+    case shopActions.FETCH_PRODUCTS_INIT:
+      return {
+        ...state,
+        error: null,
+        loading: true
+      };
+    case shopActions.FETCH_PRODUCTS_INIT_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        loading: true,
+        products: [...action.payload.products]
+      };
+
+    case shopActions.FETCH_PRODUCT_DETAILS:
+      return {
+        ...state,
+        error: null,
+        loading: true
+      };
+    case shopActions.FETCH_PRODUCT_DETAILS_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        loading: false,
+        product: action.payload.product
+      };
+    case shopActions.FETCH_PRODUCT_DETAILS_FAILURE:
       return {
         ...state,
         error: action.payload.error

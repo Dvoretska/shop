@@ -59,6 +59,40 @@ export class ShopEffects {
       )
     );
 
+  @Effect()
+  fetchProductsInit = this.actions$
+    .pipe(
+      ofType(ShopActions.FETCH_PRODUCTS_INIT),
+      map((action: ShopActions.FetchProductsInit) => action.payload),
+      switchMap((payload) =>
+        this.http.get(`${environment.API_URL}/products/${payload}`).pipe(
+          map((res)=>{
+            return new ShopActions.FetchProductsInitSuccess({products: res['products']});
+          }),
+          catchError(error => {
+            return of(new ShopActions.FetchProductsFailure({error}));
+          })
+        )
+      )
+    );
+
+  @Effect()
+  fetchProductDetails = this.actions$
+    .pipe(
+      ofType(ShopActions.FETCH_PRODUCT_DETAILS),
+      map((action: ShopActions.FetchProductDetails) => action.payload),
+      switchMap((payload) =>
+        this.http.get(`${environment.API_URL}/product/${payload}`).pipe(
+          map((res)=>{
+            return new ShopActions.FetchProductDetailsSuccess({product: res['product']});
+          }),
+          catchError(error => {
+            return of(new ShopActions.FetchProductDetailsFailure({error}));
+          })
+        )
+      )
+    );
+
   constructor(private actions$: Actions, private http: HttpClient) {
 
   }

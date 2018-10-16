@@ -11,6 +11,7 @@ import { ShopComponent } from './shop/shop.component';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { EditProductComponent } from './shop/products/edit-product/edit-product.component';
 import { ProductsComponent } from './shop/products/products.component';
+import { ProductDetailsComponent } from './shop/products/product-details/product-details.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -19,7 +20,7 @@ const appRoutes: Routes = [
     { path: '', component: ProductsComponent },
     { path: 'create-product', component: EditProductComponent },
     { path: 'product', component: EditProductComponent },
-    // { path: ':product_id', component: ProductComponent },
+    { path: ':product_id', component: ProductDetailsComponent },
     // { path: 'edit-post/:id', component: EditPostComponent }
   ]},
 

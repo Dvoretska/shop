@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Router, ActivatedRoute } from "@angular/router";
+import * as fromRoot from "../../store/shop.reducer";
+import * as shopActions from "../../store/shop.actions";
+import {Store, select} from "@ngrx/store";
 
 @Component({
   selector: 'app-product',
@@ -10,7 +14,8 @@ export class ProductComponent implements OnInit {
   @Input() product: any;
   imageUrl: string;
   defaultImageUrl: string = 'src/assets/no-img.jpg';
-  constructor() { }
+
+  constructor(private router: Router, private store: Store<fromRoot.ShopState>) { }
 
   ngOnInit() {
     if(this.product && this.product.images) {
@@ -18,7 +23,10 @@ export class ProductComponent implements OnInit {
     } else {
       this.imageUrl = this.defaultImageUrl;
     }
+  }
 
+  openProductDetails() {
+    this.router.navigate(['shop', this.product.id]);
   }
 
 }
