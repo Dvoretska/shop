@@ -24,8 +24,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.route
       .queryParams
       .subscribe(params => {
-        this.skip = params.skip | 0;
-        this.limit = params.limit | 3;
+        this.skip = +params.skip | 0;
+        this.limit = +params.limit | 3;
         let queryString = `?skip=${this.skip}&limit=${this.limit}`;
         this.store.dispatch(new shopActions.FetchProducts(queryString));
       });
@@ -42,7 +42,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.route
       .queryParams
       .subscribe(params => {
-        let queryString = `?skip=${params.skip}&limit=${params.limit}`;
+        let queryString = `?skip=${+params.skip}&limit=${+params.limit}`;
         this.store.dispatch(new shopActions.FetchProducts(queryString));
       });
 
