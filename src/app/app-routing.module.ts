@@ -18,8 +18,11 @@ const appRoutes: Routes = [
   { path: 'shop', component: ShopComponent, children: [
     { path: '', component: ProductsComponent },
     { path: 'create-product', component: EditProductComponent },
+    { path: 'product', component: EditProductComponent },
+    // { path: ':product_id', component: ProductComponent },
     // { path: 'edit-post/:id', component: EditPostComponent }
   ]},
+
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'blog', component: BlogComponent, canActivate: [AuthGuardService], children: [
     { path: '', component: PostsComponent },

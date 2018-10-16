@@ -61,7 +61,7 @@ export class FetchCategoriesFailure implements Action {
 export class FetchProducts implements Action {
   readonly type = FETCH_PRODUCTS;
 
-  constructor() {}
+  constructor(public payload: string) {}
 }
 
 export class FetchProductsSuccess implements Action {

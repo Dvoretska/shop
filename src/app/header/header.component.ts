@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  myRole: string;
   constructor() { }
 
   ngOnInit() {
+    this.myRole = JSON.parse(localStorage.getItem('user')).role;
   }
 
 }

@@ -46,8 +46,9 @@ export class ShopEffects {
   fetchProducts = this.actions$
     .pipe(
       ofType(ShopActions.FETCH_PRODUCTS),
-      switchMap(() =>
-        this.http.get(`${environment.API_URL}/products`).pipe(
+      map((action: ShopActions.FetchProducts) => action.payload),
+      switchMap((payload) =>
+        this.http.get(`${environment.API_URL}/products/${payload}`).pipe(
           map((res)=>{
             return new ShopActions.FetchProductsSuccess({products: res['products']});
           }),

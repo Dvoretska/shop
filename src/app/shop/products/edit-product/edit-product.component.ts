@@ -40,7 +40,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
   constructor(private store: Store<fromRoot.ShopState>,
               private edOptService: EditorOptionsService,
               private toastr: ToastrService,
-              private router: Router,)
+              private router: Router)
   {
     this.getState$ = this.store.pipe(select('shop'));
   }
@@ -51,8 +51,10 @@ export class EditProductComponent implements OnInit, OnDestroy {
       this.categories = state.categories;
       this.loading = state.loading;
       this.error = state.error;
+      console.log(this.categories)
     });
     this.optToolbar = this.edOptService.initOptions();
+
   }
 
   onUpload(e) {
@@ -102,7 +104,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
     for (let i =0; i < this.files.length ; i++){
         if (/\.(jpe?g|png|gif)$/i.test(this.files[i].file.name)) {
           let reader = new FileReader()
-          reader.readAsDataURL(this.files[i].file)
+          reader.readAsDataURL(this.files[i].file);
           reader.onload = () => {
             this.imageUrls[this.files[i].id] = reader.result;
           };

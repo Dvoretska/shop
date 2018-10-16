@@ -13,7 +13,7 @@ export class ProductComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if(this.product.images) {
+    if(this.product && this.product.images) {
       this.imageUrl = `${environment.API_URL}/${this.product.images[0]}`;
     } else {
       this.imageUrl = this.defaultImageUrl;

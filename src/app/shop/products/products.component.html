@@ -16,7 +16,20 @@
       <li>Price</li>
     </ul>
   </div>
-  <div class="content">
-    <app-product *ngFor="let product of products" [product]="product"></app-product>
+  <div class="content-wrapper">
+
+    <ngx-masonry class="masonry-container" [useImagesLoaded]="false">
+      <ngxMasonryItem *ngFor="let product of products" class="masonry-item">
+        <app-product [product]="product"></app-product>
+      </ngxMasonryItem>
+    </ngx-masonry>
+
+    <!--<app-product *ngFor="let product of products" [product]="product"></app-product>-->
+
+    <div class="button-wrapper" *ngIf="products.length >= 3">
+      <button (click)="loadMore()" class="load">Load more</button>
+    </div>
   </div>
 </div>
+
+

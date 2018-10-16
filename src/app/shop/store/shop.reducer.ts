@@ -1,11 +1,10 @@
 import * as shopActions from './shop.actions';
-import {INIT_PRODUCT_WAS_ADDED} from "./shop.actions";
-import {FETCH_PRODUCTS} from "./shop.actions";
+import {FETCH_PRODUCTS_FAILURE} from "./shop.actions";
+
 
 export class ShopState {
   constructor(
     public products: any[],
-    public images: any,
     public loading: boolean,
     public error: any,
     public categories: any,
@@ -16,13 +15,11 @@ export class ShopState {
 
 export const initialState: ShopState = {
   products: [],
-  images: [],
   loading: false,
   error: null,
   categories: null,
   productWasAdded: false
 };
-
 
 export function shopReducer(state: ShopState =initialState, action: shopActions.shopActions) {
   switch(action.type) {
@@ -78,7 +75,12 @@ export function shopReducer(state: ShopState =initialState, action: shopActions.
         ...state,
         error: null,
         loading: false,
-        products: [...action.payload.products]
+        products: state.products.concat(action.payload.products)
+      };
+    case shopActions.FETCH_PRODUCTS_FAILURE:
+      return {
+        ...state,
+        error: action.payload.error
       };
     default:
       return state;
