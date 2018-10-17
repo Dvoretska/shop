@@ -45,14 +45,14 @@
   </div>
   <div class="form-group">
     <strong class="text">Description</strong>
-    <quill-editor name="editor" (optToolbarInit)="optToolbarInit($event)" [modules]="{toolbar: optToolbar}" [(ngModel)]="description"></quill-editor>
+    <textarea class="form-control" name="editor" [(ngModel)]="description"></textarea>
   </div>
   <div class="form-group">
     <strong>Category</strong>
     <ng-select *ngIf="categories" [items]="categories"
                bindLabel="category"
                bindValue="id"
-               [(ngModel)]="selectedCategory" name="category" placeholder="Chose category">
+               [(ngModel)]="selectedCategory" name="category" placeholder="Choose category">
     </ng-select>
   </div>
   <div class="form-group">

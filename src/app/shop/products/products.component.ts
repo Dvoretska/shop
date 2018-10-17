@@ -14,6 +14,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   getState$: Observable<fromRoot.ShopState>;
   limit: number = 3;
   skip: number = 0;
+  totalAmount: number;
   private getStateSubscription: Subscription;
 
   constructor(private store: Store<fromRoot.ShopState>) {
@@ -25,7 +26,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.getState$ = this.store.pipe(select('shop'));
     this.getStateSubscription = this.getState$.subscribe((state) => {
       this.products = state.products;
-      console.log(state)
+      this.totalAmount = state.totalAmount;
     });
   }
 

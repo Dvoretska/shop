@@ -9,7 +9,9 @@ export class ShopState {
     public error: any,
     public categories: any,
     public productWasAdded: boolean,
-    public product: any
+    public product: any,
+    public totalAmount: any,
+    public addProductLoading: boolean
   ) { }
 }
 
@@ -17,10 +19,12 @@ export class ShopState {
 export const initialState: ShopState = {
   products: [],
   loading: false,
+  addProductLoading: false,
   error: null,
   categories: null,
   productWasAdded: false,
-  product: null
+  product: null,
+  totalAmount: null
 };
 
 export function shopReducer(state: ShopState =initialState, action: shopActions.shopActions) {
@@ -28,20 +32,20 @@ export function shopReducer(state: ShopState =initialState, action: shopActions.
     case shopActions.ADD_PRODUCT:
       return {
         ...state,
-        loading: true,
+        addProductLoading: true,
         productWasAdded: false
       };
     case shopActions.ADD_PRODUCT_SUCCESS:
       return {
         ...state,
-        loading: false,
+        addProductLoading: false,
         error: null,
         productWasAdded: true
       };
     case shopActions.ADD_PRODUCT_FAILURE:
       return {
         ...state,
-        loading: false,
+        addProductLoading: false,
         error: action.payload.error,
         productWasAdded: false
       };
@@ -77,7 +81,8 @@ export function shopReducer(state: ShopState =initialState, action: shopActions.
         ...state,
         error: null,
         loading: false,
-        products: state.products.concat(action.payload.products)
+        products: state.products.concat(action.payload.products),
+        totalAmount: action.payload.totalAmount[0].count
       };
     case shopActions.FETCH_PRODUCTS_FAILURE:
       return {
@@ -95,7 +100,8 @@ export function shopReducer(state: ShopState =initialState, action: shopActions.
         ...state,
         error: null,
         loading: true,
-        products: [...action.payload.products]
+        products: [...action.payload.products],
+        totalAmount: action.payload.totalAmount[0].count
       };
 
     case shopActions.FETCH_PRODUCT_DETAILS:

@@ -72,7 +72,7 @@ export class FetchProductsInit implements Action {
 export class FetchProductsInitSuccess implements Action {
   readonly type = FETCH_PRODUCTS_INIT_SUCCESS;
 
-  constructor(public payload: {products: any}) {}
+  constructor(public payload: {products: any, totalAmount: any}) {}
 }
 
 export class FetchProducts implements Action {
@@ -84,7 +84,7 @@ export class FetchProducts implements Action {
 export class FetchProductsSuccess implements Action {
   readonly type = FETCH_PRODUCTS_SUCCESS;
 
-  constructor(public payload: {products: any}) {}
+  constructor(public payload: {products: any, totalAmount: any}) {}
 }
 
 export class FetchProductsFailure implements Action {

@@ -20,15 +20,15 @@
   }
   .manage-panel {
     border: 2px solid black;
-    height: 45px;
+    height: 40px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
   .icon {
     display: inline-block;
-    height: 25px;
-    width: 25px;
+    height: 23px;
+    width: 23px;
     margin: 0 7px;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -47,9 +47,15 @@
   }
   .brand {
     font-size: 24px;
+    margin-top: 10px;
+    font-family: 'goudy_old_stylebold';
   }
-  .price {
-    font-size: 24px;
-    color: rgba(0, 0, 0, .7);
+  .price-wrapper {
+    display: flex;
+    .price {
+      font-size: 17px;
+      margin: 0 3px;
+    }
   }
+
 }

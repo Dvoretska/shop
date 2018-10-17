@@ -4,6 +4,11 @@ import {Store, select} from "@ngrx/store";
 import * as fromRoot from "../../store/shop.reducer";
 import {ActivatedRoute} from "@angular/router";
 import * as shopActions from "../../store/shop.actions";
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation,NgxGalleryImageSize } from 'ngx-gallery';
+import { environment } from 'src/environments/environment';
+import {CartModalComponent} from "../../cart/cart-modal/cart-modal.component";
+import {BsModalService} from "ngx-bootstrap/modal";
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-product-details',
@@ -14,10 +19,38 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   getState$: Observable<fromRoot.ShopState>;
   private getStateSubscription: Subscription;
   product;
+  galleryOptions: NgxGalleryOptions[];
+  galleryImages: NgxGalleryImage[] = [];
+  sizes = ['XS', 'S', 'M', 'L', 'XL'];
+  selectedSize;
+  modalRef: BsModalRef;
 
-  constructor(private route: ActivatedRoute, private store: Store<fromRoot.ShopState>) { }
+  constructor(private modalService: BsModalService, private route: ActivatedRoute, private store: Store<fromRoot.ShopState>) { }
 
   ngOnInit() {
+    this.galleryOptions = [
+      {
+        width: '100%',
+        height: '400px',
+        thumbnailsColumns: 4,
+        imageAnimation: NgxGalleryAnimation.Slide,
+        imageSize: NgxGalleryImageSize.Cover
+      },
+      {
+        breakpoint: 991,
+        width: '100%',
+        height: '600px',
+        imagePercent: 80,
+        thumbnailsPercent: 20,
+        thumbnailsMargin: 20,
+        thumbnailMargin: 20
+      },
+      {
+        breakpoint: 450,
+        preview: false,
+        imageSize: NgxGalleryImageSize.Contain
+      }
+    ];
     this.route.params
       .subscribe((params) => {
         this.store.dispatch(new shopActions.FetchProductDetails(+params['product_id']));
@@ -25,7 +58,21 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this.getState$ = this.store.pipe(select('shop'));
     this.getStateSubscription = this.getState$.subscribe((state) => {
       this.product = state.product;
+      if(this.product) {
+        this.galleryImages = [];
+        for(let image of this.product.images) {
+          let obj = {};
+          obj['small'] = `${environment.API_URL}/${image}`;
+          obj['medium'] = `${environment.API_URL}/${image}`;
+          obj['big'] = `${environment.API_URL}/${image}`;
+          this.galleryImages.push(obj);
+        }
+      }
     });
+  }
+
+  openModalCart() {
+    this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal' });
   }
 
   ngOnDestroy(){

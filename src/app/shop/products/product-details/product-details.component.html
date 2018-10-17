@@ -1,4 +1,33 @@
 <div class="container" *ngIf="product">
-  <div>{{product.brand}}</div>
-  <div>{{product.price}}</div>
+  <div class="image-wrapper">
+    <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+  </div>
+  <div class="content-wrapper">
+    <div class="brand">{{product.brand}}</div>
+    <div class="description">
+      <span class="title">Description:&emsp;</span>
+      <span [innerHTML]="product.description"></span>
+    </div>
+    <div class="material"><span class="title">Material:</span> {{product.material}}</div>
+    <div class="material"><span class="title">Sizes:</span></div>
+    <ng-select [items]="sizes"
+               [(ngModel)]="selectedSize" placeholder="Choose a size" class="custom">
+    </ng-select>
+  </div>
+  <div class="sidebar-wrapper">
+    <div [ngStyle]="{textDecoration : product.discount ? 'line-through' : none, color : product.discount ? 'grey' : 'blue'}">
+      <span class="title">Price: $</span>
+      <span>{{product.price}}</span>
+    </div>
+    <div class="discount" *ngIf="product.discount"><span class="title">Discount: $</span>{{product.discount}}</div>
+    <button class="my-button cta cart" (click)="openModalCart()">
+      <span>Add to the Cart</span>
+      <img src="/assets/shop/bag.svg" alt="" class="icon">
+    </button>
+    <button class="my-button cta heart">
+      <span>Add to the Wish List</span>
+      <img src="/assets/shop/heart.svg" alt="" class="icon">
+      </button>
+  </div>
+
 </div>

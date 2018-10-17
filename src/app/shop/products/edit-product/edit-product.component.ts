@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription} from 'rxjs';
-import { EditorOptionsService} from '../../../shared/editor-options.service';
 import * as shopActions from '../../store/shop.actions';
 import * as fromRoot from '../../store/shop.reducer';
 import {ToastrService} from "ngx-toastr";
@@ -28,7 +27,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
   isHighlight: boolean = false;
   categories: Category[];
   selectedCategory: null;
-  optToolbar;
   selectedImgKey = 0;
   imageUrls = [];
   error;
@@ -38,7 +36,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
   private getStateSubscription: Subscription;
 
   constructor(private store: Store<fromRoot.ShopState>,
-              private edOptService: EditorOptionsService,
               private toastr: ToastrService,
               private router: Router)
   {
@@ -49,11 +46,8 @@ export class EditProductComponent implements OnInit, OnDestroy {
     this.store.dispatch(new shopActions.FetchCategories());
     this.getStateSubscription = this.getState$.subscribe((state) => {
       this.categories = state.categories;
-      this.loading = state.loading;
       this.error = state.error;
-      console.log(this.categories)
     });
-    this.optToolbar = this.edOptService.initOptions();
 
   }
 
@@ -135,6 +129,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
     this.store.dispatch(new shopActions.AddProduct(savedData));
     this.getStateSubscription = this.getState$.subscribe((state) => {
       this.productWasAdded = state.productWasAdded;
+      this.loading = state.addProductLoading;
       if(this.productWasAdded) {
         this.toastr.success('Product was saved successfully!');
         this.router.navigate(['shop']);

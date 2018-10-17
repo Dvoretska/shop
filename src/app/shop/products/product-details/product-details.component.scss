@@ -1,4 +1,73 @@
 .container {
-  margin: 0 auto;
-  text-align: center;
+  display: flex;
+  width: 100%;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  font-size: 16px;
+  .title {
+    font-weight: 600;
+
+  }
+  .image-wrapper {
+    width: 40%;
+  }
+  .content-wrapper {
+    width: 35%;
+    margin: 0 2%;
+    & > div {
+      margin-bottom: 10px;
+    }
+    .brand {
+     font-size: 22px;
+     font-weight: bold;
+    }
+    .ng-select.custom {
+      width: 150px;
+    }
+    .ng-select.custom .ng-select-container  {
+      width: 150px;
+    }
+  }
+  .sidebar-wrapper {
+    width: 25%;
+    & > div {
+      margin-bottom: 10px;
+    }
+    .discount {
+      font-size: 18px;
+    }
+    .cta {
+      display: flex;
+      margin-top: 20px;
+      .icon {
+        width: 20px;
+        margin-left: 7px;
+      }
+    }
+    .cart {
+      border: 2px solid blue;
+    }
+    .heart {
+      border: 2px solid red;
+    }
+  }
+}
+
+@media screen and (max-width:991px){
+  .container {
+    flex-direction: column;
+    .image-wrapper, .content-wrapper, .sidebar-wrapper {
+      width: 100%;
+    }
+  }
+
+}
+
+@media screen and (max-width: 450px) {
+  ngx-gallery /deep/ ngx-gallery-thumbnails {
+    display: none;
+  }
+  ngx-gallery {
+    max-height:400px;
+  }
 }

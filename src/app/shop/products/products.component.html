@@ -26,8 +26,8 @@
 
     <!--<app-product *ngFor="let product of products" [product]="product"></app-product>-->
 
-    <div class="button-wrapper" *ngIf="products.length >= 3">
-      <button (click)="loadMore()" class="load">Load more</button>
+    <div class="button-wrapper" *ngIf="products.length >= 3 && products.length < totalAmount">
+      <button (click)="loadMore()" class="my-button load">Load more</button>
     </div>
   </div>
 </div>

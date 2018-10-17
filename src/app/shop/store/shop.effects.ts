@@ -50,7 +50,7 @@ export class ShopEffects {
       switchMap((payload) =>
         this.http.get(`${environment.API_URL}/products/${payload}`).pipe(
           map((res)=>{
-            return new ShopActions.FetchProductsSuccess({products: res['products']});
+            return new ShopActions.FetchProductsSuccess({products: res['products'], totalAmount: res['totalAmount']});
           }),
           catchError(error => {
             return of(new ShopActions.FetchProductsFailure({error}));
@@ -67,7 +67,7 @@ export class ShopEffects {
       switchMap((payload) =>
         this.http.get(`${environment.API_URL}/products/${payload}`).pipe(
           map((res)=>{
-            return new ShopActions.FetchProductsInitSuccess({products: res['products']});
+            return new ShopActions.FetchProductsInitSuccess({products: res['products'], totalAmount: res['totalAmount']});
           }),
           catchError(error => {
             return of(new ShopActions.FetchProductsFailure({error}));

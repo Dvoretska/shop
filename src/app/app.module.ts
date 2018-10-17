@@ -49,6 +49,9 @@ import { EditorOptionsService } from './shared/editor-options.service';
 import {EffectsModule} from "@ngrx/effects";
 import {ShopEffects} from "./shop/store/shop.effects";
 import { ProductDetailsComponent } from './shop/products/product-details/product-details.component';
+import { NgxGalleryModule } from 'ngx-gallery';
+import { CartComponent } from './shop/cart/cart.component';
+import { CartModalComponent } from './shop/cart/cart-modal/cart-modal.component';
 
 
 @NgModule({
@@ -75,7 +78,9 @@ import { ProductDetailsComponent } from './shop/products/product-details/product
     ProductsComponent,
     FileUploadDirective,
     ImagePreviewDirective,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    CartComponent,
+    CartModalComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +102,8 @@ import { ProductDetailsComponent } from './shop/products/product-details/product
     InViewportModule,
     NgxMasonryModule,
     StoreModule.forRoot({shop: shopReducer}),
-    EffectsModule.forRoot([ShopEffects])
+    EffectsModule.forRoot([ShopEffects]),
+    NgxGalleryModule
   ],
   providers: [AuthService, {
     provide: HTTP_INTERCEPTORS,
@@ -111,6 +117,6 @@ import { ProductDetailsComponent } from './shop/products/product-details/product
   EditorOptionsService,
   { provide: 'Window',  useValue: window }],
   bootstrap: [AppComponent],
-  entryComponents: [RegisterModalComponent, LoginModalComponent, UserCreateComponent, PostDetailsComponent]
+  entryComponents: [RegisterModalComponent, LoginModalComponent, UserCreateComponent, PostDetailsComponent, CartModalComponent]
 })
 export class AppModule { }
