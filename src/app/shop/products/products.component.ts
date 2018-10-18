@@ -34,47 +34,23 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     this.getState$ = this.store.pipe(select('shop'));
     this.getState$.pipe(
-      untilComponentDestroyed(this), take(1)
+      untilComponentDestroyed(this)
     ).subscribe((state) => {
         this.products = state.products;
         this.totalAmount = state.totalAmount;
         this.initLoading = state.fetchProductsInitLoading;
         this.targetId = state.targetId;
-        if(this.targetId) {
-          return;
-        } else {
-          let queryString = `?skip=${this.skip}&limit=${this.limit}`;
-          this.store.dispatch(new shopActions.FetchProductsInit(queryString));
-        }
+    });
+    if (this.targetId) {
+      setTimeout(()=>{
+        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#item'+this.targetId);
+        this.pageScrollService.start(pageScrollInstance);
+      }, 0);
 
-
-    })
-    console.log(this.products)
-    // this.store
-    //   .pipe(
-    //     select('shop'),
-    //     take(2)
-    //   )
-    //   .subscribe(state => {
-    //     console.log('state')
-    //     if(state.targetId) {
-    //       this.products = state.products;
-    //       this.totalAmount = state.totalAmount;
-    //       this.initLoading = state.fetchProductsInitLoading;
-    //       this.error = state.error
-    //       console.log('1', state)
-    //     } else {
-    //       console.log('3', state)
-    //       let queryString = `?skip=${this.skip}&limit=${this.limit}`;
-    //       this.store.dispatch(new shopActions.FetchProductsInit(queryString));
-    //       console.log('2', state)
-    //     }
-    //   });
-  }
-
-  ngAfterViewChecked() {
-    // let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({document: this.document, scrollTarget: '#item172'});
-    // this.pageScrollService.start(pageScrollInstance);
+    } else {
+      let queryString = `?skip=${this.skip}&limit=${this.limit}`;
+      this.store.dispatch(new shopActions.FetchProductsInit(queryString));
+    }
   }
 
   loadMore() {
