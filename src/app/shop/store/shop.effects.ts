@@ -70,7 +70,7 @@ export class ShopEffects {
             return new ShopActions.FetchProductsInitSuccess({products: res['products'], totalAmount: res['totalAmount']});
           }),
           catchError(error => {
-            return of(new ShopActions.FetchProductsFailure({error}));
+            return of(new ShopActions.FetchProductsInitFailure({error}));
           })
         )
       )

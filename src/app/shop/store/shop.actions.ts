@@ -10,15 +10,19 @@ export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 export const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS';
 export const FETCH_CATEGORIES_FAILURE = 'FETCH_CATEGORIES_FAILURE';
 
-export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
+
 export const FETCH_PRODUCTS_INIT = 'FETCH_PRODUCTS_INIT';
 export const FETCH_PRODUCTS_INIT_SUCCESS = 'FETCH_PRODUCTS_INIT_SUCCESS';
+export const FETCH_PRODUCTS_INIT_FAILURE = 'FETCH_PRODUCTS_INIT_FAILURE';
+export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
 export const FETCH_PRODUCTS_FAILURE = 'FETCH_PRODUCTS_FAILURE';
 
 export const FETCH_PRODUCT_DETAILS = 'FETCH_PRODUCT_DETAILS';
 export const FETCH_PRODUCT_DETAILS_SUCCESS = 'FETCH_PRODUCT_DETAILS_SUCCESS';
 export const FETCH_PRODUCT_DETAILS_FAILURE = 'FETCH_PRODUCT_DETAILS_FAILURE';
+
+export const SET_TARGET_ID = 'SET_TARGET_ID';
 
 export class AddProduct implements Action {
   readonly type = ADD_PRODUCT;
@@ -75,6 +79,12 @@ export class FetchProductsInitSuccess implements Action {
   constructor(public payload: {products: any, totalAmount: any}) {}
 }
 
+export class FetchProductsInitFailure implements Action {
+  readonly type = FETCH_PRODUCTS_INIT_FAILURE;
+
+  constructor(public payload: {error: any}) {}
+}
+
 export class FetchProducts implements Action {
   readonly type = FETCH_PRODUCTS;
 
@@ -111,6 +121,12 @@ export class FetchProductDetailsFailure implements Action {
   constructor(public payload: {error: any}) {}
 }
 
+export class SetTargetId implements Action {
+  readonly type = SET_TARGET_ID;
+
+  constructor(public payload: number) {}
+}
+
 
 export type shopActions = AddProduct |
             AddProductSuccess |
@@ -124,6 +140,8 @@ export type shopActions = AddProduct |
             FetchProductsFailure |
             FetchProductsInit |
             FetchProductsInitSuccess  |
+            FetchProductsInitFailure |
             FetchProductDetails |
             FetchProductDetailsSuccess |
-            FetchProductDetailsFailure;
+            FetchProductDetailsFailure |
+            SetTargetId;

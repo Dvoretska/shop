@@ -1,5 +1,6 @@
 import * as shopActions from './shop.actions';
 import {FETCH_PRODUCTS_FAILURE} from "./shop.actions";
+import {SET_TARGET_ID} from "./shop.actions";
 
 
 export class ShopState {
@@ -11,7 +12,11 @@ export class ShopState {
     public productWasAdded: boolean,
     public product: any,
     public totalAmount: any,
-    public addProductLoading: boolean
+    public addProductLoading: boolean,
+    public productDetailsLoading: boolean,
+    public fetchProductsLoading: boolean,
+    public fetchProductsInitLoading: boolean,
+    public targetId: number
   ) { }
 }
 
@@ -20,11 +25,15 @@ export const initialState: ShopState = {
   products: [],
   loading: false,
   addProductLoading: false,
+  productDetailsLoading: false,
+  fetchProductsLoading: false,
+  fetchProductsInitLoading: false,
   error: null,
   categories: null,
   productWasAdded: false,
   product: null,
-  totalAmount: null
+  totalAmount: null,
+  targetId: null
 };
 
 export function shopReducer(state: ShopState =initialState, action: shopActions.shopActions) {
@@ -74,53 +83,67 @@ export function shopReducer(state: ShopState =initialState, action: shopActions.
       return {
         ...state,
         error: null,
-        loading: true
+        fetchProductsLoading: true
       };
     case shopActions.FETCH_PRODUCTS_SUCCESS:
       return {
         ...state,
         error: null,
-        loading: false,
+        fetchProductsLoading: false,
         products: state.products.concat(action.payload.products),
         totalAmount: action.payload.totalAmount[0].count
       };
     case shopActions.FETCH_PRODUCTS_FAILURE:
       return {
         ...state,
+        fetchProductsLoading: false,
         error: action.payload.error
       };
     case shopActions.FETCH_PRODUCTS_INIT:
       return {
         ...state,
         error: null,
-        loading: true
+        fetchProductsInitLoading: true
       };
     case shopActions.FETCH_PRODUCTS_INIT_SUCCESS:
       return {
         ...state,
         error: null,
-        loading: true,
+        fetchProductsInitLoading: false,
         products: [...action.payload.products],
         totalAmount: action.payload.totalAmount[0].count
+      };
+    case shopActions.FETCH_PRODUCTS_INIT_FAILURE:
+      return {
+        ...state,
+        error: action.payload.error,
+        fetchProductsInitLoading: false
       };
 
     case shopActions.FETCH_PRODUCT_DETAILS:
       return {
         ...state,
         error: null,
-        loading: true
+        fetchProductsInitLoading: false,
+        productDetailsLoading: true
       };
     case shopActions.FETCH_PRODUCT_DETAILS_SUCCESS:
       return {
         ...state,
         error: null,
-        loading: false,
+        productDetailsLoading: false,
         product: action.payload.product
       };
     case shopActions.FETCH_PRODUCT_DETAILS_FAILURE:
       return {
         ...state,
+        productDetailsLoading: false,
         error: action.payload.error
+      };
+    case shopActions.SET_TARGET_ID:
+      return {
+        ...state,
+        targetId: action.payload
       };
     default:
       return state;

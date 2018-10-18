@@ -1,4 +1,9 @@
-<div class="container" *ngIf="product">
+<div class="back-block" (click)="backToSearch(product.id)">
+  <img src="/assets/back.jpg" alt="back-arrow" class="back-icon">
+  <span>Back to search</span>
+</div>
+<div class="container" >
+  <ng-container *ngIf="!loading && product">
   <div class="image-wrapper">
     <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
   </div>
@@ -29,5 +34,7 @@
       <img src="/assets/shop/heart.svg" alt="" class="icon">
       </button>
   </div>
-
+  </ng-container>
+  <div class="lds-ripple" *ngIf="loading"><div></div><div></div></div>
 </div>
+

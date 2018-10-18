@@ -1,43 +1,90 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
 import {Store, select} from "@ngrx/store";
+import { DOCUMENT } from '@angular/common';
 import * as fromRoot from "../store/shop.reducer";
 import {Observable, Subscription} from "rxjs";
 import * as shopActions from "../store/shop.actions";
+import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
+import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+import { take, map, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class ProductsComponent implements OnInit, OnDestroy, AfterViewChecked {
   products: any[];
   getState$: Observable<fromRoot.ShopState>;
   limit: number = 3;
   skip: number = 0;
   totalAmount: number;
-  private getStateSubscription: Subscription;
+  initLoading: boolean;
+  loading: boolean;
+  targetId;
+  feedSubscription: Subscription;
+  @ViewChild('container')
+  private container: ElementRef;
 
-  constructor(private store: Store<fromRoot.ShopState>) {
+  constructor(private store: Store<fromRoot.ShopState>, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
+    PageScrollConfig.defaultDuration = 700;
   }
 
   ngOnInit() {
-    let queryString = `?skip=${this.skip}&limit=${this.limit}`;
-    this.store.dispatch(new shopActions.FetchProductsInit(queryString));
-    this.getState$ = this.store.pipe(select('shop'));
-    this.getStateSubscription = this.getState$.subscribe((state) => {
-      this.products = state.products;
-      this.totalAmount = state.totalAmount;
-    });
+
+    // this.getState$ = this.store.pipe(select('shop'));
+    // this.getState$.pipe(
+    //   untilComponentDestroyed(this)
+    // ).subscribe((state) => {
+    //   this.targetId = state.targetId
+    //   if (this.targetId) {
+    //     this.products = state.products;
+    //     this.totalAmount = state.totalAmount;
+    //     this.initLoading = state.fetchProductsInitLoading;
+    //   } else {
+    //     let queryString = `?skip=${this.skip}&limit=${this.limit}`;
+    //     this.store.dispatch(new shopActions.FetchProductsInit(queryString));
+    //   }
+    //
+    // })
+    this.store
+      .pipe(
+        select('shop'),
+        take(1),
+
+        tap(data => {
+            if(data.targetId) {
+              return
+            } else {
+              let queryString = `?skip=${this.skip}&limit=${this.limit}`;
+              this.store.dispatch(new shopActions.FetchProductsInit(queryString));
+            }
+          })
+      )
+      .subscribe(data => {console.log('subscribe')});
+  }
+
+  ngAfterViewChecked() {
+    // let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({document: this.document, scrollTarget: '#item172'});
+    // this.pageScrollService.start(pageScrollInstance);
+
   }
 
   loadMore() {
     this.skip += this.limit;
     let queryString = `?skip=${this.skip}&limit=${this.limit}`;
     this.store.dispatch(new shopActions.FetchProducts(queryString));
+    this.getStateSubscriptionTwo = this.getState$.pipe(
+      untilComponentDestroyed(this)
+    ).subscribe((state) => {
+      this.loading = state.fetchProductsLoading;
+    });
   }
 
-  ngOnDestroy(){
-    this.getStateSubscription.unsubscribe();
+  public goToHeadingInContainer(): void {
+
   }
+
+  ngOnDestroy(){}
 
 }

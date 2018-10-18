@@ -5,6 +5,8 @@ import * as shopActions from '../../store/shop.actions';
 import * as fromRoot from '../../store/shop.reducer';
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+
 
 export interface Category {
   id: number;
@@ -44,7 +46,9 @@ export class EditProductComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.dispatch(new shopActions.FetchCategories());
-    this.getStateSubscription = this.getState$.subscribe((state) => {
+    this.getStateSubscription = this.getState$.pipe(
+      untilComponentDestroyed(this)
+    ).subscribe((state) => {
       this.categories = state.categories;
       this.error = state.error;
     });
@@ -143,6 +147,5 @@ export class EditProductComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.store.dispatch(new shopActions.InitProductWasAdded());
-    this.getStateSubscription.unsubscribe();
   }
 }
