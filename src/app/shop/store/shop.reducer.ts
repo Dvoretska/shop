@@ -1,6 +1,4 @@
 import * as shopActions from './shop.actions';
-import {FETCH_PRODUCTS_FAILURE} from "./shop.actions";
-import {SET_TARGET_ID} from "./shop.actions";
 
 
 export class ShopState {
@@ -16,7 +14,8 @@ export class ShopState {
     public productDetailsLoading: boolean,
     public fetchProductsLoading: boolean,
     public fetchProductsInitLoading: boolean,
-    public targetId: number
+    public targetId: number,
+    public skip: number
   ) { }
 }
 
@@ -33,7 +32,8 @@ export const initialState: ShopState = {
   productWasAdded: false,
   product: null,
   totalAmount: null,
-  targetId: null
+  targetId: null,
+  skip: 0
 };
 
 export function shopReducer(state: ShopState =initialState, action: shopActions.shopActions) {
@@ -83,7 +83,9 @@ export function shopReducer(state: ShopState =initialState, action: shopActions.
       return {
         ...state,
         error: null,
-        fetchProductsLoading: true
+        targetId: null,
+        fetchProductsLoading: true,
+        skip: action.payload.skip
       };
     case shopActions.FETCH_PRODUCTS_SUCCESS:
       return {

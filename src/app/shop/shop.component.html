@@ -7,5 +7,5 @@
       <app-corners></app-corners>
     </section>
   </div>
-  <a class="btn-add" (click)="onEditProduct()"><i class="material-icons">add</i></a>
+  <a class="btn-add" (click)="onEditProduct()" *ngIf="router.url == '/shop'"><i class="material-icons">add</i></a>
 </div>

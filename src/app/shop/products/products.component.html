@@ -24,8 +24,9 @@
         <!--<app-product [product]="product"></app-product>-->
       <!--</ngxMasonryItem>-->
     <!--</ngx-masonry>-->
-
-    <app-product *ngFor="let product of products" [product]="product" [attr.id]="'item' + product.id"></app-product>
+    <div class="content">
+      <app-product *ngFor="let product of products" [product]="product" [attr.id]="'item' + product.id"></app-product>
+    </div>
 
     <div class="button-wrapper" *ngIf="products.length >= 3 && products.length < totalAmount && !initLoading">
       <button (click)="loadMore()" class="my-button load">

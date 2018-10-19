@@ -88,7 +88,7 @@ export class FetchProductsInitFailure implements Action {
 export class FetchProducts implements Action {
   readonly type = FETCH_PRODUCTS;
 
-  constructor(public payload: string) {}
+  constructor(public payload: {queryString: string, skip: number}) {}
 }
 
 export class FetchProductsSuccess implements Action {

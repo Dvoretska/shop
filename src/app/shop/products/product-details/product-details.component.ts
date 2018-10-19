@@ -26,6 +26,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   selectedSize;
   modalRef: BsModalRef;
   loading: boolean;
+  products;
 
   constructor(private router: Router, private modalService: BsModalService, private route: ActivatedRoute, private store: Store<fromRoot.ShopState>) { }
 
@@ -61,6 +62,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this.getStateSubscription = this.getState$.pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
+      this.products = state.products;
       this.product = state.product;
       this.loading = state.productDetailsLoading;
       if(this.product) {

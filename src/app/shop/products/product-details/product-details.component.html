@@ -1,4 +1,4 @@
-<div class="back-block" (click)="backToSearch(product.id)">
+<div class="back-block" (click)="backToSearch(product.id)" *ngIf="products.length">
   <img src="/assets/back.jpg" alt="back-arrow" class="back-icon">
   <span>Back to search</span>
 </div>
@@ -24,15 +24,31 @@
       <span class="title">Price: $</span>
       <span>{{product.price}}</span>
     </div>
-    <div class="discount" *ngIf="product.discount"><span class="title">Discount: $</span>{{product.discount}}</div>
+    <div class="discount" *ngIf="product.discount"><span class="title">With Discount: $</span>{{product.discount}}</div>
     <button class="my-button cta cart" (click)="openModalCart()">
       <span>Add to the Cart</span>
-      <img src="/assets/shop/bag.svg" alt="" class="icon">
+      <svg fill="#000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"x="0px" y="0px"
+         width="20px" height="20px" viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve" class="icon">
+      <g>
+        <path d="M15.733,20.125c1.104,0,2-0.896,2-2v-7.8C17.733,6.838,20.57,4,24.058,4c3.487,0,6.325,2.838,6.325,6.325v7.8
+          c0,1.104,0.896,2,2,2c1.104,0,2-0.896,2-2v-7.8C34.383,4.632,29.751,0,24.058,0c-5.692,0-10.324,4.632-10.324,10.325v7.8
+          C13.733,19.229,14.629,20.125,15.733,20.125z"/>
+        <path d="M47,15.631H36.383v2.494c0,2.206-1.794,4-4,4c-2.205,0-4-1.794-4-4v-2.494h-8.649v2.494c0,2.206-1.794,4-4,4
+          s-4-1.794-4-4v-2.494H1c-0.552,0-0.893,0.435-0.762,0.971L7.235,45.1C7.658,46.702,9.343,48,11,48h26
+          c1.658,0,3.342-1.299,3.767-2.9l6.996-28.498C47.893,16.065,47.553,15.631,47,15.631z"/>
+      </g>
+    </svg>
     </button>
     <button class="my-button cta heart">
       <span>Add to the Wish List</span>
-      <img src="/assets/shop/heart.svg" alt="" class="icon">
-      </button>
+      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" fill="red" x="0px" y="0px"
+         width="20px" height="20px" viewBox="0 0 510 510" style="enable-background:new 0 0 510 510;" xml:space="preserve" class="icon">
+        <g id="favorite">
+          <path d="M255,489.6l-35.7-35.7C86.7,336.6,0,257.55,0,160.65C0,81.6,61.2,20.4,140.25,20.4c43.35,0,86.7,20.4,114.75,53.55
+            C283.05,40.8,326.4,20.4,369.75,20.4C448.8,20.4,510,81.6,510,160.65c0,96.9-86.7,175.95-219.3,293.25L255,489.6z"/>
+        </g>
+      </svg>
+    </button>
   </div>
   </ng-container>
   <div class="lds-ripple" *ngIf="loading"><div></div><div></div></div>

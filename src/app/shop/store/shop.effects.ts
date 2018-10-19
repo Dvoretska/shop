@@ -48,7 +48,7 @@ export class ShopEffects {
       ofType(ShopActions.FETCH_PRODUCTS),
       map((action: ShopActions.FetchProducts) => action.payload),
       switchMap((payload) =>
-        this.http.get(`${environment.API_URL}/products/${payload}`).pipe(
+        this.http.get(`${environment.API_URL}/products/${payload.queryString}`).pipe(
           map((res)=>{
             return new ShopActions.FetchProductsSuccess({products: res['products'], totalAmount: res['totalAmount']});
           }),
