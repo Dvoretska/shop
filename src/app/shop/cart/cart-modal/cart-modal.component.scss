@@ -1,0 +1,34 @@
+/deep/ .cart-modal.modal-dialog {
+  max-width: 700px;
+  z-index: 2001;
+}
+.modal-body {
+  display: flex;
+  .cart-img {
+    width: 70px;
+    height: 100px;
+    margin-right: 20px;
+  }
+  .title {
+    font-weight: 600;
+  }
+  .block {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    &:nth-child(3) {
+      align-items: flex-end;
+      margin-right: 20px;
+    }
+    .brand {
+      margin-bottom: 10px;
+    }
+    .price-wrapper {
+      .discount {
+        margin-left: 7px;
+        font-weight: 600;
+      }
+    }
+  }
+}

@@ -9,15 +9,18 @@
   </div>
   <div class="content-wrapper">
     <div class="brand">{{product.brand}}</div>
+    <div class="material"><span class="title">Category:</span> {{product.category_id.category}}</div>
     <div class="description">
       <span class="title">Description:&emsp;</span>
       <span [innerHTML]="product.description"></span>
     </div>
     <div class="material"><span class="title">Material:</span> {{product.material}}</div>
-    <div class="material"><span class="title">Sizes:</span></div>
-    <ng-select [items]="sizes"
-               [(ngModel)]="selectedSize" placeholder="Choose a size" class="custom">
-    </ng-select>
+    <div class="material">
+      <span class="title">Sizes:</span>
+      <ng-select [items]="sizes"
+                 [(ngModel)]="selectedSize" placeholder="Choose a size" class="custom">
+      </ng-select>
+    </div>
   </div>
   <div class="sidebar-wrapper">
     <div [ngStyle]="{textDecoration : product.discount ? 'line-through' : none, color : product.discount ? 'grey' : 'blue'}">

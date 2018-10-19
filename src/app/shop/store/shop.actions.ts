@@ -10,7 +10,6 @@ export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 export const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS';
 export const FETCH_CATEGORIES_FAILURE = 'FETCH_CATEGORIES_FAILURE';
 
-
 export const FETCH_PRODUCTS_INIT = 'FETCH_PRODUCTS_INIT';
 export const FETCH_PRODUCTS_INIT_SUCCESS = 'FETCH_PRODUCTS_INIT_SUCCESS';
 export const FETCH_PRODUCTS_INIT_FAILURE = 'FETCH_PRODUCTS_INIT_FAILURE';
@@ -22,13 +21,17 @@ export const FETCH_PRODUCT_DETAILS = 'FETCH_PRODUCT_DETAILS';
 export const FETCH_PRODUCT_DETAILS_SUCCESS = 'FETCH_PRODUCT_DETAILS_SUCCESS';
 export const FETCH_PRODUCT_DETAILS_FAILURE = 'FETCH_PRODUCT_DETAILS_FAILURE';
 
+export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
+export const ADD_PRODUCT_TO_CART_SUCCESS = 'ADD_PRODUCT_TO_CART_SUCCESS';
+export const ADD_PRODUCT_TO_CART_FAILURE = 'ADD_PRODUCT_TO_CART_FAILURE';
+
 export const SET_TARGET_ID = 'SET_TARGET_ID';
+
 
 export class AddProduct implements Action {
   readonly type = ADD_PRODUCT;
 
   constructor(public payload: any) {}
-
 }
 
 export class AddProductSuccess implements Action {
@@ -127,6 +130,24 @@ export class SetTargetId implements Action {
   constructor(public payload: number) {}
 }
 
+export class AddProductToCart implements Action {
+  readonly type = ADD_PRODUCT_TO_CART;
+
+  constructor(public payload: { product_id: number, size: string, quantity: number }) {}
+}
+
+export class AddProductToCartSuccess implements Action {
+  readonly type = ADD_PRODUCT_TO_CART_SUCCESS;
+
+  constructor(public payload: {product: any}) {}
+}
+
+export class AddProductToCartFailure implements Action {
+  readonly type = ADD_PRODUCT_TO_CART_FAILURE;
+
+  constructor(public payload: {error: any}) {}
+}
+
 
 export type shopActions = AddProduct |
             AddProductSuccess |
@@ -144,4 +165,7 @@ export type shopActions = AddProduct |
             FetchProductDetails |
             FetchProductDetailsSuccess |
             FetchProductDetailsFailure |
-            SetTargetId;
+            SetTargetId |
+            AddProductToCart |
+            AddProductToCartSuccess |
+            AddProductToCartFailure;

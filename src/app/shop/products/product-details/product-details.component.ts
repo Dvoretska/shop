@@ -10,6 +10,7 @@ import {CartModalComponent} from "../../cart/cart-modal/cart-modal.component";
 import {BsModalService} from "ngx-bootstrap/modal";
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-product-details',
@@ -27,8 +28,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   modalRef: BsModalRef;
   loading: boolean;
   products;
+  quantity: number = 0;
 
-  constructor(private router: Router, private modalService: BsModalService, private route: ActivatedRoute, private store: Store<fromRoot.ShopState>) { }
+  constructor(private toastr: ToastrService, private router: Router, private modalService: BsModalService, private route: ActivatedRoute, private store: Store<fromRoot.ShopState>) { }
 
   ngOnInit() {
     this.galleryOptions = [
@@ -79,7 +81,18 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   }
 
   openModalCart() {
-    this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal' });
+    if(this.selectedSize) {
+      this.quantity++;
+      this.store.dispatch(new shopActions.AddProductToCart({
+        product_id: this.product.id,
+        size: this.selectedSize,
+        quantity: this.quantity
+      }));
+      const initialState = {currentProduct: this.product, size: this.selectedSize, quantity: this.quantity};
+      this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
+    } else {
+      this.toastr.warning('Please Choose a Size!');
+    }
   }
 
   backToSearch(id) {

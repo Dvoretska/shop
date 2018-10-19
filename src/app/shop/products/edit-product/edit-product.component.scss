@@ -114,13 +114,6 @@ form {
   margin-bottom: 10px;
 }
 
-.button-update {
-  border: 3px solid blue;
-  color: black;
-  &:hover {
-    color: blue;
-  }
-}
 button[disabled] {
   cursor: not-allowed;
 }
