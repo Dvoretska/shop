@@ -16,7 +16,6 @@ export class CartModalComponent implements OnInit {
   constructor(public modalRef: BsModalRef) { }
 
   ngOnInit() {
-    console.log(this.currentProduct);
     this.imagePath = `${environment.API_URL}/${this.currentProduct.images[0]}`;
   }
 

@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {Observable} from "rxjs";
 import {Store, select} from "@ngrx/store";
-import * as fromRoot from "../../store/shop.reducer";
+import * as fromRoot from "../../store/reducers/reducer.factory";
 import {ActivatedRoute, Router} from "@angular/router";
-import * as shopActions from "../../store/shop.actions";
+import * as productsActions from "../../store/actions/products.actions";
+import * as cartsActions from "../../store/actions/cart.actions";
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation,NgxGalleryImageSize } from 'ngx-gallery';
 import { environment } from 'src/environments/environment';
 import {CartModalComponent} from "../../cart/cart-modal/cart-modal.component";
@@ -11,15 +12,14 @@ import {BsModalService} from "ngx-bootstrap/modal";
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import {ToastrService} from "ngx-toastr";
+import { skip } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })
-export class ProductDetailsComponent implements OnInit, OnDestroy {
-  getState$: Observable<fromRoot.ShopState>;
-  private getStateSubscription: Subscription;
+export class ProductDetailsComponent implements OnInit, OnDestroy {;
   product;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[] = [];
@@ -29,6 +29,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   loading: boolean;
   products;
   quantity: number = 0;
+  isAddedToCart;
+  initial: Boolean;
 
   constructor(private toastr: ToastrService, private router: Router, private modalService: BsModalService, private route: ActivatedRoute, private store: Store<fromRoot.ShopState>) { }
 
@@ -58,10 +60,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     ];
     this.route.params
       .subscribe((params) => {
-        this.store.dispatch(new shopActions.FetchProductDetails(+params['product_id']));
+        this.store.dispatch(new productsActions.FetchProductDetails(+params['product_id']));
       });
-    this.getState$ = this.store.pipe(select('shop'));
-    this.getStateSubscription = this.getState$.pipe(
+   this.store.pipe(select(fromRoot.getProducts)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.products = state.products;
@@ -78,25 +79,50 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.store.pipe(select(fromRoot.getCart)).pipe(
+      untilComponentDestroyed(this)
+    ).subscribe((state) => {
+      this.isAddedToCart = state.isAddedToCart;
+       if(this.isAddedToCart) {
+          const initialState = {currentProduct: this.product, size: this.selectedSize, quantity: this.quantity};
+          this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
+       } else if(this.isAddedToCart === false) {
+          this.toastr.error('Something went wrong');
+       }
+     }
+    )
   }
 
   openModalCart() {
     if(this.selectedSize) {
       this.quantity++;
-      this.store.dispatch(new shopActions.AddProductToCart({
+      this.store.dispatch(new cartsActions.AddProductToCart({
         product_id: this.product.id,
         size: this.selectedSize,
         quantity: this.quantity
       }));
-      const initialState = {currentProduct: this.product, size: this.selectedSize, quantity: this.quantity};
-      this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
+
+      // this.getState$ = this.store.pipe(select('shop'));
+      // this.getState$.pipe(
+      //   untilComponentDestroyed(this)
+      // ).subscribe((state) => {
+      //   console.log('fired')
+      //   this.isAddedToCart = state.isAddedToCart;
+      //   if(this.isAddedToCart) {
+      //     const initialState = {currentProduct: this.product, size: this.selectedSize, quantity: this.quantity};
+      //     this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
+      //   } else if(this.isAddedToCart === false) {
+      //     this.toastr.error('Something went wrong');
+      //   }
+      //
+      // });
     } else {
       this.toastr.warning('Please Choose a Size!');
     }
   }
 
   backToSearch(id) {
-    this.store.dispatch(new shopActions.SetTargetId(id));
+    this.store.dispatch(new productsActions.SetTargetId(id));
     this.router.navigate(['shop']);
   }
 

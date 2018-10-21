@@ -1,26 +1,26 @@
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import {Injectable} from "@angular/core";
-import * as ShopActions from './shop.actions'
-import { switchMap, concatMap, map, catchError} from 'rxjs/operators';
+import * as ProductsActions from '../actions/products.actions';
+import { switchMap, exhaustMap, map, catchError} from 'rxjs/operators';
 import { of } from 'rxjs';
 import {HttpClient} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 
 
 @Injectable()
-export class ShopEffects {
+export class ProductsEffects {
   @Effect()
   addProduct = this.actions$
   .pipe(
-    ofType(ShopActions.ADD_PRODUCT),
-    map((action: ShopActions.AddProduct) => action.payload),
+    ofType(ProductsActions.ADD_PRODUCT),
+    map((action: ProductsActions.AddProduct) => action.payload),
     switchMap((payload) =>
       this.http.post(`${environment.API_URL}/create-product`, payload).pipe(
         map((product)=>{
-          return new ShopActions.AddProductSuccess({product});
+          return new ProductsActions.AddProductSuccess({product});
         }),
         catchError(error => {
-          return of(new ShopActions.AddProductFailure({error}));
+          return of(new ProductsActions.AddProductFailure({error}));
         })
       )
     )
@@ -29,14 +29,14 @@ export class ShopEffects {
   @Effect()
   fetchCategories = this.actions$
     .pipe(
-      ofType(ShopActions.FETCH_CATEGORIES),
+      ofType(ProductsActions.FETCH_CATEGORIES),
       switchMap(() =>
         this.http.get(`${environment.API_URL}/categories`).pipe(
           map((categories)=>{
-            return new ShopActions.FetchCategoriesSuccess({categories});
+            return new ProductsActions.FetchCategoriesSuccess({categories});
           }),
           catchError(error => {
-            return of(new ShopActions.FetchCategoriesFailure({error}));
+            return of(new ProductsActions.FetchCategoriesFailure({error}));
           })
         )
       )
@@ -45,15 +45,15 @@ export class ShopEffects {
   @Effect()
   fetchProducts = this.actions$
     .pipe(
-      ofType(ShopActions.FETCH_PRODUCTS),
-      map((action: ShopActions.FetchProducts) => action.payload),
+      ofType(ProductsActions.FETCH_PRODUCTS),
+      map((action: ProductsActions.FetchProducts) => action.payload),
       switchMap((payload) =>
         this.http.get(`${environment.API_URL}/products/${payload.queryString}`).pipe(
           map((res)=>{
-            return new ShopActions.FetchProductsSuccess({products: res['products'], totalAmount: res['totalAmount']});
+            return new ProductsActions.FetchProductsSuccess({products: res['products'], totalAmount: res['totalAmount']});
           }),
           catchError(error => {
-            return of(new ShopActions.FetchProductsFailure({error}));
+            return of(new ProductsActions.FetchProductsFailure({error}));
           })
         )
       )
@@ -62,15 +62,15 @@ export class ShopEffects {
   @Effect()
   fetchProductsInit = this.actions$
     .pipe(
-      ofType(ShopActions.FETCH_PRODUCTS_INIT),
-      map((action: ShopActions.FetchProductsInit) => action.payload),
+      ofType(ProductsActions.FETCH_PRODUCTS_INIT),
+      map((action: ProductsActions.FetchProductsInit) => action.payload),
       switchMap((payload) =>
         this.http.get(`${environment.API_URL}/products/${payload}`).pipe(
           map((res)=>{
-            return new ShopActions.FetchProductsInitSuccess({products: res['products'], totalAmount: res['totalAmount']});
+            return new ProductsActions.FetchProductsInitSuccess({products: res['products'], totalAmount: res['totalAmount']});
           }),
           catchError(error => {
-            return of(new ShopActions.FetchProductsInitFailure({error}));
+            return of(new ProductsActions.FetchProductsInitFailure({error}));
           })
         )
       )
@@ -79,15 +79,15 @@ export class ShopEffects {
   @Effect()
   fetchProductDetails = this.actions$
     .pipe(
-      ofType(ShopActions.FETCH_PRODUCT_DETAILS),
-      map((action: ShopActions.FetchProductDetails) => action.payload),
+      ofType(ProductsActions.FETCH_PRODUCT_DETAILS),
+      map((action: ProductsActions.FetchProductDetails) => action.payload),
       switchMap((payload) =>
         this.http.get(`${environment.API_URL}/product/${payload}`).pipe(
           map((res)=>{
-            return new ShopActions.FetchProductDetailsSuccess({product: res['product']});
+            return new ProductsActions.FetchProductDetailsSuccess({product: res['product']});
           }),
           catchError(error => {
-            return of(new ShopActions.FetchProductDetailsFailure({error}));
+            return of(new ProductsActions.FetchProductDetailsFailure({error}));
           })
         )
       )

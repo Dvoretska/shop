@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { StoreModule } from '@ngrx/store';
-import { shopReducer } from './shop/store/shop.reducer';
+import { reducers } from './shop/store/reducers/reducer.factory';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -47,7 +47,8 @@ import { FileUploadDirective } from './shared/file-upload.directive';
 import { ImagePreviewDirective } from './shared/img-preview.directive';
 import { EditorOptionsService } from './shared/editor-options.service';
 import {EffectsModule} from "@ngrx/effects";
-import {ShopEffects} from "./shop/store/shop.effects";
+import {CartEffects} from "./shop/store/effects/cart.effects";
+import {ProductsEffects} from "./shop/store/effects/products.effects";
 import { ProductDetailsComponent } from './shop/products/product-details/product-details.component';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { CartComponent } from './shop/cart/cart.component';
@@ -101,8 +102,8 @@ import { CartModalComponent } from './shop/cart/cart-modal/cart-modal.component'
     NgxPageScrollModule,
     InViewportModule,
     NgxMasonryModule,
-    StoreModule.forRoot({shop: shopReducer}),
-    EffectsModule.forRoot([ShopEffects]),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([CartEffects, ProductsEffects]),
     NgxGalleryModule
   ],
   providers: [AuthService, {

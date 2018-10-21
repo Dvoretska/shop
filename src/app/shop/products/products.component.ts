@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import {Store, select} from "@ngrx/store";
 import { DOCUMENT } from '@angular/common';
-import * as fromRoot from "../store/shop.reducer";
+import * as fromProducts from "../store/reducers/products.reducer";
+import * as fromRoot from "../store/reducers/reducer.factory";
 import {Observable} from "rxjs";
-import * as shopActions from "../store/shop.actions";
+import * as productsActions from "../store/actions/products.actions";
 import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 
@@ -15,7 +16,7 @@ import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   products: any[];
-  getState$: Observable<fromRoot.ShopState>;
+  getState$: Observable<fromProducts.ProductsState>;
   limit: number = 3;
   skip: number;
   totalAmount: number;
@@ -24,15 +25,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
   targetId;
   error;
   chunk: number;
-  @ViewChild('container')
-  private container: ElementRef;
 
-  constructor(private store: Store<fromRoot.ShopState>, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
+  constructor(private store: Store<fromProducts.ProductsState>, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
     PageScrollConfig.defaultDuration = 1000;
   }
 
   ngOnInit() {
-    this.getState$ = this.store.pipe(select('shop'));
+    this.getState$ = this.store.pipe(select(fromRoot.getProducts));
     this.getState$.pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
@@ -50,14 +49,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
       }, 0);
     } else {
       let queryString = `?skip=${this.skip}&limit=${this.limit}`;
-      this.store.dispatch(new shopActions.FetchProductsInit(queryString));
+      this.store.dispatch(new productsActions.FetchProductsInit(queryString));
     }
   }
 
   loadMore() {
     this.skip += this.limit;
     let queryString = `?skip=${this.skip}&limit=${this.limit}`;
-    this.store.dispatch(new shopActions.FetchProducts({queryString: queryString, skip: this.skip}));
+    this.store.dispatch(new productsActions.FetchProducts({queryString: queryString, skip: this.skip}));
     this.getState$.pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {

@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription} from 'rxjs';
-import * as shopActions from '../../store/shop.actions';
-import * as fromRoot from '../../store/shop.reducer';
+import * as productsActions from '../../store/actions/products.actions';
+import * as fromRoot from '../../store/reducers/reducer.factory';
+import * as fromProducts from '../../store/reducers/products.reducer';
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
@@ -34,19 +35,18 @@ export class EditProductComponent implements OnInit, OnDestroy {
   error;
   productWasAdded;
   loading: boolean;
-  getState$: Observable<fromRoot.ShopState>;
-  private getStateSubscription: Subscription;
+  getState$: Observable<fromProducts.ProductsState>;
 
-  constructor(private store: Store<fromRoot.ShopState>,
+  constructor(private store: Store<fromProducts.ProductsState>,
               private toastr: ToastrService,
               private router: Router)
   {
-    this.getState$ = this.store.pipe(select('shop'));
+    this.getState$ = this.store.pipe(select(fromRoot.getProducts));
   }
 
   ngOnInit() {
-    this.store.dispatch(new shopActions.FetchCategories());
-    this.getStateSubscription = this.getState$.pipe(
+    this.store.dispatch(new productsActions.FetchCategories());
+    this.getState$.pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.categories = state.categories;
@@ -130,8 +130,10 @@ export class EditProductComponent implements OnInit, OnDestroy {
         savedData.append('file', file);
       }
     }
-    this.store.dispatch(new shopActions.AddProduct(savedData));
-    this.getStateSubscription = this.getState$.subscribe((state) => {
+    this.store.dispatch(new productsActions.AddProduct(savedData));
+    this.getState$.pipe(
+      untilComponentDestroyed(this)
+    ).subscribe((state) => {
       this.productWasAdded = state.productWasAdded;
       this.loading = state.addProductLoading;
       if(this.productWasAdded) {
@@ -146,6 +148,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.store.dispatch(new shopActions.InitProductWasAdded());
+    this.store.dispatch(new productsActions.InitProductWasAdded());
   }
 }

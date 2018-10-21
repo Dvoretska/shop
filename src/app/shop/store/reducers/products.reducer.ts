@@ -1,7 +1,7 @@
-import * as shopActions from './shop.actions';
+import * as productsActions from '../actions/products.actions';
 
 
-export class ShopState {
+export class ProductsState {
   constructor(
     public products: any[],
     public loading: boolean,
@@ -20,7 +20,7 @@ export class ShopState {
 }
 
 
-export const initialState: ShopState = {
+export const initialState: ProductsState = {
   products: [],
   loading: false,
   addProductLoading: false,
@@ -36,50 +36,50 @@ export const initialState: ShopState = {
   skip: 0
 };
 
-export function shopReducer(state: ShopState =initialState, action: shopActions.shopActions) {
+export function productsReducer(state: ProductsState =initialState, action: productsActions.productsActions) {
   switch(action.type) {
-    case shopActions.ADD_PRODUCT:
+    case productsActions.ADD_PRODUCT:
       return {
         ...state,
         addProductLoading: true,
         productWasAdded: false
       };
-    case shopActions.ADD_PRODUCT_SUCCESS:
+    case productsActions.ADD_PRODUCT_SUCCESS:
       return {
         ...state,
         addProductLoading: false,
         error: null,
         productWasAdded: true
       };
-    case shopActions.ADD_PRODUCT_FAILURE:
+    case productsActions.ADD_PRODUCT_FAILURE:
       return {
         ...state,
         addProductLoading: false,
         error: action.payload.error,
         productWasAdded: false
       };
-    case shopActions.INIT_PRODUCT_WAS_ADDED:
+    case productsActions.INIT_PRODUCT_WAS_ADDED:
       return {
         ...state,
         productWasAdded: false
       };
-    case shopActions.FETCH_CATEGORIES:
+    case productsActions.FETCH_CATEGORIES:
       return {
         ...state,
         error: null
       };
-    case shopActions.FETCH_CATEGORIES_SUCCESS:
+    case productsActions.FETCH_CATEGORIES_SUCCESS:
       return {
         ...state,
         error: null,
         categories: action.payload.categories
       };
-    case shopActions.FETCH_CATEGORIES_FAILURE:
+    case productsActions.FETCH_CATEGORIES_FAILURE:
       return {
         ...state,
         error: action.payload.error
       };
-    case shopActions.FETCH_PRODUCTS:
+    case productsActions.FETCH_PRODUCTS:
       return {
         ...state,
         error: null,
@@ -87,7 +87,7 @@ export function shopReducer(state: ShopState =initialState, action: shopActions.
         fetchProductsLoading: true,
         skip: action.payload.skip
       };
-    case shopActions.FETCH_PRODUCTS_SUCCESS:
+    case productsActions.FETCH_PRODUCTS_SUCCESS:
       return {
         ...state,
         error: null,
@@ -95,19 +95,19 @@ export function shopReducer(state: ShopState =initialState, action: shopActions.
         products: state.products.concat(action.payload.products),
         totalAmount: action.payload.totalAmount[0].count
       };
-    case shopActions.FETCH_PRODUCTS_FAILURE:
+    case productsActions.FETCH_PRODUCTS_FAILURE:
       return {
         ...state,
         fetchProductsLoading: false,
         error: action.payload.error
       };
-    case shopActions.FETCH_PRODUCTS_INIT:
+    case productsActions.FETCH_PRODUCTS_INIT:
       return {
         ...state,
         error: null,
         fetchProductsInitLoading: true
       };
-    case shopActions.FETCH_PRODUCTS_INIT_SUCCESS:
+    case productsActions.FETCH_PRODUCTS_INIT_SUCCESS:
       return {
         ...state,
         error: null,
@@ -115,39 +115,39 @@ export function shopReducer(state: ShopState =initialState, action: shopActions.
         products: [...action.payload.products],
         totalAmount: action.payload.totalAmount[0].count
       };
-    case shopActions.FETCH_PRODUCTS_INIT_FAILURE:
+    case productsActions.FETCH_PRODUCTS_INIT_FAILURE:
       return {
         ...state,
         error: action.payload.error,
         fetchProductsInitLoading: false
       };
-
-    case shopActions.FETCH_PRODUCT_DETAILS:
+    case productsActions.FETCH_PRODUCT_DETAILS:
       return {
         ...state,
         error: null,
-        fetchProductsInitLoading: false,
         productDetailsLoading: true
       };
-    case shopActions.FETCH_PRODUCT_DETAILS_SUCCESS:
+    case productsActions.FETCH_PRODUCT_DETAILS_SUCCESS:
       return {
         ...state,
         error: null,
         productDetailsLoading: false,
         product: action.payload.product
       };
-    case shopActions.FETCH_PRODUCT_DETAILS_FAILURE:
+    case productsActions.FETCH_PRODUCT_DETAILS_FAILURE:
       return {
         ...state,
         productDetailsLoading: false,
         error: action.payload.error
       };
-    case shopActions.SET_TARGET_ID:
+    case productsActions.SET_TARGET_ID:
       return {
         ...state,
         targetId: action.payload
       };
+
     default:
       return state;
   }
 }
+
