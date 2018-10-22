@@ -48,6 +48,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.pageScrollService.start(pageScrollInstance);
       }, 0);
     } else {
+      this.skip = 0;
       let queryString = `?skip=${this.skip}&limit=${this.limit}`;
       this.store.dispatch(new productsActions.FetchProductsInit(queryString));
     }
@@ -64,6 +65,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(){}
+  ngOnDestroy(){
+
+  }
 
 }

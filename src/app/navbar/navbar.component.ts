@@ -7,6 +7,10 @@ import { LoginModalComponent } from '../auth/login-modal/login-modal.component';
 import { StorageService } from '../storage.service';
 import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
+import {select, Store} from "@ngrx/store";
+import * as fromRoot from "../shop/store/reducers/reducer.factory";
+import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+
 
 export interface CurrentUser {
   email: string;
@@ -27,17 +31,24 @@ export class NavbarComponent implements OnInit, OnDestroy {
   currentUser: CurrentUser;
   username: string;
   imageUrl: string = '';
+  quantity: number;
   defaultImageUrl: string = 'src/assets/default-picture_0_0.png';
   private subscription: Subscription;
   constructor(private modalService: BsModalService,
               private router: Router,
-              private storageService: StorageService) {}
+              private storageService: StorageService,
+              private store: Store<fromRoot.AppState>) {}
 
   ngOnInit() {
     this.getCurrentUser();
     this.subscription = this.storageService.watchStorage().subscribe(() => {
         this.getCurrentUser();
     });
+    this.store.pipe(select(fromRoot.getCart)).pipe(
+      untilComponentDestroyed(this)
+    ).subscribe((state) => {
+      this.quantity = state.quantity;
+    })
   }
   getCurrentUser() {
     this.currentUser = JSON.parse(localStorage.getItem('user'));

@@ -24,6 +24,25 @@ nav {
         justify-content: center;
         align-items: center;
       }
+      &.cart-wrapper {
+        position: relative;
+        .cart-count {
+          position: absolute;
+          width: 15px;
+          height: 15px;
+          border-radius: 50%;
+          background-color: #e23f50;
+          top: 1px;
+          right: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          span {
+            color: white;
+            font-size: 10px;
+          }
+        }
+      }
       .user-avatar {
         width: 40px;
         height: 40px;

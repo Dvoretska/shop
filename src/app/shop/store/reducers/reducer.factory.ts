@@ -1,6 +1,6 @@
 import * as fromCart from './cart.reducer';
 import * as fromProducts from './products.reducer';
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { ActionReducerMap } from '@ngrx/store';
 
 
 export interface AppState {

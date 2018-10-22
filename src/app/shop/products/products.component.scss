@@ -36,7 +36,7 @@
     .content {
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
       grid-template-rows: auto [last-line];
       font-family: 'goudy_old_stylebold_italic';
     }

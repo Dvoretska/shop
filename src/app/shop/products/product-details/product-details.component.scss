@@ -74,7 +74,22 @@
         animation: zoom 1s linear infinite;
       }
     }
-
+    .cart {
+      width: 170px;
+      height: 38px;
+    }
+    .loading-process {
+      background: rgba(0,0,0,.7);
+    }
+    .spinner {
+      position: absolute;
+      & div {
+        background: #ccc;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+    }
   }
 }
 
@@ -97,15 +112,12 @@
     .image-wrapper, .content-wrapper, .sidebar-wrapper {
       width: 100%;
     }
+    .content-wrapper {
+      margin: 15px 0;
+    }
   }
 
 }
 
 @media screen and (max-width: 450px) {
-  ngx-gallery /deep/ ngx-gallery-thumbnails {
-    display: none;
-  }
-  ngx-gallery {
-    max-height:400px;
-  }
 }

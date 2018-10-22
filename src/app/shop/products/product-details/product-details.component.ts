@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {Observable} from "rxjs";
 import {Store, select} from "@ngrx/store";
 import * as fromRoot from "../../store/reducers/reducer.factory";
 import {ActivatedRoute, Router} from "@angular/router";
 import * as productsActions from "../../store/actions/products.actions";
-import * as cartsActions from "../../store/actions/cart.actions";
+import * as cartActions from "../../store/actions/cart.actions";
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation,NgxGalleryImageSize } from 'ngx-gallery';
 import { environment } from 'src/environments/environment';
 import {CartModalComponent} from "../../cart/cart-modal/cart-modal.component";
@@ -12,7 +11,7 @@ import {BsModalService} from "ngx-bootstrap/modal";
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import {ToastrService} from "ngx-toastr";
-import { skip } from 'rxjs/operators';
+import {Product} from '../../product.model';
 
 @Component({
   selector: 'app-product-details',
@@ -20,19 +19,24 @@ import { skip } from 'rxjs/operators';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {;
-  product;
+  product: Product;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[] = [];
   sizes = ['XS', 'S', 'M', 'L', 'XL'];
-  selectedSize;
+  selectedSize: string;
   modalRef: BsModalRef;
-  loading: boolean;
-  products;
-  quantity: number = 0;
-  isAddedToCart;
-  initial: Boolean;
+  productDetailsLoading: boolean;
+  products: Product[];
+  addToCartLoading: boolean;
+  totalQuantity: number = 1;
+  isAddedToCart: boolean;
+  arr =[];
 
-  constructor(private toastr: ToastrService, private router: Router, private modalService: BsModalService, private route: ActivatedRoute, private store: Store<fromRoot.ShopState>) { }
+  constructor(private toastr: ToastrService,
+              private router: Router,
+              private modalService: BsModalService,
+              private route: ActivatedRoute,
+              private store: Store<fromRoot.AppState>) { }
 
   ngOnInit() {
     this.galleryOptions = [
@@ -55,7 +59,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
       {
         breakpoint: 450,
         preview: false,
-        imageSize: NgxGalleryImageSize.Contain
+        height: '300px',
+        imagePercent: 100,
+        thumbnails: false,
+        imageSize: NgxGalleryImageSize.Cover
       }
     ];
     this.route.params
@@ -67,10 +74,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
     ).subscribe((state) => {
       this.products = state.products;
       this.product = state.product;
-      this.loading = state.productDetailsLoading;
+      this.productDetailsLoading = state.productDetailsLoading;
       if(this.product) {
         this.galleryImages = [];
-        for(let image of this.product.images) {
+        for(let image of this.product['images']) {
           let obj = {};
           obj['small'] = `${environment.API_URL}/${image}`;
           obj['medium'] = `${environment.API_URL}/${image}`;
@@ -83,39 +90,32 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.isAddedToCart = state.isAddedToCart;
-       if(this.isAddedToCart) {
-          const initialState = {currentProduct: this.product, size: this.selectedSize, quantity: this.quantity};
-          this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
-       } else if(this.isAddedToCart === false) {
-          this.toastr.error('Something went wrong');
-       }
-     }
-    )
+      this.totalQuantity = state.quantity;
+      this.addToCartLoading = state.addToCartLoading;
+      if(this.isAddedToCart) {
+        const initialState = {currentProduct: this.product, size: this.selectedSize, quantity: this.totalQuantity};
+        this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
+      } else if(this.isAddedToCart === false) {
+        this.toastr.error('Something went wrong. Try again later.');
+      }
+    })
   }
 
   openModalCart() {
     if(this.selectedSize) {
-      this.quantity++;
-      this.store.dispatch(new cartsActions.AddProductToCart({
-        product_id: this.product.id,
-        size: this.selectedSize,
-        quantity: this.quantity
-      }));
-
-      // this.getState$ = this.store.pipe(select('shop'));
-      // this.getState$.pipe(
-      //   untilComponentDestroyed(this)
-      // ).subscribe((state) => {
-      //   console.log('fired')
-      //   this.isAddedToCart = state.isAddedToCart;
-      //   if(this.isAddedToCart) {
-      //     const initialState = {currentProduct: this.product, size: this.selectedSize, quantity: this.quantity};
-      //     this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
-      //   } else if(this.isAddedToCart === false) {
-      //     this.toastr.error('Something went wrong');
-      //   }
-      //
-      // });
+      let found = this.arr.find((item) => {
+        return item.size == this.selectedSize
+      });
+      if(found) {
+        found.quantity++;
+      } else {
+        this.arr.push({size: this.selectedSize, quantity: 1, product_id: this.product['id']})
+      }
+      this.totalQuantity++;
+      let result = this.arr.filter(obj => {
+        return obj.size === this.selectedSize
+      });
+      this.store.dispatch(new cartActions.AddProductToCart({cart: result[0], totalQuantity: this.totalQuantity}));
     } else {
       this.toastr.warning('Please Choose a Size!');
     }
@@ -126,6 +126,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
     this.router.navigate(['shop']);
   }
 
-  ngOnDestroy(){}
-
+  ngOnDestroy(){
+    this.store.dispatch(new cartActions.RemoveIsAddedToCart());
+  }
 }

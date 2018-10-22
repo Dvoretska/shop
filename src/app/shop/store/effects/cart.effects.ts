@@ -1,7 +1,7 @@
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import {Injectable} from "@angular/core";
 import * as CartActions from '../actions/cart.actions';
-import { switchMap, exhaustMap, map, catchError} from 'rxjs/operators';
+import { exhaustMap, map, catchError} from 'rxjs/operators';
 import { of } from 'rxjs';
 import {HttpClient} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
@@ -13,11 +13,11 @@ export class CartEffects {
   addProductToCart = this.actions$
   .pipe(
     ofType(CartActions.ADD_PRODUCT_TO_CART),
-    map((action: CartActions.AddProduct) => action.payload),
+    map((action: CartActions.AddProductToCart) => action.payload),
     exhaustMap((payload) =>
-      this.http.post(`${environment.API_URL}/add-to-cart`, payload).pipe(
-        map(()=>{
-          return new CartActions.AddProductToCartSuccess();
+      this.http.post(`${environment.API_URL}/add-to-cart`, payload.cart).pipe(
+        map((res)=>{
+          return new CartActions.AddProductToCartSuccess({quantity: res['success'].quantity});
         }),
         catchError(error => {
           return of(new CartActions.AddProductToCartFailure({error}));

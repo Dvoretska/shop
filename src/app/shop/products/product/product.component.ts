@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Router, ActivatedRoute } from "@angular/router";
-import * as fromRoot from "../../store/shop.reducer";
-import * as shopActions from "../../store/shop.actions";
-import {Store, select} from "@ngrx/store";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-product',
@@ -15,7 +12,7 @@ export class ProductComponent implements OnInit {
   imageUrl: string;
   defaultImageUrl: string = 'src/assets/no-img.jpg';
 
-  constructor(private router: Router, private store: Store<fromRoot.ShopState>) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     if(this.product && this.product.images) {

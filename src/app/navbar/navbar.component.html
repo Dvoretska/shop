@@ -49,8 +49,11 @@
         </a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link cart-wrapper" href="#">
         	<div class="nav-icon-cart nav-icon"></div>
+          <div class="cart-count">
+            <span>{{quantity}}</span>
+          </div>
         </a>
       </li>
       <li class="nav-item" *ngIf="!isAuthorized()">

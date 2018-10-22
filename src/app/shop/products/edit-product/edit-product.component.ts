@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subscription} from 'rxjs';
+import { Observable} from 'rxjs';
 import * as productsActions from '../../store/actions/products.actions';
 import * as fromRoot from '../../store/reducers/reducer.factory';
 import * as fromProducts from '../../store/reducers/products.reducer';
@@ -120,7 +120,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
     if(this.discount) {
       savedData.append('discount', this.discount);
     }
-
     savedData.append('category_id', this.selectedCategory);
     if (this.files.length) {
       let a = this.files.splice(this.selectedImgKey, 1)
