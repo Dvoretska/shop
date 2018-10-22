@@ -103,19 +103,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
 
   openModalCart() {
     if(this.selectedSize) {
-      let found = this.arr.find((item) => {
-        return item.size == this.selectedSize
-      });
-      if(found) {
-        found.quantity++;
-      } else {
-        this.arr.push({size: this.selectedSize, quantity: 1, product_id: this.product['id']})
-      }
       this.totalQuantity++;
-      let result = this.arr.filter(obj => {
-        return obj.size === this.selectedSize
-      });
-      this.store.dispatch(new cartActions.AddProductToCart({cart: result[0], totalQuantity: this.totalQuantity}));
+      this.store.dispatch(new cartActions.AddProductToCart({
+        cart: {size: this.selectedSize, quantity: 1, product_id: this.product['id']},
+        totalQuantity: this.totalQuantity
+      }));
     } else {
       this.toastr.warning('Please Choose a Size!');
     }
