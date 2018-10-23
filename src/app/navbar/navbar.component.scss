@@ -28,8 +28,8 @@ nav {
         position: relative;
         .cart-count {
           position: absolute;
-          width: 15px;
-          height: 15px;
+          min-width: 18px;
+          height: 18px;
           border-radius: 50%;
           background-color: #e23f50;
           top: 1px;
@@ -40,6 +40,7 @@ nav {
           span {
             color: white;
             font-size: 10px;
+            padding-top: 3px;
           }
         }
       }

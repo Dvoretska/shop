@@ -11,20 +11,36 @@ import { environment } from 'src/environments/environment';
 export class CartEffects {
   @Effect()
   addProductToCart = this.actions$
-  .pipe(
-    ofType(CartActions.ADD_PRODUCT_TO_CART),
-    map((action: CartActions.AddProductToCart) => action.payload),
-    exhaustMap((payload) =>
-      this.http.post(`${environment.API_URL}/add-to-cart`, payload.cart).pipe(
-        map((res)=>{
-          return new CartActions.AddProductToCartSuccess({quantity: res['success'].quantity});
-        }),
-        catchError(error => {
-          return of(new CartActions.AddProductToCartFailure({error}));
-        })
+    .pipe(
+      ofType(CartActions.ADD_PRODUCT_TO_CART),
+      map((action: CartActions.AddProductToCart) => action.payload),
+      exhaustMap((payload) =>
+        this.http.post(`${environment.API_URL}/add-to-cart`, payload.cart).pipe(
+          map((res)=>{
+            return new CartActions.AddProductToCartSuccess({quantity: res['productQty'].quantity});
+          }),
+          catchError(error => {
+            return of(new CartActions.AddProductToCartFailure({error}));
+          })
+        )
       )
-    )
-  );
+    );
+
+  @Effect()
+  fetchCart = this.actions$
+    .pipe(
+      ofType(CartActions.FETCH_CART),
+      exhaustMap(() =>
+        this.http.get(`${environment.API_URL}/cart`).pipe(
+          map((res)=>{
+            return new CartActions.FetchCartSuccess(res);
+          }),
+          catchError(error => {
+            return of(new CartActions.FetchCartFailure({error}));
+          })
+        )
+      )
+    );
 
   constructor(private actions$: Actions, private http: HttpClient) {
 

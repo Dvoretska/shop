@@ -1,0 +1,17 @@
+<div class="card-item-container">
+  <img [src]="imagePath" alt="" class="cart-img">
+  <div class="content-box">
+    <div class="block">
+      <div class="title brand">{{cartItem.brand}}</div>
+      <div><span class="title">Category:</span> {{cartItem.category}}</div>
+      <div><span class="title">Size:</span> {{cartItem.size}}</div>
+    </div>
+    <div class="quantity block">{{cartItem.quantity}}</div>
+    <div class="block">
+      <div class="price-wrapper">
+        <span [ngStyle]="{textDecoration : cartItem.discount ? 'line-through' : none, color : cartItem.discount ? 'grey' : 'black'}">${{cartItem.price}}</span>
+        <span class="discount" *ngIf="cartItem.discount">${{cartItem.discount}}</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { AuthService } from '../auth.service';
 import { StorageService } from '../../storage.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-modal',
@@ -13,7 +14,8 @@ export class LoginModalComponent implements OnInit {
   errors = {};
   constructor(public modalRef: BsModalRef,
               private authService: AuthService,
-              private storageService: StorageService) { }
+              private storageService: StorageService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -25,6 +27,7 @@ export class LoginModalComponent implements OnInit {
       .subscribe((res)=>{
         this.storageService.setItem('user', JSON.stringify(res));
         this.modalRef.hide();
+        window.location.reload();
       },
       (err)=>{
         this.errors = err.error

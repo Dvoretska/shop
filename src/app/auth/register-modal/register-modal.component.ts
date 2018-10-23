@@ -32,6 +32,7 @@ export class RegisterModalComponent implements OnInit {
       .subscribe((res)=>{
         this.storageService.setItem('user', JSON.stringify(res));
         this.modalRef.hide();
+        window.location.reload();
       },
       (err)=>{
         this.errors = err.error;

@@ -53,6 +53,7 @@ import { ProductDetailsComponent } from './shop/products/product-details/product
 import { NgxGalleryModule } from 'ngx-gallery';
 import { CartComponent } from './shop/cart/cart.component';
 import { CartModalComponent } from './shop/cart/cart-modal/cart-modal.component';
+import { CartItemComponent } from './shop/cart/cart-item/cart-item.component';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { CartModalComponent } from './shop/cart/cart-modal/cart-modal.component'
     ImagePreviewDirective,
     ProductDetailsComponent,
     CartComponent,
-    CartModalComponent
+    CartModalComponent,
+    CartItemComponent
   ],
   imports: [
     BrowserModule,

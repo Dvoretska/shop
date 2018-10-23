@@ -30,7 +30,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
   addToCartLoading: boolean;
   totalQuantity: number = 1;
   isAddedToCart: boolean;
-  arr =[];
+  totalNumberOfProducts: number;
+  cart;
+  productQuantity;
+  gru;
 
   constructor(private toastr: ToastrService,
               private router: Router,
@@ -78,11 +81,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
       if(this.product) {
         this.galleryImages = [];
         for(let image of this.product['images']) {
-          let obj = {};
-          obj['small'] = `${environment.API_URL}/${image}`;
-          obj['medium'] = `${environment.API_URL}/${image}`;
-          obj['big'] = `${environment.API_URL}/${image}`;
-          this.galleryImages.push(obj);
+          let settings = {};
+          settings['small'] = `${environment.API_URL}/${image}`;
+          settings['medium'] = `${environment.API_URL}/${image}`;
+          settings['big'] = `${environment.API_URL}/${image}`;
+          this.galleryImages.push(settings);
         }
       }
     });
@@ -90,23 +93,24 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.isAddedToCart = state.isAddedToCart;
-      this.totalQuantity = state.quantity;
+      this.totalNumberOfProducts = state.totalNumberOfProducts;
       this.addToCartLoading = state.addToCartLoading;
+      this.productQuantity = state.productQty;
       if(this.isAddedToCart) {
-        const initialState = {currentProduct: this.product, size: this.selectedSize, quantity: this.totalQuantity};
+        const initialState = {currentProduct: this.product, size: this.selectedSize, quantity: this.productQuantity};
         this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
       } else if(this.isAddedToCart === false) {
         this.toastr.error('Something went wrong. Try again later.');
       }
-    })
+    });
   }
 
   openModalCart() {
     if(this.selectedSize) {
-      this.totalQuantity++;
+      this.totalNumberOfProducts++;
       this.store.dispatch(new cartActions.AddProductToCart({
         cart: {size: this.selectedSize, quantity: 1, product_id: this.product['id']},
-        totalQuantity: this.totalQuantity
+        totalNumber: this.totalNumberOfProducts
       }));
     } else {
       this.toastr.warning('Please Choose a Size!');

@@ -10,7 +10,8 @@ import { Subscription } from 'rxjs';
 import {select, Store} from "@ngrx/store";
 import * as fromRoot from "../shop/store/reducers/reducer.factory";
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
-
+import * as cartActions from "../shop/store/actions/cart.actions";
+import { skip} from 'rxjs/operators';
 
 export interface CurrentUser {
   email: string;
@@ -32,6 +33,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   username: string;
   imageUrl: string = '';
   quantity: number;
+  getCartLoading: boolean;
+  totalNumberOfProducts: number;
   defaultImageUrl: string = 'src/assets/default-picture_0_0.png';
   private subscription: Subscription;
   constructor(private modalService: BsModalService,
@@ -44,10 +47,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.subscription = this.storageService.watchStorage().subscribe(() => {
         this.getCurrentUser();
     });
-    this.store.pipe(select(fromRoot.getCart)).pipe(
+    this.store.dispatch(new cartActions.FetchCart());
+    this.store.pipe(select(fromRoot.getCart), skip(1)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
-      this.quantity = state.quantity;
+      this.totalNumberOfProducts = state.totalNumberOfProducts;
+      this.getCartLoading = state.getCartLoading
     })
   }
   getCurrentUser() {
@@ -72,6 +77,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
   onLogout() {
     localStorage.removeItem('user');
+    this.store.dispatch(new cartActions.ClearCart());
     this.router.navigate(['/']);
   }
 
