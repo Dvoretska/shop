@@ -43,7 +43,7 @@ export class FetchCart implements Action {
 export class FetchCartSuccess implements Action {
   readonly type = FETCH_CART_SUCCESS;
 
-  constructor(public payload: {cart: any[], totalAmount: number, totalNumberOfProducts: number}) {}
+  constructor(public payload: any) {}
 }
 
 export class FetchCartFailure implements Action {

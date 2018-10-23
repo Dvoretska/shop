@@ -11,12 +11,11 @@
     <div class="brand">{{product.brand}}</div>
     <div class="material"><span class="title">Category:</span> {{product.category_id.category}}</div>
     <div class="description">
-      <span class="title">Description:&emsp</span>
-      <span [innerHTML]="product.description"></span>
+      <span class="title">Description: </span><span [innerHTML]="product.description"></span>
     </div>
     <div class="material"><span class="title">Material:</span> {{product.material}}</div>
     <div class="material">
-      <span class="title">Sizes:</span>
+      <span class="title size">Sizes:</span>
       <ng-select [items]="sizes"
                  [(ngModel)]="selectedSize" placeholder="Choose a size" class="custom">
       </ng-select>

@@ -30,6 +30,11 @@
         text-align: right;
         width: 25%;
       }
+      .price-wrapper {
+        .discount {
+          margin-left: 5px;
+        }
+      }
     }
   }
 }
