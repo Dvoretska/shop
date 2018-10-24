@@ -90,6 +90,10 @@ body {
   color: black;
 }
 
+button[disabled] {
+  cursor: not-allowed;
+}
+
 /* Loading animations */
 
 .lds-ripple {

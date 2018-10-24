@@ -84,7 +84,7 @@ export class ProductsEffects {
       switchMap((payload) =>
         this.http.get(`${environment.API_URL}/product/${payload}`).pipe(
           map((res)=>{
-            return new ProductsActions.FetchProductDetailsSuccess({product: res['product']});
+            return new ProductsActions.FetchProductDetailsSuccess({product: res});
           }),
           catchError(error => {
             return of(new ProductsActions.FetchProductDetailsFailure({error}));

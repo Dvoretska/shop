@@ -1,5 +1,13 @@
 <div class="cart-container">
+  <header class="cart-header">
+    <div class="amount">{{totalNumberOfProducts}} PRODUCTS</div>
+    <div class="text qty">Quantity</div>
+    <div class="text price">Price</div>
+  </header>
   <app-cart-item *ngFor="let cartItem of cart" [cartItem]="cartItem"></app-cart-item>
-  <h3>Total amount: ${{totalAmount}}</h3>
+  <h5>Total amount: <strong>${{totalAmount}}</strong></h5>
+  <div class="button-wrapper">
+    <button class="my-button">ORDER</button>
+  </div>
 </div>
 

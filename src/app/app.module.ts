@@ -45,6 +45,7 @@ import { ProductsComponent } from './shop/products/products.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FileUploadDirective } from './shared/file-upload.directive';
 import { ImagePreviewDirective } from './shared/img-preview.directive';
+import { HoverDirective } from './shared/hover.directive';
 import { EditorOptionsService } from './shared/editor-options.service';
 import {EffectsModule} from "@ngrx/effects";
 import {CartEffects} from "./shop/store/effects/cart.effects";
@@ -83,7 +84,8 @@ import { CartItemComponent } from './shop/cart/cart-item/cart-item.component';
     ProductDetailsComponent,
     CartComponent,
     CartModalComponent,
-    CartItemComponent
+    CartItemComponent,
+    HoverDirective
   ],
   imports: [
     BrowserModule,

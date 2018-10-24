@@ -1,5 +1,30 @@
 .cart-container {
-  padding: 60px 0;
+  padding: 60px 0 30px;
   width: 70%;
   margin: 0 auto;
+  .cart-header {
+    display: flex;
+    border-bottom: 3px solid black;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    .amount {
+      width: 50%;
+      text-align: left;
+    }
+    .qty {
+      width: 25%;
+      text-align: center;
+      margin-left: 100px;
+    }
+    .price {
+      width: 25%;
+      text-align: right;
+    }
+  }
+  h5 {
+    margin-top: 15px;
+  }
+  .button-wrapper {
+    text-align: center;
+  }
 }

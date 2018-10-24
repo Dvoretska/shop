@@ -13,6 +13,7 @@ import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 export class CartComponent implements OnInit, OnDestroy {
   cart: any[];
   totalAmount: number;
+  totalNumberOfProducts: number;
 
   constructor(private store: Store<fromRoot.AppState>) { }
 
@@ -23,6 +24,7 @@ export class CartComponent implements OnInit, OnDestroy {
     ).subscribe((state) => {
       this.cart = state.cart;
       this.totalAmount = state.totalAmount;
+      this.totalNumberOfProducts = state.totalNumberOfProducts
     })
   }
 
