@@ -17,7 +17,7 @@ export class CartEffects {
       exhaustMap((payload) =>
         this.http.post(`${environment.API_URL}/add-to-cart`, payload.cart).pipe(
           map((res)=>{
-            return new CartActions.AddProductToCartSuccess({quantity: res['productQty'].quantity, amount: res['amount']});
+            return new CartActions.AddProductToCartSuccess({quantity: res['productQty'].quantity, amount: res['amount'], product: res['product']});
           }),
           catchError(error => {
             return of(new CartActions.AddProductToCartFailure({error}));

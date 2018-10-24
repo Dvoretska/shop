@@ -31,7 +31,7 @@ export class CartComponent implements OnInit, OnDestroy {
         // this.amount = state.amount;
 
 
-      console.log(this.cart)
+      console.log(state)
     })
   }
 

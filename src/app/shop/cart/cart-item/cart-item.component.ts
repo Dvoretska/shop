@@ -31,6 +31,6 @@ export class CartItemComponent implements OnInit {
       cart: {size: this.cartItem['size'], quantity: 1, product_id: this.cartItem['product_id']},
       totalNumber: this.totalNumberOfProducts
     }));
-    this.cartItem['amount'] = this.amount;
+    // this.cartItem['amount'] = this.amount;
   }
 }

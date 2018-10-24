@@ -38,16 +38,17 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
       };
     case cartActions.ADD_PRODUCT_TO_CART_SUCCESS:
       let changed = [...state.cart];
-      let result = changed.find(obj => {
-        return obj.product_id == action.payload.product.product_id.id && obj.size == action.payload.product.product_id.size
+      var newData = changed.map(el => {
+      if(el.product_id == action.payload.product.product_id.id && el.size == action.payload.product.size)
+         return Object.assign({}, el, {amount:action.payload.amount})
+      return el
       });
-      result.amount = action.payload.amount;
       return {
         ...state,
         addToCartLoading: false,
         isAddedToCart: true,
         error: null,
-        amount: action.payload.amount,
+        cart: newData,
         productQty: action.payload.quantity
       };
     case cartActions.ADD_PRODUCT_TO_CART_FAILURE:
