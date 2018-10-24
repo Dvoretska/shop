@@ -8,6 +8,9 @@ export const FETCH_CART = 'FETCH_CART';
 export const FETCH_CART_SUCCESS = 'FETCH_CART_SUCCESS';
 export const FETCH_CART_FAILURE = 'FETCH_CART_FAILURE';
 export const CLEAR_CART = 'CLEAR_CART';
+export const GET_TOTAL_AMOUNT = 'GET_TOTAL_AMOUNT';
+export const GET_TOTAL_AMOUNT_SUCCESS = 'GET_TOTAL_AMOUNT_SUCCESS';
+export const GET_TOTAL_AMOUNT_FAILURE = 'GET_TOTAL_AMOUNT_FAILURE';
 
 
 export class AddProductToCart implements Action {
@@ -19,7 +22,7 @@ export class AddProductToCart implements Action {
 export class AddProductToCartSuccess implements Action {
   readonly type = ADD_PRODUCT_TO_CART_SUCCESS;
 
-  constructor(public payload: {quantity: number}) {}
+  constructor(public payload: {quantity: number, amount: number, product: any}) {}
 }
 
 export class AddProductToCartFailure implements Action {
@@ -58,6 +61,23 @@ export class ClearCart implements Action {
   constructor() {}
 }
 
+export class GetTotalAmount implements Action {
+  readonly type = GET_TOTAL_AMOUNT;
+
+  constructor() {}
+}
+
+export class GetTotalAmountSuccess implements Action {
+  readonly type = GET_TOTAL_AMOUNT_SUCCESS;
+
+  constructor(public payload: {totalAmount: number}) {}
+}
+
+export class GetTotalAmountFailure implements Action {
+  readonly type = GET_TOTAL_AMOUNT_FAILURE;
+
+  constructor(public payload: {error: any}) {}
+}
 
 export type cartActions =
             AddProductToCart |
@@ -67,4 +87,7 @@ export type cartActions =
             FetchCart |
             FetchCartSuccess |
             FetchCartFailure |
-            ClearCart;
+            ClearCart |
+            GetTotalAmount |
+            GetTotalAmountSuccess |
+            GetTotalAmountFailure;

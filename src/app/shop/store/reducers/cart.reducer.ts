@@ -10,7 +10,8 @@ export class CartState {
     public cart: any[],
     public totalAmount: number,
     public totalNumberOfProducts: number,
-    public productQty: number
+    public productQty: number,
+    public amount: number
   ) { }
 }
 
@@ -19,9 +20,10 @@ export const initialState: CartState = {
   isAddedToCart: null,
   getCartLoading: false,
   cart: [],
-  totalAmount: 0,
+  totalAmount: null,
   totalNumberOfProducts: 0,
-  productQty: null
+  productQty: null,
+  amount: null
 };
 
 export function cartReducer(state: CartState =initialState, action: cartActions.cartActions) {
@@ -35,11 +37,17 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
         totalNumberOfProducts: action.payload.totalNumber
       };
     case cartActions.ADD_PRODUCT_TO_CART_SUCCESS:
+      let changed = [...state.cart];
+      let result = changed.find(obj => {
+        return obj.product_id == action.payload.product.product_id.id && obj.size == action.payload.product.product_id.size
+      });
+      result.amount = action.payload.amount;
       return {
         ...state,
         addToCartLoading: false,
         isAddedToCart: true,
         error: null,
+        amount: action.payload.amount,
         productQty: action.payload.quantity
       };
     case cartActions.ADD_PRODUCT_TO_CART_FAILURE:
@@ -57,7 +65,7 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
     case cartActions.FETCH_CART:
       return {
         ...state,
-        totalAmount: 0,
+        // totalAmount: 0,
         totalNumberOfProducts: 0,
         getCartLoading: true,
         error: null
@@ -67,7 +75,7 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
         ...state,
         getCartLoading: false,
         cart: [...action.payload.cart],
-        totalAmount: action.payload.totalAmount,
+        // totalAmount: action.payload.totalAmount,
         totalNumberOfProducts: action.payload.totalNumberOfProducts,
         error: null
       };
@@ -79,6 +87,23 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
       };
     case cartActions.CLEAR_CART:
       return initialState;
+    case cartActions.GET_TOTAL_AMOUNT:
+      return {
+        ...state,
+        error: null
+      };
+    case cartActions.GET_TOTAL_AMOUNT_SUCCESS:
+      return {
+        ...state,
+        totalAmount: action.payload.totalAmount,
+        error: null
+      };
+    case cartActions.GET_TOTAL_AMOUNT_FAILURE:
+      return {
+        ...state,
+        error: action.payload.error
+      };
+
     default:
       return state;
   }

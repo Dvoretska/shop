@@ -33,7 +33,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
   totalNumberOfProducts: number;
   cart;
   productQuantity;
-  gru;
 
   constructor(private toastr: ToastrService,
               private router: Router,

@@ -4,7 +4,10 @@
     <div class="text qty">Quantity</div>
     <div class="text price">Price</div>
   </header>
-  <app-cart-item *ngFor="let cartItem of cart" [cartItem]="cartItem"></app-cart-item>
+  <app-cart-item *ngFor="let cartItem of cart"
+                 [cartItem]="cartItem"
+                 [totalNumberOfProducts]="totalNumberOfProducts"
+                  ></app-cart-item>
   <h5>Total amount: <strong>${{totalAmount}}</strong></h5>
   <div class="button-wrapper">
     <button class="my-button">ORDER</button>
