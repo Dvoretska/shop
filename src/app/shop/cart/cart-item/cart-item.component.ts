@@ -27,4 +27,16 @@ export class CartItemComponent implements OnInit {
       totalNumber: this.totalNumberOfProducts
     }));
   }
+
+  deleteProductFromCart() {
+    this.store.dispatch(new cartActions.DeleteProductFromCart({
+      product_id: this.cartItem['product_id'], size: this.cartItem['size']
+    }));
+  }
+
+  decreaseProductsQuantity() {
+    this.store.dispatch(new cartActions.DecreaseQuantityOfProductInCart({
+      product_id: this.cartItem['product_id'], size: this.cartItem['size']
+    }));
+  }
 }

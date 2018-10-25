@@ -31,7 +31,6 @@ export class CartComponent implements OnInit, OnDestroy {
       this.addToCartLoading = state.addToCartLoading;
       this.isAddedToCart = state.isAddedToCart;
       this.getCartLoading = state.getCartLoading;
-      console.log(this.getCartLoading)
     })
   }
 

@@ -67,6 +67,9 @@
           height: 12px;
         }
       }
+      button[disabled] {
+        cursor: not-allowed;
+      }
       .active {
          visibility: visible;
          opacity: 1;

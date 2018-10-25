@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 import * as CartActions from '../actions/cart.actions';
 import { exhaustMap, map, catchError} from 'rxjs/operators';
 import { of } from 'rxjs';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 
 
@@ -51,6 +51,62 @@ export class CartEffects {
         )
       )
     );
+
+  @Effect()
+  deleteProductFromCart = this.actions$
+    .pipe(
+      ofType(CartActions.DELETE_PRODUCT_FROM_CART),
+      map((action: CartActions.DeleteProductFromCart) => action.payload),
+      exhaustMap((payload)=> {
+        let options = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+          }),
+          body: payload,
+        };
+        return this.http.delete(`${environment.API_URL}/delete-from-cart`, options).pipe(
+          map((res) => {
+            return new CartActions.DeleteProductFromCartSuccess({
+              product_id: res['product_id'],
+              size: res['size'],
+              totalNumberOfProducts: res['totalNumberOfProducts'],
+              totalAmount: res['totalAmount']
+            });
+          }),
+          catchError(error => {
+            return of(new CartActions.DeleteProductFromCartFailure({error}));
+          })
+        )
+      }
+    )
+  );
+
+  @Effect()
+  decreaseQuantityOfProductInCart = this.actions$
+    .pipe(
+      ofType(CartActions.DECREASE_QUANTITY_OF_PRODUCT_IN_CART),
+      map((action: CartActions.DecreaseQuantityOfProductInCart) => action.payload),
+      exhaustMap((payload)=> {
+        return this.http.post(`${environment.API_URL}/update-cart`, {
+          product_id: payload.product_id,
+          size: payload.size
+        }).pipe(
+          map((res) => {
+            return new CartActions.DecreaseQuantityOfProductInCartSuccess({
+              quantity: res['productQty'].quantity,
+              amount: res['amount'],
+              product: res['product'],
+              totalAmount: res['totalAmount'],
+              totalNumberOfProducts: res['totalNumberOfProducts']
+            });
+          }),
+          catchError(error => {
+            return of(new CartActions.DecreaseQuantityOfProductInCartFailure({error}));
+          })
+        )
+      }
+    )
+  );
 
   constructor(private actions$: Actions, private http: HttpClient) {}
 }
