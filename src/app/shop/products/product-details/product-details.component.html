@@ -27,7 +27,7 @@
       <span>{{product.price}}</span>
     </div>
     <div class="discount" *ngIf="product.discount"><span class="title">With Discount: $</span>{{product.discount}}</div>
-    <button class="my-button cta cart" (click)="openModalCart()" [ngClass]="{'loading-process': addToCartLoading}">
+    <button class="my-button cta cart" (click)="openModalCart()">
       <ng-container>
         <span>Add to the Cart</span>
         <svg fill="#000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"x="0px" y="0px"
@@ -42,10 +42,12 @@
         </g>
       </svg>
       </ng-container>
-      <div class="spinner" *ngIf="addToCartLoading">
-        <div class="bounce1"></div>
-        <div class="bounce2"></div>
-        <div class="bounce3"></div>
+      <div class="loading-process" *ngIf="addToCartLoading">
+        <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
       </div>
     </button>
     <button class="my-button cta heart">

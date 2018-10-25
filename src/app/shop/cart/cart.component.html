@@ -1,16 +1,34 @@
-<div class="cart-container">
-  <header class="cart-header">
-    <div class="amount">{{totalNumberOfProducts}} PRODUCTS</div>
-    <div class="text qty">Quantity</div>
-    <div class="text price">Price</div>
-  </header>
-  <app-cart-item *ngFor="let cartItem of cart"
-                 [cartItem]="cartItem"
-                 [totalNumberOfProducts]="totalNumberOfProducts"
-                  ></app-cart-item>
-  <h5>Total amount: <strong>${{totalAmount}}</strong></h5>
-  <div class="button-wrapper">
-    <button class="my-button">ORDER</button>
+<div class="lds-ripple loading-animation" *ngIf="getCartLoading"><div></div><div></div></div>
+<div class="cart-container" *ngIf="cart && !getCartLoading">
+  <div *ngIf="!cart.length" class="no-cart-box">
+    <img src="/assets/bag.svg" alt="" class="cart-icon">
+    <div class="title">Cart is empty.</div>
+    <div class="text">Looks like you have no items in your shopping cart.</div>
+    <div class="text">Click <a routerLink="/shop">here</a> to continue shopping.</div>
+  </div>
+  <ng-container *ngIf="cart.length">
+    <header class="cart-header">
+      <div class="amount">{{totalNumberOfProducts}} PRODUCTS</div>
+      <div class="text qty">Quantity</div>
+      <div class="text price">Price</div>
+    </header>
+    <app-cart-item *ngFor="let cartItem of cart"
+                   [cartItem]="cartItem"
+                   [totalNumberOfProducts]="totalNumberOfProducts"
+                   [isAddedToCart]="isAddedToCart"></app-cart-item>
+    <h5>Total amount: <strong>${{totalAmount}}</strong></h5>
+    <div class="button-wrapper">
+      <button class="my-button order-btn"><span>ORDER</span></button>
+    </div>
+  </ng-container>
+  <div class="loading-process" *ngIf="addToCartLoading">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
   </div>
 </div>
+
+
 

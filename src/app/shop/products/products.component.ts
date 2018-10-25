@@ -40,6 +40,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.initLoading = state.fetchProductsInitLoading;
         this.targetId = state.targetId;
         this.chunk = state.skip;
+        console.log(this.products)
     });
     this.skip = this.chunk;
     if (this.targetId) {
@@ -65,8 +66,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(){
-
-  }
+  ngOnDestroy(){}
 
 }

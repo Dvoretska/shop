@@ -17,7 +17,13 @@ export class CartEffects {
       exhaustMap((payload) =>
         this.http.post(`${environment.API_URL}/add-to-cart`, payload.cart).pipe(
           map((res)=>{
-            return new CartActions.AddProductToCartSuccess({quantity: res['productQty'].quantity, amount: res['amount'], product: res['product']});
+            return new CartActions.AddProductToCartSuccess({
+              quantity: res['productQty'].quantity,
+              amount: res['amount'],
+              product: res['product'],
+              totalAmount: res['totalAmount'],
+              totalNumberOfProducts: res['totalNumberOfProducts']
+            });
           }),
           catchError(error => {
             return of(new CartActions.AddProductToCartFailure({error}));
@@ -33,26 +39,14 @@ export class CartEffects {
       exhaustMap(() =>
         this.http.get(`${environment.API_URL}/cart`).pipe(
           map((res)=>{
-            return new CartActions.FetchCartSuccess(res);
+            return new CartActions.FetchCartSuccess({
+              cart: res['cart'],
+              totalNumberOfProducts: res['totalNumberOfProducts'],
+              totalAmount: res['totalAmount']
+            });
           }),
           catchError(error => {
             return of(new CartActions.FetchCartFailure({error}));
-          })
-        )
-      )
-    );
-
-  @Effect()
-  getTotalAmount = this.actions$
-    .pipe(
-      ofType(CartActions.GET_TOTAL_AMOUNT),
-      exhaustMap(() =>
-        this.http.get(`${environment.API_URL}/amount`).pipe(
-          map((res)=>{
-            return new CartActions.GetTotalAmountSuccess({totalAmount: res['totalAmount']});
-          }),
-          catchError(error => {
-            return of(new CartActions.GetTotalAmountFailure({error}));
           })
         )
       )

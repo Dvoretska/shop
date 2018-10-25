@@ -1,4 +1,3 @@
-<div #container>
 <h2 class="heading">SHOP THE TRUE DRAMATIC DRESSES</h2>
 <div class="wrapper">
   <div class="filters">
@@ -19,25 +18,20 @@
   </div>
   <div class="content-wrapper" >
     <div class="lds-ripple" *ngIf="initLoading"><div></div><div></div></div>
-    <!--<ngx-masonry class="masonry-container" [useImagesLoaded]="false" *ngIf="!initLoading" >-->
-      <!--<ngxMasonryItem *ngFor="let product of products" class="masonry-item" [attr.id]="'item' + product.id">-->
-        <!--<app-product [product]="product"></app-product>-->
-      <!--</ngxMasonryItem>-->
-    <!--</ngx-masonry>-->
-    <div class="content">
-      <app-product *ngFor="let product of products" [product]="product" [attr.id]="'item' + product.id"></app-product>
-    </div>
-
-    <div class="button-wrapper" *ngIf="products.length >= 3 && products.length < totalAmount && !initLoading">
-      <button (click)="loadMore()" class="my-button load">
-        <span *ngIf="!loading">Load more</span>
-        <div class="spinner" *ngIf="loading">
-          <div class="bounce1"></div>
-          <div class="bounce2"></div>
-          <div class="bounce3"></div>
-        </div>
-      </button>
-    </div>
+    <ng-container *ngIf="products">
+      <div class="content">
+        <app-product *ngFor="let product of products" [product]="product" [attr.id]="'item' + product.id"></app-product>
+      </div>
+      <div class="button-wrapper" *ngIf="products.length >= 3 && products.length < totalAmount && (!initLoading || !loading)">
+        <button (click)="loadMore()" class="my-button load">
+          <span *ngIf="!loading">Load more</span>
+          <div class="spinner" *ngIf="loading">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
+        </button>
+      </div>
+    </ng-container>
   </div>
-</div>
 </div>

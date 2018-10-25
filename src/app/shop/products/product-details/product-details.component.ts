@@ -95,7 +95,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
       this.totalNumberOfProducts = state.totalNumberOfProducts;
       this.addToCartLoading = state.addToCartLoading;
       this.productQuantity = state.productQty;
-      if(this.isAddedToCart) {
+      if(this.isAddedToCart && this.product) {
         const initialState = {currentProduct: this.product, size: this.selectedSize, quantity: this.productQuantity};
         this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
       } else if(this.isAddedToCart === false) {
@@ -106,13 +106,12 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
 
   openModalCart() {
     if(this.selectedSize) {
-      this.totalNumberOfProducts++;
       this.store.dispatch(new cartActions.AddProductToCart({
         cart: {size: this.selectedSize, quantity: 1, product_id: this.product['id']},
         totalNumber: this.totalNumberOfProducts
       }));
     } else {
-      this.toastr.warning('Please Choose a Size!');
+      this.toastr.error('Please Choose a Size!');
     }
   }
 

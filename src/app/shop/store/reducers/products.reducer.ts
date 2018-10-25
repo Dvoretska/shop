@@ -105,6 +105,7 @@ export function productsReducer(state: ProductsState =initialState, action: prod
       return {
         ...state,
         error: null,
+        products: null,
         fetchProductsInitLoading: true
       };
     case productsActions.FETCH_PRODUCTS_INIT_SUCCESS:

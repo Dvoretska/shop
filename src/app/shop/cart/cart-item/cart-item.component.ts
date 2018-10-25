@@ -12,7 +12,7 @@ import * as fromRoot from "../../store/reducers/reducer.factory";
 export class CartItemComponent implements OnInit {
   @Input() cartItem;
   @Input() totalNumberOfProducts;
-  @Input() amount;
+  @Input() isAddedToCart;
   imagePath: string;
 
   constructor(private store: Store<fromRoot.AppState>) { }
@@ -22,15 +22,9 @@ export class CartItemComponent implements OnInit {
   }
 
   increaseProductsQuantity() {
-    // console.log(this.amount)
-
-    this.cartItem['quantity']++;
-    this.totalNumberOfProducts++;
-    this.store.dispatch(new cartActions.GetTotalAmount());
     this.store.dispatch(new cartActions.AddProductToCart({
       cart: {size: this.cartItem['size'], quantity: 1, product_id: this.cartItem['product_id']},
       totalNumber: this.totalNumberOfProducts
     }));
-    // this.cartItem['amount'] = this.amount;
   }
 }

@@ -38,10 +38,10 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
       };
     case cartActions.ADD_PRODUCT_TO_CART_SUCCESS:
       let changed = [...state.cart];
-      var newData = changed.map(el => {
+      let newData = changed.map(el => {
       if(el.product_id == action.payload.product.product_id.id && el.size == action.payload.product.size)
-         return Object.assign({}, el, {amount:action.payload.amount})
-      return el
+         return Object.assign({}, el, {amount:action.payload.amount}, {quantity: action.payload.quantity});
+      return el;
       });
       return {
         ...state,
@@ -49,13 +49,16 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
         isAddedToCart: true,
         error: null,
         cart: newData,
-        productQty: action.payload.quantity
+        totalAmount: action.payload.totalAmount,
+        productQty: action.payload.quantity,
+        totalNumberOfProducts: action.payload.totalNumberOfProducts
       };
     case cartActions.ADD_PRODUCT_TO_CART_FAILURE:
       return {
         ...state,
         addToCartLoading: false,
         isAddedToCart: false,
+        totalAmount: null,
         error: action.payload.error
       };
     case cartActions.REMOVE_IS_ADDED_TO_CART:
@@ -66,7 +69,6 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
     case cartActions.FETCH_CART:
       return {
         ...state,
-        // totalAmount: 0,
         totalNumberOfProducts: 0,
         getCartLoading: true,
         error: null
@@ -76,8 +78,8 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
         ...state,
         getCartLoading: false,
         cart: [...action.payload.cart],
-        // totalAmount: action.payload.totalAmount,
         totalNumberOfProducts: action.payload.totalNumberOfProducts,
+        totalAmount: action.payload.totalAmount,
         error: null
       };
     case cartActions.FETCH_CART_FAILURE:
@@ -88,22 +90,6 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
       };
     case cartActions.CLEAR_CART:
       return initialState;
-    case cartActions.GET_TOTAL_AMOUNT:
-      return {
-        ...state,
-        error: null
-      };
-    case cartActions.GET_TOTAL_AMOUNT_SUCCESS:
-      return {
-        ...state,
-        totalAmount: action.payload.totalAmount,
-        error: null
-      };
-    case cartActions.GET_TOTAL_AMOUNT_FAILURE:
-      return {
-        ...state,
-        error: action.payload.error
-      };
 
     default:
       return state;
