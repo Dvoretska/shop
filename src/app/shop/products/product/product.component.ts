@@ -19,7 +19,6 @@ export class ProductComponent implements OnInit {
   constructor(private router: Router, private store: Store<fromRoot.AppState>) { }
 
   ngOnInit() {
-    console.log(this.product)
     if(this.product && this.product.images) {
       this.imageUrl = `${environment.API_URL}/${this.product.images[0]}`;
     } else {
