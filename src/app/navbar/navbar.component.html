@@ -48,10 +48,10 @@
         	<div class="nav-icon-heart nav-icon"></div>
         </a>
       </li>
-       <li class="nav-item" *ngIf="isAuthorized()">
+       <li class="nav-item" *ngIf="isAuthorized()" #cartElement>
         <a class="nav-link cart-wrapper" routerLink="/shop/cart">
         	<div class="nav-icon-cart nav-icon"></div>
-          <div class="cart-count" *ngIf="!getCartLoading">
+          <div class="cart-count" *ngIf="totalNumberOfProducts">
             <span>{{totalNumberOfProducts}}</span>
           </div>
         </a>

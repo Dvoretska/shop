@@ -98,8 +98,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
       if(this.isAddedToCart && this.product) {
         const initialState = {currentProduct: this.product, size: this.selectedSize, quantity: this.productQuantity};
         this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
-      } else if(this.isAddedToCart === false) {
-        this.toastr.error('Something went wrong. Try again later.');
       }
     });
   }

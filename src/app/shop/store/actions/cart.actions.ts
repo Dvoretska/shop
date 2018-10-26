@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import {HttpErrorResponse} from "@angular/common/http";
 
 export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
 export const ADD_PRODUCT_TO_CART_SUCCESS = 'ADD_PRODUCT_TO_CART_SUCCESS';
@@ -14,6 +15,10 @@ export const DELETE_PRODUCT_FROM_CART_FAILURE = 'DELETE_PRODUCT_FROM_CART_FAILUR
 export const DECREASE_QUANTITY_OF_PRODUCT_IN_CART = 'DECREASE_QUANTITY_OF_PRODUCT_IN_CART';
 export const DECREASE_QUANTITY_OF_PRODUCT_IN_CART_SUCCESS = 'DECREASE_QUANTITY_OF_PRODUCT_IN_CART_SUCCESS';
 export const DECREASE_QUANTITY_OF_PRODUCT_IN_CART_FAILURE = 'DECREASE_QUANTITY_OF_PRODUCT_IN_CART_FAILURE';
+export const EFFECT_ERROR = 'EFFECT_ERROR';
+export const GET_TOTAL_NUMBER_OF_PRODUCTS = 'GET_TOTAL_NUMBER_OF_PRODUCTS';
+export const GET_TOTAL_NUMBER_OF_PRODUCTS_SUCCESS = 'GET_TOTAL_NUMBER_OF_PRODUCTS_SUCCESS';
+
 
 export class AddProductToCart implements Action {
   readonly type = ADD_PRODUCT_TO_CART;
@@ -30,7 +35,7 @@ export class AddProductToCartSuccess implements Action {
 export class AddProductToCartFailure implements Action {
   readonly type = ADD_PRODUCT_TO_CART_FAILURE;
 
-  constructor(public payload: {error: any}) {}
+  constructor() {}
 }
 
 export class RemoveIsAddedToCart implements Action {
@@ -54,7 +59,7 @@ export class FetchCartSuccess implements Action {
 export class FetchCartFailure implements Action {
   readonly type = FETCH_CART_FAILURE;
 
-  constructor(public payload: {error: any}) {}
+  constructor() {}
 }
 
 export class ClearCart implements Action {
@@ -78,7 +83,7 @@ export class DeleteProductFromCartSuccess implements Action {
 export class DeleteProductFromCartFailure implements Action {
   readonly type = DELETE_PRODUCT_FROM_CART_FAILURE;
 
-  constructor(public payload: {error: any}) {}
+  constructor() {}
 }
 
 export class DecreaseQuantityOfProductInCart implements Action {
@@ -96,8 +101,27 @@ export class DecreaseQuantityOfProductInCartSuccess implements Action {
 export class DecreaseQuantityOfProductInCartFailure implements Action {
   readonly type = DECREASE_QUANTITY_OF_PRODUCT_IN_CART_FAILURE;
 
-  constructor(public payload: {error: any}) {}
+  constructor() {}
 }
+
+export class LoadError implements Action {
+  readonly type = EFFECT_ERROR;
+
+  constructor(public payload: HttpErrorResponse) {}
+}
+
+export class GetTotalNumberOfProducts implements Action {
+  readonly type = GET_TOTAL_NUMBER_OF_PRODUCTS;
+
+  constructor() {}
+}
+
+export class GetTotalNumberOfProductsSuccess implements Action {
+  readonly type = GET_TOTAL_NUMBER_OF_PRODUCTS_SUCCESS;
+
+  constructor(public payload: {totalNumberOfProducts: number}) {}
+}
+
 
 
 export type cartActions =
@@ -114,4 +138,7 @@ export type cartActions =
             DeleteProductFromCartFailure |
             DecreaseQuantityOfProductInCart |
             DecreaseQuantityOfProductInCartSuccess |
-            DecreaseQuantityOfProductInCartFailure;
+            DecreaseQuantityOfProductInCartFailure |
+            LoadError |
+            GetTotalNumberOfProducts |
+            GetTotalNumberOfProductsSuccess;

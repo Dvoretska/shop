@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {select, Store} from "@ngrx/store";
 import * as fromRoot from "../store/reducers/reducer.factory";
-import {skip} from "rxjs/operators";
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import * as cartActions from "../store/actions/cart.actions";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-cart',
@@ -17,8 +17,10 @@ export class CartComponent implements OnInit, OnDestroy {
   isAddedToCart: boolean;
   addToCartLoading: boolean;
   getCartLoading: boolean;
+  decreaseCartLoading: boolean;
+  fetchCartError;
 
-  constructor(private store: Store<fromRoot.AppState>) { }
+  constructor(private store: Store<fromRoot.AppState>, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.store.dispatch(new cartActions.FetchCart());
@@ -31,9 +33,13 @@ export class CartComponent implements OnInit, OnDestroy {
       this.addToCartLoading = state.addToCartLoading;
       this.isAddedToCart = state.isAddedToCart;
       this.getCartLoading = state.getCartLoading;
+      this.decreaseCartLoading = state.decreaseCartLoading;
+      this.fetchCartError = state.fetchCartError;
     })
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.store.dispatch(new cartActions.RemoveIsAddedToCart());
+  }
 
 }

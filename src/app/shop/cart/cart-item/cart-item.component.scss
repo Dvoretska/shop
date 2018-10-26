@@ -66,6 +66,9 @@
           width: 12px;
           height: 12px;
         }
+        .invisible {
+          visibility: hidden;
+        }
       }
       button[disabled] {
         cursor: not-allowed;

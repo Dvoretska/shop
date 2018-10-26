@@ -1,14 +1,18 @@
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import {Injectable} from "@angular/core";
 import * as CartActions from '../actions/cart.actions';
-import { exhaustMap, map, catchError} from 'rxjs/operators';
-import { of } from 'rxjs';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { exhaustMap, map, catchError, switchMap} from 'rxjs/operators';
+import { of, from } from 'rxjs';
+import {HttpClient, HttpHeaders, HttpErrorResponse} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import {ToastrService} from "ngx-toastr";
 
 
 @Injectable()
 export class CartEffects {
+
+  constructor(private actions$: Actions, private http: HttpClient, private toastr: ToastrService) {}
+
   @Effect()
   addProductToCart = this.actions$
     .pipe(
@@ -26,7 +30,7 @@ export class CartEffects {
             });
           }),
           catchError(error => {
-            return of(new CartActions.AddProductToCartFailure({error}));
+            return from([new CartActions.LoadError(error), new CartActions.AddProductToCartFailure()]);
           })
         )
       )
@@ -46,7 +50,7 @@ export class CartEffects {
             });
           }),
           catchError(error => {
-            return of(new CartActions.FetchCartFailure({error}));
+            return from([new CartActions.LoadError(error), new CartActions.FetchCartFailure()]);
           })
         )
       )
@@ -74,7 +78,7 @@ export class CartEffects {
             });
           }),
           catchError(error => {
-            return of(new CartActions.DeleteProductFromCartFailure({error}));
+            return from([new CartActions.LoadError(error), new CartActions.DeleteProductFromCartFailure()]);
           })
         )
       }
@@ -101,12 +105,50 @@ export class CartEffects {
             });
           }),
           catchError(error => {
-            return of(new CartActions.DecreaseQuantityOfProductInCartFailure({error}));
+            return from([new CartActions.LoadError(error), new CartActions.DecreaseQuantityOfProductInCartFailure()]);
           })
         )
       }
     )
   );
 
-  constructor(private actions$: Actions, private http: HttpClient) {}
+  @Effect()
+  getTotalNumberOfProducts = this.actions$
+    .pipe(
+      ofType(CartActions.GET_TOTAL_NUMBER_OF_PRODUCTS),
+      exhaustMap(() =>
+        this.http.get(`${environment.API_URL}/number-products`).pipe(
+          map((res)=>{
+            return new CartActions.GetTotalNumberOfProductsSuccess({
+              totalNumberOfProducts: res['totalNumberOfProducts']
+            });
+          }),
+          catchError(error => of(new CartActions.LoadError(error)))
+        )
+      )
+    );
+
+  @Effect()
+  onLoadError = this.actions$
+    .pipe(
+      ofType(CartActions.EFFECT_ERROR),
+      map((action: CartActions.LoadError) => action.payload),
+      switchMap((payload) => {
+        let error = payload;
+        if (error instanceof HttpErrorResponse) {
+          // Server or connection error happened
+          if (!navigator.onLine) {
+            // Handle offline error
+            this.toastr.error('No Internet Connection.');
+          } else if(error.status == 0) {
+            this.toastr.error('Something went wrong. Try again later.');
+          } else {
+            // Handle Http Error (error.status === 403, 404...)
+            this.toastr.error(`${error.status} - ${error.statusText}`);
+          }
+        }
+        return of();
+      })
+    )
+
 }

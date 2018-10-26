@@ -12,7 +12,8 @@ export class CartState {
     public productQty: number,
     public amount: number,
     public deleteProductFromCartLoading: boolean,
-    public updateCartLoading: boolean,
+    public decreaseCartLoading: boolean,
+    public fetchCartError,
   ) { }
 }
 
@@ -26,7 +27,8 @@ export const initialState: CartState = {
   productQty: null,
   amount: null,
   deleteProductFromCartLoading: false,
-  updateCartLoading: false
+  decreaseCartLoading: false,
+  fetchCartError: null
 };
 
 export function cartReducer(state: CartState =initialState, action: cartActions.cartActions) {
@@ -50,7 +52,6 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
         ...state,
         addToCartLoading: false,
         isAddedToCart: true,
-        error: null,
         cart: newData,
         totalAmount: action.payload.totalAmount,
         productQty: action.payload.quantity,
@@ -61,8 +62,7 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
         ...state,
         addToCartLoading: false,
         isAddedToCart: false,
-        totalAmount: null,
-        error: action.payload.error
+        totalAmount: null
       };
     case cartActions.REMOVE_IS_ADDED_TO_CART:
       return {
@@ -72,9 +72,10 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
     case cartActions.FETCH_CART:
       return {
         ...state,
+        error: null,
         totalNumberOfProducts: 0,
         getCartLoading: true,
-        error: null
+        fetchCartError: null
       };
     case cartActions.FETCH_CART_SUCCESS:
       return {
@@ -83,13 +84,12 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
         cart: [...action.payload.cart],
         totalNumberOfProducts: action.payload.totalNumberOfProducts,
         totalAmount: action.payload.totalAmount,
-        error: null
+        fetchCartError: null
       };
     case cartActions.FETCH_CART_FAILURE:
       return {
         ...state,
-        getCartLoading: false,
-        error: action.payload.error
+        getCartLoading: false
       };
     case cartActions.DELETE_PRODUCT_FROM_CART:
       return {
@@ -105,20 +105,18 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
         cart: [...state.cart.slice(0, index), ...state.cart.slice(index + 1)],
         deleteProductFromCartLoading: false,
         totalNumberOfProducts: action.payload.totalNumberOfProducts,
-        totalAmount: action.payload.totalAmount,
-        error: null
+        totalAmount: action.payload.totalAmount
       };
     case cartActions.DELETE_PRODUCT_FROM_CART_FAILURE:
       return {
         ...state,
-        deleteProductFromCartLoading: false,
-        error: action.payload.error
+        deleteProductFromCartLoading: false
       };
 
     case cartActions.DECREASE_QUANTITY_OF_PRODUCT_IN_CART:
       return {
         ...state,
-        updateCartLoading: true,
+        decreaseCartLoading: true,
         error: null
       };
     case cartActions.DECREASE_QUANTITY_OF_PRODUCT_IN_CART_SUCCESS:
@@ -130,8 +128,7 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
       });
       return {
         ...state,
-        updateCartLoading: false,
-        error: null,
+        decreaseCartLoading: false,
         cart: newCart,
         totalAmount: action.payload.totalAmount,
         productQty: action.payload.quantity,
@@ -140,10 +137,15 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
     case cartActions.DECREASE_QUANTITY_OF_PRODUCT_IN_CART_FAILURE:
       return {
         ...state,
-        updateCartLoading: false,
-        totalAmount: null,
-        error: action.payload.error
+        decreaseCartLoading: false,
+        totalAmount: null
       };
+    case cartActions.GET_TOTAL_NUMBER_OF_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        totalNumberOfProducts: action.payload.totalNumberOfProducts
+      };
+
     case cartActions.CLEAR_CART:
       return initialState;
 

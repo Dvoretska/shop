@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Router } from '@angular/router';
@@ -26,17 +26,18 @@ export interface CurrentUser {
   styleUrls: ['./navbar.component.scss']
 })
 
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   isCollapsed = true;
   modalRef: BsModalRef;
   currentUser: CurrentUser;
   username: string;
   imageUrl: string = '';
   quantity: number;
-  getCartLoading: boolean;
   totalNumberOfProducts: number;
   defaultImageUrl: string = 'src/assets/default-picture_0_0.png';
   private subscription: Subscription;
+  @ViewChild('cartElement') cartElement:ElementRef;
+
   constructor(private modalService: BsModalService,
               private router: Router,
               private storageService: StorageService,
@@ -47,14 +48,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.subscription = this.storageService.watchStorage().subscribe(() => {
         this.getCurrentUser();
     });
-    this.store.dispatch(new cartActions.FetchCart());
+
     this.store.pipe(select(fromRoot.getCart), skip(1)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.totalNumberOfProducts = state.totalNumberOfProducts;
-      this.getCartLoading = state.getCartLoading
     })
   }
+
+  ngAfterViewInit() {
+    if(this.cartElement) {
+      this.store.dispatch(new cartActions.GetTotalNumberOfProducts());
+    }
+  }
+
   getCurrentUser() {
     this.currentUser = JSON.parse(localStorage.getItem('user'));
     if(this.currentUser) {
