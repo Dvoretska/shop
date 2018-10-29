@@ -52,7 +52,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
     this.store.pipe(select(fromRoot.getCart), skip(1)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
-      this.totalNumberOfProducts = state.totalNumberOfProducts;
+      this.totalNumberOfProducts = state.totalNumOfProductsInCart;
     })
   }
 

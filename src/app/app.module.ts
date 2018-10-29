@@ -6,6 +6,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './shop/store/reducers/reducer.factory';
+import { IconSpriteModule } from 'ng-svg-icon-sprite';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -49,12 +50,16 @@ import { HoverDirective } from './shared/hover.directive';
 import { EditorOptionsService } from './shared/editor-options.service';
 import {EffectsModule} from "@ngrx/effects";
 import {CartEffects} from "./shop/store/effects/cart.effects";
+import {ErrorsEffects} from "./shop/store/effects/errors.effects";
+import {WishlistEffects} from "./shop/store/effects/wishlist.effects";
 import {ProductsEffects} from "./shop/store/effects/products.effects";
 import { ProductDetailsComponent } from './shop/products/product-details/product-details.component';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { CartComponent } from './shop/cart/cart.component';
 import { CartModalComponent } from './shop/cart/cart-modal/cart-modal.component';
 import { CartItemComponent } from './shop/cart/cart-item/cart-item.component';
+import { WishlistComponent } from './shop/wishlist/wishlist.component';
+import { WishlistItemComponent } from './shop/wishlist/wishlist-item/wishlist-item.component';
 
 
 @NgModule({
@@ -85,7 +90,9 @@ import { CartItemComponent } from './shop/cart/cart-item/cart-item.component';
     CartComponent,
     CartModalComponent,
     CartItemComponent,
-    HoverDirective
+    HoverDirective,
+    WishlistComponent,
+    WishlistItemComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +100,7 @@ import { CartItemComponent } from './shop/cart/cart-item/cart-item.component';
     FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
+    IconSpriteModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     AppRoutingModule,
@@ -107,7 +115,7 @@ import { CartItemComponent } from './shop/cart/cart-item/cart-item.component';
     InViewportModule,
     NgxMasonryModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([CartEffects, ProductsEffects]),
+    EffectsModule.forRoot([CartEffects, ProductsEffects, ErrorsEffects, WishlistEffects]),
     NgxGalleryModule
   ],
   providers: [AuthService, {

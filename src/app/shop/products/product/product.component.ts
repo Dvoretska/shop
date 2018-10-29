@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Router } from "@angular/router";
-import * as cartActions from "../../store/actions/cart.actions";
+import * as wishlistActions from "../../store/actions/wishlist.actions";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../store/reducers/reducer.factory";
 
@@ -28,5 +28,11 @@ export class ProductComponent implements OnInit {
 
   openProductDetails() {
     this.router.navigate(['shop', this.product.id]);
+  }
+
+  addProductToWishlist() {
+    this.store.dispatch(new wishlistActions.AddProductToWishlist({
+      product_id: this.product['id']
+    }));
   }
 }

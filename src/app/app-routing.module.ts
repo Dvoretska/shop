@@ -13,6 +13,7 @@ import { EditProductComponent } from './shop/products/edit-product/edit-product.
 import { ProductsComponent } from './shop/products/products.component';
 import { ProductDetailsComponent } from './shop/products/product-details/product-details.component';
 import { CartComponent } from './shop/cart/cart.component';
+import { WishlistComponent } from './shop/wishlist/wishlist.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
     { path: '', component: ProductsComponent },
     { path: 'create-product', component: EditProductComponent },
     { path: 'product', component: EditProductComponent },
+    { path: 'wishlist', component: WishlistComponent },
     { path: 'cart', component: CartComponent },
     { path: ':product_id', component: ProductDetailsComponent },
   ]},

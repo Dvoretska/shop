@@ -1,7 +1,7 @@
 <div class="lds-ripple loading-animation" *ngIf="getCartLoading"><div></div><div></div></div>
 <div class="cart-container" *ngIf="cart && !getCartLoading">
   <div *ngIf="!cart.length" class="no-cart-box">
-    <img src="/assets/bag.svg" alt="" class="cart-icon">
+    <img src="/assets/empty-bag.svg" alt="" class="cart-icon">
     <div class="title">Cart is empty.</div>
     <div class="text">Looks like you have no items in your shopping cart.</div>
     <div class="text">Click <a routerLink="/shop">here</a> to continue shopping.</div>

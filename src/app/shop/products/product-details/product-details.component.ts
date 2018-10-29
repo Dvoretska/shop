@@ -28,7 +28,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
   productDetailsLoading: boolean;
   products: Product[];
   addToCartLoading: boolean;
-  totalQuantity: number = 1;
   isAddedToCart: boolean;
   totalNumberOfProducts: number;
   cart;
@@ -92,7 +91,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.isAddedToCart = state.isAddedToCart;
-      this.totalNumberOfProducts = state.totalNumberOfProducts;
+      this.totalNumberOfProducts = state.totalNumOfProductsInCart;
       this.addToCartLoading = state.addToCartLoading;
       this.productQuantity = state.productQty;
       if(this.isAddedToCart && this.product) {

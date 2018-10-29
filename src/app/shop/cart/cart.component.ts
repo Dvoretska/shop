@@ -18,7 +18,7 @@ export class CartComponent implements OnInit, OnDestroy {
   addToCartLoading: boolean;
   getCartLoading: boolean;
   decreaseCartLoading: boolean;
-  fetchCartError;
+
 
   constructor(private store: Store<fromRoot.AppState>, private toastr: ToastrService) { }
 
@@ -29,12 +29,11 @@ export class CartComponent implements OnInit, OnDestroy {
     ).subscribe((state) => {
       this.cart = state.cart;
       this.totalAmount = state.totalAmount;
-      this.totalNumberOfProducts = state.totalNumberOfProducts;
+      this.totalNumberOfProducts = state.totalNumOfProductsInCart;
       this.addToCartLoading = state.addToCartLoading;
       this.isAddedToCart = state.isAddedToCart;
       this.getCartLoading = state.getCartLoading;
       this.decreaseCartLoading = state.decreaseCartLoading;
-      this.fetchCartError = state.fetchCartError;
     })
   }
 

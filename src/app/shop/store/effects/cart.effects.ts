@@ -1,9 +1,10 @@
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import {Injectable} from "@angular/core";
 import * as CartActions from '../actions/cart.actions';
-import { exhaustMap, map, catchError, switchMap} from 'rxjs/operators';
+import * as ErrorsActions from '../actions/errors.actions';
+import { exhaustMap, map, catchError} from 'rxjs/operators';
 import { of, from } from 'rxjs';
-import {HttpClient, HttpHeaders, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import {ToastrService} from "ngx-toastr";
 
@@ -30,7 +31,7 @@ export class CartEffects {
             });
           }),
           catchError(error => {
-            return from([new CartActions.LoadError(error), new CartActions.AddProductToCartFailure()]);
+            return from([new ErrorsActions.LoadError(error), new CartActions.AddProductToCartFailure()]);
           })
         )
       )
@@ -50,7 +51,7 @@ export class CartEffects {
             });
           }),
           catchError(error => {
-            return from([new CartActions.LoadError(error), new CartActions.FetchCartFailure()]);
+            return from([new ErrorsActions.LoadError(error), new CartActions.FetchCartFailure()]);
           })
         )
       )
@@ -78,7 +79,7 @@ export class CartEffects {
             });
           }),
           catchError(error => {
-            return from([new CartActions.LoadError(error), new CartActions.DeleteProductFromCartFailure()]);
+            return from([new ErrorsActions.LoadError(error), new CartActions.DeleteProductFromCartFailure()]);
           })
         )
       }
@@ -105,7 +106,7 @@ export class CartEffects {
             });
           }),
           catchError(error => {
-            return from([new CartActions.LoadError(error), new CartActions.DecreaseQuantityOfProductInCartFailure()]);
+            return from([new ErrorsActions.LoadError(error), new CartActions.DecreaseQuantityOfProductInCartFailure()]);
           })
         )
       }
@@ -123,32 +124,9 @@ export class CartEffects {
               totalNumberOfProducts: res['totalNumberOfProducts']
             });
           }),
-          catchError(error => of(new CartActions.LoadError(error)))
+          catchError(error => of(new ErrorsActions.LoadError(error)))
         )
       )
     );
-
-  @Effect()
-  onLoadError = this.actions$
-    .pipe(
-      ofType(CartActions.EFFECT_ERROR),
-      map((action: CartActions.LoadError) => action.payload),
-      switchMap((payload) => {
-        let error = payload;
-        if (error instanceof HttpErrorResponse) {
-          // Server or connection error happened
-          if (!navigator.onLine) {
-            // Handle offline error
-            this.toastr.error('No Internet Connection.');
-          } else if(error.status == 0) {
-            this.toastr.error('Something went wrong. Try again later.');
-          } else {
-            // Handle Http Error (error.status === 403, 404...)
-            this.toastr.error(`${error.status} - ${error.statusText}`);
-          }
-        }
-        return of();
-      })
-    )
 
 }

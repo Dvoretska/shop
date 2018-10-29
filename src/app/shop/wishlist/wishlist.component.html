@@ -1,0 +1,18 @@
+<div class="lds-ripple loading-animation" *ngIf="getWishlistLoading"><div></div><div></div></div>
+<div class="wishlist-container" *ngIf="wishlist && !getWishlistLoading">
+  <div *ngIf="!wishlist.length" class="no-wishlist-box">
+    <img src="/assets/bag.svg" alt="" class="wishlist-icon">
+    <div class="title">Wishlist is empty.</div>
+    <div class="text">Looks like you have no items in your wishlist.</div>
+    <div class="text">Click <a routerLink="/shop">here</a> to continue shopping.</div>
+  </div>
+  <ng-container *ngIf="wishlist.length">
+    <header class="wishlist-header">
+      <div class="amount">{{totalNumOfProductsInWishlist}} PRODUCTS</div>
+      <div class="text price">Price</div>
+    </header>
+    <app-wishlist-item *ngFor="let wishlistItem of wishlist"
+                   [wishlistItem]="wishlistItem"></app-wishlist-item>
+  </ng-container>
+</div>
+

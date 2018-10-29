@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import {HttpErrorResponse} from "@angular/common/http";
 
 export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
 export const ADD_PRODUCT_TO_CART_SUCCESS = 'ADD_PRODUCT_TO_CART_SUCCESS';
@@ -15,7 +14,6 @@ export const DELETE_PRODUCT_FROM_CART_FAILURE = 'DELETE_PRODUCT_FROM_CART_FAILUR
 export const DECREASE_QUANTITY_OF_PRODUCT_IN_CART = 'DECREASE_QUANTITY_OF_PRODUCT_IN_CART';
 export const DECREASE_QUANTITY_OF_PRODUCT_IN_CART_SUCCESS = 'DECREASE_QUANTITY_OF_PRODUCT_IN_CART_SUCCESS';
 export const DECREASE_QUANTITY_OF_PRODUCT_IN_CART_FAILURE = 'DECREASE_QUANTITY_OF_PRODUCT_IN_CART_FAILURE';
-export const EFFECT_ERROR = 'EFFECT_ERROR';
 export const GET_TOTAL_NUMBER_OF_PRODUCTS = 'GET_TOTAL_NUMBER_OF_PRODUCTS';
 export const GET_TOTAL_NUMBER_OF_PRODUCTS_SUCCESS = 'GET_TOTAL_NUMBER_OF_PRODUCTS_SUCCESS';
 
@@ -104,12 +102,6 @@ export class DecreaseQuantityOfProductInCartFailure implements Action {
   constructor() {}
 }
 
-export class LoadError implements Action {
-  readonly type = EFFECT_ERROR;
-
-  constructor(public payload: HttpErrorResponse) {}
-}
-
 export class GetTotalNumberOfProducts implements Action {
   readonly type = GET_TOTAL_NUMBER_OF_PRODUCTS;
 
@@ -139,6 +131,5 @@ export type cartActions =
             DecreaseQuantityOfProductInCart |
             DecreaseQuantityOfProductInCartSuccess |
             DecreaseQuantityOfProductInCartFailure |
-            LoadError |
             GetTotalNumberOfProducts |
             GetTotalNumberOfProductsSuccess;

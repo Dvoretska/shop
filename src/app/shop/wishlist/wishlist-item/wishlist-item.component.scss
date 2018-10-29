@@ -1,0 +1,82 @@
+.wishlist-item-container {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  position: relative;
+  .img-box {
+    width: 100px;
+    height: 120px;
+    cursor: pointer;
+    position: relative;
+    .wishlist-img {
+      width: 100%;
+      height: 100%;
+    }
+    .heart-icon {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      animation: zoom 1s linear infinite;
+    }
+  }
+  .title {
+    font-weight: 600;
+  }
+  .content-box {
+    display: flex;
+    width: calc(100% - 80px);
+    justify-content: center;
+    .block {
+      &:nth-child(1) {
+        text-align: left;
+        width: 50%;
+        margin-left: 20px;
+      }
+      &:nth-child(2) {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-between;
+        .price-wrapper {
+          display: flex;
+          .discount {
+            margin-left: 5px;
+          }
+        }
+        .additional-block {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          visibility: hidden;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+          .icon {
+            width: 20px;
+            height: 20px;
+          }
+          .text {
+            font-size: 14px;
+            line-height: 14px;
+            margin-left: 3px;
+            margin-top: 4px;
+          }
+        }
+        .delete-block {
+          margin-left: 15px;
+          .delete-text {
+            color: #e23f50;
+          }
+        }
+        .active {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
