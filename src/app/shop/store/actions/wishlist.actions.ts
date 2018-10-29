@@ -8,6 +8,9 @@ export const ADD_PRODUCT_TO_WISHLIST_FAILURE = 'ADD_PRODUCT_TO_WISHLIST_FAILURE'
 export const FETCH_WISHLIST = 'FETCH_WISHLIST';
 export const FETCH_WISHLIST_SUCCESS = 'FETCH_WISHLIST_SUCCESS';
 export const FETCH_WISHLIST_FAILURE = 'FETCH_WISHLIST_FAILURE';
+export const DELETE_PRODUCT_FROM_WISHLIST = 'DELETE_PRODUCT_FROM_WISHLIST';
+export const DELETE_PRODUCT_FROM_WISHLIST_SUCCESS = 'DELETE_PRODUCT_FROM_WISHLIST_SUCCESS';
+export const DELETE_PRODUCT_FROM_WISHLIST_FAILURE = 'DELETE_PRODUCT_FROM_WISHLIST_FAILURE';
 
 
 export class AddProductToWishlist implements Action {
@@ -46,6 +49,23 @@ export class FetchWishlistFailure implements Action {
   constructor() {}
 }
 
+export class DeleteProductFromWishlist implements Action {
+  readonly type = DELETE_PRODUCT_FROM_WISHLIST;
+
+  constructor(public payload: {id: number}) {}
+}
+
+export class DeleteProductFromWishlistSuccess implements Action {
+  readonly type = DELETE_PRODUCT_FROM_WISHLIST_SUCCESS;
+
+  constructor(public payload: {id: number, totalNumOfProductsInWishlist: number}) {}
+}
+
+export class DeleteProductFromWishlistFailure implements Action {
+  readonly type = DELETE_PRODUCT_FROM_WISHLIST_FAILURE;
+
+  constructor() {}
+}
 
 export type wishlistActions =
             AddProductToWishlist |
@@ -53,4 +73,7 @@ export type wishlistActions =
             AddProductToWishlistFailure |
             FetchWishlist |
             FetchWishlistSuccess |
-            FetchWishlistFailure;
+            FetchWishlistFailure |
+            DeleteProductFromWishlist |
+            DeleteProductFromWishlistSuccess |
+            DeleteProductFromWishlistFailure;

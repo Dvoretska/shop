@@ -51,4 +51,31 @@ export class WishlistEffects {
         )
       )
     );
+
+  @Effect()
+  deleteProductFromWishlist = this.actions$
+    .pipe(
+      ofType(WishlistActions.DELETE_PRODUCT_FROM_WISHLIST),
+      map((action: WishlistActions.DeleteProductFromWishlist) => action.payload),
+      exhaustMap((payload)=> {
+        let options = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+          }),
+          body: payload,
+        };
+        return this.http.delete(`${environment.API_URL}/delete-from-wishlist`, options).pipe(
+          map((res) => {
+            return new WishlistActions.DeleteProductFromWishlistSuccess({
+              id: res['id'],
+              totalNumOfProductsInWishlist: res['count'].count
+            });
+          }),
+          catchError(error => {
+            return from([new ErrorsActions.LoadError(error), new WishlistActions.DeleteProductFromWishlistFailure()]);
+          })
+        )
+      }
+    )
+  );
 }
