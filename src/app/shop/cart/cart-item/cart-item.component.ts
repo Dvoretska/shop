@@ -30,7 +30,7 @@ export class CartItemComponent implements OnInit {
 
   deleteProductFromCart() {
     this.store.dispatch(new cartActions.DeleteProductFromCart({
-      product_id: this.cartItem['product_id'], size: this.cartItem['size']
+      id: this.cartItem['id']
     }));
   }
 

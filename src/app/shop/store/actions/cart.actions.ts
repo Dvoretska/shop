@@ -69,13 +69,13 @@ export class ClearCart implements Action {
 export class DeleteProductFromCart implements Action {
   readonly type = DELETE_PRODUCT_FROM_CART;
 
-  constructor(public payload: {product_id: number, size: string}) {}
+  constructor(public payload: {id: number}) {}
 }
 
 export class DeleteProductFromCartSuccess implements Action {
   readonly type = DELETE_PRODUCT_FROM_CART_SUCCESS;
 
-  constructor(public payload: {product_id: number, size: string, totalNumberOfProducts: number, totalAmount: number}) {}
+  constructor(public payload: {id: number, totalNumberOfProducts: number, totalAmount: number}) {}
 }
 
 export class DeleteProductFromCartFailure implements Action {

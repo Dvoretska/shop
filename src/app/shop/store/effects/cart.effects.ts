@@ -72,8 +72,7 @@ export class CartEffects {
         return this.http.delete(`${environment.API_URL}/delete-from-cart`, options).pipe(
           map((res) => {
             return new CartActions.DeleteProductFromCartSuccess({
-              product_id: res['product_id'],
-              size: res['size'],
+              id: res['id'],
               totalNumberOfProducts: res['totalNumberOfProducts'],
               totalAmount: res['totalAmount']
             });

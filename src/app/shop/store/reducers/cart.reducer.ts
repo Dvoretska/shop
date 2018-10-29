@@ -41,7 +41,7 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
     case cartActions.ADD_PRODUCT_TO_CART_SUCCESS:
       let changed = [...state.cart];
       let newData = changed.map(el => {
-      if(el.product_id == action.payload.product.product_id.id && el.size == action.payload.product.size)
+      if(el.id == action.payload.product.id)
          return Object.assign({}, el, {amount:action.payload.amount}, {quantity: action.payload.quantity});
       return el;
       });
@@ -92,7 +92,7 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
       };
     case cartActions.DELETE_PRODUCT_FROM_CART_SUCCESS:
       let changedArr = [...state.cart];
-      let index = changedArr.findIndex(x => x.product_id == action.payload.product_id && x.size == action.payload.size);
+      let index = changedArr.findIndex(x => x.id == action.payload.id);
       return {
         ...state,
         cart: [...state.cart.slice(0, index), ...state.cart.slice(index + 1)],

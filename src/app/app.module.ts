@@ -6,7 +6,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './shop/store/reducers/reducer.factory';
-import { IconSpriteModule } from 'ng-svg-icon-sprite';
+
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -100,7 +100,6 @@ import { WishlistItemComponent } from './shop/wishlist/wishlist-item/wishlist-it
     FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
-    IconSpriteModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     AppRoutingModule,
