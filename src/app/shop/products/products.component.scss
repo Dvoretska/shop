@@ -10,15 +10,6 @@
   letter-spacing: 1px;
   font-family: 'goudy_old_style_small_caps_Rg';
 }
-/deep/ .masonry-container {
-  text-align: center;
-}
-/deep/ .masonry-item {
-  width: 240px;
-  cursor: pointer;
-  z-index: 1;
-  margin: 5px;
-}
 .wrapper {
   display: flex;
   width: 100%;

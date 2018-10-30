@@ -12,7 +12,17 @@
       <div class="text price">Price</div>
     </header>
     <app-wishlist-item *ngFor="let wishlistItem of wishlist"
-                   [wishlistItem]="wishlistItem"></app-wishlist-item>
+                   [wishlistItem]="wishlistItem"
+                   [sizes]="sizes"
+                   [addToCartWasClicked]="addToCartWasClicked">
+    </app-wishlist-item>
   </ng-container>
+  <div class="loading-process-with-dim-background" *ngIf="deleteFromWishlistLoading">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
 </div>
 

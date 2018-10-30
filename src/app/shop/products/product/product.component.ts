@@ -13,6 +13,8 @@ import * as fromRoot from "../../store/reducers/reducer.factory";
 })
 export class ProductComponent implements OnInit {
   @Input() product: any;
+  @Input() wishlist: any[];
+  @Input() addedToWishlistId: number;
   imageUrl: string;
   defaultImageUrl: string = 'src/assets/no-img.jpg';
 
@@ -34,5 +36,12 @@ export class ProductComponent implements OnInit {
     this.store.dispatch(new wishlistActions.AddProductToWishlist({
       product_id: this.product['id']
     }));
+  }
+
+  checkIfProductInWishlist() {
+    if(this.addedToWishlistId) {
+      this.wishlist.push({product_id: this.addedToWishlistId})
+    }
+    return this.wishlist.some(obj => obj.product_id == this.product.id)
   }
 }

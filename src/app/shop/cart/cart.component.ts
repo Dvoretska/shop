@@ -18,6 +18,7 @@ export class CartComponent implements OnInit, OnDestroy {
   addToCartLoading: boolean;
   getCartLoading: boolean;
   decreaseCartLoading: boolean;
+  deleteFromCartLoading: boolean;
 
 
   constructor(private store: Store<fromRoot.AppState>, private toastr: ToastrService) { }
@@ -34,6 +35,7 @@ export class CartComponent implements OnInit, OnDestroy {
       this.isAddedToCart = state.isAddedToCart;
       this.getCartLoading = state.getCartLoading;
       this.decreaseCartLoading = state.decreaseCartLoading;
+      this.deleteFromCartLoading = state.deleteFromCartLoading;
     })
   }
 

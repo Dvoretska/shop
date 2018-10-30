@@ -9,7 +9,8 @@
     <img [src]="imagePath" alt="" class="cart-img">
     <div class="block">
       <div class="title brand">{{currentProduct.brand}}</div>
-      <div><span class="title">Category:</span> {{currentProduct.category_id.category}}</div>
+      <div *ngIf="currentProduct.category_id"><span class="title">Category:</span> {{currentProduct.category_id.category}}</div>
+      <div *ngIf="!currentProduct.category_id"><span class="title">Category:</span> {{currentProduct.category}}</div>
       <div><span class="title">Size:</span> {{size}}</div>
     </div>
     <div class="block">

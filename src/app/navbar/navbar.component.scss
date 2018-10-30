@@ -24,16 +24,15 @@ nav {
         justify-content: center;
         align-items: center;
       }
-      &.cart-wrapper {
+      &.count-wrapper {
         position: relative;
-        .cart-count {
+        .count {
           position: absolute;
           min-width: 18px;
           height: 18px;
           border-radius: 50%;
-          background-color: #e23f50;
           top: 1px;
-          right: 4px;
+          right: 1px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -41,6 +40,16 @@ nav {
             color: white;
             font-size: 10px;
             padding-top: 1px;
+          }
+        }
+        .cart-count {
+          background-color: #e23f50;
+        }
+        .wishlist-count {
+          background-color: white;
+          border: 1px solid #e23f50;
+          span {
+            color: #e23f50;
           }
         }
       }

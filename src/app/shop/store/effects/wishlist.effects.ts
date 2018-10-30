@@ -3,9 +3,11 @@ import {Injectable} from "@angular/core";
 import * as WishlistActions from '../actions/wishlist.actions';
 import * as ErrorsActions from '../actions/errors.actions';
 import { exhaustMap, map, catchError, switchMap} from 'rxjs/operators';
-import { from } from 'rxjs';
+import {from, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import * as CartActions from "../actions/cart.actions";
+import {GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST} from "../actions/wishlist.actions";
 
 
 @Injectable()
@@ -68,7 +70,7 @@ export class WishlistEffects {
           map((res) => {
             return new WishlistActions.DeleteProductFromWishlistSuccess({
               id: res['id'],
-              totalNumOfProductsInWishlist: res['count'].count
+              totalNumOfProductsInWishlist: res['count'][0].count
             });
           }),
           catchError(error => {
@@ -78,4 +80,20 @@ export class WishlistEffects {
       }
     )
   );
+
+  @Effect()
+  getTotalNumOfProductsInWishlist = this.actions$
+    .pipe(
+      ofType(WishlistActions.GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST),
+      exhaustMap(() =>
+        this.http.get(`${environment.API_URL}/number-wishlist`).pipe(
+          map((res)=>{
+            return new WishlistActions.GetTotalNumOfProductsInWishlistSuccess({
+              totalNumOfProductsInWishlist: res['total']
+            });
+          }),
+          catchError(error => of(new ErrorsActions.LoadError(error)))
+        )
+      )
+    );
 }

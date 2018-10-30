@@ -11,7 +11,7 @@ export class CartState {
     public totalNumOfProductsInCart: number,
     public productQty: number,
     public amount: number,
-    public deleteProductFromCartLoading: boolean,
+    public deleteFromCartLoading: boolean,
     public decreaseCartLoading: boolean,
   ) { }
 }
@@ -25,7 +25,7 @@ export const initialState: CartState = {
   totalNumOfProductsInCart: 0,
   productQty: null,
   amount: null,
-  deleteProductFromCartLoading: false,
+  deleteFromCartLoading: false,
   decreaseCartLoading: false
 };
 
@@ -35,8 +35,7 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
       return {
         ...state,
         addToCartLoading: true,
-        isAddedToCart: null,
-        totalNumOfProductsInCart: action.payload.totalNumber
+        isAddedToCart: null
       };
     case cartActions.ADD_PRODUCT_TO_CART_SUCCESS:
       let changed = [...state.cart];
@@ -88,7 +87,7 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
     case cartActions.DELETE_PRODUCT_FROM_CART:
       return {
         ...state,
-        deleteProductFromCartLoading: true
+        deleteFromCartLoading: true
       };
     case cartActions.DELETE_PRODUCT_FROM_CART_SUCCESS:
       let changedArr = [...state.cart];
@@ -96,14 +95,14 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
       return {
         ...state,
         cart: [...state.cart.slice(0, index), ...state.cart.slice(index + 1)],
-        deleteProductFromCartLoading: false,
+        deleteFromCartLoading: false,
         totalNumOfProductsInCart: action.payload.totalNumberOfProducts,
         totalAmount: action.payload.totalAmount
       };
     case cartActions.DELETE_PRODUCT_FROM_CART_FAILURE:
       return {
         ...state,
-        deleteProductFromCartLoading: false
+        deleteFromCartLoading: false
       };
 
     case cartActions.DECREASE_QUANTITY_OF_PRODUCT_IN_CART:

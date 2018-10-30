@@ -23,8 +23,7 @@ export class CartItemComponent implements OnInit {
 
   increaseProductsQuantity() {
     this.store.dispatch(new cartActions.AddProductToCart({
-      cart: {size: this.cartItem['size'], quantity: 1, product_id: this.cartItem['product_id']},
-      totalNumber: this.totalNumberOfProducts
+      size: this.cartItem['size'], quantity: 1, product_id: this.cartItem['product_id']
     }));
   }
 

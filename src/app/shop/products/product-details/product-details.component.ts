@@ -22,7 +22,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
   product: Product;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[] = [];
-  sizes = ['XS', 'S', 'M', 'L', 'XL'];
+  sizes: string[];
   selectedSize: string;
   modalRef: BsModalRef;
   productDetailsLoading: boolean;
@@ -75,6 +75,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
     ).subscribe((state) => {
       this.products = state.products;
       this.product = state.product;
+      this.sizes = state.sizes;
       this.productDetailsLoading = state.productDetailsLoading;
       if(this.product) {
         this.galleryImages = [];
@@ -104,8 +105,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
   openModalCart() {
     if(this.selectedSize) {
       this.store.dispatch(new cartActions.AddProductToCart({
-        cart: {size: this.selectedSize, quantity: 1, product_id: this.product['id']},
-        totalNumber: this.totalNumberOfProducts
+        size: this.selectedSize, quantity: 1, product_id: this.product['id']
       }));
     } else {
       this.toastr.error('Please Choose a Size!');

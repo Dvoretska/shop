@@ -20,7 +20,7 @@ export class CartEffects {
       ofType(CartActions.ADD_PRODUCT_TO_CART),
       map((action: CartActions.AddProductToCart) => action.payload),
       exhaustMap((payload) =>
-        this.http.post(`${environment.API_URL}/add-to-cart`, payload.cart).pipe(
+        this.http.post(`${environment.API_URL}/add-to-cart`, payload).pipe(
           map((res)=>{
             return new CartActions.AddProductToCartSuccess({
               quantity: res['productQty'].quantity,
@@ -91,7 +91,7 @@ export class CartEffects {
       ofType(CartActions.DECREASE_QUANTITY_OF_PRODUCT_IN_CART),
       map((action: CartActions.DecreaseQuantityOfProductInCart) => action.payload),
       exhaustMap((payload)=> {
-        return this.http.post(`${environment.API_URL}/update-cart`, {
+        return this.http.post(`${environment.API_URL}/decrease-cart`, {
           product_id: payload.product_id,
           size: payload.size
         }).pipe(

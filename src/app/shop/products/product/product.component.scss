@@ -1,3 +1,5 @@
+@import '../../../../variables.scss';
+
 .product-card {
   display: flex;
   flex-direction: column;
@@ -26,6 +28,11 @@
     span {
       height: 23px;
       width: 23px;
+    }
+    .highlight {
+      .heart-icon path {
+        fill: $red_color;
+      }
     }
     .icon {
       display: inline-block;

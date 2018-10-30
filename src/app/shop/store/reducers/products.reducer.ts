@@ -4,6 +4,7 @@ import * as productsActions from '../actions/products.actions';
 export class ProductsState {
   constructor(
     public products: any[],
+    public sizes: string[],
     public loading: boolean,
     public error: any,
     public categories: any,
@@ -22,6 +23,7 @@ export class ProductsState {
 
 export const initialState: ProductsState = {
   products: [],
+  sizes: ['XS', 'S', 'M', 'L', 'XL'],
   loading: false,
   addProductLoading: false,
   productDetailsLoading: false,

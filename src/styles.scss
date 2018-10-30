@@ -118,6 +118,24 @@ button[disabled] {
   cursor: not-allowed;
 }
 
+.loading-process-with-dim-background {
+  background: rgba(0,0,0,.5);
+  width:100%;
+  height:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .spinner {
+    div {
+      background-color: white;
+    }
+  }
+}
+
 /* Animations */
 
 @keyframes zoom {

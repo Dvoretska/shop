@@ -1,6 +1,5 @@
 import * as wishlistActions from '../actions/wishlist.actions';
 
-
 export class WishlistState {
   constructor(
     public addToWishlistLoading: boolean,
@@ -8,6 +7,7 @@ export class WishlistState {
     public getWishlistLoading: boolean,
     public totalNumOfProductsInWishlist: number,
     public deleteFromWishlistLoading: boolean,
+    public addedToWishlistId: number
   ) { }
 }
 
@@ -16,7 +16,8 @@ export const initialState: WishlistState = {
   wishlist: [],
   getWishlistLoading: false,
   totalNumOfProductsInWishlist: null,
-  deleteFromWishlistLoading: false
+  deleteFromWishlistLoading: false,
+  addedToWishlistId: null
 };
 
 export function wishlistReducer(state: WishlistState = initialState, action: wishlistActions.wishlistActions) {
@@ -30,7 +31,9 @@ export function wishlistReducer(state: WishlistState = initialState, action: wis
       return {
         ...state,
         wishlist: state.wishlist.concat(action.payload.item),
-        addToWishlistLoading: false
+        totalNumOfProductsInWishlist: action.payload.totalNumOfProductsInWishlist,
+        addToWishlistLoading: false,
+        addedToWishlistId: action.payload.item.product_id.id
       };
     case wishlistActions.ADD_PRODUCT_TO_WISHLIST_FAILURE:
       return {
@@ -75,6 +78,12 @@ export function wishlistReducer(state: WishlistState = initialState, action: wis
       return {
         ...state,
         deleteFromWishlistLoading: false
+      };
+
+    case wishlistActions.GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST_SUCCESS:
+      return {
+        ...state,
+        totalNumOfProductsInWishlist: action.payload.totalNumOfProductsInWishlist
       };
 
     default:

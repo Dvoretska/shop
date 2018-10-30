@@ -11,6 +11,7 @@ import {select, Store} from "@ngrx/store";
 import * as fromRoot from "../shop/store/reducers/reducer.factory";
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import * as cartActions from "../shop/store/actions/cart.actions";
+import * as wishlistActions from "../shop/store/actions/wishlist.actions";
 import { skip} from 'rxjs/operators';
 
 export interface CurrentUser {
@@ -34,9 +35,11 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   imageUrl: string = '';
   quantity: number;
   totalNumberOfProducts: number;
+  totalNumOfProductsInWishlist: number;
   defaultImageUrl: string = 'src/assets/default-picture_0_0.png';
   private subscription: Subscription;
   @ViewChild('cartElement') cartElement:ElementRef;
+  @ViewChild('cartElement') wishlistElement:ElementRef;
 
   constructor(private modalService: BsModalService,
               private router: Router,
@@ -54,11 +57,19 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
     ).subscribe((state) => {
       this.totalNumberOfProducts = state.totalNumOfProductsInCart;
     })
+    this.store.pipe(select(fromRoot.getWishlist), skip(1)).pipe(
+      untilComponentDestroyed(this)
+    ).subscribe((state) => {
+      this.totalNumOfProductsInWishlist = state.totalNumOfProductsInWishlist;
+    })
   }
 
   ngAfterViewInit() {
     if(this.cartElement) {
       this.store.dispatch(new cartActions.GetTotalNumberOfProducts());
+    }
+    if(this.wishlistElement) {
+      this.store.dispatch(new wishlistActions.GetTotalNumOfProductsInWishlist());
     }
   }
 

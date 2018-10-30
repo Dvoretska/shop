@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import {FETCH_CART, FETCH_CART_FAILURE, FETCH_CART_SUCCESS} from "./cart.actions";
+import {FETCH_CART, FETCH_CART_FAILURE, FETCH_CART_SUCCESS, GET_TOTAL_NUMBER_OF_PRODUCTS} from "./cart.actions";
 
 
 export const ADD_PRODUCT_TO_WISHLIST = 'ADD_PRODUCT_TO_WISHLIST';
@@ -11,6 +11,8 @@ export const FETCH_WISHLIST_FAILURE = 'FETCH_WISHLIST_FAILURE';
 export const DELETE_PRODUCT_FROM_WISHLIST = 'DELETE_PRODUCT_FROM_WISHLIST';
 export const DELETE_PRODUCT_FROM_WISHLIST_SUCCESS = 'DELETE_PRODUCT_FROM_WISHLIST_SUCCESS';
 export const DELETE_PRODUCT_FROM_WISHLIST_FAILURE = 'DELETE_PRODUCT_FROM_WISHLIST_FAILURE';
+export const GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST = 'GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST';
+export const GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST_SUCCESS = 'GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST_SUCCESS';
 
 
 export class AddProductToWishlist implements Action {
@@ -67,6 +69,18 @@ export class DeleteProductFromWishlistFailure implements Action {
   constructor() {}
 }
 
+export class GetTotalNumOfProductsInWishlist implements Action {
+  readonly type = GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST;
+
+  constructor() {}
+}
+
+export class GetTotalNumOfProductsInWishlistSuccess implements Action {
+  readonly type = GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST_SUCCESS;
+
+  constructor(public payload: {totalNumOfProductsInWishlist: number}) {}
+}
+
 export type wishlistActions =
             AddProductToWishlist |
             AddProductToWishlistSuccess |
@@ -76,4 +90,6 @@ export type wishlistActions =
             FetchWishlistFailure |
             DeleteProductFromWishlist |
             DeleteProductFromWishlistSuccess |
-            DeleteProductFromWishlistFailure;
+            DeleteProductFromWishlistFailure |
+            GetTotalNumOfProductsInWishlist |
+            GetTotalNumOfProductsInWishlistSuccess;

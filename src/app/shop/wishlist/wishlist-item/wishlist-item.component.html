@@ -1,5 +1,5 @@
 <div class="wishlist-item-container" hover activeClass="active" [el]="[addBlock, deleteBlock, detailsBlock]">
-  <div class="img-box">
+  <div class="img-box" (click)="openProductDetails()">
     <img [src]="imagePath" alt="" class="wishlist-img">
     <img src="/assets/red-heart.svg" alt="" class="heart-icon">
   </div>
@@ -13,13 +13,18 @@
         <div class="price" [ngStyle]="{textDecoration : wishlistItem.discount ? 'line-through' : none, color : wishlistItem.discount ? 'grey' : 'black'}">${{wishlistItem.price}}</div>
         <div class="discount" *ngIf="wishlistItem.discount">${{wishlistItem.discount}}</div>
       </div>
-      <div class="additional-block details-block" #detailsBlock (click)="openDetails()">
+      <div class="additional-block details-block" #detailsBlock (click)="openProductDetails()">
         <img src="/assets/shop/eye.svg" alt="" class="icon">
         <div class="text add-text">Watch Details</div>
       </div>
       <div class="additional-block" #addBlock (click)="addProductToCart()">
-        <img src="/assets/shop/bag.svg" alt="" class="icon">
-        <div class="text">Add to Cart</div>
+        <ng-container *ngIf="!addToCartWasClicked">
+          <img src="/assets/shop/bag.svg" alt="" class="icon">
+          <div class="text">Add to Cart</div>
+        </ng-container>
+        <ng-select *ngIf="addToCartWasClicked" [items]="sizes"
+                   [(ngModel)]="selectedSize" placeholder="Choose a size" class="custom">
+        </ng-select>
       </div>
       <div class="additional-block delete-block" #deleteBlock (click)="deleteProductFromWishlist()">
         <img src="/assets/waste-bin.svg" alt="" class="icon">

@@ -38,20 +38,18 @@
           <span class="username">{{ username }}</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-        	<div class="nav-icon-settings nav-icon"></div>
-        </a>
-      </li>
        <li class="nav-item">
-        <a class="nav-link" routerLink="/shop/wishlist">
+        <a class="nav-link count-wrapper" routerLink="/shop/wishlist" #wishlistElement>
         	<div class="nav-icon-heart nav-icon"></div>
+          <div class="wishlist-count count" *ngIf="totalNumOfProductsInWishlist">
+            <span>{{totalNumOfProductsInWishlist}}</span>
+          </div>
         </a>
       </li>
        <li class="nav-item" *ngIf="isAuthorized()" #cartElement>
-        <a class="nav-link cart-wrapper" routerLink="/shop/cart">
+        <a class="nav-link count-wrapper" routerLink="/shop/cart">
         	<div class="nav-icon-cart nav-icon"></div>
-          <div class="cart-count" *ngIf="totalNumberOfProducts">
+          <div class="cart-count count" *ngIf="totalNumberOfProducts">
             <span>{{totalNumberOfProducts}}</span>
           </div>
         </a>

@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import {Store, select} from "@ngrx/store";
 import { DOCUMENT } from '@angular/common';
-import * as fromProducts from "../store/reducers/products.reducer";
 import * as fromRoot from "../store/reducers/reducer.factory";
-import {Observable} from "rxjs";
 import * as productsActions from "../store/actions/products.actions";
+import * as wishlistActions from "../store/actions/wishlist.actions";
 import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 
@@ -16,7 +15,6 @@ import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   products: any[];
-  getState$: Observable<fromProducts.ProductsState>;
   limit: number = 3;
   skip: number;
   totalAmount: number;
@@ -25,14 +23,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
   targetId;
   error;
   chunk: number;
+  wishlist: any[];
+  addedToWishlistId: number;
 
-  constructor(private store: Store<fromProducts.ProductsState>, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
+  constructor(private store: Store<fromRoot.AppState>, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
     PageScrollConfig.defaultDuration = 1000;
   }
 
   ngOnInit() {
-    this.getState$ = this.store.pipe(select(fromRoot.getProducts));
-    this.getState$.pipe(
+    this.store.dispatch(new wishlistActions.FetchWishlist());
+    this.store.pipe(select(fromRoot.getProducts)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
         this.products = state.products;
@@ -40,6 +40,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.initLoading = state.fetchProductsInitLoading;
         this.targetId = state.targetId;
         this.chunk = state.skip;
+        this.loading = state.fetchProductsLoading;
+    });
+    this.store.pipe(select(fromRoot.getWishlist)).pipe(
+      untilComponentDestroyed(this)
+    ).subscribe((state) => {
+        this.wishlist = state.wishlist;
+        this.addedToWishlistId = state.addedToWishlistId
     });
     this.skip = this.chunk;
     if (this.targetId) {
@@ -58,11 +65,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.skip += this.limit;
     let queryString = `?skip=${this.skip}&limit=${this.limit}`;
     this.store.dispatch(new productsActions.FetchProducts({queryString: queryString, skip: this.skip}));
-    this.getState$.pipe(
-      untilComponentDestroyed(this)
-    ).subscribe((state) => {
-      this.loading = state.fetchProductsLoading;
-    });
   }
 
   ngOnDestroy(){}

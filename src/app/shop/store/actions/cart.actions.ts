@@ -21,7 +21,7 @@ export const GET_TOTAL_NUMBER_OF_PRODUCTS_SUCCESS = 'GET_TOTAL_NUMBER_OF_PRODUCT
 export class AddProductToCart implements Action {
   readonly type = ADD_PRODUCT_TO_CART;
 
-  constructor(public payload: { cart: {product_id: number, size: string, quantity: number }, totalNumber: number}) {}
+  constructor(public payload: {product_id: number, size: string, quantity: number }) {}
 }
 
 export class AddProductToCartSuccess implements Action {
