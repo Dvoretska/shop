@@ -2,12 +2,10 @@
 <div class="wrapper">
   <div class="filters">
     <h5 class="filter-title">SHOP BY</h5>
-    <ul>
-      <li>Dresses</li>
-      <li>Tops</li>
-      <li>Bottoms</li>
-      <li>Shoes</li>
-      <li>Accessories</li>
+    <ul class="filter-options">
+      <li *ngFor="let category of categories">
+        <a [routerLink]="['/shop/products']" [queryParams]="{category: category.id}">{{category.category}}</a>
+      </li>
     </ul>
     <h5 class="filter-title">REFINE</h5>
     <ul>

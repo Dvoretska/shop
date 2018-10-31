@@ -6,6 +6,7 @@ import * as productsActions from "../store/actions/products.actions";
 import * as wishlistActions from "../store/actions/wishlist.actions";
 import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -24,13 +25,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
   error;
   chunk: number;
   wishlist: any[];
+  categories: any[];
 
 
-  constructor(private store: Store<fromRoot.AppState>, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
+  constructor(private store: Store<fromRoot.AppState>,
+              private pageScrollService: PageScrollService,
+              @Inject(DOCUMENT) private document: any,
+              private route: ActivatedRoute) {
     PageScrollConfig.defaultDuration = 1000;
   }
 
   ngOnInit() {
+    this.store.dispatch(new productsActions.FetchCategories());
     this.store.dispatch(new wishlistActions.FetchWishlist());
     this.store.pipe(select(fromRoot.getProducts)).pipe(
       untilComponentDestroyed(this)
@@ -41,6 +47,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.targetId = state.targetId;
         this.chunk = state.skip;
         this.loading = state.fetchProductsLoading;
+        this.categories = state.categories;
     });
     this.store.pipe(select(fromRoot.getWishlist)).pipe(
       untilComponentDestroyed(this)
@@ -48,22 +55,29 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.wishlist = state.wishlist;
     });
     this.skip = this.chunk;
-    if (this.targetId) {
-      setTimeout(()=>{
-        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#item'+this.targetId);
-        this.pageScrollService.start(pageScrollInstance);
-      }, 0);
-    } else {
-      this.skip = 0;
-      let queryString = `?skip=${this.skip}&limit=${this.limit}`;
-      this.store.dispatch(new productsActions.FetchProductsInit(queryString));
-    }
+      this.route.queryParams.subscribe(params => {
+        if (this.targetId) {
+          setTimeout(()=>{
+            let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#item'+this.targetId);
+            this.pageScrollService.start(pageScrollInstance);
+            this.targetId = null;
+            console.log('2', this.targetId)
+          }, 0);
+        } else {
+          this.skip = 0;
+          console.log('1', this.skip)
+          let category = +params['category'] || 1;
+          let queryString = `?skip=0&limit=${this.limit}&category=${category}`;
+          this.store.dispatch(new productsActions.FetchProductsInit(queryString));
+        }
+      });
   }
 
   loadMore() {
-    this.skip += this.limit;
-    let queryString = `?skip=${this.skip}&limit=${this.limit}`;
-    this.store.dispatch(new productsActions.FetchProducts({queryString: queryString, skip: this.skip}));
+      this.skip += this.limit;
+      let category =  this.route.snapshot.queryParamMap.get('category') || 1;
+      let queryString = `?skip=${this.skip}&limit=${this.limit}&category=${category}`;
+      this.store.dispatch(new productsActions.FetchProducts({queryString: queryString, skip: this.skip}));
   }
 
   ngOnDestroy(){}

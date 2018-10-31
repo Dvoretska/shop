@@ -20,6 +20,15 @@
     .filter-title {
       border-bottom: 2px solid black;
     }
+    .filter-options li {
+      cursor: pointer;
+      padding: 3px 0;
+      a {
+        text-decoration: none;
+        color: black;
+        text-transform: capitalize;
+      }
+    }
   }
   .content-wrapper {
     width: 100%;

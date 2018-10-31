@@ -137,7 +137,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
       this.loading = state.addProductLoading;
       if(this.productWasAdded) {
         this.toastr.success('Product was saved successfully!');
-        this.router.navigate(['shop']);
+        this.router.navigate(['shop/products'], { queryParams: { category: this.selectedCategory }});
       }
     });
   }
