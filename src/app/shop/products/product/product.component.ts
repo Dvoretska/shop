@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import * as wishlistActions from "../../store/actions/wishlist.actions";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../store/reducers/reducer.factory";
-
+import { ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -17,7 +17,7 @@ export class ProductComponent implements OnInit {
   imageUrl: string;
   defaultImageUrl: string = 'src/assets/no-img.jpg';
 
-  constructor(private router: Router, private store: Store<fromRoot.AppState>) { }
+  constructor(private router: Router, private store: Store<fromRoot.AppState>, private route:ActivatedRoute) { }
 
   ngOnInit() {
     if(this.product && this.product.images) {
@@ -28,7 +28,7 @@ export class ProductComponent implements OnInit {
   }
 
   openProductDetails() {
-    this.router.navigate(['shop', this.product.id]);
+    this.router.navigate([this.product.id], {relativeTo:this.route});
   }
 
   handleWishlist(id) {

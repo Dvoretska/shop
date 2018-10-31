@@ -19,12 +19,11 @@ const appRoutes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'users', component: UsersListComponent, canActivate: [AuthGuardService] },
   { path: 'shop', component: ShopComponent, children: [
-    { path: '', component: ProductsComponent },
-    { path: 'create-product', component: EditProductComponent },
-    { path: 'product', component: EditProductComponent },
+    { path: 'products', component: ProductsComponent},
+    { path: 'products/:product_id', component: ProductDetailsComponent},
+    { path: 'edit-product', component: EditProductComponent},
     { path: 'wishlist', component: WishlistComponent },
-    { path: 'cart', component: CartComponent },
-    { path: ':product_id', component: ProductDetailsComponent },
+    { path: 'cart', component: CartComponent }
   ]},
 
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },

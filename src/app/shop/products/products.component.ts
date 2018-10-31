@@ -24,8 +24,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   error;
   chunk: number;
   wishlist: any[];
-  addToWishlistLoading: boolean;
-  deleteFromWishlistLoading: boolean;
 
 
   constructor(private store: Store<fromRoot.AppState>, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {

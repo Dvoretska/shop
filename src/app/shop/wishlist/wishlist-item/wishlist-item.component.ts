@@ -46,7 +46,7 @@ export class WishlistItemComponent implements OnInit, OnDestroy {
 
   deleteProductFromWishlist() {
     this.store.dispatch(new wishlistActions.DeleteProductFromWishlist({
-      id: this.wishlistItem['id']
+      product_id: this.wishlistItem['product_id']
     }));
   }
 
@@ -61,7 +61,7 @@ export class WishlistItemComponent implements OnInit, OnDestroy {
   }
 
   openProductDetails() {
-    this.router.navigate(['shop', this.wishlistItem.product_id]);
+    this.router.navigate(['shop/products', this.wishlistItem.product_id]);
   }
 
   ngOnDestroy() {}

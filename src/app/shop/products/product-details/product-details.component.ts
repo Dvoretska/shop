@@ -12,6 +12,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import {ToastrService} from "ngx-toastr";
 import {Product} from '../../product.model';
+import {skip} from 'rxjs/operators'
+import * as wishlistActions from "../../store/actions/wishlist.actions";
 
 @Component({
   selector: 'app-product-details',
@@ -30,8 +32,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
   addToCartLoading: boolean;
   isAddedToCart: boolean;
   totalNumberOfProducts: number;
-  cart;
   productQuantity;
+  wishlist: any[];
+  productIsInWishlist: boolean = false;
 
   constructor(private toastr: ToastrService,
               private router: Router,
@@ -40,6 +43,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
               private store: Store<fromRoot.AppState>) { }
 
   ngOnInit() {
+    this.store.dispatch(new wishlistActions.FetchWishlist());
     this.galleryOptions = [
       {
         width: '100%',
@@ -100,10 +104,16 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
         this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
       }
     });
-    this.store.pipe(select(fromRoot.getWishlist)).pipe(
+    this.store.pipe(select(fromRoot.getWishlist), skip(1)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.wishlist = state.wishlist;
+      const product_id = +this.route.snapshot.params['product_id'];
+      if(this.checkIfProductInWishlist(this.wishlist, product_id)) {
+        this.productIsInWishlist = true;
+      } else {
+        this.productIsInWishlist = false;
+      }
     });
   }
 
@@ -119,7 +129,23 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
 
   backToSearch(id) {
     this.store.dispatch(new productsActions.SetTargetId(id));
-    this.router.navigate(['shop']);
+    this.router.navigate(['../'], {relativeTo: this.route});
+  }
+
+  checkIfProductInWishlist(wishlist, product_id) {
+    return wishlist.some(obj => obj.product_id == product_id)
+  }
+
+  addProductToWishlist(product_id) {
+    this.store.dispatch(new wishlistActions.AddProductToWishlist({
+      product_id: product_id
+    }));
+  }
+
+  RemoveProductFromWishlist(product_id) {
+    this.store.dispatch(new wishlistActions.DeleteProductFromWishlist({
+      product_id: product_id
+    }));
   }
 
   ngOnDestroy(){
