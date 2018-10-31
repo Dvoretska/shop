@@ -60,12 +60,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
           setTimeout(()=>{
             let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#item'+this.targetId);
             this.pageScrollService.start(pageScrollInstance);
-            this.targetId = null;
-            console.log('2', this.targetId)
+            this.store.dispatch(new productsActions.RemoveTargetId());
           }, 0);
         } else {
           this.skip = 0;
-          console.log('1', this.skip)
           let category = +params['category'] || 1;
           let queryString = `?skip=0&limit=${this.limit}&category=${category}`;
           this.store.dispatch(new productsActions.FetchProductsInit(queryString));

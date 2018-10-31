@@ -60,7 +60,7 @@ export function productsReducer(state: ProductsState =initialState, action: prod
         error: action.payload.error,
         productWasAdded: false
       };
-    case productsActions.INIT_PRODUCT_WAS_ADDED:
+    case productsActions.REMOVE_PRODUCT_WAS_ADDED:
       return {
         ...state,
         productWasAdded: false
@@ -148,6 +148,12 @@ export function productsReducer(state: ProductsState =initialState, action: prod
         ...state,
         targetId: action.payload
       };
+    case productsActions.REMOVE_TARGET_ID:
+      return {
+        ...state,
+        targetId: null
+      };
+
 
     default:
       return state;

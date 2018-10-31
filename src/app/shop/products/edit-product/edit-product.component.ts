@@ -147,6 +147,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.store.dispatch(new productsActions.InitProductWasAdded());
+    this.store.dispatch(new productsActions.RemoveProductWasAdded());
   }
 }
