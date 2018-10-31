@@ -17,7 +17,7 @@
                    [addToCartWasClicked]="addToCartWasClicked">
     </app-wishlist-item>
   </ng-container>
-  <div class="loading-process-with-dim-background" *ngIf="deleteFromWishlistLoading">
+  <div class="loading-process-with-dim-background" *ngIf="deleteFromWishlistLoading || addToCartLoading">
     <div class="spinner">
       <div class="bounce1"></div>
       <div class="bounce2"></div>

@@ -54,13 +54,13 @@ export class FetchWishlistFailure implements Action {
 export class DeleteProductFromWishlist implements Action {
   readonly type = DELETE_PRODUCT_FROM_WISHLIST;
 
-  constructor(public payload: {id: number}) {}
+  constructor(public payload: {product_id: number}) {}
 }
 
 export class DeleteProductFromWishlistSuccess implements Action {
   readonly type = DELETE_PRODUCT_FROM_WISHLIST_SUCCESS;
 
-  constructor(public payload: {id: number, totalNumOfProductsInWishlist: number}) {}
+  constructor(public payload: {product_id: number, totalNumOfProductsInWishlist: number}) {}
 }
 
 export class DeleteProductFromWishlistFailure implements Action {

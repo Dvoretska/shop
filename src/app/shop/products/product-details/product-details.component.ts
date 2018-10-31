@@ -100,6 +100,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
         this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
       }
     });
+    this.store.pipe(select(fromRoot.getWishlist)).pipe(
+      untilComponentDestroyed(this)
+    ).subscribe((state) => {
+      this.wishlist = state.wishlist;
+    });
   }
 
   openModalCart() {

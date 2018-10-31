@@ -25,15 +25,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    span {
-      height: 23px;
-      width: 23px;
-    }
-    .highlight {
-      .heart-icon path {
-        fill: $red_color;
-      }
-    }
     .icon {
       display: inline-block;
       height: 23px;
@@ -44,14 +35,25 @@
       background-position: center;
       cursor: pointer;
     }
-    .wish-icon {
-      background-image: url('/assets/shop/heart.svg');
-    }
     .eye-icon {
       background-image: url('/assets/shop/eye.svg');
+      transition: transform 1s ease-out;
+      &:hover {
+        transform: scale(1.2);
+        transition: transform 1s ease-out;
+      }
     }
-    .bag-icon {
-      background-image: url('/assets/shop/bag.svg');
+    .heart-icon-wrapper {
+      height: 23px;
+      width: 23px;
+      &:hover .heart-icon {
+        animation: zoom 1s linear infinite;
+      }
+    }
+    .highlight {
+      .heart-icon path {
+        fill: $red_color;
+      }
     }
   }
   .brand {

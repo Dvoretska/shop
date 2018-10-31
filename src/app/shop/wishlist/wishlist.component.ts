@@ -16,8 +16,7 @@ export class WishlistComponent implements OnInit, OnDestroy {
   getWishlistLoading: boolean;
   deleteFromWishlistLoading: boolean;
   sizes: string[];
-  addToCartWasClicked: boolean = false;
-
+  addToCartLoading: boolean;
 
   constructor(private store: Store<fromRoot.AppState>) { }
 
@@ -36,6 +35,11 @@ export class WishlistComponent implements OnInit, OnDestroy {
     ).subscribe((state) => {
       this.sizes = state.sizes;
     });
+    this.store.pipe(select(fromRoot.getCart)).pipe(
+      untilComponentDestroyed(this)
+    ).subscribe((state) => {
+      this.addToCartLoading = state.addToCartLoading;
+    })
 
   }
 

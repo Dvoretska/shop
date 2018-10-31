@@ -24,7 +24,6 @@ export class WishlistItemComponent implements OnInit, OnDestroy {
   imagePath: string;
   selectedSize: string;
   productQuantity: number;
-  addToCartLoading: boolean;
   selectedProduct;
   constructor(private store: Store<fromRoot.AppState>, private router: Router, private modalService: BsModalService) { }
 
@@ -33,11 +32,9 @@ export class WishlistItemComponent implements OnInit, OnDestroy {
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.isAddedToCart = state.isAddedToCart;
-      this.addToCartLoading = state.addToCartLoading;
       this.productQuantity = state.productQty;
       if(this.isAddedToCart && this.selectedProduct) {
         this.addToCartWasClicked = false;
-        console.log('sel', this.selectedProduct)
         const initialState = {currentProduct: this.selectedProduct, size: this.selectedSize, quantity: this.productQuantity};
         this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
         this.selectedSize = null;

@@ -6,8 +6,7 @@ export class WishlistState {
     public wishlist: any[],
     public getWishlistLoading: boolean,
     public totalNumOfProductsInWishlist: number,
-    public deleteFromWishlistLoading: boolean,
-    public addedToWishlistId: number
+    public deleteFromWishlistLoading: boolean
   ) { }
 }
 
@@ -16,8 +15,7 @@ export const initialState: WishlistState = {
   wishlist: [],
   getWishlistLoading: false,
   totalNumOfProductsInWishlist: null,
-  deleteFromWishlistLoading: false,
-  addedToWishlistId: null
+  deleteFromWishlistLoading: false
 };
 
 export function wishlistReducer(state: WishlistState = initialState, action: wishlistActions.wishlistActions) {
@@ -30,10 +28,9 @@ export function wishlistReducer(state: WishlistState = initialState, action: wis
     case wishlistActions.ADD_PRODUCT_TO_WISHLIST_SUCCESS:
       return {
         ...state,
-        wishlist: state.wishlist.concat(action.payload.item),
+        wishlist: state.wishlist.concat({product_id: action.payload.item.product_id.id}),
         totalNumOfProductsInWishlist: action.payload.totalNumOfProductsInWishlist,
-        addToWishlistLoading: false,
-        addedToWishlistId: action.payload.item.product_id.id
+        addToWishlistLoading: false
       };
     case wishlistActions.ADD_PRODUCT_TO_WISHLIST_FAILURE:
       return {
@@ -67,7 +64,7 @@ export function wishlistReducer(state: WishlistState = initialState, action: wis
       };
     case wishlistActions.DELETE_PRODUCT_FROM_WISHLIST_SUCCESS:
       let changedArr = [...state.wishlist];
-      let index = changedArr.findIndex(x => x.id == action.payload.id);
+      let index = changedArr.findIndex(x => x.product_id == action.payload.product_id);
       return {
         ...state,
         wishlist: [...state.wishlist.slice(0, index), ...state.wishlist.slice(index + 1)],

@@ -69,7 +69,7 @@ export class WishlistEffects {
         return this.http.delete(`${environment.API_URL}/delete-from-wishlist`, options).pipe(
           map((res) => {
             return new WishlistActions.DeleteProductFromWishlistSuccess({
-              id: res['id'],
+              product_id: res['product_id'],
               totalNumOfProductsInWishlist: res['count'][0].count
             });
           }),

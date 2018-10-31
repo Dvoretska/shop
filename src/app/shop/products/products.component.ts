@@ -24,7 +24,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   error;
   chunk: number;
   wishlist: any[];
-  addedToWishlistId: number;
+  addToWishlistLoading: boolean;
+  deleteFromWishlistLoading: boolean;
+
 
   constructor(private store: Store<fromRoot.AppState>, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
     PageScrollConfig.defaultDuration = 1000;
@@ -46,7 +48,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
       untilComponentDestroyed(this)
     ).subscribe((state) => {
         this.wishlist = state.wishlist;
-        this.addedToWishlistId = state.addedToWishlistId
     });
     this.skip = this.chunk;
     if (this.targetId) {
