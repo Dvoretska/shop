@@ -1,5 +1,5 @@
 <div class="card-item-container" hover activeClass="active" [el]="[button1, button2, deleteBlock]">
-  <img [src]="imagePath" alt="" class="cart-img">
+  <img [src]="imagePath" alt="" class="cart-img" (click)="openProductDetails()">
   <div class="content-box">
     <div class="block">
       <div class="title brand">{{cartItem.brand}}</div>

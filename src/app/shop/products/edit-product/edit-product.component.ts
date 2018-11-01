@@ -20,13 +20,13 @@ export interface Category {
   styleUrls: ['./edit-product.component.scss']
 })
 export class EditProductComponent implements OnInit, OnDestroy {
-  price: '';
-  brand: '';
-  description: '';
-  material: '';
-  discount: '';
+  price: string = '';
+  brand: string = '';
+  description: string = '';
+  material: string = '';
+  discount: string = '';
   files = [];
-  warning: boolean = false;
+  warning: string = '';
   isHighlight: boolean = false;
   categories: Category[];
   selectedCategory: null;
@@ -36,6 +36,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
   productWasAdded;
   loading: boolean;
   getState$: Observable<fromProducts.ProductsState>;
+  subjectMaxLength: number = 50;
 
   constructor(private store: Store<fromProducts.ProductsState>,
               private toastr: ToastrService,
@@ -66,12 +67,21 @@ export class EditProductComponent implements OnInit, OnDestroy {
   }
 
   uploadImages(event) {
+    this.warning = '';
     for(let i = 0; i < event.files.length; i++){
-      if (/\.(jpe?g|png|gif)$/i.test(event.files[i].name)) {
-        this.files.push({file: event.files[i], id: i});
-        this.warning = false
+      if (!/\.(jpe?g|png|gif)$/i.test(event.files[i].name)) {
+        this.warning = 'Download images with extension jpeg, jpg or png.'
       } else {
-        this.warning = true
+        if(this.files.length) {
+          if(this.files.length >= 3) {
+            this.warning = ' The uploaded files exceed the limit.';
+            return this.files;
+          }
+          let prevId = this.files[this.files.length - 1].id;
+          this.files.push({file: event.files[i], id: prevId + 1});
+        } else {
+          this.files.push({file: event.files[i], id: i});
+        }
       }
     }
     this.getImagePreviews();
@@ -99,16 +109,21 @@ export class EditProductComponent implements OnInit, OnDestroy {
   getImagePreviews() {
     this.imageUrls = [];
     if(this.files && this.files.length) {
-    for (let i =0; i < this.files.length ; i++){
-        if (/\.(jpe?g|png|gif)$/i.test(this.files[i].file.name)) {
-          let reader = new FileReader()
-          reader.readAsDataURL(this.files[i].file);
-          reader.onload = () => {
-            this.imageUrls[this.files[i].id] = reader.result;
-          };
-        }
+    for (let i = 0; i < this.files.length ; i++){
+        let reader = new FileReader();
+        reader.onload = () => {
+          this.imageUrls[this.files[i].id] = reader.result;
+        };
+        reader.readAsDataURL(this.files[i].file);
       }
     }
+  }
+
+  subjectSignsLeft () {
+    if(this.brand) {
+      return this.subjectMaxLength - this.brand.length
+    }
+    return this.subjectMaxLength
   }
 
   onCreateProduct() {

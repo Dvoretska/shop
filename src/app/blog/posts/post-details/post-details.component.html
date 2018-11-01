@@ -8,6 +8,7 @@
       <div [innerHTML]="post.content" class="post-content"></div>
       <span class="post-owner">{{ postOwner }}</span>
     </div>
+    <div class="view">View comments</div>
     <div class="separator" (click)="toggleComments()"></div>
     <div [ngClass]="{show: displayComments, hide: !displayComments}">
       <div class="info-message" *ngIf="comments.length == 0">There are no comments yet</div>

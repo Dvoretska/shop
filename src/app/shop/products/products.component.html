@@ -15,12 +15,16 @@
   <div class="content-wrapper" >
     <div class="lds-ripple" *ngIf="initLoading"><div></div><div></div></div>
     <ng-container *ngIf="products">
-      <div class="content">
+      <div class="content" *ngIf="products.length">
         <app-product *ngFor="let product of products"
                      [product]="product"
                      [attr.id]="'item' + product.id"
                      [wishlist]="wishlist">
         </app-product>
+      </div>
+      <div class="no-content" *ngIf="!products.length">
+        <img src="/assets/loupe.svg" alt="" class="loupe-icon">
+        <span>Sorry, no results were found.</span>
       </div>
       <div class="button-wrapper" *ngIf="products.length >= 3 && products.length < totalAmount && (!initLoading || !loading)">
         <button (click)="loadMore()" class="my-button load">

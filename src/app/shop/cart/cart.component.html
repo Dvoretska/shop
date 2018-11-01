@@ -4,7 +4,7 @@
     <img src="/assets/empty-bag.svg" alt="" class="cart-icon">
     <div class="title">Cart is empty.</div>
     <div class="text">Looks like you have no items in your shopping cart.</div>
-    <div class="text">Click <a routerLink="/shop">here</a> to continue shopping.</div>
+    <div class="text">Click <a routerLink="/shop/products">here</a> to continue shopping.</div>
   </div>
   <ng-container *ngIf="cart.length">
     <header class="cart-header">
@@ -18,7 +18,7 @@
                    [isAddedToCart]="isAddedToCart"></app-cart-item>
     <h5>Total amount: <strong>${{totalAmount}}</strong></h5>
     <div class="button-wrapper">
-      <button class="my-button order-btn"><span>ORDER</span></button>
+      <button class="my-button order-btn"><span>PLACE AN ORDER</span></button>
     </div>
   </ng-container>
   <div class="loading-process-with-dim-background" *ngIf="addToCartLoading || decreaseCartLoading || deleteFromCartLoading">

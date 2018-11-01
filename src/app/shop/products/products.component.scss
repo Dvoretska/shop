@@ -40,6 +40,15 @@
       grid-template-rows: auto [last-line];
       font-family: 'goudy_old_stylebold_italic';
     }
+    .no-content {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 50px 0;
+      .loupe-icon {
+        width: 40px;
+        height: 40px;
+      }
+    }
     .button-wrapper {
       text-align: center;
       margin-top: 30px;

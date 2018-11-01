@@ -10,12 +10,9 @@ export class ShopComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
-  ngOnInit() {
-    console.log(this.route)
-  }
+  ngOnInit() {}
 
   onEditProduct() {
-    // this.router.navigate(['shop/edit-product/']);
     this.router.navigate(['edit-product'], {relativeTo: this.route});
   }
 

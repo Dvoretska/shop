@@ -3,6 +3,7 @@ import {environment} from "../../../../environments/environment";
 import * as cartActions from "../../store/actions/cart.actions";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../store/reducers/reducer.factory";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cart-item',
@@ -15,7 +16,7 @@ export class CartItemComponent implements OnInit {
   @Input() isAddedToCart;
   imagePath: string;
 
-  constructor(private store: Store<fromRoot.AppState>) { }
+  constructor(private store: Store<fromRoot.AppState>, private router: Router) { }
 
   ngOnInit() {
     this.imagePath = `${environment.API_URL}/${this.cartItem.images[0]}`;
@@ -37,5 +38,9 @@ export class CartItemComponent implements OnInit {
     this.store.dispatch(new cartActions.DecreaseQuantityOfProductInCart({
       product_id: this.cartItem['product_id'], size: this.cartItem['size']
     }));
+  }
+
+  openProductDetails() {
+    this.router.navigate(['shop/products', this.cartItem['product_id']]);
   }
 }

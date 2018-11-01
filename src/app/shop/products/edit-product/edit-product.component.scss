@@ -1,3 +1,5 @@
+@import '../../../../variables.scss';
+
 form {
   max-width: 800px;
   margin: 50px auto 0;
@@ -8,6 +10,14 @@ form {
   .text {
     margin-bottom: 7px;
     display: inline-block;
+  }
+  .counter-validation {
+    color: $grey_color;
+    font-family: 'goudy_old_stylebold';
+    font-size: 16px;
+    line-height: 16px;
+    margin-top: 3px;
+    margin-left: 3px;
   }
   #file-drag-drop {
     cursor: pointer;
@@ -23,7 +33,10 @@ form {
       background: #f4f4f4;
       border-radius: 4px;
       border: 2px dashed #ccc;
-      margin-bottom: 10px;
+      span {
+        font-family: 'goudy_old_stylebold';
+        font-size: 18px;
+      }
       .icon-cloud-download {
         width: 40px;
         height: 40px;
@@ -32,10 +45,10 @@ form {
       .warning {
         width:100%;
         color: red;
-        line-height: 16px;
-        font-size: 12px;
+        line-height: 14px;
+        font-size: 14px;
         text-align: center;
-        margin-bottom: 10px;
+        margin-bottom: 7px;
       }
     }
     .inputfile {
@@ -52,6 +65,14 @@ form {
       border: 2px dashed #7957d5;
       background-color: #fff;
     }
+  }
+  .img-valid {
+    font-family: 'goudy_old_stylebold';
+    font-size: 16px;
+    line-height: 16px;
+    color: $grey_color;
+    margin-bottom: 10px;
+    margin-left: 3px;
   }
   .wrapper-file-list {
     display: flex;

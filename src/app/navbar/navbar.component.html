@@ -32,8 +32,8 @@
           <span class="username">{{ username }}</span>
         </a>
       </li>
-       <li class="nav-item">
-        <a class="nav-link count-wrapper" routerLink="/shop/wishlist" #wishlistElement>
+       <li class="nav-item" *ngIf="isAuthorized()" #wishlistElement>
+        <a class="nav-link count-wrapper" routerLink="/shop/wishlist" >
         	<div class="nav-icon-heart nav-icon"></div>
           <div class="wishlist-count count" *ngIf="totalNumOfProductsInWishlist">
             <span>{{totalNumOfProductsInWishlist}}</span>
