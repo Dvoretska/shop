@@ -1,0 +1,107 @@
+@import '../../../../variables.scss';
+
+.comments-wrapper {
+  width: 100%;
+  margin-bottom: 20px;
+  .comment-heading {
+    display: flex;
+    align-items: center;
+    border: 2px solid #595f66;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    height: 35px;
+    border-bottom: none;
+    padding: 0 15px;
+    color: $grey_color;
+  }
+  .date-item {
+    margin-left: auto;
+  }
+  .comment-body {
+    display: flex;
+    align-items: center;
+    border: 2px solid #595f66;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 100%;
+    padding: 5px 10px 5px 15px;
+    min-height: 35px;
+    overflow: hidden;
+    .cta {
+      border: 1px solid black;
+      border-radius: 4px;
+      font-family: 'goudy_old_stylebold_italic';
+      margin-left: auto;
+      font-size: 14px;
+      cursor: pointer;
+      background-color: #eee;
+      display: flex;
+      align-items: center;
+      .pencil-icon {
+        width: 15px;
+        height: 15px;
+        margin-right: 3px;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+  .edit-input-wrapper {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    position: relative;
+    .edit-comment-input {
+      border: 2px solid #595f66;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      width: 100%;
+      display: inline-block;
+      padding: 5px 70px 5px 15px;
+    }
+    .edit-cta {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 1px solid black;
+      border-radius: 4px;
+      font-family: 'goudy_old_stylebold_italic';
+      font-size: 14px;
+      cursor: pointer;
+      background-color: $red_color;
+      color: white;
+    }
+  }
+  .close-icon {
+    width: 11px;
+    height: 11px;
+    margin-left: 7px;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .comments-wrapper {
+    .comment-heading {
+      flex-direction: column;
+      height: 50px;
+      position: relative;
+    }
+    .date-item {
+      font-size: 14px;
+      margin: 0 auto;
+    }
+    .close-icon {
+      position: absolute;
+      top: 7px;
+      right: 10px;
+    }
+  }
+}
+

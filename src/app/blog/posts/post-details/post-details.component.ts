@@ -24,11 +24,7 @@ export class PostDetailsComponent implements OnInit {
   displayComments: boolean = false;
   commentText: string = '';
   text: string;
-  isEditMode: boolean = false;
-  isViewMode: boolean = true;
-  selectedComment: number;
-  changedCommentText: string = '';
-  user: {};
+  user: any;
   postOwner: string;
 
 
@@ -60,38 +56,16 @@ export class PostDetailsComponent implements OnInit {
     this.displayComments = !this.displayComments;
   }
 
-  formattedDate(date) {
-    return new Date(date)['toGMTString']();
-
-  }
   onAddComment() {
     if (this.commentText) {
       this.blogService.addComment(this.commentText, this.id).subscribe(
-      (res: {comment: Comment}) => {
-        this.commentText = '';
-        this.comments.push(res.comment)
-      },
-      (err) => {
-        this.toastr.error(`${err.error.rights}`);
-      })
-    }
-  }
-
-  onUpdateComment(id) {
-    if (this.changedCommentText) {
-      this.blogService.updateComment(this.changedCommentText, id).subscribe(
         (res: {comment: Comment}) => {
-          let commentIndex = this.comments.findIndex((comment => comment.id == id));
-          this.comments[commentIndex].text = res.comment.text;
-          this.isEditMode = false;
-          this.isViewMode = true;
+          this.commentText = '';
+          this.comments.push(res.comment)
         },
         (err) => {
           this.toastr.error(`${err.error.rights}`);
-        }
-      )
-    } else {
-      this.toastr.error('You can\'t save empty comment!');
+        })
     }
   }
 
@@ -114,26 +88,6 @@ export class PostDetailsComponent implements OnInit {
     this.router.navigate(['blog/edit-post/', this.id]);
   }
 
-  onEditComment(id, text) {
-    this.selectedComment = id;
-    this.isViewMode = false;
-    this.isEditMode = true;
-    this.changedCommentText = text;
-  }
-
-  onDeleteComment(id) {
-    this.blogService.deleteComment(id).subscribe(
-      () => {
-        this.comments = this.comments.filter((comment) => {
-          return comment.id !== id
-        })
-      },
-      (err) => {
-        this.toastr.error(`${err.error.rights}`);
-      }
-    )
-  }
-
   isEditPostAllowed() {
     if(this.post) {
       return this.user['role'] == 'admin' || this.user['email'] == this.post.user_id.email;
@@ -146,10 +100,5 @@ export class PostDetailsComponent implements OnInit {
     }
   }
 
-  isUpdateCommentAllowed(email) {
-    if(this.post) {
-      return this.user['role'] == 'admin' || this.user['role'] == 'premium' && this.user['email'] == email;
-    }
-  }
 }
 

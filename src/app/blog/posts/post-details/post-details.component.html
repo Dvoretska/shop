@@ -13,33 +13,7 @@
     <div [ngClass]="{show: displayComments, hide: !displayComments}">
       <div class="info-message" *ngIf="comments.length == 0">There are no comments yet</div>
       <ng-container *ngIf="comments.length !== 0">
-        <div class="comments-wrapper" *ngFor="let comment of comments">
-          <div class="comment-heading">
-            <span class="heading-item">{{ comment.email.substring(0, comment.email.lastIndexOf('@')) }}</span>
-            <span class="heading-item date-item">{{ formattedDate(comment.created) }}</span>
-            <img src="src/assets/cancel.svg"
-                 alt="close"
-                 class="close-icon"
-                 *ngIf="isUpdateCommentAllowed(comment.email)"
-                 (click)="onDeleteComment(comment.id)">
-          </div>
-          <div class="comment-body" *ngIf="isViewMode || selectedComment !== comment.id">
-            <div>{{ comment.text }}</div>
-            <button class="cta"
-                    (click)="onEditComment(comment.id, comment.text)"
-                    *ngIf="isUpdateCommentAllowed(comment.email)">Edit</button>
-          </div>
-          <div class="edit-input-wrapper" *ngIf="selectedComment == comment.id && isEditMode">
-            <input type="text"
-                   maxlength="255"
-                   placeholder="Add a comment"
-                   class="edit-comment-input"
-                   autofocus
-                   [(ngModel)]="changedCommentText"
-                   (keyup.enter)="onUpdateComment(comment.id)">
-            <button class="edit-cta" (click)="onUpdateComment(comment.id)">Save</button>
-          </div>
-        </div>
+        <app-comment *ngFor="let comment of comments" [comment]="comment" [comments]="comments" [post]="post"></app-comment>
       </ng-container>
       <hr>
       <div class="input-wrapper" *ngIf="isAddCommentAllowed()">
@@ -49,7 +23,9 @@
                class="add-comment-input"
                [(ngModel)]="commentText"
                (keyup.enter)="onAddComment()">
-        <button class="cta" (click)="onAddComment()" [disabled]="!commentText">Submit</button>
+        <button class="my-button cta" (click)="onAddComment()" [disabled]="!commentText">
+          <span>Submit</span>
+        </button>
       </div>
     </div>
 </div>

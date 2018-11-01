@@ -1,0 +1,30 @@
+<div class="comments-wrapper">
+  <div class="comment-heading">
+    <span class="heading-item">{{ comment.email.substring(0, comment.email.lastIndexOf('@')) }}</span>
+    <span class="heading-item date-item">{{ formattedDate(comment.created) }}</span>
+    <img src="src/assets/cancel.svg"
+         alt="close"
+         class="close-icon"
+         *ngIf="isUpdateCommentAllowed(comment.email)"
+         (click)="onDeleteComment(comment.id)">
+  </div>
+  <div class="comment-body" *ngIf="isViewMode || selectedComment !== comment.id">
+    <div>{{ comment.text }}</div>
+    <button class="cta"
+            (click)="onEditComment(comment.id, comment.text)"
+            *ngIf="isUpdateCommentAllowed(comment.email)">
+      <img src="/assets/pencil.svg" alt="" class="pencil-icon">
+      <span>Edit</span>
+    </button>
+  </div>
+  <div class="edit-input-wrapper" *ngIf="selectedComment == comment.id && isEditMode">
+    <input type="text"
+           maxlength="255"
+           placeholder="Add a comment"
+           class="edit-comment-input"
+           autofocus
+           [(ngModel)]="changedCommentText"
+           (keyup.enter)="onUpdateComment(comment.id)">
+    <button class="edit-cta" (click)="onUpdateComment(comment.id)">Save</button>
+  </div>
+</div>

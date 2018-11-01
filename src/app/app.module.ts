@@ -60,6 +60,7 @@ import { CartModalComponent } from './shop/cart/cart-modal/cart-modal.component'
 import { CartItemComponent } from './shop/cart/cart-item/cart-item.component';
 import { WishlistComponent } from './shop/wishlist/wishlist.component';
 import { WishlistItemComponent } from './shop/wishlist/wishlist-item/wishlist-item.component';
+import { CommentComponent } from './blog/posts/comment/comment.component';
 
 
 @NgModule({
@@ -92,7 +93,8 @@ import { WishlistItemComponent } from './shop/wishlist/wishlist-item/wishlist-it
     CartItemComponent,
     HoverDirective,
     WishlistComponent,
-    WishlistItemComponent
+    WishlistItemComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
