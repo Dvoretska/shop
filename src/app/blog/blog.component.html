@@ -1,6 +1,21 @@
 <app-navbar></app-navbar>
 <div class="posts-wrapper">
-  <app-header></app-header>
+  <header>
+    <h2 class="heading"><span class="first-letter">D</span>ISCOVER THE WORLD OF THE TRUE ROMANTIC</h2>
+    <nav>
+      <ul>
+        <li [routerLink]="['shop']" routerLinkActive="active-link" >
+          <span>SHOP</span>
+        </li>
+        <li [routerLink]="['./']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+          <span>DISCOVER</span>
+        </li>
+        <li [routerLink]="['create-post']" routerLinkActive="active-link" *ngIf="myRole !== 'admin'">
+          <span>CREATE POST</span>
+        </li>
+      </ul>
+    </nav>
+  </header>
   <div class="blog-container">
     <router-outlet></router-outlet>
     <app-corners></app-corners>

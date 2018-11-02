@@ -8,7 +8,6 @@ import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { EditorOptionsService } from "../../shared/editor-options.service";
 
 
 @Component({
@@ -25,17 +24,21 @@ export class EditPostComponent implements OnInit {
   editMode:boolean = false;
   text: string;
   title: string;
-  optToolbar;
+  optToolbar = [
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ 'size': ['small', 'large', 'huge'] }],
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'align': [] }]
+  ];
 
   constructor(private modalService: BsModalService,
               private blogService: BlogService,
               private router: Router,
               private route: ActivatedRoute,
-              private toastr: ToastrService,
-              private edOptService: EditorOptionsService) { }
+              private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.optToolbar = this.edOptService.initOptions();
     this.route.params.subscribe(
       (params: Params) => {
         this.editMode = params['id'] != null;

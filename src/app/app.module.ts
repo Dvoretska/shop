@@ -6,61 +6,64 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './shop/store/reducers/reducer.factory';
+import { AppRoutingModule } from './app-routing.module';
+import { EffectsModule } from "@ngrx/effects";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { CartEffects } from "./shop/store/effects/cart.effects";
+import { ErrorsEffects } from "./shop/store/effects/errors.effects";
+import { WishlistEffects } from "./shop/store/effects/wishlist.effects";
+import { ProductsEffects } from "./shop/store/effects/products.effects";
 
-import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { LandingComponent } from './landing/landing.component';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { RegisterModalComponent } from './auth/register-modal/register-modal.component';
-import { LoginModalComponent } from './auth/login-modal/login-modal.component';
 import { AuthService } from './auth/auth.service';
 import { StorageService } from './storage.service';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { ProfileComponent } from './profile/profile.component';
-import { UserComponent } from './users/users-list/user/user.component';
-import { UsersListComponent } from './users/users-list/users-list.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
 import { UserService } from './users/user.service';
 import { BlogService } from './blog/blog.service';
-import { UserCreateComponent } from './users/user-create/user-create.component';
-import { AppRoutingModule } from './app-routing.module';
-import { PostsComponent } from './blog/posts/posts.component';
-import { PostComponent } from './blog/posts/post/post.component';
-import { BlogComponent } from './blog/blog.component';
+import { AuthGuardService } from './auth/auth-guard.service';
+
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { InViewportModule } from 'ng-in-viewport';
 import { NgxMasonryModule } from 'ngx-masonry';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxGalleryModule } from 'ngx-gallery';
+
+import { FileUploadDirective } from './directives/file-upload.directive';
+import { ImagePreviewDirective } from './directives/img-preview.directive';
+import { HoverDirective } from './directives/hover.directive';
+
+import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { LandingComponent } from './landing/landing.component';
+import { RegisterModalComponent } from './auth/register-modal/register-modal.component';
+import { LoginModalComponent } from './auth/login-modal/login-modal.component';
 import { PostDetailsComponent } from './blog/posts/post-details/post-details.component';
 import { EditPostComponent } from './blog/edit-post/edit-post.component';
-import { AuthGuardService } from './auth/auth-guard.service';
+import { ProfileComponent } from './profile/profile.component';
+import { UserComponent } from './users/users-list/user/user.component';
+import { UsersListComponent } from './users/users-list/users-list.component';
+import { UserCreateComponent } from './users/user-create/user-create.component';
+import { PostsComponent } from './blog/posts/posts.component';
+import { PostComponent } from './blog/posts/post/post.component';
+import { BlogComponent } from './blog/blog.component';
 import { ShopComponent } from './shop/shop.component';
-import { HeaderComponent } from './header/header.component';
-import { CornersComponent } from './corners/corners.component';
+import { CornersComponent } from './UI/corners/corners.component';
 import { ProductComponent } from './shop/products/product/product.component';
 import { EditProductComponent } from './shop/products/edit-product/edit-product.component';
 import { ProductsComponent } from './shop/products/products.component';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { FileUploadDirective } from './shared/file-upload.directive';
-import { ImagePreviewDirective } from './shared/img-preview.directive';
-import { HoverDirective } from './shared/hover.directive';
-import { EditorOptionsService } from './shared/editor-options.service';
-import {EffectsModule} from "@ngrx/effects";
-import {CartEffects} from "./shop/store/effects/cart.effects";
-import {ErrorsEffects} from "./shop/store/effects/errors.effects";
-import {WishlistEffects} from "./shop/store/effects/wishlist.effects";
-import {ProductsEffects} from "./shop/store/effects/products.effects";
 import { ProductDetailsComponent } from './shop/products/product-details/product-details.component';
-import { NgxGalleryModule } from 'ngx-gallery';
 import { CartComponent } from './shop/cart/cart.component';
 import { CartModalComponent } from './shop/cart/cart-modal/cart-modal.component';
 import { CartItemComponent } from './shop/cart/cart-item/cart-item.component';
 import { WishlistComponent } from './shop/wishlist/wishlist.component';
 import { WishlistItemComponent } from './shop/wishlist/wishlist-item/wishlist-item.component';
 import { CommentComponent } from './blog/posts/comment/comment.component';
+import { SaleComponent } from './UI/sale/sale.component';
+import { ClockComponent } from './UI/clock/clock.component';
 
 
 @NgModule({
@@ -80,7 +83,6 @@ import { CommentComponent } from './blog/posts/comment/comment.component';
     PostDetailsComponent,
     EditPostComponent,
     ShopComponent,
-    HeaderComponent,
     CornersComponent,
     ProductComponent,
     EditProductComponent,
@@ -94,7 +96,9 @@ import { CommentComponent } from './blog/posts/comment/comment.component';
     HoverDirective,
     WishlistComponent,
     WishlistItemComponent,
-    CommentComponent
+    CommentComponent,
+    SaleComponent,
+    ClockComponent
   ],
   imports: [
     BrowserModule,
@@ -128,7 +132,6 @@ import { CommentComponent } from './blog/posts/comment/comment.component';
   UserService,
   BlogService,
   AuthGuardService,
-  EditorOptionsService,
   { provide: 'Window',  useValue: window }],
   bootstrap: [AppComponent],
   entryComponents: [RegisterModalComponent, LoginModalComponent, UserCreateComponent, PostDetailsComponent, CartModalComponent]
