@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-clock',
@@ -7,31 +8,35 @@ import { interval, map } from 'rxjs/operators';
   styleUrls: ['./clock.component.scss']
 })
 export class ClockComponent implements OnInit {
-  future = new Date().setHours(23,59,59,999);
   diff;
+  hours = '00';
+  minutes = '00';
+  seconds = '00';
 
   constructor() { }
 
   ngOnInit() {
-    this.diff = Math.floor(this.future.getTime() - new Date().getTime())
-  }
-
-  getCurrentTime() {
-    return new Date();
-  }
-
-  serializeClockTime(date) {
     interval(1000).pipe(
-      map((x) => {
-        return {
-          hours: this.startHours - date.getHours(),
-          minutes: date.getMinutes(),
-          seconds: date.getSeconds()
-        }
-        this.diff = Math.floor((this.future.getTime() - new Date().getTime()) / 1000);
-        return x;
+      map(() => {
+        this.diff = Math.floor(new Date().setHours(23,59,59,999) - new Date().getTime());
+        this.serializeClockTime(this.diff);
       })
-  )
+    ).subscribe()
   }
+
+  serializeClockTime(duration) {
+    let clockHours = duration / (1000*60*60);
+    let absoluteHours = Math.floor(clockHours);
+    this.hours = absoluteHours > 9 ? absoluteHours : '0' + absoluteHours;
+
+    let clockMinutes = (clockHours - absoluteHours) * 60;
+    let absoluteMinutes = Math.floor(clockMinutes);
+    this.minutes = absoluteMinutes > 9 ? absoluteMinutes : '0' +  absoluteMinutes;
+
+    let clockSeconds = (clockMinutes - absoluteMinutes) * 60;
+    let absoluteSeconds = Math.floor(clockSeconds);
+    this.seconds = absoluteSeconds > 9 ? absoluteSeconds : '0' + absoluteSeconds;
+  }
+
 
 }

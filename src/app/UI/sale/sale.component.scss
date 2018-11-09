@@ -1,0 +1,22 @@
+@import '../../../variables.scss';
+
+.sale-container {
+  width: 100vw;
+  height: 70px;
+  background-color: rgba(0, 0, 0, .5);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 11;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 30px;
+  .first-word {
+    margin-right: 10px;
+  }
+  .last-word {
+    margin-left: 10px;
+  }
+}
