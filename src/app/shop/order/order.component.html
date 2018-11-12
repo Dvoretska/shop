@@ -1,4 +1,4 @@
-<form #productForm="ngForm" class="form">
+<form #productForm class="form" id="form">
   <div class="form-group">
     <label for="phone">
       <strong>Phone</strong>
@@ -27,10 +27,12 @@
     <strong class="text">Comment</strong>
     <textarea class="form-control" name="comment" [(ngModel)]="comment"></textarea>
   </div>
-
-  <!--<button type="submit" class="my-button" (click)="onCreateProduct()" [disabled]="isFormInvalid()">-->
-    <!--<app-spinner *ngIf="loading"></app-spinner>-->
-    <!--<span *ngIf="!loading">Save product</span>-->
-  <!--</button>-->
+  <button (click)="downloadPdf()">Download PDF</button>
+  <!--<div class="button-wrapper">-->
+    <!--<button type="submit" class="my-button" (click)="onCreateProduct()" [disabled]="isFormInvalid()">-->
+      <!--<app-spinner *ngIf="loading"></app-spinner>-->
+      <!--<span *ngIf="!loading">Checkout</span>-->
+    <!--</button>-->
+  <!--</div>-->
 </form>
 

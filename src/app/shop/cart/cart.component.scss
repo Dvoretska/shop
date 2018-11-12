@@ -52,8 +52,9 @@
     align-items: center;
     background: #F4F0ED;
     margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 10px 15px;
     h5 {
-      margin-top: 15px;
       font-family: 'goudy_old_stylebold';
       font-size: 22px;
       line-height: 22px;
@@ -63,6 +64,7 @@
     }
   }
   .button-wrapper {
+    width: 100%;
     text-align: center;
   }
 }
