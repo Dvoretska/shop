@@ -1,5 +1,5 @@
 <h2 class="heading">SHOP THE TRUE DRAMATIC DRESSES</h2>
-<div class="wrapper">
+<div class="wrapper" #parent>
   <div class="filters">
     <h5 class="filter-title">SHOP BY</h5>
     <ul class="filter-options">
@@ -12,7 +12,7 @@
       <li>Price</li>
     </ul>
   </div>
-  <div class="content-wrapper" >
+  <div class="content-wrapper" #container>
     <div class="lds-ripple" *ngIf="initLoading"><div></div><div></div></div>
     <ng-container *ngIf="products">
       <div class="content" *ngIf="products.length">
@@ -29,13 +29,10 @@
       <div class="button-wrapper" *ngIf="products.length >= 3 && products.length < totalAmount && (!initLoading || !loading)">
         <button (click)="loadMore()" class="my-button load">
           <span *ngIf="!loading">Load more</span>
-          <div class="spinner" *ngIf="loading">
-            <div class="bounce1"></div>
-            <div class="bounce2"></div>
-            <div class="bounce3"></div>
-          </div>
+          <app-spinner *ngIf="loading"></app-spinner>
         </button>
       </div>
     </ng-container>
   </div>
 </div>
+

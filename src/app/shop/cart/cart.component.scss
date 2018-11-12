@@ -45,8 +45,22 @@
       text-align: right;
     }
   }
-  h5 {
-    margin-top: 15px;
+  .total-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #F4F0ED;
+    margin-bottom: 15px;
+    h5 {
+      margin-top: 15px;
+      font-family: 'goudy_old_stylebold';
+      font-size: 22px;
+      line-height: 22px;
+    }
+    strong {
+      margin-left: auto;
+    }
   }
   .button-wrapper {
     text-align: center;

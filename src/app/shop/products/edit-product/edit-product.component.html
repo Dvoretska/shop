@@ -63,11 +63,7 @@
   </div>
 
   <button type="submit" class="my-button" (click)="onCreateProduct()" [disabled]="isFormInvalid()">
-    <div class="spinner" *ngIf="loading">
-      <div class="bounce1"></div>
-      <div class="bounce2"></div>
-      <div class="bounce3"></div>
-    </div>
+    <app-spinner *ngIf="loading"></app-spinner>
     <span *ngIf="!loading">Save product</span>
   </button>
 </form>

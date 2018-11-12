@@ -9,9 +9,9 @@ import { interval } from 'rxjs';
 })
 export class ClockComponent implements OnInit {
   diff;
-  hours = '00';
-  minutes = '00';
-  seconds = '00';
+  hours: string | number = '0' + 0;
+  minutes: string | number = '0' + 0;
+  seconds: string | number = '0' + 0;
 
   constructor() { }
 

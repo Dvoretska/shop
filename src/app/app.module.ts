@@ -33,7 +33,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxGalleryModule } from 'ngx-gallery';
 
 import { FileUploadDirective } from './directives/file-upload.directive';
-import { ImagePreviewDirective } from './directives/img-preview.directive';
 import { HoverDirective } from './directives/hover.directive';
 
 import { AppComponent } from './app.component';
@@ -64,6 +63,8 @@ import { WishlistItemComponent } from './shop/wishlist/wishlist-item/wishlist-it
 import { CommentComponent } from './blog/posts/comment/comment.component';
 import { SaleComponent } from './UI/sale/sale.component';
 import { ClockComponent } from './UI/clock/clock.component';
+import { OrderComponent } from './shop/order/order.component';
+import { SpinnerComponent } from './UI/spinner/spinner.component';
 
 
 @NgModule({
@@ -88,7 +89,6 @@ import { ClockComponent } from './UI/clock/clock.component';
     EditProductComponent,
     ProductsComponent,
     FileUploadDirective,
-    ImagePreviewDirective,
     ProductDetailsComponent,
     CartComponent,
     CartModalComponent,
@@ -98,7 +98,9 @@ import { ClockComponent } from './UI/clock/clock.component';
     WishlistItemComponent,
     CommentComponent,
     SaleComponent,
-    ClockComponent
+    ClockComponent,
+    OrderComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -134,6 +136,6 @@ import { ClockComponent } from './UI/clock/clock.component';
   AuthGuardService,
   { provide: 'Window',  useValue: window }],
   bootstrap: [AppComponent],
-  entryComponents: [RegisterModalComponent, LoginModalComponent, UserCreateComponent, PostDetailsComponent, CartModalComponent]
+  entryComponents: [RegisterModalComponent, LoginModalComponent, UserCreateComponent, PostDetailsComponent, CartModalComponent, SaleComponent]
 })
 export class AppModule { }

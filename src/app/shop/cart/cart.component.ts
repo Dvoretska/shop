@@ -19,7 +19,7 @@ export class CartComponent implements OnInit, OnDestroy {
   getCartLoading: boolean;
   decreaseCartLoading: boolean;
   deleteFromCartLoading: boolean;
-
+  orderIsPlaced: boolean = false;
 
   constructor(private store: Store<fromRoot.AppState>, private toastr: ToastrService) { }
 
@@ -37,6 +37,10 @@ export class CartComponent implements OnInit, OnDestroy {
       this.decreaseCartLoading = state.decreaseCartLoading;
       this.deleteFromCartLoading = state.deleteFromCartLoading;
     })
+  }
+
+  onOpenOrder() {
+    this.orderIsPlaced = true;
   }
 
   ngOnDestroy() {

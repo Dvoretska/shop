@@ -120,6 +120,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
   }
 
   subjectSignsLeft () {
+    console.log(this.brand)
     if(this.brand) {
       return this.subjectMaxLength - this.brand.length
     }
