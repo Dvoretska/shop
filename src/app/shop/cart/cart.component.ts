@@ -4,6 +4,7 @@ import * as fromRoot from "../store/reducers/reducer.factory";
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import * as cartActions from "../store/actions/cart.actions";
 import {ToastrService} from "ngx-toastr";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -19,9 +20,8 @@ export class CartComponent implements OnInit, OnDestroy {
   getCartLoading: boolean;
   decreaseCartLoading: boolean;
   deleteFromCartLoading: boolean;
-  orderIsPlaced: boolean = false;
 
-  constructor(private store: Store<fromRoot.AppState>, private toastr: ToastrService) { }
+  constructor(private store: Store<fromRoot.AppState>, private toastr: ToastrService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.store.dispatch(new cartActions.FetchCart());
@@ -40,7 +40,7 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   onOpenOrder() {
-    this.orderIsPlaced = true;
+    this.router.navigate(['order'], {relativeTo: this.route});
   }
 
   ngOnDestroy() {

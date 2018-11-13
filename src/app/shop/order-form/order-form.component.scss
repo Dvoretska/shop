@@ -1,0 +1,29 @@
+@import '../../../variables.scss';
+
+.form-header {
+  display: flex;
+  border-bottom: 3px solid black;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+  font-family: 'goudy_old_stylebold';
+  font-size: 20px;
+  .info {
+    width: 50%;
+    text-align: left;
+  }
+}
+.form {
+  margin-top: 15px;
+  background-color: $light_red_color;
+  padding: 15px;
+  border-radius: 10px;
+  label {
+    font-family: 'goudy_old_stylebold';
+    font-size: 20px;
+    line-height: 20px;
+  }
+  .button-wrapper {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -11,7 +11,7 @@ import {BsModalService} from "ngx-bootstrap/modal";
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import {ToastrService} from "ngx-toastr";
-import {Product} from '../../product.model';
+import {Product} from '../../models/product.model';
 import {skip} from 'rxjs/operators'
 import * as wishlistActions from "../../store/actions/wishlist.actions";
 

@@ -4,7 +4,7 @@
     <h5 class="filter-title">SHOP BY</h5>
     <ul class="filter-options">
       <li *ngFor="let category of categories">
-        <a [routerLink]="['/shop/products']" [queryParams]="{category: category.id}">{{category.category}}</a>
+        <a [routerLink]="['/shop/products']" [queryParams]="{category: category.id}">{{category.name}}</a>
       </li>
     </ul>
     <h5 class="filter-title">REFINE</h5>

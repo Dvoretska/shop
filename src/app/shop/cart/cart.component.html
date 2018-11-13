@@ -23,7 +23,7 @@
     <div class="button-wrapper">
       <button class="my-button order-btn" (click)="onOpenOrder()"><span>Proceed to checkout</span></button>
     </div>
-    <app-order *ngIf="orderIsPlaced"></app-order>
+    <router-outlet></router-outlet>
   </ng-container>
   <div class="loading-process-with-dim-background" *ngIf="addToCartLoading || decreaseCartLoading || deleteFromCartLoading">
     <app-spinner></app-spinner>

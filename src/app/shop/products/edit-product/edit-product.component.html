@@ -31,9 +31,9 @@
   <div class="form-group">
     <strong>Category</strong>
     <ng-select *ngIf="categories" [items]="categories"
-               bindLabel="category"
+               bindLabel="name"
                bindValue="id"
-               [(ngModel)]="selectedCategory" name="category" placeholder="Choose category">
+               [(ngModel)]="selectedCategory" name="name" placeholder="Choose category">
     </ng-select>
   </div>
   <div class="form-group">

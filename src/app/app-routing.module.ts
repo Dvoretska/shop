@@ -14,6 +14,8 @@ import { ProductsComponent } from './shop/products/products.component';
 import { ProductDetailsComponent } from './shop/products/product-details/product-details.component';
 import { CartComponent } from './shop/cart/cart.component';
 import { WishlistComponent } from './shop/wishlist/wishlist.component';
+import { OrderFormComponent } from './shop/order-form/order-form.component';
+import { CheckoutComponent } from './shop/checkout/checkout.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -23,7 +25,10 @@ const appRoutes: Routes = [
     { path: 'products/:product_id', component: ProductDetailsComponent},
     { path: 'edit-product', component: EditProductComponent},
     { path: 'wishlist', component: WishlistComponent },
-    { path: 'cart', component: CartComponent }
+    { path: 'cart', component: CartComponent, children: [
+      { path: 'order', component: OrderFormComponent},
+    ]},
+    { path: 'checkout', component: CheckoutComponent }
   ]},
 
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },

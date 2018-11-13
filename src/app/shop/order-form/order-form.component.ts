@@ -1,20 +1,30 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import {ActivatedRoute, Router} from "@angular/router";
+import {OrderForm} from '../models/orderForm.model';
 
 @Component({
   selector: 'app-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss']
+  templateUrl: './order-form.component.html',
+  styleUrls: ['./order-form.component.scss']
 })
-export class OrderComponent implements OnInit {
-  phone: string  = '';
-  city: string  = '';
-  name: string  = '';
-  email: string  = '';
-  comment: string  = '';
+
+export class OrderFormComponent implements OnInit {
+  orderForm: OrderForm = {
+    phone: '',
+    city: '',
+    first_name: '',
+    surname: '',
+    email: '',
+    comment: '',
+    post_code:  '',
+    country: ''
+  };
+
   @ViewChild('productForm') productForm:ElementRef;
-  constructor() { }
+
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
   }
@@ -36,5 +46,15 @@ export class OrderComponent implements OnInit {
       pdf.save('MYPdf.pdf'); // Generated PDF
     });
   }
+
+  saveOrder() {
+    let savedData:FormData = new FormData();
+    for(let key in this.orderForm){
+      savedData.append(key, this.orderForm[key]);
+    }
+
+    // this.router.navigate(['../../checkout'], {relativeTo: this.route});
+  }
+
 
 }

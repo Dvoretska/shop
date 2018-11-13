@@ -63,8 +63,9 @@ import { WishlistItemComponent } from './shop/wishlist/wishlist-item/wishlist-it
 import { CommentComponent } from './blog/posts/comment/comment.component';
 import { SaleComponent } from './UI/sale/sale.component';
 import { ClockComponent } from './UI/clock/clock.component';
-import { OrderComponent } from './shop/order/order.component';
+import { OrderFormComponent } from './shop/order-form/order-form.component';
 import { SpinnerComponent } from './UI/spinner/spinner.component';
+import { CheckoutComponent } from './shop/checkout/checkout.component';
 
 
 @NgModule({
@@ -99,8 +100,9 @@ import { SpinnerComponent } from './UI/spinner/spinner.component';
     CommentComponent,
     SaleComponent,
     ClockComponent,
-    OrderComponent,
-    SpinnerComponent
+    OrderFormComponent,
+    SpinnerComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
