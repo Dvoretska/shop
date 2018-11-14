@@ -1,8 +1,15 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import {Component, OnInit, ElementRef, ViewChild, Inject, OnDestroy} from '@angular/core';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import {ActivatedRoute, Router} from "@angular/router";
 import {OrderForm} from '../models/orderForm.model';
+import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
+import {DOCUMENT} from "@angular/common";
+import * as orderActions from "../store/actions/order.actions";
+import {select, Store} from "@ngrx/store";
+import * as fromRoot from "../store/reducers/reducer.factory";
+import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+
 
 @Component({
   selector: 'app-order',
@@ -10,7 +17,7 @@ import {OrderForm} from '../models/orderForm.model';
   styleUrls: ['./order-form.component.scss']
 })
 
-export class OrderFormComponent implements OnInit {
+export class OrderFormComponent implements OnInit,OnDestroy {
   orderForm: OrderForm = {
     phone: '',
     city: '',
@@ -21,12 +28,21 @@ export class OrderFormComponent implements OnInit {
     post_code:  '',
     country: ''
   };
+  order_number;
 
   @ViewChild('productForm') productForm:ElementRef;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private pageScrollService: PageScrollService,
+              @Inject(DOCUMENT) private document: any,
+              private store: Store<fromRoot.AppState>) {
+    PageScrollConfig.defaultDuration = 1500;
+  }
 
   ngOnInit() {
+    let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#formContainer');
+    this.pageScrollService.start(pageScrollInstance);
   }
 
   downloadPdf() {
@@ -52,9 +68,16 @@ export class OrderFormComponent implements OnInit {
     for(let key in this.orderForm){
       savedData.append(key, this.orderForm[key]);
     }
-
-    // this.router.navigate(['../../checkout'], {relativeTo: this.route});
+    this.store.dispatch(new orderActions.SaveOrder({savedData}));
+    this.store.pipe(select(fromRoot.getOrder)).pipe(
+      untilComponentDestroyed(this)
+    ).subscribe((state) => {
+      this.order_number = state.order_number;
+      if(this.order_number) {
+        this.router.navigate(['../../checkout', this.order_number], {relativeTo: this.route});
+      }
+    });
   }
 
-
+  ngOnDestroy() {}
 }

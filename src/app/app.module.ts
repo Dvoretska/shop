@@ -14,6 +14,7 @@ import { CartEffects } from "./shop/store/effects/cart.effects";
 import { ErrorsEffects } from "./shop/store/effects/errors.effects";
 import { WishlistEffects } from "./shop/store/effects/wishlist.effects";
 import { ProductsEffects } from "./shop/store/effects/products.effects";
+import { OrderEffects } from "./shop/store/effects/order.effects";
 
 import { AuthService } from './auth/auth.service';
 import { StorageService } from './storage.service';
@@ -124,7 +125,7 @@ import { CheckoutComponent } from './shop/checkout/checkout.component';
     InViewportModule,
     NgxMasonryModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([CartEffects, ProductsEffects, ErrorsEffects, WishlistEffects]),
+    EffectsModule.forRoot([CartEffects, ProductsEffects, ErrorsEffects, WishlistEffects, OrderEffects]),
     NgxGalleryModule
   ],
   providers: [AuthService, {

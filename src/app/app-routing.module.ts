@@ -28,7 +28,7 @@ const appRoutes: Routes = [
     { path: 'cart', component: CartComponent, children: [
       { path: 'order', component: OrderFormComponent},
     ]},
-    { path: 'checkout', component: CheckoutComponent }
+    { path: 'checkout/:order_number', component: CheckoutComponent }
   ]},
 
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
