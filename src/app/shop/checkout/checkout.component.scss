@@ -1,0 +1,71 @@
+@import '../../../variables.scss';
+
+.checkout-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0 0;
+  width: 70%;
+  margin: 0 auto;
+  font-family: 'goudy_old_stylebold';
+  .title {
+    margin: 0 auto 15px;
+    color: $red_color;
+  }
+  .order-title {
+    font-size: 22px;
+    text-decoration: underline;
+    margin: 10px auto 15px;
+    text-align: center;
+  }
+  .info-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .info {
+    font-family: 'goudy_old_stylebold';
+    font-size: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    .item-title {
+      width: 20%;
+    }
+    .item-text {
+      width: 80%;
+    }
+  }
+  .total {
+    margin: 15px 0;
+    font-size: 22px;
+    text-decoration: underline;
+  }
+  table {
+    text-align: center;
+    display: table;
+    overflow-x: auto;
+    width: 100%;
+    margin-top: 15px;
+    tr {
+      height: 40px;
+      th {
+        font-size: 20px;
+      }
+      td {
+        font-size: 18px;
+      }
+      th, td{
+        border: 1px solid black;
+      }
+    }
+  }
+  .button-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+  }
+}
+
+.loader-wrapper {
+  text-align: center;
+  margin-top: 50px;
+}

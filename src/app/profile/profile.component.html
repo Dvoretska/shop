@@ -22,7 +22,7 @@
       <div class="error" *ngIf="checkErrors('password')">{{ checkErrors('password') }}</div>
     </label>
   </div>
-  <div class="save-wrapper">
+  <div class="button-wrapper">
     <button class="my-button" (click)="onSave()" [disabled]="!isChanged && !newPassword"><span>Save changes</span></button>
   </div>
 </div>

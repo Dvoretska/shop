@@ -1,4 +1,65 @@
-<h1>Congratulations!</h1>
-<h3>Your order has been placed</h3>
-<div>Order number </div>
-<div>Customer Information</div>
+<div class="checkout-wrapper" *ngIf="!fetchOrderLoading">
+  <h3 class="title">Congratulations! Your order has been placed.</h3>
+  <div id="checkout">
+    <div class="order-title" *ngIf="orderInfo">
+      <span>Your order number: {{orderInfo['order_number']}}</span>
+    </div>
+    <div class="info-title">Customer information:</div>
+    <div *ngIf="orderPerson">
+      <div class="info">
+        <span class="item-title">First name: </span>
+        <span class="item-text">{{orderPerson.first_name}}</span>
+      </div>
+      <div class="info">
+        <span class="item-title">Surname: </span>
+        <span class="item-text">{{orderPerson.surname}}</span>
+      </div>
+      <div class="info">
+        <span class="item-title">Phone: </span>
+        <span class="item-text">{{orderPerson.phone}}</span>
+      </div>
+      <div class="info">
+        <span class="item-title">Postal code: </span>
+        <span class="item-text">{{orderPerson.post_code}}</span>
+      </div>
+      <div class="info">
+        <span class="item-title">Country: </span>
+        <span class="item-text">{{orderPerson.country}}</span>
+      </div>
+      <div class="info">
+        <span class="item-title">City: </span>
+        <span class="item-text">{{orderPerson.city}}</span>
+      </div>
+      <div class="info">
+        <span class="item-title">Email: </span>
+        <span class="item-text">{{email}}</span>
+      </div>
+    </div>
+    <div class="total">Total amount to be paid: {{totalAmount}}$</div>
+    <table>
+      <tr>
+        <th>Brand</th>
+        <th>Category</th>
+        <th>Size</th>
+        <th>Quantity</th>
+        <th>Amount</th>
+      </tr>
+      <ng-container *ngIf="orders">
+        <tr *ngFor="let order of orders">
+          <td>{{order.brand}}</td>
+          <td>{{order.category}}</td>
+          <td>{{order.size}}</td>
+          <td>{{order.quantity}}</td>
+          <td>{{order.amount}}$</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+  <div class="button-wrapper">
+    <button class="my-button" (click)="downloadPdf()"><span>Download PDF</span></button>
+  </div>
+</div>
+<div class="loader-wrapper">
+  <app-ripple *ngIf="fetchOrderLoading"></app-ripple>
+</div>
+

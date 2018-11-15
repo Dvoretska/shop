@@ -7,14 +7,10 @@
         <a [routerLink]="['/shop/products']" [queryParams]="{category: category.id}">{{category.name}}</a>
       </li>
     </ul>
-    <h5 class="filter-title">REFINE</h5>
-    <ul>
-      <li>Price</li>
-    </ul>
   </div>
   <div class="content-wrapper" #container>
     <div class="lds-ripple" *ngIf="initLoading"><div></div><div></div></div>
-    <ng-container *ngIf="products">
+    <ng-container *ngIf="products && !initLoading">
       <div class="content" *ngIf="products.length">
         <app-product *ngFor="let product of products"
                      [product]="product"

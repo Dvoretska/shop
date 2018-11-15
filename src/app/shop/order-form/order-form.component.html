@@ -3,6 +3,18 @@
 </header>
 <form #productForm class="form" id="form">
   <div class="form-group">
+    <label for="first_name">
+      <strong>First name</strong>
+    </label>
+    <input type="text" class="form-control" name="first_name" id="first_name" [(ngModel)]="orderForm.first_name">
+  </div>
+  <div class="form-group">
+    <label for="surname">
+      <strong>Surname</strong>
+    </label>
+    <input type="text" class="form-control" name="surname" id="surname" [(ngModel)]="orderForm.surname">
+  </div>
+  <div class="form-group">
     <label for="phone">
       <strong>Phone</strong>
     </label>
@@ -27,22 +39,10 @@
     <input type="text" class="form-control" name="city" id="city" [(ngModel)]="orderForm.city">
   </div>
   <div class="form-group">
-    <label for="first_name">
-      <strong>First name</strong>
-    </label>
-    <input type="text" class="form-control" name="first_name" id="first_name" [(ngModel)]="orderForm.first_name">
-  </div>
-  <div class="form-group">
-    <label for="surname">
-      <strong>Surname</strong>
-    </label>
-    <input type="text" class="form-control" name="surname" id="surname" [(ngModel)]="orderForm.surname">
-  </div>
-  <div class="form-group">
     <label for="email">
       <strong>Email</strong>
     </label>
-    <input type="text" class="form-control" name="email" id="email" [(ngModel)]="orderForm.email">
+    <input type="text" class="form-control" name="email" id="email" [(ngModel)]="orderForm.email" disabled="true">
   </div>
   <div class="form-group">
     <label>

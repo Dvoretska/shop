@@ -29,7 +29,7 @@
     <div class="discount" *ngIf="product.discount"><span class="title">With Discount: $</span>{{product.discount}}</div>
     <button class="my-button cta cart" (click)="openModalCart()">
       <ng-container>
-        <span>Add to the Cart</span>
+        <span>Add to Cart</span>
         <svg fill="#000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"x="0px" y="0px"
            width="20px" height="20px" viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve" class="icon">
         <g>
@@ -47,8 +47,8 @@
       </div>
     </button>
     <button class="my-button cta heart">
-      <span *ngIf="!productIsInWishlist" (click)="addProductToWishlist(product.id)">Add to the Wish List</span>
-      <span *ngIf="productIsInWishlist" (click)="RemoveProductFromWishlist(product.id)">Added to the Wish List</span>
+      <span *ngIf="!productIsInWishlist" (click)="addProductToWishlist(product.id)">Add to Wish List</span>
+      <span *ngIf="productIsInWishlist" (click)="RemoveProductFromWishlist(product.id)">Added to Wish List</span>
       <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
          width="20px" height="20px" viewBox="0 0 510 510"
            style="enable-background:new 0 0 510 510;" xml:space="preserve" class="icon"

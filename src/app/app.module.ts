@@ -67,6 +67,8 @@ import { ClockComponent } from './UI/clock/clock.component';
 import { OrderFormComponent } from './shop/order-form/order-form.component';
 import { SpinnerComponent } from './UI/spinner/spinner.component';
 import { CheckoutComponent } from './shop/checkout/checkout.component';
+import { RippleComponent } from './UI/ripple/ripple.component';
+import { ButtonComponent } from './UI/button/button.component';
 
 
 @NgModule({
@@ -103,7 +105,9 @@ import { CheckoutComponent } from './shop/checkout/checkout.component';
     ClockComponent,
     OrderFormComponent,
     SpinnerComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    RippleComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

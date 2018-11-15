@@ -6,20 +6,20 @@
     <span class="my-role">{{ myRole }}</span>
   </nav>
   <table style="width:100%">
-  <tr>
-    <th>Photo</th>
-    <th>User</th>
-    <th>New Password</th>
-    <th>User Role</th>
-    <th>Save changes</th>
-    <th>Delete user</th>
-  </tr>
-  <tr *ngIf="errorMsg; else usersList">
-    <td colspan="6" class="td-error">{{ errorMsg }}</td>
-  </tr>
-  <ng-container *ngIf="users">
-    <tr app-user *ngFor="let user of users" [user]="user" [roles]="roles" #usersList (deletedUser)="onClearUsers($event)"></tr>
-  </ng-container>
-</table>
+    <tr>
+      <th>Photo</th>
+      <th>User</th>
+      <th>New Password</th>
+      <th>User Role</th>
+      <th>Save changes</th>
+      <th>Delete user</th>
+    </tr>
+    <tr *ngIf="errorMsg; else usersList">
+      <td colspan="6" class="td-error">{{ errorMsg }}</td>
+    </tr>
+    <ng-container *ngIf="users">
+      <tr app-user *ngFor="let user of users" [user]="user" [roles]="roles" #usersList (deletedUser)="onClearUsers($event)"></tr>
+    </ng-container>
+  </table>
 </div>
 

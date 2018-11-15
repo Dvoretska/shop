@@ -1,6 +1,4 @@
 import {Component, OnInit, ElementRef, ViewChild, Inject, OnDestroy} from '@angular/core';
-import * as jspdf from 'jspdf';
-import html2canvas from 'html2canvas';
 import {ActivatedRoute, Router} from "@angular/router";
 import {OrderForm} from '../models/orderForm.model';
 import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
@@ -28,7 +26,7 @@ export class OrderFormComponent implements OnInit,OnDestroy {
     post_code:  '',
     country: ''
   };
-  order_number;
+  order_number: number;
 
   @ViewChild('productForm') productForm:ElementRef;
 
@@ -41,31 +39,15 @@ export class OrderFormComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit() {
+    this.orderForm.email = JSON.parse(localStorage.getItem('user')).email;
     let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#formContainer');
     this.pageScrollService.start(pageScrollInstance);
-  }
-
-  downloadPdf() {
-    //   doc.save(`Order${Date.now()}.pdf`);
-
-     var data = document.getElementById('form');
-    html2canvas(data).then(canvas => {
-      var imgWidth = 208;
-      var pageHeight = 295;
-      var imgHeight = canvas.height * imgWidth / canvas.width;
-      var heightLeft = imgHeight;
-
-      const contentDataURL = canvas.toDataURL('image/png')
-      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
-      var position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-      pdf.save('MYPdf.pdf'); // Generated PDF
-    });
   }
 
   saveOrder() {
     let savedData:FormData = new FormData();
     for(let key in this.orderForm){
+      console.log(key, this.orderForm[key])
       savedData.append(key, this.orderForm[key]);
     }
     this.store.dispatch(new orderActions.SaveOrder({savedData}));

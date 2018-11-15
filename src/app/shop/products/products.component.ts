@@ -74,13 +74,13 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
       });
   }
 
-  ngAfterViewInit() {
-    if(!sessionStorage .getItem('adIsClosed')) {
-      let comp = this._cfr.resolveComponentFactory(SaleComponent);
-      let saleComponent = this.container.createComponent(comp);
-      saleComponent.instance._ref = saleComponent;
-    }
-  }
+  // ngAfterViewInit() {
+  //   if(!sessionStorage .getItem('adIsClosed')) {
+  //     let comp = this._cfr.resolveComponentFactory(SaleComponent);
+  //     let saleComponent = this.container.createComponent(comp);
+  //     saleComponent.instance._ref = saleComponent;
+  //   }
+  // }
 
   loadMore() {
       this.skip += this.limit;

@@ -32,9 +32,10 @@
           <span class="username">{{ username }}</span>
         </a>
       </li>
-       <li class="nav-item" *ngIf="isAuthorized()" #wishlistElement>
-        <a class="nav-link count-wrapper" routerLink="/shop/wishlist" >
+      <li class="nav-item" *ngIf="isAuthorized()" #wishlistElement>
+        <a class="nav-link count-wrapper" routerLink="/shop/wishlist">
         	<div class="nav-icon-heart nav-icon"></div>
+          <span class="tooltiptext">Wishlist</span>
           <div class="wishlist-count count" *ngIf="totalNumOfProductsInWishlist">
             <span>{{totalNumOfProductsInWishlist}}</span>
           </div>
@@ -43,11 +44,18 @@
        <li class="nav-item" *ngIf="isAuthorized()" #cartElement>
         <a class="nav-link count-wrapper" routerLink="/shop/cart">
         	<div class="nav-icon-cart nav-icon"></div>
+          <span class="tooltiptext">Cart</span>
           <div class="cart-count count" *ngIf="totalNumberOfProducts">
             <span>{{totalNumberOfProducts}}</span>
           </div>
         </a>
       </li>
+       <li class="nav-item" *ngIf="isAuthorized()" #ordersElement>
+         <a class="nav-link count-wrapper" routerLink="/shop/wishlist">
+           <div class="nav-icon-orders nav-icon"></div>
+           <span class="tooltiptext">Orders</span>
+         </a>
+       </li>
       <li class="nav-item" *ngIf="!isAuthorized()">
         <a class="nav-link" (click)="openModalRegister()">REGISTER</a>
       </li>

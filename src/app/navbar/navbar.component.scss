@@ -19,6 +19,7 @@ nav {
     align-items: center;
     a.nav-link {
       cursor: pointer;
+      position: relative;
       &.nav-link-profile {
         display: flex;
         justify-content: center;
@@ -53,6 +54,20 @@ nav {
           }
         }
       }
+      .tooltiptext {
+        visibility: hidden;
+        background-color: black;
+        color: #fff;
+        left: -5px;
+        text-align: center;
+        border-radius: 6px;
+        padding: 3px 5px;
+        position: absolute;
+        z-index: 1;
+      }
+      &:hover .tooltiptext {
+        visibility: visible;
+      }
       .user-avatar {
         width: 40px;
         height: 40px;
@@ -71,14 +86,11 @@ nav {
         vertical-align: middle;
         max-width: 100px;
       }
-      .nav-icon-head {
-        background-image: url('../../assets/MenuIcons/head.png');
-      }
       .nav-icon-heart {
         background-image: url('../../assets/MenuIcons/heart.png');
       }
-      .nav-icon-settings {
-        background-image: url('../../assets/MenuIcons/settings.png');
+      .nav-icon-orders {
+        background-image: url('../../assets/MenuIcons/shopping-list.svg');
       }
       .nav-icon-cart {
         background-image: url('../../assets/shop/bag.svg');

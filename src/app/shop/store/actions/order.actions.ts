@@ -19,7 +19,7 @@ export class SaveOrder implements Action {
 export class SaveOrderSuccess implements Action {
   readonly type = SAVE_ORDER_SUCCESS;
 
-  constructor(public payload: {order_number: any}) {}
+  constructor(public payload: {order_number: number}) {}
 }
 
 export class SaveOrderFailure implements Action {
@@ -31,13 +31,13 @@ export class SaveOrderFailure implements Action {
 export class FetchOrder implements Action {
   readonly type = FETCH_ORDER;
 
-  constructor(public payload: {order_number: any}) {}
+  constructor(public payload: {order_number: number}) {}
 }
 
 export class FetchOrderSuccess implements Action {
   readonly type = FETCH_ORDER_SUCCESS;
 
-  constructor(public payload: {orders: any}) {}
+  constructor(public payload: {order_info: any, order: any, order_person: any, totalAmount: number}) {}
 }
 
 export class FetchOrderFailure implements Action {
