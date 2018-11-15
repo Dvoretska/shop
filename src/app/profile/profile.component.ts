@@ -39,6 +39,7 @@ export class ProfileComponent implements OnInit {
   imageUrlHandler($event) {
     this.url = $event;
   }
+
   fileUploaded($event) {
     this.errors = {};
     this.isChanged = true;

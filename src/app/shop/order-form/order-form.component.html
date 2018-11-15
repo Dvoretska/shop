@@ -51,7 +51,7 @@
     <textarea class="form-control" name="comment" [(ngModel)]="orderForm.comment"></textarea>
   </div>
   <div class="button-wrapper">
-    <button class="my-button" (click)="saveOrder()"><span>Checkout</span></button>
+    <app-button [text]="'Checkout'" (onClick)="saveOrder()"></app-button>
   </div>
 </form>
 

@@ -23,7 +23,7 @@
     </label>
   </div>
   <div class="button-wrapper">
-    <button class="my-button" (click)="onSave()" [disabled]="!isChanged && !newPassword"><span>Save changes</span></button>
+    <app-button [text]="'Save changes'" (onClick)="onSave()" [disabled]="!isChanged && !newPassword"></app-button>
   </div>
 </div>
 
