@@ -4,22 +4,24 @@ export class OrderState {
   constructor(
     public saveOrderLoading: boolean,
     public fetchOrderLoading: boolean,
+    public fetchOrdersLoading: boolean,
     public order_number: number,
     public order: any,
     public orderInfo: any,
     public orderPerson: any,
-    public totalAmount: number
+    public orders: any
   ) { }
 }
 
 export const initialState: OrderState = {
   saveOrderLoading: false,
   fetchOrderLoading: false,
+  fetchOrdersLoading: false,
   order_number: null,
   order: [],
   orderInfo: null,
   orderPerson: null,
-  totalAmount: null
+  orders: []
 };
 
 export function orderReducer(state: OrderState = initialState, action: orderActions.orderActions) {
@@ -52,13 +54,29 @@ export function orderReducer(state: OrderState = initialState, action: orderActi
         order: action.payload.order,
         orderInfo: action.payload.order_info,
         orderPerson: action.payload.order_person,
-        totalAmount: action.payload.totalAmount,
         fetchOrderLoading: false
       };
     case orderActions.FETCH_ORDER_FAILURE:
       return {
         ...state,
         fetchOrderLoading: false
+      };
+
+    case orderActions.FETCH_ORDERS:
+      return {
+        ...state,
+        fetchOrdersLoading: true
+      };
+    case orderActions.FETCH_ORDERS_SUCCESS:
+      return {
+        ...state,
+        orders: action.payload.orders,
+        fetchOrdersLoading: false
+      };
+    case orderActions.FETCH_ORDERS_FAILURE:
+      return {
+        ...state,
+        fetchOrdersLoading: false
       };
 
     default:

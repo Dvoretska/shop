@@ -1,0 +1,27 @@
+.order-wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 15px;
+  .order {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    .item {
+      flex: 1;
+      font-size: 16px;
+    }
+    .number {
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
+  .button-wrapper {
+    width: 100%;
+    text-align:right;
+    margin-top: 20px;
+  }
+
+}

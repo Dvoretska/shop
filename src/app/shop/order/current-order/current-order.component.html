@@ -1,41 +1,41 @@
-<div class="checkout-wrapper" *ngIf="!fetchOrderLoading">
+<div class="checkout-wrapper" *ngIf="!fetchOrderLoading && orderInfo">
   <h3 class="title">Congratulations! Your order has been placed.</h3>
   <div id="checkout">
-    <div class="order-title" *ngIf="orderInfo">
-      <span>Your order number: {{orderInfo['order_number']}}</span>
+    <div class="order-title">
+      <span>Your order number: №{{orderInfo['order_number']}}</span>
     </div>
     <div class="info-title">Customer information:</div>
     <div *ngIf="orderPerson">
       <div class="info">
         <span class="item-title">First name: </span>
-        <span class="item-text">{{orderPerson.first_name}}</span>
+        <span class="item-text">{{orderPerson.data.first_name}}</span>
       </div>
       <div class="info">
         <span class="item-title">Surname: </span>
-        <span class="item-text">{{orderPerson.surname}}</span>
+        <span class="item-text">{{orderPerson.data.surname}}</span>
       </div>
       <div class="info">
         <span class="item-title">Phone: </span>
-        <span class="item-text">{{orderPerson.phone}}</span>
+        <span class="item-text">{{orderPerson.data.phone}}</span>
       </div>
       <div class="info">
         <span class="item-title">Postal code: </span>
-        <span class="item-text">{{orderPerson.post_code}}</span>
+        <span class="item-text">{{orderPerson.data.post_code}}</span>
       </div>
       <div class="info">
         <span class="item-title">Country: </span>
-        <span class="item-text">{{orderPerson.country}}</span>
+        <span class="item-text">{{orderPerson.data.country}}</span>
       </div>
       <div class="info">
         <span class="item-title">City: </span>
-        <span class="item-text">{{orderPerson.city}}</span>
+        <span class="item-text">{{orderPerson.data.city}}</span>
       </div>
       <div class="info">
         <span class="item-title">Email: </span>
-        <span class="item-text">{{email}}</span>
+        <span class="item-text">{{orderPerson.email}}</span>
       </div>
     </div>
-    <div class="total">Total amount to be paid: {{totalAmount}}$</div>
+    <div class="total" *ngIf="orderInfo">Total amount to be paid: {{orderInfo['total_amount']}}$</div>
     <table>
       <tr>
         <th>Brand</th>

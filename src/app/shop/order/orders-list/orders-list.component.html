@@ -1,0 +1,15 @@
+<div class="container">
+  <div *ngIf="!orders.length" class="no-content-box">
+    <img src="/assets/bill.svg" alt="" class="icon">
+    <div class="title">You have no orders yet.</div>
+    <div class="text">Click <a routerLink="/shop/products">here</a> to continue shopping.</div>
+  </div>
+  <ng-container *ngIf="orders.length">
+    <header class="orders-header">
+      <div class="amount">Order number</div>
+      <div class="text price">Total amount</div>
+      <div class="text price">Date</div>
+    </header>
+    <app-order-item *ngFor="let order of orders" [order]="order"></app-order-item>
+  </ng-container>
+</div>

@@ -12,10 +12,11 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { EditProductComponent } from './shop/products/edit-product/edit-product.component';
 import { ProductsComponent } from './shop/products/products.component';
 import { ProductDetailsComponent } from './shop/products/product-details/product-details.component';
-import { CartComponent } from './shop/cart/cart.component';
+import { CartListComponent } from './shop/cart/cart-list/cart-list.component';
 import { WishlistComponent } from './shop/wishlist/wishlist.component';
-import { OrderFormComponent } from './shop/order-form/order-form.component';
-import { CheckoutComponent } from './shop/checkout/checkout.component';
+import { OrderFormComponent } from './shop/order/order-form/order-form.component';
+import { CurrentOrderComponent } from './shop/order/current-order/current-order.component';
+import { OrdersListComponent } from './shop/order/orders-list/orders-list.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -25,10 +26,11 @@ const appRoutes: Routes = [
     { path: 'products/:product_id', component: ProductDetailsComponent},
     { path: 'edit-product', component: EditProductComponent},
     { path: 'wishlist', component: WishlistComponent },
-    { path: 'cart', component: CartComponent, children: [
+    { path: 'cart', component: CartListComponent, children: [
       { path: 'order', component: OrderFormComponent},
     ]},
-    { path: 'checkout/:order_number', component: CheckoutComponent }
+    { path: 'current-order/:order_number', component: CurrentOrderComponent },
+    { path: 'orders', component: OrdersListComponent }
   ]},
 
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },

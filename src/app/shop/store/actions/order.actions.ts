@@ -9,6 +9,10 @@ export const FETCH_ORDER = 'FETCH_ORDER';
 export const FETCH_ORDER_SUCCESS = 'FETCH_ORDER_SUCCESS';
 export const FETCH_ORDER_FAILURE = 'FETCH_ORDER_FAILURE';
 
+export const FETCH_ORDERS = 'FETCH_ORDERS';
+export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
+export const FETCH_ORDERS_FAILURE = 'FETCH_ORDERS_FAILURE';
+
 
 export class SaveOrder implements Action {
   readonly type = SAVE_ORDER;
@@ -37,11 +41,29 @@ export class FetchOrder implements Action {
 export class FetchOrderSuccess implements Action {
   readonly type = FETCH_ORDER_SUCCESS;
 
-  constructor(public payload: {order_info: any, order: any, order_person: any, totalAmount: number}) {}
+  constructor(public payload: {order_info: any, order: any, order_person: any}) {}
 }
 
 export class FetchOrderFailure implements Action {
   readonly type = FETCH_ORDER_FAILURE;
+
+  constructor() {}
+}
+
+export class FetchOrders implements Action {
+  readonly type = FETCH_ORDERS;
+
+  constructor() {}
+}
+
+export class FetchOrdersSuccess implements Action {
+  readonly type = FETCH_ORDERS_SUCCESS;
+
+  constructor(public payload: {orders: any}) {}
+}
+
+export class FetchOrdersFailure implements Action {
+  readonly type = FETCH_ORDERS_FAILURE;
 
   constructor() {}
 }
@@ -52,4 +74,7 @@ export type orderActions =
   SaveOrderFailure |
   FetchOrder |
   FetchOrderSuccess |
-  FetchOrderFailure;
+  FetchOrderFailure |
+  FetchOrders |
+  FetchOrdersSuccess |
+  FetchOrdersFailure;

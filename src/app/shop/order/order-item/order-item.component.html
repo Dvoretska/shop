@@ -1,0 +1,11 @@
+<div class="order-wrapper">
+  <div *ngIf="order" class="order">
+    <div class="item number">№{{order.order_number}}</div>
+    <div class="item">{{order.total_amount}}$</div>
+    <div class="item">{{formattedDate()}}</div>
+  </div>
+  <div class="button-wrapper">
+    <app-button (onClick)="openOrderDetails()" [text]="'Order details'"></app-button>
+  </div>
+</div>
+

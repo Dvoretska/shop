@@ -64,6 +64,10 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
     })
   }
 
+  isAuthorized() {
+    return localStorage.getItem('user');
+  }
+
   ngAfterViewInit() {
     if(this.cartElement) {
       this.store.dispatch(new cartActions.GetTotalNumberOfProducts());
@@ -84,15 +88,15 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
       this.username = this.currentUser.email.substring(0, this.currentUser.email.lastIndexOf('@'));
     }
   }
+
   openModalRegister() {
     this.modalRef = this.modalService.show(RegisterModalComponent, { class : 'auth-modal' });
   }
+
   openModalLogin() {
     this.modalRef = this.modalService.show(LoginModalComponent, { class : 'auth-modal' });
   }
-  isAuthorized() {
-    return localStorage.getItem('user');
-  }
+
   onLogout() {
     localStorage.removeItem('user');
     this.store.dispatch(new cartActions.ClearCart());

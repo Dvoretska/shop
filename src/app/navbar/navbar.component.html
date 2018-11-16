@@ -50,8 +50,8 @@
           </div>
         </a>
       </li>
-       <li class="nav-item" *ngIf="isAuthorized()" #ordersElement>
-         <a class="nav-link count-wrapper" routerLink="/shop/wishlist">
+       <li class="nav-item" *ngIf="isAuthorized()">
+         <a class="nav-link count-wrapper" routerLink="/shop/orders">
            <div class="nav-icon-orders nav-icon"></div>
            <span class="tooltiptext">Orders</span>
          </a>

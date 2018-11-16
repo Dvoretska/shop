@@ -38,18 +38,36 @@ export class OrderEffects {
       ofType(OrderActions.FETCH_ORDER),
       map((action: OrderActions.FetchOrder) => action.payload),
       exhaustMap((payload) =>
-        this.http.get(`${environment.API_URL}/get-order/${payload.order_number}`).pipe(
+        this.http.get(`${environment.API_URL}/order/${payload.order_number}`).pipe(
           map((res)=>{
             return new OrderActions.FetchOrderSuccess({
              order_info: res['order_info'],
              order: res['order'],
-             order_person: res['order_person'],
-             totalAmount: res['totalAmount']
+             order_person: res['order_person']
             });
           }),
           catchError(error => {
             return from([new ErrorsActions.LoadError(error),
               new OrderActions.FetchOrderFailure()]);
+          })
+        )
+      )
+    );
+
+  @Effect()
+  getOrders = this.actions$
+    .pipe(
+      ofType(OrderActions.FETCH_ORDERS),
+      exhaustMap((payload) =>
+        this.http.get(`${environment.API_URL}/orders`).pipe(
+          map((res)=>{
+            return new OrderActions.FetchOrdersSuccess({
+              orders: res['orders']
+            });
+          }),
+          catchError(error => {
+            return from([new ErrorsActions.LoadError(error),
+              new OrderActions.FetchOrdersFailure()]);
           })
         )
       )

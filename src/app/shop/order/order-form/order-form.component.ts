@@ -1,11 +1,11 @@
 import {Component, OnInit, ElementRef, ViewChild, Inject, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {OrderForm} from '../models/orderForm.model';
+import {OrderForm} from '../../models/orderForm.model';
 import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 import {DOCUMENT} from "@angular/common";
-import * as orderActions from "../store/actions/order.actions";
+import * as orderActions from "../../store/actions/order.actions";
 import {select, Store} from "@ngrx/store";
-import * as fromRoot from "../store/reducers/reducer.factory";
+import * as fromRoot from "../../store/reducers/reducer.factory";
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 
 
@@ -47,7 +47,6 @@ export class OrderFormComponent implements OnInit,OnDestroy {
   saveOrder() {
     let savedData:FormData = new FormData();
     for(let key in this.orderForm){
-      console.log(key, this.orderForm[key])
       savedData.append(key, this.orderForm[key]);
     }
     this.store.dispatch(new orderActions.SaveOrder({savedData}));
@@ -56,7 +55,7 @@ export class OrderFormComponent implements OnInit,OnDestroy {
     ).subscribe((state) => {
       this.order_number = state.order_number;
       if(this.order_number) {
-        this.router.navigate(['../../checkout', this.order_number], {relativeTo: this.route});
+        this.router.navigate(['../../current-order', this.order_number], {relativeTo: this.route});
       }
     });
   }

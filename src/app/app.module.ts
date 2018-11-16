@@ -56,7 +56,7 @@ import { ProductComponent } from './shop/products/product/product.component';
 import { EditProductComponent } from './shop/products/edit-product/edit-product.component';
 import { ProductsComponent } from './shop/products/products.component';
 import { ProductDetailsComponent } from './shop/products/product-details/product-details.component';
-import { CartComponent } from './shop/cart/cart.component';
+import { CartListComponent } from './shop/cart/cart-list/cart-list.component';
 import { CartModalComponent } from './shop/cart/cart-modal/cart-modal.component';
 import { CartItemComponent } from './shop/cart/cart-item/cart-item.component';
 import { WishlistComponent } from './shop/wishlist/wishlist.component';
@@ -64,11 +64,13 @@ import { WishlistItemComponent } from './shop/wishlist/wishlist-item/wishlist-it
 import { CommentComponent } from './blog/posts/comment/comment.component';
 import { SaleComponent } from './UI/sale/sale.component';
 import { ClockComponent } from './UI/clock/clock.component';
-import { OrderFormComponent } from './shop/order-form/order-form.component';
+import { OrderFormComponent } from './shop/order/order-form/order-form.component';
 import { SpinnerComponent } from './UI/spinner/spinner.component';
-import { CheckoutComponent } from './shop/checkout/checkout.component';
+import { CurrentOrderComponent } from './shop/order/current-order/current-order.component';
 import { RippleComponent } from './UI/ripple/ripple.component';
 import { ButtonComponent } from './UI/button/button.component';
+import { OrdersListComponent } from './shop/order/orders-list/orders-list.component';
+import { OrderItemComponent } from './shop/order/order-item/order-item.component';
 
 
 @NgModule({
@@ -94,7 +96,7 @@ import { ButtonComponent } from './UI/button/button.component';
     ProductsComponent,
     FileUploadDirective,
     ProductDetailsComponent,
-    CartComponent,
+    CartListComponent,
     CartModalComponent,
     CartItemComponent,
     HoverDirective,
@@ -105,9 +107,11 @@ import { ButtonComponent } from './UI/button/button.component';
     ClockComponent,
     OrderFormComponent,
     SpinnerComponent,
-    CheckoutComponent,
+    CurrentOrderComponent,
     RippleComponent,
-    ButtonComponent
+    ButtonComponent,
+    OrdersListComponent,
+    OrderItemComponent
   ],
   imports: [
     BrowserModule,

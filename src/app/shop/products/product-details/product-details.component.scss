@@ -1,3 +1,5 @@
+@import '../../../../variables.scss';
+
 .back-block {
   position: absolute;
   left: 50%;
@@ -93,6 +95,18 @@
     .cart {
       width: 140px;
       height: 38px;
+    }
+    .heart{
+      &:hover {
+        span {
+          transition: color 0.5s ease-out;
+          color: black;
+        }
+      }
+      span {
+        transition: color 0.5s ease-out;
+        color: red;
+      }
     }
   }
 }

@@ -30,7 +30,7 @@ export class ErrorsEffects {
             console.log(error);
           } else {
             // Handle Http Error (error.status === 403, 404...)
-            if(typeof error.error === 'object') {
+            if(Object.keys(error.error).length) {
               this.toastr.error(`${Object.values(error.error)[0]}`);
             } else {
               this.toastr.error(`${error.status} - ${error.statusText}`);
