@@ -71,6 +71,7 @@ import { RippleComponent } from './UI/ripple/ripple.component';
 import { ButtonComponent } from './UI/button/button.component';
 import { OrdersListComponent } from './shop/order/orders-list/orders-list.component';
 import { OrderItemComponent } from './shop/order/order-item/order-item.component';
+import { FilterComponent } from './shop/products/filter/filter.component';
 
 
 @NgModule({
@@ -111,7 +112,8 @@ import { OrderItemComponent } from './shop/order/order-item/order-item.component
     RippleComponent,
     ButtonComponent,
     OrdersListComponent,
-    OrderItemComponent
+    OrderItemComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,15 +1,8 @@
 <h2 class="heading">SHOP THE TRUE DRAMATIC DRESSES</h2>
 <div class="wrapper" #parent>
-  <div class="filters">
-    <h5 class="filter-title">SHOP BY</h5>
-    <ul class="filter-options">
-      <li *ngFor="let category of categories">
-        <a [routerLink]="['/shop/products']" [queryParams]="{category: category.id}">{{category.name}}</a>
-      </li>
-    </ul>
-  </div>
+  <app-filter [categories]="categories"></app-filter>
   <div class="content-wrapper" #container>
-    <div class="lds-ripple" *ngIf="initLoading"><div></div><div></div></div>
+    <app-ripple *ngIf="initLoading"></app-ripple>
     <ng-container *ngIf="products && !initLoading">
       <div class="content" *ngIf="products.length">
         <app-product *ngFor="let product of products"

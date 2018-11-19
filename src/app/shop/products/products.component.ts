@@ -27,6 +27,7 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
   chunk: number;
   wishlist: any[];
   categories: any[];
+  getCategoryId: any;
   @ViewChild('parent', { read: ViewContainerRef }) container: ViewContainerRef;
 
   constructor(private store: Store<fromRoot.AppState>,

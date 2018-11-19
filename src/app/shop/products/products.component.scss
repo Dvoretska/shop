@@ -1,4 +1,4 @@
-.heading {
+ .heading {
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -13,23 +13,6 @@
 .wrapper {
   display: flex;
   width: 100%;
-  .filters {
-    width: 200px;
-    font-family: 'goudy_old_stylebold_italic';
-    margin-right: 50px;
-    .filter-title {
-      border-bottom: 2px solid black;
-    }
-    .filter-options li {
-      cursor: pointer;
-      padding: 3px 0;
-      a {
-        text-decoration: none;
-        color: black;
-        text-transform: capitalize;
-      }
-    }
-  }
   .content-wrapper {
     width: 100%;
     text-align: center;

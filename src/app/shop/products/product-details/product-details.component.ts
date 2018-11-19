@@ -79,7 +79,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
     ).subscribe((state) => {
       this.products = state.products;
       this.product = state.product;
-      this.sizes = state.sizes;
+      // if(this.product.category_id.slug)
+      // this.sizes = state.sizes;
       this.productDetailsLoading = state.productDetailsLoading;
       if(this.product) {
         this.galleryImages = [];

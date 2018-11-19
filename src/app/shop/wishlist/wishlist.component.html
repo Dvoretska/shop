@@ -1,4 +1,6 @@
-<div class="lds-ripple loading-animation" *ngIf="getWishlistLoading"><div></div><div></div></div>
+<div class="loading-animation">
+  <app-ripple *ngIf="getWishlistLoading"></app-ripple>
+</div>
 <div class="wishlist-container" *ngIf="wishlist && !getWishlistLoading">
   <div *ngIf="!wishlist.length" class="no-wishlist-box">
     <img src="/assets/bag.svg" alt="" class="wishlist-icon">

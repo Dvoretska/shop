@@ -1,4 +1,7 @@
-<div class="lds-ripple loading-animation" *ngIf="getCartLoading"><div></div><div></div></div>
+<div class="loading-animation">
+  <app-ripple *ngIf="getCartLoading"></app-ripple>
+</div>
+
 <div class="cart-container" *ngIf="cart && !getCartLoading">
   <div *ngIf="!cart.length" class="no-cart-box">
     <img src="/assets/empty-bag.svg" alt="" class="cart-icon">
