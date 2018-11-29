@@ -19,10 +19,12 @@ export class CurrentOrderComponent implements OnInit, OnDestroy {
   orders: any;
   email:string = '';
   fetchOrderLoading: boolean;
+  showDetails: boolean = false;
 
   constructor(private route: ActivatedRoute, private store: Store<fromRoot.AppState>) { }
 
   ngOnInit() {
+    this.route.snapshot.queryParamMap.get('showDetails') === 'true' ? this.showDetails = true : this.showDetails = false;
     this.store.dispatch(new orderActions.FetchOrder({order_number: +this.route.snapshot.params.order_number}));
     this.store.pipe(select(fromRoot.getOrder)).pipe(
       untilComponentDestroyed(this)

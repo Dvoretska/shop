@@ -1,3 +1,8 @@
+.loading-animation {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+}
 .cart-container {
   padding: 60px 0 30px;
   width: 70%;
@@ -73,10 +78,5 @@
     text-align: center;
     margin: 20px 0;
   }
-}
-.loading-animation {
-  position: absolute;
-  top: 70px;
-  left: 50%;
 }
 

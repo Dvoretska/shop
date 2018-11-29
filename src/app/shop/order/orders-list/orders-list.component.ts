@@ -11,6 +11,7 @@ import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 })
 export class OrdersListComponent implements OnInit, OnDestroy {
   orders;
+  fetchOrdersLoading: boolean;
   constructor(private store: Store<fromRoot.AppState>) { }
 
   ngOnInit() {
@@ -19,6 +20,7 @@ export class OrdersListComponent implements OnInit, OnDestroy {
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.orders = state.orders;
+      this.fetchOrdersLoading = state.fetchOrdersLoading;
     });
   }
 

@@ -1,5 +1,5 @@
 <div class="checkout-wrapper" *ngIf="!fetchOrderLoading && orderInfo">
-  <h3 class="title">Congratulations! Your order has been placed.</h3>
+  <h3 class="title" *ngIf="!showDetails">Congratulations! Your order has been placed.</h3>
   <div id="checkout">
     <div class="order-title">
       <span>Your order number: №{{orderInfo['order_number']}}</span>

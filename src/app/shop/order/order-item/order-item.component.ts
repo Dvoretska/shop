@@ -18,7 +18,7 @@ export class OrderItemComponent implements OnInit {
   }
 
   openOrderDetails() {
-    this.router.navigate(['../current-order', this.order.order_number], {relativeTo: this.route});
+    this.router.navigate(['../current-order', this.order.order_number], {relativeTo: this.route, queryParams: { showDetails: true }});
   }
 
 }

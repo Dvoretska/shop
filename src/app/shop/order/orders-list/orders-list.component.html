@@ -1,5 +1,9 @@
-<div class="container">
-  <div *ngIf="!orders.length" class="no-content-box">
+<div class="loading-animation">
+  <app-ripple *ngIf="fetchOrdersLoading"></app-ripple>
+</div>
+
+<div class="container" *ngIf="!fetchOrdersLoading">
+  <div class="no-content-box" *ngIf="!orders.length">
     <img src="/assets/bill.svg" alt="" class="icon">
     <div class="title">You have no orders yet.</div>
     <div class="text">Click <a routerLink="/shop/products">here</a> to continue shopping.</div>
