@@ -44,9 +44,8 @@ import { LoginModalComponent } from './auth/login-modal/login-modal.component';
 import { PostDetailsComponent } from './blog/posts/post-details/post-details.component';
 import { EditPostComponent } from './blog/edit-post/edit-post.component';
 import { ProfileComponent } from './profile/profile.component';
-import { UserComponent } from './users/users-list/user/user.component';
+import { UserComponent } from './users/user/user.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
-import { UserCreateComponent } from './users/user-create/user-create.component';
 import { PostsComponent } from './blog/posts/posts.component';
 import { PostComponent } from './blog/posts/post/post.component';
 import { BlogComponent } from './blog/blog.component';
@@ -84,7 +83,6 @@ import { FilterComponent } from './shop/products/filter/filter.component';
     ProfileComponent,
     UserComponent,
     UsersListComponent,
-    UserCreateComponent,
     PostsComponent,
     PostComponent,
     BlogComponent,
@@ -149,6 +147,6 @@ import { FilterComponent } from './shop/products/filter/filter.component';
   AuthGuardService,
   { provide: 'Window',  useValue: window }],
   bootstrap: [AppComponent],
-  entryComponents: [RegisterModalComponent, LoginModalComponent, UserCreateComponent, PostDetailsComponent, CartModalComponent, SaleComponent]
+  entryComponents: [RegisterModalComponent, LoginModalComponent, PostDetailsComponent, CartModalComponent, SaleComponent]
 })
 export class AppModule { }

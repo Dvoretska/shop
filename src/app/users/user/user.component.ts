@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
-import { User } from '../../user.model';
-import { Role } from '../../role.model';
+import { User } from '../user.model';
+import { Role } from '../role.model';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from '../../user.service';
+import { UserService } from '../user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({

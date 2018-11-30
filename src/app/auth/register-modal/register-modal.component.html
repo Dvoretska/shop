@@ -1,6 +1,7 @@
 <form (ngSubmit)="onSignup(appForm)" #appForm="ngForm">
   <div class="modal-header">
-    <h5 class="modal-title">Register</h5>
+    <h5 class="modal-title" *ngIf="!createUserMode">Register</h5>
+    <h5 class="modal-title" *ngIf="createUserMode">Create new user</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -53,6 +54,13 @@
         [ngClass]="{'input-error': passwordMatchError() && password2.value}">
     </div>
     <div *ngIf="passwordMatchError() && password2.value" class="validate-error">Passwords don't match</div>
-    <button type="submit" [disabled]="isDisabled()" class="btn btn-primary">Sign up</button>
+    <div class="form-group" *ngIf="userRole === 'admin' && createUserMode">
+      <label for="password">Role</label>
+      <select [(ngModel)]="selectedRole" name="selectedRole">
+        <option *ngFor="let role of roles">{{ role.role }}</option>
+      </select>
+    </div>
+    <button type="submit" [disabled]="isDisabled()" class="btn btn-primary" *ngIf="!createUserMode">Sign up</button>
+    <button type="submit" [disabled]="isDisabled()" class="btn btn-primary" *ngIf="createUserMode">Create</button>
   </div>
 </form>

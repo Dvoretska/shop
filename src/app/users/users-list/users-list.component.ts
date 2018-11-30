@@ -4,8 +4,8 @@ import { User } from '../user.model';
 import { Role } from '../role.model';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { UserCreateComponent } from '../user-create/user-create.component';
 import { environment } from 'src/environments/environment';
+import {RegisterModalComponent} from "../../auth/register-modal/register-modal.component";
 
 @Component({
   selector: 'app-users-list',
@@ -40,7 +40,8 @@ export class UsersListComponent implements OnInit {
   }
 
   onCreateUser() {
-    this.modalRef = this.modalService.show(UserCreateComponent);
+    const initialState = { createUserMode: true};
+    this.modalRef = this.modalService.show(RegisterModalComponent, { class : 'auth-modal', initialState });
     this.modalRef.content.createdUser.subscribe(data => {
       this.users.push(data);
    });

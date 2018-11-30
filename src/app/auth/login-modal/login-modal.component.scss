@@ -22,4 +22,25 @@ form {
   button[disabled] {
     cursor: not-allowed;
   }
+  select {
+    cursor: pointer;
+    max-width: 150px;
+    width: 100%;
+    min-width: 70px;
+    padding: 5px 20px 5px 5px;
+    font-size: 16px;
+    line-height:1;
+    border: 1px solid #ccc;
+    height: 30px;
+    border-radius: 5px;
+    appearance: none;
+    margin-left: 15px;
+    background: url('../../../assets/arrow.png') 96% / 10px no-repeat #eee;
+    &:focus {
+      outline: none;
+      border: 1px solid rgb(77, 144, 254);
+      border-radius: 5px;
+      box-shadow: 0 0 0 1px rgb(77, 144, 254);
+    }
+  }
 }
