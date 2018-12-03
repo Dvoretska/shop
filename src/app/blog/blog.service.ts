@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders} from '@angular/common/http';
 import { throwError} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -20,7 +20,8 @@ export class BlogService {
   }
 
   getPosts() {
-    return this.http.get(`${environment.API_URL}/posts`).pipe(
+    let options = {withCredentials: true};
+    return this.http.get(`${environment.API_URL}/posts`, options).pipe(
       catchError(this.handleError)
     );
   }

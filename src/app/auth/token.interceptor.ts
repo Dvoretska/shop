@@ -11,6 +11,7 @@ export class TokenInterceptor implements HttpInterceptor {
     let user = JSON.parse(localStorage.getItem('user'));
     if (user && user.token) {
       request = request.clone({
+        withCredentials: true,
         setHeaders: {
             Authorization: `Bearer ${user.token}`
         }

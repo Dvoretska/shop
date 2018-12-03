@@ -59,6 +59,8 @@
     </button>
   </div>
   </ng-container>
-  <app-ripple *ngIf="productDetailsLoading"></app-ripple>
+  <div class="loading-wrapper" *ngIf="productDetailsLoading">
+    <app-ripple></app-ripple>
+  </div>
 </div>
 
