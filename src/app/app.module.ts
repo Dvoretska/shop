@@ -32,6 +32,7 @@ import { InViewportModule } from 'ng-in-viewport';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { FileUploadDirective } from './directives/file-upload.directive';
 import { HoverDirective } from './directives/hover.directive';
@@ -71,6 +72,7 @@ import { ButtonComponent } from './UI/button/button.component';
 import { OrdersListComponent } from './shop/order/orders-list/orders-list.component';
 import { OrderItemComponent } from './shop/order/order-item/order-item.component';
 import { FilterComponent } from './shop/products/filter/filter.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -111,7 +113,8 @@ import { FilterComponent } from './shop/products/filter/filter.component';
     ButtonComponent,
     OrdersListComponent,
     OrderItemComponent,
-    FilterComponent
+    FilterComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -130,6 +133,7 @@ import { FilterComponent } from './shop/products/filter/filter.component';
     }),
     QuillModule,
     NgxPageScrollModule,
+    NgxPaginationModule,
     InViewportModule,
     NgxMasonryModule,
     StoreModule.forRoot(reducers),

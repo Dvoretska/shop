@@ -27,9 +27,14 @@
       font-size: 20px;
       font-weight: 600;
       margin: 50px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       .loupe-icon {
         width: 40px;
         height: 40px;
+        margin-bottom: 30px;
       }
     }
     .button-wrapper {

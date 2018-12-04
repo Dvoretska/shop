@@ -17,6 +17,7 @@ import { WishlistComponent } from './shop/wishlist/wishlist.component';
 import { OrderFormComponent } from './shop/order/order-form/order-form.component';
 import { CurrentOrderComponent } from './shop/order/current-order/current-order.component';
 import { OrdersListComponent } from './shop/order/orders-list/orders-list.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -38,7 +39,8 @@ const appRoutes: Routes = [
     { path: '', component: PostsComponent },
     { path: 'create-post', component: EditPostComponent },
     { path: 'edit-post/:id', component: EditPostComponent }
-  ]}
+  ]},
+  { path: '**',  component: NotFoundComponent }
 ];
 
 @NgModule({

@@ -19,6 +19,7 @@ export class ErrorsEffects {
       map((action: ErrorsActions.LoadError) => action.payload),
       switchMap((payload) => {
         let error = payload;
+        // console.log(error)
         if (error instanceof HttpErrorResponse) {
           // Server or connection error happened
           if (!navigator.onLine) {
@@ -30,12 +31,7 @@ export class ErrorsEffects {
             console.log(error);
           } else {
             // Handle Http Error (error.status === 403, 404...)
-            if(Object.keys(error.error).length) {
-              this.toastr.error(`${Object.values(error.error)[0]}`);
-            } else {
               this.toastr.error(`${error.status} - ${error.statusText}`);
-              console.log(error);
-            }
           }
         }
         return of();

@@ -4,6 +4,7 @@ import { Action } from '@ngrx/store';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const ADD_PRODUCT_SUCCESS = 'ADD_PRODUCT_SUCCESS';
 export const ADD_PRODUCT_FAILURE = 'ADD_PRODUCT_FAILURE';
+
 export const REMOVE_PRODUCT_WAS_ADDED = 'REMOVE_PRODUCT_WAS_ADDED';
 
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
@@ -11,12 +12,16 @@ export const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS';
 export const FETCH_CATEGORIES_FAILURE = 'FETCH_CATEGORIES_FAILURE';
 
 export const FETCH_PRODUCTS_INIT = 'FETCH_PRODUCTS_INIT';
-export const FETCH_PRODUCTS_INIT_SUCCESS = 'FETCH_PRODUCTS_INIT_SUCCESS';
-export const FETCH_PRODUCTS_INIT_FAILURE = 'FETCH_PRODUCTS_INIT_FAILURE';
 
 export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
 export const FETCH_PRODUCTS_FAILURE = 'FETCH_PRODUCTS_FAILURE';
+
+export const FETCH_PRODUCTS_BY_SEARCH_INIT = 'FETCH_PRODUCTS_BY_SEARCH_INIT';
+
+export const FETCH_PRODUCTS_BY_SEARCH = 'FETCH_PRODUCTS_BY_SEARCH';
+export const FETCH_PRODUCTS_BY_SEARCH_SUCCESS = 'FETCH_PRODUCTS_BY_SEARCH_SUCCESS';
+export const FETCH_PRODUCTS_BY_SEARCH_FAILURE = 'FETCH_PRODUCTS_BY_SEARCH_FAILURE';
 
 export const FETCH_PRODUCT_DETAILS = 'FETCH_PRODUCT_DETAILS';
 export const FETCH_PRODUCT_DETAILS_SUCCESS = 'FETCH_PRODUCT_DETAILS_SUCCESS';
@@ -25,6 +30,7 @@ export const FETCH_PRODUCT_DETAILS_FAILURE = 'FETCH_PRODUCT_DETAILS_FAILURE';
 export const SET_TARGET_ID = 'SET_TARGET_ID';
 export const REMOVE_TARGET_ID = 'REMOVE_TARGET_ID';
 
+// _____________________________________________________
 
 export class AddProduct implements Action {
   readonly type = ADD_PRODUCT;
@@ -41,14 +47,46 @@ export class AddProductSuccess implements Action {
 export class AddProductFailure implements Action {
   readonly type = ADD_PRODUCT_FAILURE;
 
-  constructor(public payload: {error: any}) {}
+  constructor() {}
 }
+
+// _____________________________________________________
 
 export class RemoveProductWasAdded implements Action {
   readonly type = REMOVE_PRODUCT_WAS_ADDED;
 
   constructor() {}
 }
+
+// _____________________________________________________
+
+export class FetchProductsInit implements Action {
+  readonly type = FETCH_PRODUCTS_INIT;
+
+  constructor(public payload: string) {}
+}
+
+// _____________________________________________________
+
+export class FetchProducts implements Action {
+  readonly type = FETCH_PRODUCTS;
+
+  constructor(public payload: string) {}
+}
+
+export class FetchProductsSuccess implements Action {
+  readonly type = FETCH_PRODUCTS_SUCCESS;
+
+  constructor(public payload: {products: any, totalAmount: any}) {}
+}
+
+export class FetchProductsFailure implements Action {
+  readonly type = FETCH_PRODUCTS_FAILURE;
+
+  constructor() {}
+}
+
+// _____________________________________________________
 
 export class FetchCategories implements Action {
   readonly type = FETCH_CATEGORIES;
@@ -65,44 +103,38 @@ export class FetchCategoriesSuccess implements Action {
 export class FetchCategoriesFailure implements Action {
   readonly type = FETCH_CATEGORIES_FAILURE;
 
-  constructor(public payload: {error: any}) {}
+  constructor() {}
 }
 
-export class FetchProductsInit implements Action {
-  readonly type = FETCH_PRODUCTS_INIT;
+// _____________________________________________________
+
+export class FetchProductsBySearchInit implements Action {
+  readonly type = FETCH_PRODUCTS_BY_SEARCH_INIT;
 
   constructor(public payload: string) {}
 }
 
-export class FetchProductsInitSuccess implements Action {
-  readonly type = FETCH_PRODUCTS_INIT_SUCCESS;
+// _____________________________________________________
+
+export class FetchProductsBySearch implements Action {
+  readonly type = FETCH_PRODUCTS_BY_SEARCH;
+
+  constructor(public payload: string) {}
+}
+
+export class FetchProductsBySearchSuccess implements Action {
+  readonly type = FETCH_PRODUCTS_BY_SEARCH_SUCCESS;
 
   constructor(public payload: {products: any, totalAmount: any}) {}
 }
 
-export class FetchProductsInitFailure implements Action {
-  readonly type = FETCH_PRODUCTS_INIT_FAILURE;
+export class FetchProductsBySearchFailure implements Action {
+  readonly type = FETCH_PRODUCTS_BY_SEARCH_FAILURE;
 
-  constructor(public payload: {error: any}) {}
+  constructor() {}
 }
 
-export class FetchProducts implements Action {
-  readonly type = FETCH_PRODUCTS;
-
-  constructor(public payload: {queryString: string, skip: number}) {}
-}
-
-export class FetchProductsSuccess implements Action {
-  readonly type = FETCH_PRODUCTS_SUCCESS;
-
-  constructor(public payload: {products: any, totalAmount: any}) {}
-}
-
-export class FetchProductsFailure implements Action {
-  readonly type = FETCH_PRODUCTS_FAILURE;
-
-  constructor(public payload: {error: any}) {}
-}
+// _____________________________________________________
 
 export class FetchProductDetails implements Action {
   readonly type = FETCH_PRODUCT_DETAILS;
@@ -119,14 +151,18 @@ export class FetchProductDetailsSuccess implements Action {
 export class FetchProductDetailsFailure implements Action {
   readonly type = FETCH_PRODUCT_DETAILS_FAILURE;
 
-  constructor(public payload: {error: any}) {}
+  constructor() {}
 }
+
+// _____________________________________________________
 
 export class SetTargetId implements Action {
   readonly type = SET_TARGET_ID;
 
   constructor(public payload: number) {}
 }
+
+// _____________________________________________________
 
 export class RemoveTargetId implements Action {
   readonly type = REMOVE_TARGET_ID;
@@ -146,10 +182,12 @@ export type productsActions = AddProduct |
             FetchProductsSuccess |
             FetchProductsFailure |
             FetchProductsInit |
-            FetchProductsInitSuccess  |
-            FetchProductsInitFailure |
             FetchProductDetails |
             FetchProductDetailsSuccess |
             FetchProductDetailsFailure |
+            FetchProductsBySearch |
+            FetchProductsBySearchSuccess |
+            FetchProductsBySearchFailure |
+            FetchProductsBySearchInit |
             SetTargetId |
             RemoveTargetId;

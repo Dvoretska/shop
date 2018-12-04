@@ -6,7 +6,6 @@ export class ProductsState {
     public products: any[],
     public sizes: string[],
     public loading: boolean,
-    public error: any,
     public categories: any,
     public productWasAdded: boolean,
     public product: any,
@@ -15,8 +14,8 @@ export class ProductsState {
     public productDetailsLoading: boolean,
     public fetchProductsLoading: boolean,
     public fetchProductsInitLoading: boolean,
-    public targetId: number,
-    public skip: number
+    public fetchProductsBySearchLoading: boolean,
+    public targetId: number
   ) { }
 }
 
@@ -29,13 +28,12 @@ export const initialState: ProductsState = {
   productDetailsLoading: false,
   fetchProductsLoading: false,
   fetchProductsInitLoading: false,
-  error: null,
+  fetchProductsBySearchLoading: false,
   categories: null,
   productWasAdded: false,
   product: null,
   totalAmount: null,
-  targetId: null,
-  skip: 0
+  targetId: null
 };
 
 export function productsReducer(state: ProductsState =initialState, action: productsActions.productsActions) {
@@ -50,14 +48,12 @@ export function productsReducer(state: ProductsState =initialState, action: prod
       return {
         ...state,
         addProductLoading: false,
-        error: null,
         productWasAdded: true
       };
     case productsActions.ADD_PRODUCT_FAILURE:
       return {
         ...state,
         addProductLoading: false,
-        error: action.payload.error,
         productWasAdded: false
       };
     case productsActions.REMOVE_PRODUCT_WAS_ADDED:
@@ -65,35 +61,32 @@ export function productsReducer(state: ProductsState =initialState, action: prod
         ...state,
         productWasAdded: false
       };
-    case productsActions.FETCH_CATEGORIES:
-      return {
-        ...state,
-        error: null
-      };
+
     case productsActions.FETCH_CATEGORIES_SUCCESS:
       return {
         ...state,
-        error: null,
         categories: action.payload.categories
       };
-    case productsActions.FETCH_CATEGORIES_FAILURE:
-      return {
-        ...state,
-        error: action.payload.error
-      };
+
     case productsActions.FETCH_PRODUCTS:
       return {
         ...state,
-        error: null,
         targetId: null,
-        fetchProductsLoading: true,
-        skip: action.payload.skip
+        fetchProductsLoading: true
       };
+
+    case productsActions.FETCH_PRODUCTS_INIT:
+      return {
+        ...state,
+        products: [],
+        fetchProductsInitLoading: true
+      };
+
     case productsActions.FETCH_PRODUCTS_SUCCESS:
       return {
         ...state,
-        error: null,
         fetchProductsLoading: false,
+        fetchProductsInitLoading: false,
         products: state.products.concat(action.payload.products),
         totalAmount: action.payload.totalAmount[0].count
       };
@@ -101,47 +94,51 @@ export function productsReducer(state: ProductsState =initialState, action: prod
       return {
         ...state,
         fetchProductsLoading: false,
-        error: action.payload.error
-      };
-    case productsActions.FETCH_PRODUCTS_INIT:
-      return {
-        ...state,
-        error: null,
-        products: null,
-        fetchProductsInitLoading: true
-      };
-    case productsActions.FETCH_PRODUCTS_INIT_SUCCESS:
-      return {
-        ...state,
-        error: null,
-        fetchProductsInitLoading: false,
-        products: [...action.payload.products],
-        totalAmount: action.payload.totalAmount[0].count
-      };
-    case productsActions.FETCH_PRODUCTS_INIT_FAILURE:
-      return {
-        ...state,
-        error: action.payload.error,
         fetchProductsInitLoading: false
       };
+
+    case productsActions.FETCH_PRODUCTS_BY_SEARCH:
+      return {
+        ...state,
+        fetchProductsBySearchLoading: true
+      };
+
+    case productsActions.FETCH_PRODUCTS_BY_SEARCH_INIT:
+      return {
+        ...state,
+        products: [],
+        fetchProductsInitLoading: true
+      };
+    case productsActions.FETCH_PRODUCTS_BY_SEARCH_SUCCESS:
+      return {
+        ...state,
+        fetchProductsBySearchLoading: false,
+        fetchProductsInitLoading: false,
+        products: state.products.concat(action.payload.products),
+        totalAmount: action.payload.totalAmount[0].count
+      };
+    case productsActions.FETCH_PRODUCTS_BY_SEARCH_FAILURE:
+      return {
+        ...state,
+        fetchProductsBySearchLoading: false,
+        fetchProductsInitLoading: false
+      };
+
     case productsActions.FETCH_PRODUCT_DETAILS:
       return {
         ...state,
-        error: null,
         productDetailsLoading: true
       };
     case productsActions.FETCH_PRODUCT_DETAILS_SUCCESS:
       return {
         ...state,
-        error: null,
         productDetailsLoading: false,
         product: action.payload.product
       };
     case productsActions.FETCH_PRODUCT_DETAILS_FAILURE:
       return {
         ...state,
-        productDetailsLoading: false,
-        error: action.payload.error
+        productDetailsLoading: false
       };
     case productsActions.SET_TARGET_ID:
       return {

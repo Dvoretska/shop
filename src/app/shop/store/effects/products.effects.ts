@@ -1,8 +1,9 @@
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import {Injectable} from "@angular/core";
 import * as ProductsActions from '../actions/products.actions';
-import { switchMap, exhaustMap, map, catchError} from 'rxjs/operators';
-import { of } from 'rxjs';
+import * as ErrorsActions from '../actions/errors.actions';
+import { switchMap, map, catchError} from 'rxjs/operators';
+import {from} from 'rxjs';
 import {HttpClient} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 
@@ -20,7 +21,7 @@ export class ProductsEffects {
           return new ProductsActions.AddProductSuccess({product});
         }),
         catchError(error => {
-          return of(new ProductsActions.AddProductFailure({error}));
+          return from([new ErrorsActions.LoadError(error), new ProductsActions.AddProductFailure()]);
         })
       )
     )
@@ -36,7 +37,7 @@ export class ProductsEffects {
             return new ProductsActions.FetchCategoriesSuccess({categories});
           }),
           catchError(error => {
-            return of(new ProductsActions.FetchCategoriesFailure({error}));
+            return from([new ErrorsActions.LoadError(error), new ProductsActions.FetchCategoriesFailure()]);
           })
         )
       )
@@ -45,32 +46,32 @@ export class ProductsEffects {
   @Effect()
   fetchProducts = this.actions$
     .pipe(
-      ofType(ProductsActions.FETCH_PRODUCTS),
+      ofType(ProductsActions.FETCH_PRODUCTS, ProductsActions.FETCH_PRODUCTS_INIT),
       map((action: ProductsActions.FetchProducts) => action.payload),
       switchMap((payload) =>
-        this.http.get(`${environment.API_URL}/products/${payload.queryString}`).pipe(
+        this.http.get(`${environment.API_URL}/products/${payload}`).pipe(
           map((res)=>{
             return new ProductsActions.FetchProductsSuccess({products: res['products'], totalAmount: res['totalAmount']});
           }),
           catchError(error => {
-            return of(new ProductsActions.FetchProductsFailure({error}));
+            return from([new ErrorsActions.LoadError(error), new ProductsActions.FetchProductsFailure()]);
           })
         )
       )
     );
 
   @Effect()
-  fetchProductsInit = this.actions$
+  fetchProductsBySearch = this.actions$
     .pipe(
-      ofType(ProductsActions.FETCH_PRODUCTS_INIT),
-      map((action: ProductsActions.FetchProductsInit) => action.payload),
+      ofType(ProductsActions.FETCH_PRODUCTS_BY_SEARCH, ProductsActions.FETCH_PRODUCTS_BY_SEARCH_INIT),
+      map((action: ProductsActions.FetchProductsBySearch) => action.payload),
       switchMap((payload) =>
-        this.http.get(`${environment.API_URL}/products/${payload}`).pipe(
+        this.http.get(`${environment.API_URL}/search-products${payload}`).pipe(
           map((res)=>{
-            return new ProductsActions.FetchProductsInitSuccess({products: res['products'], totalAmount: res['totalAmount']});
+            return new ProductsActions.FetchProductsBySearchSuccess({products: res['products'], totalAmount: res['totalAmount']});
           }),
           catchError(error => {
-            return of(new ProductsActions.FetchProductsInitFailure({error}));
+            return from([new ErrorsActions.LoadError(error), new ProductsActions.FetchProductsBySearchFailure()]);
           })
         )
       )
@@ -87,7 +88,7 @@ export class ProductsEffects {
             return new ProductsActions.FetchProductDetailsSuccess({product: res});
           }),
           catchError(error => {
-            return of(new ProductsActions.FetchProductDetailsFailure({error}));
+            return from([new ErrorsActions.LoadError(error), new ProductsActions.FetchProductDetailsFailure()]);
           })
         )
       )

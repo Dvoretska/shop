@@ -32,7 +32,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
   selectedCategory: null;
   selectedImgKey = 0;
   imageUrls = [];
-  error;
   productWasAdded;
   loading: boolean;
   getState$: Observable<fromProducts.ProductsState>;
@@ -51,7 +50,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.categories = state.categories;
-      this.error = state.error;
     });
 
   }

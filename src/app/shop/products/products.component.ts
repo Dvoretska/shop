@@ -18,16 +18,16 @@ import { SaleComponent } from '../../UI/sale/sale.component'
 export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
   products: any[];
   limit: number = 3;
-  skip: number;
+  skipProducts: number;
+  skipSearchedProducts: number;
   totalAmount: number;
   initLoading: boolean;
   loading: boolean;
   targetId;
   error;
-  chunk: number;
   wishlist: any[];
   categories: any[];
-  getCategoryId: any;
+  fetchProductsBySearchLoading: boolean;
   @ViewChild('parent', { read: ViewContainerRef }) container: ViewContainerRef;
 
   constructor(private store: Store<fromRoot.AppState>,
@@ -49,30 +49,34 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.totalAmount = state.totalAmount;
         this.initLoading = state.fetchProductsInitLoading;
         this.targetId = state.targetId;
-        this.chunk = state.skip;
         this.loading = state.fetchProductsLoading;
         this.categories = state.categories;
+        this.fetchProductsBySearchLoading = state.fetchProductsBySearchLoading;
     });
     this.store.pipe(select(fromRoot.getWishlist)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
         this.wishlist = state.wishlist;
     });
-    this.skip = this.chunk;
-      this.route.queryParams.subscribe(params => {
-        if (this.targetId) {
-          setTimeout(()=>{
-            let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#item'+this.targetId);
-            this.pageScrollService.start(pageScrollInstance);
-            this.store.dispatch(new productsActions.RemoveTargetId());
-          }, 0);
-        } else {
-          this.skip = 0;
-          let category = +params['category'] || 1;
-          let queryString = `?skip=0&limit=${this.limit}&category=${category}`;
-          this.store.dispatch(new productsActions.FetchProductsInit(queryString));
-        }
-      });
+    this.route.queryParams.subscribe(params => {
+      if (this.targetId) {
+        setTimeout(()=>{
+          let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#item'+this.targetId);
+          this.pageScrollService.start(pageScrollInstance);
+          this.store.dispatch(new productsActions.RemoveTargetId());
+        }, 0);
+      } else if(params['search']){
+        this.skipSearchedProducts = 0;
+        let searchItem = params['search'];
+        let queryString = `?skip=0&limit=${this.limit}&search=${searchItem}`;
+        this.store.dispatch(new productsActions.FetchProductsBySearchInit(queryString));
+      } else {
+        this.skipProducts = 0;
+        let category = +params['category'] || 1;
+        let queryString = `?skip=0&limit=${this.limit}&category=${category}`;
+        this.store.dispatch(new productsActions.FetchProductsInit(queryString));
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -84,10 +88,18 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   loadMore() {
-      this.skip += this.limit;
+    if(this.route.snapshot.queryParamMap.get('search')) {
+      this.skipSearchedProducts += this.limit;
+      let searchItem = this.route.snapshot.queryParamMap.get('search');
+      let queryString = `?skip=${this.skipSearchedProducts}&limit=${this.limit}&search=${searchItem}`;
+      this.store.dispatch(new productsActions.FetchProductsBySearch(queryString));
+    } else {
+      console.log(this.skipProducts)
+      this.skipProducts += this.limit;
       let category =  this.route.snapshot.queryParamMap.get('category') || 1;
-      let queryString = `?skip=${this.skip}&limit=${this.limit}&category=${category}`;
-      this.store.dispatch(new productsActions.FetchProducts({queryString: queryString, skip: this.skip}));
+      let queryString = `?skip=${this.skipProducts}&limit=${this.limit}&category=${category}`;
+      this.store.dispatch(new productsActions.FetchProducts(queryString));
+    }
   }
 
   ngOnDestroy(){}

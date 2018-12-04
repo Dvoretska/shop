@@ -3,8 +3,8 @@
   <app-filter [categories]="categories"></app-filter>
   <div class="content-wrapper" #container>
     <app-ripple *ngIf="initLoading"></app-ripple>
-    <ng-container *ngIf="products && !initLoading">
-      <div class="content" *ngIf="products.length">
+    <ng-container *ngIf="!initLoading">
+      <div class="content" *ngIf="products && products.length">
         <app-product *ngFor="let product of products"
                      [product]="product"
                      [attr.id]="'item' + product.id"
