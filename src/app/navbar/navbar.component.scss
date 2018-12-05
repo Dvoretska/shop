@@ -20,6 +20,9 @@ nav {
     a.nav-link {
       cursor: pointer;
       position: relative;
+      &.active {
+        color: #000000;
+      }
       &.nav-link-profile {
         display: flex;
         justify-content: center;

@@ -5,8 +5,11 @@
   </div>
   <h5 class="filter-title">SHOP BY</h5>
   <ul class="filter-options">
-    <li *ngFor="let category of categories">
-      <a [routerLink]="['/shop/products']" [queryParams]="{category: category.id}">{{category.name}}</a>
+    <li *ngFor="let category of categories; let index = index">
+      <a [routerLink]="['/shop/products']"
+         [queryParams]="{category: category.id}"
+         routerLinkActive="active"
+         [class.active]="index == 0 && router.url.indexOf('?') == -1">{{category.name}}</a>
     </li>
   </ul>
 </div>

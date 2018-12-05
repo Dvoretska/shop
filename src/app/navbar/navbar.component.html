@@ -16,13 +16,13 @@
   <div class="collapse navbar-collapse" [collapse]="isCollapsed" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/blog" *ngIf="isAuthorized()" routerLinkActive="active">BLOG</a>
+        <a class="nav-link" routerLink="/blog" routerLinkActive="active">BLOG</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/users" *ngIf="isAuthorized()" routerLinkActive="active">USERS</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/shop/products">SHOP</a>
+        <a class="nav-link" routerLink="/shop/products" routerLinkActive="active">SHOP</a>
       </li>
     </ul>
      <ul class="navbar-nav">

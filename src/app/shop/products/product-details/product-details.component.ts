@@ -79,8 +79,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
     ).subscribe((state) => {
       this.products = state.products;
       this.product = state.product;
-      // if(this.product.category_id.slug)
-      // this.sizes = state.sizes;
       this.productDetailsLoading = state.productDetailsLoading;
       if(this.product) {
         this.galleryImages = [];
@@ -130,7 +128,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
 
   backToSearch(id) {
     this.store.dispatch(new productsActions.SetTargetId(id));
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['../'], {relativeTo: this.route, queryParamsHandling: 'preserve'});
   }
 
   checkIfProductInWishlist(wishlist, product_id) {

@@ -28,7 +28,7 @@ export class ProductComponent implements OnInit {
   }
 
   openProductDetails() {
-    this.router.navigate([this.product.id], {relativeTo:this.route});
+    this.router.navigate([this.product.id], {relativeTo:this.route, queryParamsHandling: 'preserve' });
   }
 
   handleWishlist(id) {

@@ -88,13 +88,12 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   loadMore() {
-    if(this.route.snapshot.queryParamMap.get('search')) {
+    let searchRoute = this.route.snapshot.queryParamMap.get('search');
+    if(searchRoute) {
       this.skipSearchedProducts += this.limit;
-      let searchItem = this.route.snapshot.queryParamMap.get('search');
-      let queryString = `?skip=${this.skipSearchedProducts}&limit=${this.limit}&search=${searchItem}`;
+      let queryString = `?skip=${this.skipSearchedProducts}&limit=${this.limit}&search=${searchRoute}`;
       this.store.dispatch(new productsActions.FetchProductsBySearch(queryString));
     } else {
-      console.log(this.skipProducts)
       this.skipProducts += this.limit;
       let category =  this.route.snapshot.queryParamMap.get('category') || 1;
       let queryString = `?skip=${this.skipProducts}&limit=${this.limit}&category=${category}`;

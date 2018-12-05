@@ -1,20 +1,21 @@
-import { Component, OnInit, Input } from '@angular/core';
-import * as productsActions from "../../store/actions/products.actions";
+import {Component, OnInit, Input} from '@angular/core';
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../store/reducers/reducer.factory";
-import {FetchProductsBySearch} from "../../store/actions/products.actions";
-import {PageScrollInstance} from "ngx-page-scroll";
 import {ActivatedRoute, Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
-export class FilterComponent implements OnInit {
+export class FilterComponent implements OnInit{
   @Input() categories: any[];
+  pageSelected;
   searchValue: string = '';
-  constructor(private store: Store<fromRoot.AppState>, private router: Router, private route: ActivatedRoute) { }
+  constructor(private store: Store<fromRoot.AppState>,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
