@@ -85,7 +85,7 @@ export class PostDetailsComponent implements OnInit {
 
   onEditPost() {
     this.modalRef.hide();
-    this.router.navigate(['blog/edit-post/', this.id]);
+    this.router.navigate(['blog/post/edit', this.id]);
   }
 
   isEditPostAllowed() {

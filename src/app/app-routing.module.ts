@@ -18,27 +18,28 @@ import { OrderFormComponent } from './shop/order/order-form/order-form.component
 import { CurrentOrderComponent } from './shop/order/current-order/current-order.component';
 import { OrdersListComponent } from './shop/order/orders-list/orders-list.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AdminComponent } from './admin/admin.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService] },
   { path: 'users', component: UsersListComponent, canActivate: [AuthGuardService] },
   { path: 'shop', component: ShopComponent, children: [
     { path: 'products', component: ProductsComponent},
     { path: 'products/:product_id', component: ProductDetailsComponent},
-    { path: 'edit-product', component: EditProductComponent},
+    { path: 'product/edit', component: EditProductComponent},
     { path: 'wishlist', component: WishlistComponent },
     { path: 'cart', component: CartListComponent, children: [
       { path: 'order', component: OrderFormComponent},
     ]},
-    { path: 'current-order/:order_number', component: CurrentOrderComponent },
+    { path: 'order/:order_number', component: CurrentOrderComponent },
     { path: 'orders', component: OrdersListComponent }
   ]},
-
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'blog', component: BlogComponent, canActivate: [AuthGuardService], children: [
     { path: '', component: PostsComponent },
-    { path: 'create-post', component: EditPostComponent },
-    { path: 'edit-post/:id', component: EditPostComponent }
+    { path: 'post/create', component: EditPostComponent },
+    { path: 'post/edit/:id', component: EditPostComponent }
   ]},
   { path: '**',  component: NotFoundComponent }
 ];

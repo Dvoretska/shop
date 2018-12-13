@@ -20,7 +20,7 @@ export class CartEffects {
       ofType(CartActions.ADD_PRODUCT_TO_CART),
       map((action: CartActions.AddProductToCart) => action.payload),
       exhaustMap((payload) =>
-        this.http.post(`${environment.API_URL}/add-to-cart`, payload).pipe(
+        this.http.post(`${environment.API_URL}/cart`, payload).pipe(
           map((res)=>{
             return new CartActions.AddProductToCartSuccess({
               quantity: res['productQty'].quantity,
@@ -69,7 +69,7 @@ export class CartEffects {
           }),
           body: payload,
         };
-        return this.http.delete(`${environment.API_URL}/delete-from-cart`, options).pipe(
+        return this.http.delete(`${environment.API_URL}/cart`, options).pipe(
           map((res) => {
             return new CartActions.DeleteProductFromCartSuccess({
               id: res['id'],
@@ -91,7 +91,7 @@ export class CartEffects {
       ofType(CartActions.DECREASE_QUANTITY_OF_PRODUCT_IN_CART),
       map((action: CartActions.DecreaseQuantityOfProductInCart) => action.payload),
       exhaustMap((payload)=> {
-        return this.http.post(`${environment.API_URL}/decrease-cart`, {
+        return this.http.post(`${environment.API_URL}/cart/decrease`, {
           product_id: payload.product_id,
           size: payload.size
         }).pipe(
@@ -117,7 +117,7 @@ export class CartEffects {
     .pipe(
       ofType(CartActions.GET_TOTAL_NUMBER_OF_PRODUCTS),
       exhaustMap(() =>
-        this.http.get(`${environment.API_URL}/number-products`).pipe(
+        this.http.get(`${environment.API_URL}/cart/number`).pipe(
           map((res)=>{
             return new CartActions.GetTotalNumberOfProductsSuccess({
               totalNumberOfProducts: res['totalNumberOfProducts']

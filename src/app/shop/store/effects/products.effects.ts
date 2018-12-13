@@ -16,7 +16,7 @@ export class ProductsEffects {
     ofType(ProductsActions.ADD_PRODUCT),
     map((action: ProductsActions.AddProduct) => action.payload),
     switchMap((payload) =>
-      this.http.post(`${environment.API_URL}/create-product`, payload).pipe(
+      this.http.post(`${environment.API_URL}/product`, payload).pipe(
         map((product)=>{
           return new ProductsActions.AddProductSuccess({product});
         }),
@@ -66,7 +66,7 @@ export class ProductsEffects {
       ofType(ProductsActions.FETCH_PRODUCTS_BY_SEARCH, ProductsActions.FETCH_PRODUCTS_BY_SEARCH_INIT),
       map((action: ProductsActions.FetchProductsBySearch) => action.payload),
       switchMap((payload) =>
-        this.http.get(`${environment.API_URL}/search-products${payload}`).pipe(
+        this.http.get(`${environment.API_URL}/products/search${payload}`).pipe(
           map((res)=>{
             return new ProductsActions.FetchProductsBySearchSuccess({products: res['products'], totalAmount: res['totalAmount']});
           }),

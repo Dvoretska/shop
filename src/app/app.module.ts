@@ -73,6 +73,7 @@ import { OrdersListComponent } from './shop/order/orders-list/orders-list.compon
 import { OrderItemComponent } from './shop/order/order-item/order-item.component';
 import { FilterComponent } from './shop/products/filter/filter.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -114,7 +115,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     OrdersListComponent,
     OrderItemComponent,
     FilterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

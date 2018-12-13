@@ -55,7 +55,7 @@ export class OrderFormComponent implements OnInit,OnDestroy {
     ).subscribe((state) => {
       this.order_number = state.order_number;
       if(this.order_number) {
-        this.router.navigate(['../../current-order', this.order_number], {relativeTo: this.route});
+        this.router.navigate(['../../order', this.order_number], {relativeTo: this.route});
       }
     });
   }
