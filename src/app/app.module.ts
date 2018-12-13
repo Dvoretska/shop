@@ -33,6 +33,7 @@ import { NgxMasonryModule } from 'ngx-masonry';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TreeviewModule } from 'ngx-treeview';
 
 import { FileUploadDirective } from './directives/file-upload.directive';
 import { HoverDirective } from './directives/hover.directive';
@@ -74,6 +75,7 @@ import { OrderItemComponent } from './shop/order/order-item/order-item.component
 import { FilterComponent } from './shop/products/filter/filter.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminComponent } from './admin/admin.component';
+import { CreateCategoryComponent } from './admin/create-category/create-category.component';
 
 
 @NgModule({
@@ -116,7 +118,8 @@ import { AdminComponent } from './admin/admin.component';
     OrderItemComponent,
     FilterComponent,
     NotFoundComponent,
-    AdminComponent
+    AdminComponent,
+    CreateCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -133,6 +136,7 @@ import { AdminComponent } from './admin/admin.component';
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
+    TreeviewModule.forRoot(),
     QuillModule,
     NgxPageScrollModule,
     NgxPaginationModule,

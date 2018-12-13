@@ -11,7 +11,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class FilterComponent implements OnInit{
   @Input() categories: any[];
-  pageSelected;
   searchValue: string = '';
   constructor(private store: Store<fromRoot.AppState>,
               private router: Router,

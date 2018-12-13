@@ -1,0 +1,14 @@
+<div class="admin-main">
+  <ul>
+    <li class="nav-item">
+      <a class="nav-link nav-link-profile"  routerLink="/">
+        <span class="username">Categories{{list}}</span>
+      </a>
+    </li>
+  </ul>
+  <ngx-treeview
+    [config]="config"
+    [items]="list">
+  </ngx-treeview>
+</div>
+
