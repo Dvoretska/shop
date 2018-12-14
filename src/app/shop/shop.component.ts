@@ -13,7 +13,7 @@ export class ShopComponent implements OnInit {
   ngOnInit() {}
 
   onEditProduct() {
-    this.router.navigate(['product/edit'], {relativeTo: this.route});
+    this.router.navigate(['product'], {relativeTo: this.route});
   }
 
 }

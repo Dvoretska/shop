@@ -17,6 +17,7 @@ export class FilterComponent implements OnInit{
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log(this.categories)
     this.route.queryParams.subscribe(params => {
       this.searchValue = params['search']
     })

@@ -37,7 +37,24 @@ export class ProductsEffects {
             return new ProductsActions.FetchCategoriesSuccess({categories});
           }),
           catchError(error => {
-            return from([new ErrorsActions.LoadError(error), new ProductsActions.FetchCategoriesFailure()]);
+            return from([new ErrorsActions.LoadError(error)]);
+          })
+        )
+      )
+    );
+
+  @Effect()
+  fetchSubcategories = this.actions$
+    .pipe(
+      ofType(ProductsActions.FETCH_SUBCATEGORIES),
+      map((action: ProductsActions.FetchSubcategories) => action.payload),
+      switchMap((payload) =>
+        this.http.get(`${environment.API_URL}/subcategories/${payload.category_id}`).pipe(
+          map((subcategories)=>{
+            return new ProductsActions.FetchSubcategoriesSuccess({subcategories});
+          }),
+          catchError(error => {
+            return from([new ErrorsActions.LoadError(error)]);
           })
         )
       )

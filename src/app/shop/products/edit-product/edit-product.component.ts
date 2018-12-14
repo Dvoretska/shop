@@ -29,7 +29,9 @@ export class EditProductComponent implements OnInit, OnDestroy {
   warning: string = '';
   isHighlight: boolean = false;
   categories: Category[];
+  subcategories: any[];
   selectedCategory: null;
+  selectedSubcategory: null;
   selectedImgKey = 0;
   imageUrls = [];
   productWasAdded;
@@ -50,6 +52,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.categories = state.categories;
+      this.subcategories = state.subcategories;
     });
 
   }
@@ -124,6 +127,11 @@ export class EditProductComponent implements OnInit, OnDestroy {
     return this.subjectMaxLength
   }
 
+  fetchSubcategories(selectedCategory) {
+    console.log('changed')
+    this.store.dispatch(new productsActions.FetchSubcategories({category_id: selectedCategory}));
+  }
+
   onCreateProduct() {
     let savedData:FormData = new FormData();
     savedData.append('price', this.price);
@@ -133,7 +141,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
     if(this.discount) {
       savedData.append('discount', this.discount);
     }
-    savedData.append('category_id', this.selectedCategory);
+    savedData.append('subcategory_id', this.selectedSubcategory);
     if (this.files.length) {
       let a = this.files.splice(this.selectedImgKey, 1)
       this.files.unshift(a[0]);
@@ -150,13 +158,13 @@ export class EditProductComponent implements OnInit, OnDestroy {
       this.loading = state.addProductLoading;
       if(this.productWasAdded) {
         this.toastr.success('Product was saved successfully!');
-        this.router.navigate(['shop/products'], { queryParams: { category: this.selectedCategory }});
+        this.router.navigate(['shop/products'], { queryParams: {subcategory: this.selectedSubcategory}});
       }
     });
   }
 
   isFormInvalid() {
-    return !(this.description && this.price && this.brand && this.material && this.files.length && this.selectedCategory)
+    return !(this.description && this.price && this.brand && this.material && this.files.length && this.selectedCategory && this.selectedSubcategory)
   }
 
   ngOnDestroy(){

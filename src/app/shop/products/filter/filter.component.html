@@ -1,4 +1,4 @@
-<div class="filters" *ngIf="categories && categories.length">
+<div class="filters">
   <div class="container-search">
     <img src="/assets/search.svg" alt="" class="search-icon" (click)="searchProduct()">
     <input class="search-input" placeholder="Search..." type="text" [(ngModel)]="searchValue" (keydown.enter)="searchProduct()"/>

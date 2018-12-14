@@ -1,4 +1,4 @@
-<form #productForm="ngForm" *ngIf="categories && categories.length">
+<form #productForm="ngForm">
   <div class="form-group">
     <label for="title">
       <strong>Brand</strong>
@@ -30,10 +30,20 @@
   </div>
   <div class="form-group">
     <strong>Category</strong>
-    <ng-select *ngIf="categories" [items]="categories"
+    <ng-select *ngIf="categories && categories.length" [items]="categories"
                bindLabel="name"
                bindValue="id"
-               [(ngModel)]="selectedCategory" name="name" placeholder="Choose category">
+               [(ngModel)]="selectedCategory" name="category" placeholder="Choose category"
+               (change)="fetchSubcategories(selectedCategory)">
+    </ng-select>
+  </div>
+  <div class="form-group" *ngIf="subcategories && subcategories.length">
+    <strong>Subcategory</strong>
+    <ng-select  [items]="subcategories"
+               bindLabel="name"
+               bindValue="id"
+               [(ngModel)]="selectedSubcategory"
+               name="subcategory" placeholder="Choose subcategory">
     </ng-select>
   </div>
   <div class="form-group">

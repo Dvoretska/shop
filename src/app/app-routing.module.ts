@@ -30,7 +30,7 @@ const appRoutes: Routes = [
   { path: 'shop', component: ShopComponent, children: [
     { path: 'products', component: ProductsComponent},
     { path: 'products/:product_id', component: ProductDetailsComponent},
-    { path: 'product/edit', component: EditProductComponent},
+    { path: 'product', component: EditProductComponent},
     { path: 'wishlist', component: WishlistComponent },
     { path: 'cart', component: CartListComponent, children: [
       { path: 'order', component: OrderFormComponent},

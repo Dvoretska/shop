@@ -7,7 +7,6 @@ import * as wishlistActions from "../store/actions/wishlist.actions";
 import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import {ActivatedRoute} from "@angular/router";
-import { SaleComponent } from '../../UI/sale/sale.component'
 
 
 @Component({
@@ -72,8 +71,8 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.store.dispatch(new productsActions.FetchProductsBySearchInit(queryString));
       } else {
         this.skipProducts = 0;
-        let category = +params['category'] || 1;
-        let queryString = `?skip=0&limit=${this.limit}&category=${category}`;
+        let subcategory = +params['subcategory'] || 1;
+        let queryString = `?skip=0&limit=${this.limit}&subcategory=${subcategory}`;
         this.store.dispatch(new productsActions.FetchProductsInit(queryString));
       }
     });

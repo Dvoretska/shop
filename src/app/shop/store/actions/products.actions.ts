@@ -9,7 +9,9 @@ export const REMOVE_PRODUCT_WAS_ADDED = 'REMOVE_PRODUCT_WAS_ADDED';
 
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 export const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS';
-export const FETCH_CATEGORIES_FAILURE = 'FETCH_CATEGORIES_FAILURE';
+
+export const FETCH_SUBCATEGORIES = 'FETCH_SUBCATEGORIES';
+export const FETCH_SUBCATEGORIES_SUCCESS = 'FETCH_SUBCATEGORIES_SUCCESS';
 
 export const FETCH_PRODUCTS_INIT = 'FETCH_PRODUCTS_INIT';
 
@@ -100,10 +102,18 @@ export class FetchCategoriesSuccess implements Action {
   constructor(public payload: {categories: any}) {}
 }
 
-export class FetchCategoriesFailure implements Action {
-  readonly type = FETCH_CATEGORIES_FAILURE;
+// _____________________________________________________
 
-  constructor() {}
+export class FetchSubcategories implements Action {
+  readonly type = FETCH_SUBCATEGORIES;
+
+  constructor(public payload: {category_id: number}) {}
+}
+
+export class FetchSubcategoriesSuccess implements Action {
+  readonly type = FETCH_SUBCATEGORIES_SUCCESS;
+
+  constructor(public payload: {subcategories: any}) {}
 }
 
 // _____________________________________________________
@@ -176,7 +186,6 @@ export type productsActions = AddProduct |
             AddProductFailure |
             FetchCategories |
             FetchCategoriesSuccess |
-            FetchCategoriesFailure |
             RemoveProductWasAdded |
             FetchProducts |
             FetchProductsSuccess |
@@ -190,4 +199,6 @@ export type productsActions = AddProduct |
             FetchProductsBySearchFailure |
             FetchProductsBySearchInit |
             SetTargetId |
-            RemoveTargetId;
+            RemoveTargetId |
+            FetchSubcategories |
+            FetchSubcategoriesSuccess;
