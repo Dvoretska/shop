@@ -1,8 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Store} from "@ngrx/store";
-import * as fromRoot from "../../store/reducers/reducer.factory";
 import {ActivatedRoute, Router} from "@angular/router";
-
 
 @Component({
   selector: 'app-filter',
@@ -10,14 +7,20 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit{
-  @Input() categories: any[];
+  @Input() categoriesTree: any;
   searchValue: string = '';
-  constructor(private store: Store<fromRoot.AppState>,
-              private router: Router,
+  options = {};
+  constructor(private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log(this.categories)
+    // this.store.dispatch(new productsActions.FetchCategoriesTree());
+    // this.store.pipe(select(fromRoot.getProducts)).pipe(
+    //   untilComponentDestroyed(this)
+    // ).subscribe((state) => {
+    //     this.categoriesTree = state.categoriesTree;
+    // });
+    console.log(this.categoriesTree)
     this.route.queryParams.subscribe(params => {
       this.searchValue = params['search']
     })

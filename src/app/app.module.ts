@@ -135,7 +135,6 @@ import { CreateCategoryComponent } from './admin/create-category/create-category
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
-    TreeviewModule.forRoot(),
     QuillModule,
     NgxPageScrollModule,
     InViewportModule,

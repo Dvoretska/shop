@@ -17,6 +17,7 @@
      <label>
       <span class="password">New Password: </span>
       <input type="password"
+             autocomplete="false"
              [(ngModel)]="newPassword"
              [ngClass]="{'input-error': checkErrors('password')}">
       <div class="error" *ngIf="checkErrors('password')">{{ checkErrors('password') }}</div>

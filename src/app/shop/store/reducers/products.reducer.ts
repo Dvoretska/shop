@@ -8,6 +8,7 @@ export class ProductsState {
     public loading: boolean,
     public categories: any[],
     public subcategories: any,
+    public categoriesTree: any[],
     public productWasAdded: boolean,
     public product: any,
     public totalAmount: any,
@@ -32,6 +33,7 @@ export const initialState: ProductsState = {
   fetchProductsBySearchLoading: false,
   categories: [],
   subcategories: [],
+  categoriesTree: [],
   productWasAdded: false,
   product: null,
   totalAmount: null,
@@ -82,6 +84,18 @@ export function productsReducer(state: ProductsState =initialState, action: prod
         subcategories: action.payload.subcategories
       };
 
+      case productsActions.FETCH_CATEGORIES_TREE:
+      return {
+        ...state,
+        categoriesTree: []
+      };
+
+    case productsActions.FETCH_CATEGORIES_TREE_SUCCESS:
+      console.log('>>', action.payload.categoriesTree)
+      return {
+        ...state,
+        categoriesTree: action.payload.categoriesTree
+      };
 
     case productsActions.FETCH_PRODUCTS:
       return {

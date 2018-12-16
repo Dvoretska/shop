@@ -61,6 +61,22 @@ export class ProductsEffects {
     );
 
   @Effect()
+  fetchCategoriesTree = this.actions$
+    .pipe(
+      ofType(ProductsActions.FETCH_CATEGORIES_TREE),
+      switchMap(() =>
+        this.http.get(`${environment.API_URL}/categories-tree`).pipe(
+          map((res)=>{
+            return new ProductsActions.FetchCategoriesTreeSuccess({categoriesTree: res['categoriesTree']});
+          }),
+          catchError(error => {
+            return from([new ErrorsActions.LoadError(error)]);
+          })
+        )
+      )
+    );
+
+  @Effect()
   fetchProducts = this.actions$
     .pipe(
       ofType(ProductsActions.FETCH_PRODUCTS, ProductsActions.FETCH_PRODUCTS_INIT),

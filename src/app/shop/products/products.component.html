@@ -1,6 +1,6 @@
 <h2 class="heading">SHOP THE TRUE DRAMATIC DRESSES</h2>
 <div class="wrapper" #parent>
-  <app-filter [categories]="categories"></app-filter>
+  <app-filter [categoriesTree]="categoriesTree"></app-filter>
   <div class="content-wrapper" #container>
     <app-ripple *ngIf="initLoading"></app-ripple>
     <ng-container *ngIf="!initLoading">

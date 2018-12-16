@@ -13,6 +13,9 @@ export const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS';
 export const FETCH_SUBCATEGORIES = 'FETCH_SUBCATEGORIES';
 export const FETCH_SUBCATEGORIES_SUCCESS = 'FETCH_SUBCATEGORIES_SUCCESS';
 
+export const FETCH_CATEGORIES_TREE = 'FETCH_CATEGORIES_TREE';
+export const FETCH_CATEGORIES_TREE_SUCCESS = 'FETCH_CATEGORIES_TREE_SUCCESS';
+
 export const FETCH_PRODUCTS_INIT = 'FETCH_PRODUCTS_INIT';
 
 export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
@@ -118,6 +121,20 @@ export class FetchSubcategoriesSuccess implements Action {
 
 // _____________________________________________________
 
+export class FetchCategoriesTree implements Action {
+  readonly type = FETCH_CATEGORIES_TREE;
+
+  constructor() {}
+}
+
+export class FetchCategoriesTreeSuccess implements Action {
+  readonly type = FETCH_CATEGORIES_TREE_SUCCESS;
+
+  constructor(public payload: {categoriesTree: any}) {}
+}
+
+// _____________________________________________________
+
 export class FetchProductsBySearchInit implements Action {
   readonly type = FETCH_PRODUCTS_BY_SEARCH_INIT;
 
@@ -201,4 +218,6 @@ export type productsActions = AddProduct |
             SetTargetId |
             RemoveTargetId |
             FetchSubcategories |
-            FetchSubcategoriesSuccess;
+            FetchSubcategoriesSuccess |
+            FetchCategoriesTree |
+            FetchCategoriesTreeSuccess;

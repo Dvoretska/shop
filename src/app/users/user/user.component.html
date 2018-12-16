@@ -12,7 +12,7 @@
 </td>
 <td>{{user.email}}</td>
 <td>
-  <input type="password" [(ngModel)]="newPassword">
+  <input autocomplete="new-password" type="password" [(ngModel)]="newPassword">
   <div *ngIf="checkErrors()" class="error">{{ checkErrors() }}</div>
 </td>
 <td>

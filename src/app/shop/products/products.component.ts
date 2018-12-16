@@ -8,7 +8,6 @@ import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-pag
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import {ActivatedRoute} from "@angular/router";
 
-
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -26,6 +25,7 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
   error;
   wishlist: any[];
   categories: any[];
+  categoriesTree: any[];
   fetchProductsBySearchLoading: boolean;
   @ViewChild('parent', { read: ViewContainerRef }) container: ViewContainerRef;
 
@@ -38,8 +38,7 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-
-    this.store.dispatch(new productsActions.FetchCategories());
+    this.store.dispatch(new productsActions.FetchCategoriesTree());
     this.store.dispatch(new wishlistActions.FetchWishlist());
     this.store.pipe(select(fromRoot.getProducts)).pipe(
       untilComponentDestroyed(this)
@@ -49,7 +48,9 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.initLoading = state.fetchProductsInitLoading;
         this.targetId = state.targetId;
         this.loading = state.fetchProductsLoading;
-        this.categories = state.categories;
+        // this.categories = state.categories;
+        this.categoriesTree = state.categoriesTree;
+      console.log( this.categoriesTree)
         this.fetchProductsBySearchLoading = state.fetchProductsBySearchLoading;
     });
     this.store.pipe(select(fromRoot.getWishlist)).pipe(
