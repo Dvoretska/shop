@@ -81,6 +81,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
       this.product = state.product;
       this.sizes = state.sizes;
       this.productDetailsLoading = state.productDetailsLoading;
+      this.sizes = state.sizes;
       if(this.product) {
         this.galleryImages = [];
         for(let image of this.product['images']) {

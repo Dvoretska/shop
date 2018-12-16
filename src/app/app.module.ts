@@ -32,8 +32,7 @@ import { InViewportModule } from 'ng-in-viewport';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxGalleryModule } from 'ngx-gallery';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { TreeviewModule } from 'ngx-treeview';
+import { TreeModule } from 'angular-tree-component';
 
 import { FileUploadDirective } from './directives/file-upload.directive';
 import { HoverDirective } from './directives/hover.directive';
@@ -139,9 +138,9 @@ import { CreateCategoryComponent } from './admin/create-category/create-category
     TreeviewModule.forRoot(),
     QuillModule,
     NgxPageScrollModule,
-    NgxPaginationModule,
     InViewportModule,
     NgxMasonryModule,
+    TreeModule.forRoot(),
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([CartEffects, ProductsEffects, ErrorsEffects, WishlistEffects, OrderEffects]),
     NgxGalleryModule
