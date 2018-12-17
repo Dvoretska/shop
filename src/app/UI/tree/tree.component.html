@@ -1,0 +1,16 @@
+<ul *ngIf="treeData">
+  <li *ngFor="let node of treeData; let index = index">
+    <div class="name-wrapper" (click)="toggleChild(node)" >
+      <span  class="expand-icon" [ngClass]="{'transformed': node.showChildren}"></span>
+      <span class="node-name">{{ node.text }}</span>
+    </div>
+    <ul *ngIf="node.showChildren" class="children">
+      <li *ngFor="let child of node['children']; let i = index">
+        <a *ngIf="node.children" [routerLink]="['/shop/products']"
+           [queryParams]="{category: node.value, subcategory: child.value}"
+           routerLinkActive="active" class="child-link"
+           [class.active]="index == 0 && i ==0 && router.url.indexOf('?') == -1">{{child.text}}</a>
+      </li>
+    </ul>
+  </li>
+</ul>

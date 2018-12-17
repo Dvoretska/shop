@@ -91,7 +91,6 @@ export function productsReducer(state: ProductsState =initialState, action: prod
       };
 
     case productsActions.FETCH_CATEGORIES_TREE_SUCCESS:
-      console.log('>>', action.payload.categoriesTree)
       return {
         ...state,
         categoriesTree: action.payload.categoriesTree

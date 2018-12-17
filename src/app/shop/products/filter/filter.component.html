@@ -4,13 +4,7 @@
     <input class="search-input" placeholder="Search..." type="text" [(ngModel)]="searchValue" (keydown.enter)="searchProduct()"/>
   </div>
   <h5 class="filter-title">SHOP BY</h5>
-  <!--<ul class="filter-options">-->
-    <!--<li *ngFor="let category of categories; let index = index">-->
-      <!--<a [routerLink]="['/shop/products']"-->
-         <!--[queryParams]="{category: category.id}"-->
-         <!--routerLinkActive="active"-->
-         <!--[class.active]="index == 0 && router.url.indexOf('?') == -1">{{category.name}}</a>-->
-    <!--</li>-->
-  <!--</ul>-->
-  <tree-root [nodes]="categoriesTree"></tree-root>
+  <div class="tree-wrapper">
+    <app-tree [treeData]="categoriesTree"></app-tree>
+  </div>
 </div>

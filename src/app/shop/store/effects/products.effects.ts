@@ -2,10 +2,12 @@ import {Actions, Effect, ofType} from "@ngrx/effects";
 import {Injectable} from "@angular/core";
 import * as ProductsActions from '../actions/products.actions';
 import * as ErrorsActions from '../actions/errors.actions';
-import { switchMap, map, catchError} from 'rxjs/operators';
+import {switchMap, map, catchError, exhaustMap} from 'rxjs/operators';
 import {from} from 'rxjs';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import * as CartActions from "../actions/cart.actions";
+import {DeleteSubcategories} from "../actions/products.actions";
 
 
 @Injectable()
@@ -73,6 +75,30 @@ export class ProductsEffects {
             return from([new ErrorsActions.LoadError(error)]);
           })
         )
+      )
+    );
+
+  @Effect()
+  deleteSubcategories = this.actions$
+    .pipe(
+      ofType(ProductsActions.DELETE_SUBCATEGORIES),
+      map((action: ProductsActions.DeleteSubcategories) => action.payload),
+      exhaustMap((payload)=> {
+          let options = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+            }),
+            body: payload,
+          };
+          return this.http.delete(`${environment.API_URL}/subcategories/delete`, options).pipe(
+            map((res) => {
+              return new ProductsActions.DeleteSubcategoriesSuccess();
+            }),
+            catchError(error => {
+              return from([new ErrorsActions.LoadError(error)]);
+            })
+          )
+        }
       )
     );
 

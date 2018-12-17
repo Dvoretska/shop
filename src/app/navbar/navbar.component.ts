@@ -13,6 +13,7 @@ import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import * as cartActions from "../shop/store/actions/cart.actions";
 import * as wishlistActions from "../shop/store/actions/wishlist.actions";
 import { skip} from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
 
 export interface CurrentUser {
   email: string;
@@ -44,6 +45,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private modalService: BsModalService,
               private router: Router,
               private storageService: StorageService,
+              private authService: AuthService,
               private store: Store<fromRoot.AppState>) {}
 
   ngOnInit() {
@@ -65,7 +67,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   isAuthorized() {
-    return localStorage.getItem('user');
+    return this.authService.isAuthenticated();
   }
 
   ngAfterViewInit() {

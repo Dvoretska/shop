@@ -32,7 +32,7 @@ import { InViewportModule } from 'ng-in-viewport';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxGalleryModule } from 'ngx-gallery';
-import { TreeModule } from 'angular-tree-component';
+import { TreeviewModule } from 'ngx-treeview';
 
 import { FileUploadDirective } from './directives/file-upload.directive';
 import { HoverDirective } from './directives/hover.directive';
@@ -73,8 +73,9 @@ import { OrdersListComponent } from './shop/order/orders-list/orders-list.compon
 import { OrderItemComponent } from './shop/order/order-item/order-item.component';
 import { FilterComponent } from './shop/products/filter/filter.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AdminComponent } from './admin/admin.component';
-import { CreateCategoryComponent } from './admin/create-category/create-category.component';
+import { AdminComponent } from './shop/admin/admin.component';
+import { CategoriesComponent } from './shop/admin/categories/categories.component';
+import { TreeComponent } from './UI/tree/tree.component';
 
 
 @NgModule({
@@ -118,7 +119,8 @@ import { CreateCategoryComponent } from './admin/create-category/create-category
     FilterComponent,
     NotFoundComponent,
     AdminComponent,
-    CreateCategoryComponent
+    CategoriesComponent,
+    TreeComponent
   ],
   imports: [
     BrowserModule,
@@ -139,7 +141,7 @@ import { CreateCategoryComponent } from './admin/create-category/create-category
     NgxPageScrollModule,
     InViewportModule,
     NgxMasonryModule,
-    TreeModule.forRoot(),
+    TreeviewModule.forRoot(),
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([CartEffects, ProductsEffects, ErrorsEffects, WishlistEffects, OrderEffects]),
     NgxGalleryModule

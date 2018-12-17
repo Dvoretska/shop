@@ -25,7 +25,6 @@
     "@ngrx/effects": "^6.1.0",
     "@ngrx/store": "^6.1.0",
     "@w11k/ngx-componentdestroyed": "^4.0.1",
-    "angular-tree-component": "^8.0.2",
     "bcrypt": "^3.0.0",
     "core-js": "^2.5.4",
     "firebase": "^5.5.3",

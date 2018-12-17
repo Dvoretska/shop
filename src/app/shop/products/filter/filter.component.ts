@@ -14,13 +14,6 @@ export class FilterComponent implements OnInit{
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    // this.store.dispatch(new productsActions.FetchCategoriesTree());
-    // this.store.pipe(select(fromRoot.getProducts)).pipe(
-    //   untilComponentDestroyed(this)
-    // ).subscribe((state) => {
-    //     this.categoriesTree = state.categoriesTree;
-    // });
-    console.log(this.categoriesTree)
     this.route.queryParams.subscribe(params => {
       this.searchValue = params['search']
     })

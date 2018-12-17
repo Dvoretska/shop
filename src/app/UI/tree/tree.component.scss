@@ -1,0 +1,46 @@
+@import '../../../variables.scss';
+
+ul {
+  li {
+    font-size: 19px;
+    font-family: 'goudy_old_stylebold';
+    .name-wrapper {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      .expand-icon {
+        display: inline-block;
+        padding-right: 20px;
+        width: 8px;
+        height: 8px;
+        background-image: url('../../../assets/play.svg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center center;
+        &.transformed {
+          transform: rotate(90deg);
+          transition: transform .3s ease-out;
+        }
+      }
+    }
+    .children {
+      li {
+        .child-link {
+          font-family: 'goudy_old_stylebold_italic';
+          font-size: 18px;
+          color: rgba(0,0,0,.8);
+          padding-left: 30px;
+          &:hover {
+            text-decoration: none;
+            color: #F08080;
+          }
+          &.active {
+            color: $red_color;
+          }
+        }
+      }
+    }
+  }
+}
+
+
