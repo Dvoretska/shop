@@ -7,6 +7,7 @@ import * as wishlistActions from "../store/actions/wishlist.actions";
 import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import {ActivatedRoute} from "@angular/router";
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-products',
@@ -23,7 +24,7 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
   loading: boolean;
   targetId;
   error;
-  wishlist: any[];
+  wishlist: any[] = [];
   categoriesTree: any[];
   fetchProductsBySearchLoading: boolean;
   @ViewChild('parent', { read: ViewContainerRef }) container: ViewContainerRef;
@@ -32,11 +33,15 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
               private pageScrollService: PageScrollService,
               @Inject(DOCUMENT) private document: any,
               private route: ActivatedRoute,
-              private _cfr: ComponentFactoryResolver) {
+              private _cfr: ComponentFactoryResolver,
+              private authService: AuthService) {
     PageScrollConfig.defaultDuration = 1000;
   }
 
   ngOnInit() {
+    if(this.authService.isAuthenticated()) {
+      this.store.dispatch(new wishlistActions.FetchWishlist());
+    }
     this.store.dispatch(new productsActions.FetchCategoriesTree());
     this.store.pipe(select(fromRoot.getProducts)).pipe(
       untilComponentDestroyed(this)
@@ -68,7 +73,7 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.store.dispatch(new productsActions.FetchProductsBySearchInit(queryString));
       } else {
         this.skipProducts = 0;
-        let subcategory = +params['subcategory'] || 1;
+        let subcategory = params['subcategory'] || 'work';
         let queryString = `?skip=0&limit=${this.limit}&subcategory=${subcategory}`;
         this.store.dispatch(new productsActions.FetchProductsInit(queryString));
       }
@@ -91,8 +96,8 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
       this.store.dispatch(new productsActions.FetchProductsBySearch(queryString));
     } else {
       this.skipProducts += this.limit;
-      let category =  this.route.snapshot.queryParamMap.get('category') || 1;
-      let queryString = `?skip=${this.skipProducts}&limit=${this.limit}&category=${category}`;
+      let subcategory =  this.route.snapshot.queryParamMap.get('subcategory') || 'work';
+      let queryString = `?skip=${this.skipProducts}&limit=${this.limit}&subcategory=${subcategory}`;
       this.store.dispatch(new productsActions.FetchProducts(queryString));
     }
   }

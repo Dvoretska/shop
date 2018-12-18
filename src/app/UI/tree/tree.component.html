@@ -7,9 +7,8 @@
     <ul *ngIf="node.showChildren" class="children">
       <li *ngFor="let child of node['children']; let i = index">
         <a *ngIf="node.children" [routerLink]="['/shop/products']"
-           [queryParams]="{category: node.value, subcategory: child.value}"
-           routerLinkActive="active" class="child-link"
-           [class.active]="index == 0 && i ==0 && router.url.indexOf('?') == -1">{{child.text}}</a>
+           [queryParams]="{category: node.slug, subcategory: child.slug}"
+           routerLinkActive="active" class="child-link">{{child.text}}</a>
       </li>
     </ul>
   </li>

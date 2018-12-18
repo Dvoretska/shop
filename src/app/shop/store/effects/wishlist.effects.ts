@@ -92,7 +92,7 @@ export class WishlistEffects {
               totalNumOfProductsInWishlist: res['total']
             });
           }),
-          catchError(error => of(new ErrorsActions.LoadError(error)))
+          catchError(error => of(new WishlistActions.GetTotalNumOfProductsInWishlistFailure()))
         )
       )
     );

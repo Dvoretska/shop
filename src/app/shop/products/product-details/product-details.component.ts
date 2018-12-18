@@ -110,7 +110,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
     ).subscribe((state) => {
       this.wishlist = state.wishlist;
       const product_id = +this.route.snapshot.params['product_id'];
-      if(this.checkIfProductInWishlist(this.wishlist, product_id)) {
+      if(this.wishlist.length && this.checkIfProductInWishlist(this.wishlist, product_id)) {
         this.productIsInWishlist = true;
       } else {
         this.productIsInWishlist = false;

@@ -35,6 +35,7 @@ export function wishlistReducer(state: WishlistState = initialState, action: wis
     case wishlistActions.ADD_PRODUCT_TO_WISHLIST_FAILURE:
       return {
         ...state,
+        wishlist: [],
         addToWishlistLoading: false
       };
 
@@ -81,6 +82,12 @@ export function wishlistReducer(state: WishlistState = initialState, action: wis
       return {
         ...state,
         totalNumOfProductsInWishlist: action.payload.totalNumOfProductsInWishlist
+      };
+
+    case wishlistActions.GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST_FAILURE:
+      return {
+        ...state,
+        totalNumOfProductsInWishlist: null
       };
 
     default:

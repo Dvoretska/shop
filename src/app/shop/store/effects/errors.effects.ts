@@ -19,19 +19,17 @@ export class ErrorsEffects {
       map((action: ErrorsActions.LoadError) => action.payload),
       switchMap((payload) => {
         let error = payload;
-        // console.log(error)
         if (error instanceof HttpErrorResponse) {
           // Server or connection error happened
           if (!navigator.onLine) {
             // Handle offline error
             this.toastr.error('No Internet Connection.');
-            console.log(error);
-          } else if(error.status == 0) {
-            this.toastr.error('Something went wrong. Try again later.');
-            console.log(error);
+          } else if(error.status == 500) {
+             this.toastr.error(`Something went wrong. Try again later.`);
+          } else if(error.status == 404) {
+             this.toastr.error(`${error.status} - Not found.`);
           } else {
-            // Handle Http Error (error.status === 403, 404...)
-              this.toastr.error(`${error.status} - ${error.statusText}`);
+             this.toastr.error(`${error.status} - ${error.statusText}`);
           }
         }
         return of();

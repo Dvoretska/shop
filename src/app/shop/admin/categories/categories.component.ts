@@ -26,7 +26,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   onSelectedChange(event) {
-    console.log(event);
+
   }
 
   ngOnDestroy(){}

@@ -13,6 +13,7 @@ export const DELETE_PRODUCT_FROM_WISHLIST_SUCCESS = 'DELETE_PRODUCT_FROM_WISHLIS
 export const DELETE_PRODUCT_FROM_WISHLIST_FAILURE = 'DELETE_PRODUCT_FROM_WISHLIST_FAILURE';
 export const GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST = 'GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST';
 export const GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST_SUCCESS = 'GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST_SUCCESS';
+export const GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST_FAILURE = 'GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST_FAILURE';
 
 
 export class AddProductToWishlist implements Action {
@@ -81,6 +82,12 @@ export class GetTotalNumOfProductsInWishlistSuccess implements Action {
   constructor(public payload: {totalNumOfProductsInWishlist: number}) {}
 }
 
+export class GetTotalNumOfProductsInWishlistFailure implements Action {
+  readonly type = GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST_FAILURE;
+
+  constructor() {}
+}
+
 export type wishlistActions =
             AddProductToWishlist |
             AddProductToWishlistSuccess |
@@ -92,4 +99,5 @@ export type wishlistActions =
             DeleteProductFromWishlistSuccess |
             DeleteProductFromWishlistFailure |
             GetTotalNumOfProductsInWishlist |
-            GetTotalNumOfProductsInWishlistSuccess;
+            GetTotalNumOfProductsInWishlistSuccess |
+            GetTotalNumOfProductsInWishlistFailure;
