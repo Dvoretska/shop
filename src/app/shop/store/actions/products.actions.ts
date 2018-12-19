@@ -7,18 +7,6 @@ export const ADD_PRODUCT_FAILURE = 'ADD_PRODUCT_FAILURE';
 
 export const REMOVE_PRODUCT_WAS_ADDED = 'REMOVE_PRODUCT_WAS_ADDED';
 
-export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
-export const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS';
-
-export const FETCH_SUBCATEGORIES = 'FETCH_SUBCATEGORIES';
-export const FETCH_SUBCATEGORIES_SUCCESS = 'FETCH_SUBCATEGORIES_SUCCESS';
-
-export const FETCH_CATEGORIES_TREE = 'FETCH_CATEGORIES_TREE';
-export const FETCH_CATEGORIES_TREE_SUCCESS = 'FETCH_CATEGORIES_TREE_SUCCESS';
-
-export const DELETE_SUBCATEGORIES = 'DELETE_SUBCATEGORIES';
-export const DELETE_SUBCATEGORIES_SUCCESS = 'DELETE_SUBCATEGORIES_SUCCESS';
-
 export const FETCH_PRODUCTS_INIT = 'FETCH_PRODUCTS_INIT';
 
 export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
@@ -96,62 +84,6 @@ export class FetchProductsFailure implements Action {
 
 // _____________________________________________________
 
-export class FetchCategories implements Action {
-  readonly type = FETCH_CATEGORIES;
-
-  constructor() {}
-}
-
-export class FetchCategoriesSuccess implements Action {
-  readonly type = FETCH_CATEGORIES_SUCCESS;
-
-  constructor(public payload: {categories: any}) {}
-}
-
-// _____________________________________________________
-
-export class FetchSubcategories implements Action {
-  readonly type = FETCH_SUBCATEGORIES;
-
-  constructor(public payload: {category_id: number}) {}
-}
-
-export class FetchSubcategoriesSuccess implements Action {
-  readonly type = FETCH_SUBCATEGORIES_SUCCESS;
-
-  constructor(public payload: {subcategories: any}) {}
-}
-
-// _____________________________________________________
-
-export class FetchCategoriesTree implements Action {
-  readonly type = FETCH_CATEGORIES_TREE;
-
-  constructor() {}
-}
-
-export class FetchCategoriesTreeSuccess implements Action {
-  readonly type = FETCH_CATEGORIES_TREE_SUCCESS;
-
-  constructor(public payload: {categoriesTree: any}) {}
-}
-
-// _____________________________________________________
-
-export class DeleteSubcategories implements Action {
-  readonly type = DELETE_SUBCATEGORIES;
-
-  constructor(public payload: {subcategories: any[]}) {}
-}
-
-export class DeleteSubcategoriesSuccess implements Action {
-  readonly type = DELETE_SUBCATEGORIES_SUCCESS;
-
-  constructor() {}
-}
-
-// _____________________________________________________
-
 export class FetchProductsBySearchInit implements Action {
   readonly type = FETCH_PRODUCTS_BY_SEARCH_INIT;
 
@@ -218,8 +150,6 @@ export class RemoveTargetId implements Action {
 export type productsActions = AddProduct |
             AddProductSuccess |
             AddProductFailure |
-            FetchCategories |
-            FetchCategoriesSuccess |
             RemoveProductWasAdded |
             FetchProducts |
             FetchProductsSuccess |
@@ -233,10 +163,4 @@ export type productsActions = AddProduct |
             FetchProductsBySearchFailure |
             FetchProductsBySearchInit |
             SetTargetId |
-            RemoveTargetId |
-            FetchSubcategories |
-            FetchSubcategoriesSuccess |
-            FetchCategoriesTree |
-            FetchCategoriesTreeSuccess |
-            DeleteSubcategories |
-            DeleteSubcategoriesSuccess;
+            RemoveTargetId;

@@ -24,12 +24,14 @@ export class ErrorsEffects {
           if (!navigator.onLine) {
             // Handle offline error
             this.toastr.error('No Internet Connection.');
-          } else if(error.status == 500) {
+          } else if(error.status == 500 && !error.error.message) {
              this.toastr.error(`Something went wrong. Try again later.`);
-          } else if(error.status == 404) {
+          } else if(error.status == 404 && !error.error.message) {
              this.toastr.error(`${error.status} - Not found.`);
+          } else if(error.error.message) {
+             this.toastr.error(`${error.error.message}`);
           } else {
-             this.toastr.error(`${error.status} - ${error.statusText}`);
+            this.toastr.error(`${error.status} - ${error.statusText}`);
           }
         }
         return of();

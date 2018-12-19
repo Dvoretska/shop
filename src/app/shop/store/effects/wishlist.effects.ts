@@ -6,8 +6,6 @@ import { exhaustMap, map, catchError, switchMap} from 'rxjs/operators';
 import {from, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
-import * as CartActions from "../actions/cart.actions";
-import {GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST} from "../actions/wishlist.actions";
 
 
 @Injectable()
@@ -40,7 +38,7 @@ export class WishlistEffects {
       ofType(WishlistActions.ADD_PRODUCT_TO_WISHLIST),
       map((action: WishlistActions.AddProductToWishlist) => action.payload),
       exhaustMap((payload) =>
-        this.http.post(`${environment.API_URL}/add-to-wishlist`, payload).pipe(
+        this.http.post(`${environment.API_URL}/wishlist/add`, payload).pipe(
           map((res)=>{
             return new WishlistActions.AddProductToWishlistSuccess({
              item: res['item'],
@@ -66,7 +64,7 @@ export class WishlistEffects {
           }),
           body: payload,
         };
-        return this.http.delete(`${environment.API_URL}/delete-from-wishlist`, options).pipe(
+        return this.http.delete(`${environment.API_URL}/wishlist/delete`, options).pipe(
           map((res) => {
             return new WishlistActions.DeleteProductFromWishlistSuccess({
               product_id: res['product_id'],
@@ -86,7 +84,7 @@ export class WishlistEffects {
     .pipe(
       ofType(WishlistActions.GET_TOTAL_NUM_OF_PRODUCTS_IN_WISHLIST),
       exhaustMap(() =>
-        this.http.get(`${environment.API_URL}/number-wishlist`).pipe(
+        this.http.get(`${environment.API_URL}/wishlist/number`).pipe(
           map((res)=>{
             return new WishlistActions.GetTotalNumOfProductsInWishlistSuccess({
               totalNumOfProductsInWishlist: res['total']

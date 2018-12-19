@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import * as productsActions from "../../store/actions/products.actions";
+import * as categoriesActions from "../../store/actions/categories.actions";
 import {select, Store} from "@ngrx/store";
 import * as fromRoot from "../../store/reducers/reducer.factory";
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import {TreeviewItem} from 'ngx-treeview';
+import * as productsActions from "../../store/actions/products.actions";
 
 @Component({
   selector: 'app-create-category',
@@ -12,12 +13,17 @@ import {TreeviewItem} from 'ngx-treeview';
 })
 export class CategoriesComponent implements OnInit {
   categoriesTree: any[];
-  nodes;
+  nodes: any[];
+  selectedSubcategories: number[];
+  config = {
+    hasAllCheckBox: false
+  };
+  category: string = '';
   constructor(private store: Store<fromRoot.AppState>) { }
 
   ngOnInit() {
-    this.store.dispatch(new productsActions.FetchCategoriesTree());
-    this.store.pipe(select(fromRoot.getProducts)).pipe(
+    this.store.dispatch(new categoriesActions.FetchCategoriesTree());
+    this.store.pipe(select(fromRoot.getCategories)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.categoriesTree = state.categoriesTree;
@@ -26,7 +32,12 @@ export class CategoriesComponent implements OnInit {
   }
 
   onSelectedChange(event) {
+    this.selectedSubcategories = event;
+    console.log(this.selectedSubcategories)
+  }
 
+  onSaveCategory() {
+    this.store.dispatch(new categoriesActions.AddCategory({category: this.category}));
   }
 
   ngOnDestroy(){}

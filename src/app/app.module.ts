@@ -15,6 +15,7 @@ import { ErrorsEffects } from "./shop/store/effects/errors.effects";
 import { WishlistEffects } from "./shop/store/effects/wishlist.effects";
 import { ProductsEffects } from "./shop/store/effects/products.effects";
 import { OrderEffects } from "./shop/store/effects/order.effects";
+import { CategoriesEffects } from "./shop/store/effects/categories.effects";
 
 import { AuthService } from './auth/auth.service';
 import { StorageService } from './storage.service';
@@ -143,7 +144,7 @@ import { TreeComponent } from './UI/tree/tree.component';
     NgxMasonryModule,
     TreeviewModule.forRoot(),
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([CartEffects, ProductsEffects, ErrorsEffects, WishlistEffects, OrderEffects]),
+    EffectsModule.forRoot([CartEffects, ProductsEffects, ErrorsEffects, WishlistEffects, OrderEffects, CategoriesEffects]),
     NgxGalleryModule
   ],
   providers: [AuthService, {

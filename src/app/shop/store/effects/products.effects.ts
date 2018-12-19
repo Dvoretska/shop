@@ -6,8 +6,7 @@ import {switchMap, map, catchError, exhaustMap} from 'rxjs/operators';
 import {from} from 'rxjs';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
-import * as CartActions from "../actions/cart.actions";
-import {DeleteSubcategories} from "../actions/products.actions";
+
 
 
 @Injectable()
@@ -29,78 +28,6 @@ export class ProductsEffects {
     )
   );
 
-  @Effect()
-  fetchCategories = this.actions$
-    .pipe(
-      ofType(ProductsActions.FETCH_CATEGORIES),
-      switchMap(() =>
-        this.http.get(`${environment.API_URL}/categories`).pipe(
-          map((categories)=>{
-            return new ProductsActions.FetchCategoriesSuccess({categories});
-          }),
-          catchError(error => {
-            return from([new ErrorsActions.LoadError(error)]);
-          })
-        )
-      )
-    );
-
-  @Effect()
-  fetchSubcategories = this.actions$
-    .pipe(
-      ofType(ProductsActions.FETCH_SUBCATEGORIES),
-      map((action: ProductsActions.FetchSubcategories) => action.payload),
-      switchMap((payload) =>
-        this.http.get(`${environment.API_URL}/subcategories/${payload.category_id}`).pipe(
-          map((subcategories)=>{
-            return new ProductsActions.FetchSubcategoriesSuccess({subcategories});
-          }),
-          catchError(error => {
-            return from([new ErrorsActions.LoadError(error)]);
-          })
-        )
-      )
-    );
-
-  @Effect()
-  fetchCategoriesTree = this.actions$
-    .pipe(
-      ofType(ProductsActions.FETCH_CATEGORIES_TREE),
-      switchMap(() =>
-        this.http.get(`${environment.API_URL}/categories-tree`).pipe(
-          map((res)=>{
-            return new ProductsActions.FetchCategoriesTreeSuccess({categoriesTree: res['categoriesTree']});
-          }),
-          catchError(error => {
-            return from([new ErrorsActions.LoadError(error)]);
-          })
-        )
-      )
-    );
-
-  @Effect()
-  deleteSubcategories = this.actions$
-    .pipe(
-      ofType(ProductsActions.DELETE_SUBCATEGORIES),
-      map((action: ProductsActions.DeleteSubcategories) => action.payload),
-      exhaustMap((payload)=> {
-          let options = {
-            headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-            }),
-            body: payload,
-          };
-          return this.http.delete(`${environment.API_URL}/subcategories/delete`, options).pipe(
-            map((res) => {
-              return new ProductsActions.DeleteSubcategoriesSuccess();
-            }),
-            catchError(error => {
-              return from([new ErrorsActions.LoadError(error)]);
-            })
-          )
-        }
-      )
-    );
 
   @Effect()
   fetchProducts = this.actions$

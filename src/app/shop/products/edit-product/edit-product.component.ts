@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable} from 'rxjs';
 import * as productsActions from '../../store/actions/products.actions';
+import * as categoriesActions from '../../store/actions/categories.actions';
 import * as fromRoot from '../../store/reducers/reducer.factory';
 import * as fromProducts from '../../store/reducers/products.reducer';
 import {ToastrService} from "ngx-toastr";
@@ -36,25 +37,20 @@ export class EditProductComponent implements OnInit, OnDestroy {
   imageUrls = [];
   productWasAdded;
   loading: boolean;
-  getState$: Observable<fromProducts.ProductsState>;
   subjectMaxLength: number = 50;
 
-  constructor(private store: Store<fromProducts.ProductsState>,
+  constructor(private store: Store<fromRoot.AppState>,
               private toastr: ToastrService,
-              private router: Router)
-  {
-    this.getState$ = this.store.pipe(select(fromRoot.getProducts));
-  }
+              private router: Router) {}
 
   ngOnInit() {
-    this.store.dispatch(new productsActions.FetchCategories());
-    this.getState$.pipe(
+    this.store.dispatch(new categoriesActions.FetchCategories());
+    this.store.pipe(select(fromRoot.getCategories)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.categories = state.categories;
       this.subcategories = state.subcategories;
     });
-
   }
 
   onUpload(e) {
@@ -128,8 +124,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
   }
 
   fetchSubcategories(selectedCategory) {
-    console.log('changed')
-    this.store.dispatch(new productsActions.FetchSubcategories({category_id: selectedCategory}));
+    this.store.dispatch(new categoriesActions.FetchSubcategories({category_id: selectedCategory}));
   }
 
   onCreateProduct() {
@@ -151,14 +146,14 @@ export class EditProductComponent implements OnInit, OnDestroy {
       }
     }
     this.store.dispatch(new productsActions.AddProduct(savedData));
-    this.getState$.pipe(
+    this.store.pipe(select(fromRoot.getProducts)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.productWasAdded = state.productWasAdded;
       this.loading = state.addProductLoading;
       if(this.productWasAdded) {
         this.toastr.success('Product was saved successfully!');
-        this.router.navigate(['shop/products'], { queryParams: {subcategory: this.selectedSubcategory}});
+        this.router.navigate(['shop/products']);
       }
     });
   }

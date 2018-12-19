@@ -27,6 +27,9 @@ form {
     }
   }
 }
+/deep/ .modal.show .modal-sm {
+  top: 70px;
+}
 /deep/ .confirm-body {
   .cta {
     display: inline-block;

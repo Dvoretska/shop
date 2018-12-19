@@ -4,6 +4,7 @@ import { DOCUMENT } from '@angular/common';
 import * as fromRoot from "../store/reducers/reducer.factory";
 import * as productsActions from "../store/actions/products.actions";
 import * as wishlistActions from "../store/actions/wishlist.actions";
+import * as categoriesActions from "../store/actions/categories.actions";
 import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import {ActivatedRoute} from "@angular/router";
@@ -42,7 +43,8 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
     if(this.authService.isAuthenticated()) {
       this.store.dispatch(new wishlistActions.FetchWishlist());
     }
-    this.store.dispatch(new productsActions.FetchCategoriesTree());
+    this.store.dispatch(new categoriesActions.FetchCategoriesTree());
+
     this.store.pipe(select(fromRoot.getProducts)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
@@ -51,13 +53,18 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.initLoading = state.fetchProductsInitLoading;
         this.targetId = state.targetId;
         this.loading = state.fetchProductsLoading;
-        this.categoriesTree = state.categoriesTree;
         this.fetchProductsBySearchLoading = state.fetchProductsBySearchLoading;
     });
     this.store.pipe(select(fromRoot.getWishlist)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
         this.wishlist = state.wishlist;
+    });
+    this.store.pipe(select(fromRoot.getCategories)).pipe(
+      untilComponentDestroyed(this)
+    ).subscribe((state) => {
+        this.categoriesTree = state.categoriesTree;
+        console.log(this.categoriesTree)
     });
     this.route.queryParams.subscribe(params => {
       if (this.targetId) {
@@ -73,8 +80,13 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.store.dispatch(new productsActions.FetchProductsBySearchInit(queryString));
       } else {
         this.skipProducts = 0;
-        let subcategory = params['subcategory'] || 'work';
-        let queryString = `?skip=0&limit=${this.limit}&subcategory=${subcategory}`;
+        let subcategory = params['subcategory'];
+        let queryString;
+        if(subcategory) {
+          queryString = `?skip=0&limit=${this.limit}&subcategory=${subcategory}`;
+        } else {
+          queryString = `?skip=0&limit=${this.limit}`;
+        }
         this.store.dispatch(new productsActions.FetchProductsInit(queryString));
       }
     });
@@ -96,8 +108,13 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
       this.store.dispatch(new productsActions.FetchProductsBySearch(queryString));
     } else {
       this.skipProducts += this.limit;
-      let subcategory =  this.route.snapshot.queryParamMap.get('subcategory') || 'work';
-      let queryString = `?skip=${this.skipProducts}&limit=${this.limit}&subcategory=${subcategory}`;
+      let subcategory =  this.route.snapshot.queryParamMap.get('subcategory');
+      let queryString;
+      if(subcategory) {
+        queryString = `?skip=${this.skipProducts}&limit=${this.limit}&subcategory=${subcategory}`;
+      } else {
+        queryString = `?skip=${this.skipProducts}&limit=${this.limit}`;
+      }
       this.store.dispatch(new productsActions.FetchProducts(queryString));
     }
   }
