@@ -1,0 +1,16 @@
+<div class="box">
+  <ngx-treeview
+    [items]="nodes"
+    [config]="config"
+    (selectedChange)="onSelectedChange($event)">
+  </ngx-treeview>
+  <div class="button-container">
+    <app-button [text]="'Delete selected'" (onClick)="onDelete()" [disabled]="!selectedSubcategories.length"></app-button>
+    <div class="button-wrapper">
+      <app-button [text]="'Create new category'" (onClick)="showFormCreateCategory()"></app-button>
+    </div>
+    <div class="button-wrapper">
+      <app-button [text]="'Add new subcategory'" (onClick)="showFormCreateSubcategory()"></app-button>
+    </div>
+  </div>
+</div>

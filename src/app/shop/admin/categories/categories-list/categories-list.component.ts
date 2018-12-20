@@ -1,25 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import * as categoriesActions from "../../store/actions/categories.actions";
+import * as categoriesActions from "../../../store/actions/categories.actions";
 import {select, Store} from "@ngrx/store";
-import * as fromRoot from "../../store/reducers/reducer.factory";
+import * as fromRoot from "../../../store/reducers/reducer.factory";
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import {TreeviewItem} from 'ngx-treeview';
-import * as productsActions from "../../store/actions/products.actions";
+import {ActivatedRoute, Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-create-category',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss']
+  templateUrl: './categories-list.component.html',
+  styleUrls: ['./categories-list.component.scss']
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesListComponent implements OnInit {
   categoriesTree: any[];
   nodes: any[];
   selectedSubcategories: number[];
   config = {
     hasAllCheckBox: false
   };
-  category: string = '';
-  constructor(private store: Store<fromRoot.AppState>) { }
+
+  constructor(private store: Store<fromRoot.AppState>, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.store.dispatch(new categoriesActions.FetchCategoriesTree());
@@ -33,11 +34,14 @@ export class CategoriesComponent implements OnInit {
 
   onSelectedChange(event) {
     this.selectedSubcategories = event;
-    console.log(this.selectedSubcategories)
   }
 
-  onSaveCategory() {
-    this.store.dispatch(new categoriesActions.AddCategory({category: this.category}));
+  showFormCreateCategory() {
+    this.router.navigate(['/add'], {relativeTo: this.route});
+  }
+
+  showFormCreateSubcategory() {
+    this.router.navigate(['../subcategory/add'], {relativeTo: this.route});
   }
 
   ngOnDestroy(){}

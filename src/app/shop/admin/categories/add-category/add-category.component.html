@@ -1,0 +1,20 @@
+<form class="form">
+  <div class="form-group">
+    <label for="category">
+      <strong>Category:</strong>
+    </label>
+    <input type="text" class="form-control" name="category" id="category" [(ngModel)]="category">
+  </div>
+
+  <div class="form-group">
+    <label for="subcategory">
+      <strong>Subcategory:</strong>
+    </label>
+    <input type="text" class="form-control" name="subcategory" id="subcategory" [(ngModel)]="subcategory">
+  </div>
+  <app-button [text]="'Save category'" (onClick)="onSaveCategory()" [disabled]="!category"></app-button>
+  <a class="back-link" routerLink="../">
+    <img src="/assets/back.jpg" class="arrow" alt="avatar">
+    <span class="back">Back to Categories</span>
+  </a>
+</form>

@@ -19,14 +19,18 @@ import { CurrentOrderComponent } from './shop/order/current-order/current-order.
 import { OrdersListComponent } from './shop/order/orders-list/orders-list.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminComponent } from './shop/admin/admin.component';
-import { CategoriesComponent } from './shop/admin/categories/categories.component';
+import { CategoriesListComponent } from './shop/admin/categories/categories-list/categories-list.component';
+import { AddCategoryComponent } from './shop/admin/categories/add-category/add-category.component';
+import { AddSubcategoryComponent } from './shop/admin/categories/add-subcategory/add-subcategory.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'users', component: UsersListComponent, canActivate: [AuthGuardService] },
   { path: 'shop', component: ShopComponent, children: [
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], children: [
-      { path: 'categories', component: CategoriesComponent },
+      { path: 'categories', component: CategoriesListComponent },
+      { path: 'categories/add', component: AddCategoryComponent },
+      { path: 'subcategory/add', component: AddSubcategoryComponent },
     ]},
     { path: 'products', component: ProductsComponent},
     { path: 'products/:product_id', component: ProductDetailsComponent},

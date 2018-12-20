@@ -1,0 +1,22 @@
+<div class="category-form">
+  <app-ripple *ngIf="!categories.length; else formAdSubcategory"></app-ripple>
+  <ng-template #formAdSubcategory>
+    <form class="form">
+      <div class="form-group">
+        <strong>Category</strong>
+        <ng-select *ngIf="categories && categories.length" [items]="categories"
+                   bindLabel="name"
+                   bindValue="id"
+                   [(ngModel)]="selectedCategory" name="category" placeholder="Choose an existing category">
+        </ng-select>
+      </div>
+      <div class="form-group">
+        <label for="adSubcategory">
+          <strong>Subcategory:</strong>
+        </label>
+        <input type="text" class="form-control" name="subcategory" id="adSubcategory" [(ngModel)]="adSubcategory">
+      </div>
+      <app-button [text]="'Save subcategory'" (onClick)="onSaveAdSubcategory()" [disabled]="!subcategory && !selectedCategory"></app-button>
+    </form>
+  </ng-template>
+</div>

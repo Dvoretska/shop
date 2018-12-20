@@ -1,5 +1,8 @@
 import * as categoriesActions from '../actions/categories.actions';
 import {ADD_CATEGORY} from "../actions/categories.actions";
+import {SAVE_ADDITIONAL_SUBCATEGORIES} from "../actions/categories.actions";
+import {SAVE_ADDITIONAL_SUBCATEGORIES_SUCCESS} from "../actions/categories.actions";
+import * as productsActions from "../actions/products.actions";
 
 
 export class CategoriesState {
@@ -51,12 +54,24 @@ export function categoriesReducer(state: CategoriesState =initialState, action: 
         categoriesTree: action.payload.categoriesTree
       };
 
+    case categoriesActions.ADD_CATEGORY:
+      return {
+        ...state,
+        categoryWasAdded: false
+      };
+
     case categoriesActions.ADD_CATEGORY_SUCCESS:
       return {
         ...state,
-        categoryWasAdded: true,
-        categoriesTree: state.categoriesTree.concat(action.payload.category),
+        categoryWasAdded: true
       };
+
+    case categoriesActions.REMOVE_CATEGORY_WAS_ADDED:
+      return {
+        ...state,
+        categoryWasAdded: false
+      };
+
 
     default:
       return state;

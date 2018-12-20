@@ -7,6 +7,7 @@ import { of, from } from 'rxjs';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import {ToastrService} from "ngx-toastr";
+import {SAVE_ADDITIONAL_SUBCATEGORIES} from "../actions/categories.actions";
 
 
 @Injectable()
@@ -22,9 +23,7 @@ export class CategoriesEffects {
       exhaustMap((payload) =>
         this.http.post(`${environment.API_URL}/category/add`, payload).pipe(
           map((res)=>{
-            return new CategoriesActions.AddCategorySuccess({
-              category: res['category']
-            });
+            return new CategoriesActions.AddCategorySuccess()
           }),
           catchError(error => {
             return from([new ErrorsActions.LoadError(error)]);
@@ -103,6 +102,25 @@ export class CategoriesEffects {
             })
           )
         }
+      )
+    );
+
+  @Effect()
+  saveAdditionalSubcategory= this.actions$
+    .pipe(
+      ofType(CategoriesActions.SAVE_ADDITIONAL_SUBCATEGORIES),
+      map((action: CategoriesActions.SaveAdditionalSubcategory) => action.payload),
+      exhaustMap((payload) =>
+        this.http.post(`${environment.API_URL}/subcategory/add`, payload).pipe(
+          map((res)=>{
+            return new CategoriesActions.SaveAdditionalSubcategorySuccess({
+              subcategory: res['subcategory']
+            });
+          }),
+          catchError(error => {
+            return from([new ErrorsActions.LoadError(error)]);
+          })
+        )
       )
     );
 }

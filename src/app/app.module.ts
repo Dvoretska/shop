@@ -75,8 +75,10 @@ import { OrderItemComponent } from './shop/order/order-item/order-item.component
 import { FilterComponent } from './shop/products/filter/filter.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminComponent } from './shop/admin/admin.component';
-import { CategoriesComponent } from './shop/admin/categories/categories.component';
+import { CategoriesListComponent } from './shop/admin/categories/categories-list/categories-list.component';
 import { TreeComponent } from './UI/tree/tree.component';
+import { AddCategoryComponent } from './shop/admin/categories/add-category/add-category.component';
+import { AddSubcategoryComponent } from './shop/admin/categories/add-subcategory/add-subcategory.component';
 
 
 @NgModule({
@@ -120,8 +122,10 @@ import { TreeComponent } from './UI/tree/tree.component';
     FilterComponent,
     NotFoundComponent,
     AdminComponent,
-    CategoriesComponent,
-    TreeComponent
+    CategoriesListComponent,
+    TreeComponent,
+    AddCategoryComponent,
+    AddSubcategoryComponent
   ],
   imports: [
     BrowserModule,

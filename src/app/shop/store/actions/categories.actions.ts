@@ -15,17 +15,21 @@ export const FETCH_CATEGORIES_TREE_SUCCESS = 'FETCH_CATEGORIES_TREE_SUCCESS';
 export const DELETE_SUBCATEGORIES = 'DELETE_SUBCATEGORIES';
 export const DELETE_SUBCATEGORIES_SUCCESS = 'DELETE_SUBCATEGORIES_SUCCESS';
 
+export const SAVE_ADDITIONAL_SUBCATEGORIES = 'SAVE_ADDITIONAL_SUBCATEGORIES';
+export const SAVE_ADDITIONAL_SUBCATEGORIES_SUCCESS = 'SAVE_ADDITIONAL_SUBCATEGORIES_SUCCESS';
+
+export const REMOVE_CATEGORY_WAS_ADDED = 'REMOVE_CATEGORY_WAS_ADDED';
 
 export class AddCategory implements Action {
   readonly type = ADD_CATEGORY;
 
-  constructor(public payload: {category: string}) {}
+  constructor(public payload: {category: string, subcategory: string}) {}
 }
 
 export class AddCategorySuccess implements Action {
   readonly type = ADD_CATEGORY_SUCCESS;
 
-  constructor(public payload: {category: string}) {}
+  constructor() {}
 }
 
 // _____________________________________________________
@@ -84,7 +88,29 @@ export class DeleteSubcategoriesSuccess implements Action {
   constructor() {}
 }
 
+// _____________________________________________________
 
+export class SaveAdditionalSubcategory implements Action {
+  readonly type = SAVE_ADDITIONAL_SUBCATEGORIES;
+
+  constructor(public payload: {category_id: string, subcategory: string}) {}
+}
+
+export class SaveAdditionalSubcategorySuccess implements Action {
+  readonly type = SAVE_ADDITIONAL_SUBCATEGORIES_SUCCESS;
+
+  constructor(public payload: {subcategory: any}) {}
+}
+
+// _____________________________________________________
+
+export class RemoveCategoryWasAdded implements Action {
+  readonly type = REMOVE_CATEGORY_WAS_ADDED;
+
+  constructor() {}
+}
+
+// _____________________________________________________
 
 export type categoriesActions =
   AddCategory |
@@ -96,4 +122,7 @@ export type categoriesActions =
   DeleteSubcategories |
   DeleteSubcategoriesSuccess |
   FetchCategories |
-  FetchCategoriesSuccess;
+  FetchCategoriesSuccess |
+  SaveAdditionalSubcategory |
+  SaveAdditionalSubcategorySuccess |
+  RemoveCategoryWasAdded;
