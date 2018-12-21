@@ -20,6 +20,8 @@ export const SAVE_ADDITIONAL_SUBCATEGORIES_SUCCESS = 'SAVE_ADDITIONAL_SUBCATEGOR
 
 export const REMOVE_CATEGORY_WAS_ADDED = 'REMOVE_CATEGORY_WAS_ADDED';
 
+export const REMOVE_SUBCATEGORY_WAS_ADDED = 'REMOVE_SUBCATEGORY_WAS_ADDED';
+
 export class AddCategory implements Action {
   readonly type = ADD_CATEGORY;
 
@@ -79,7 +81,7 @@ export class FetchCategoriesTreeSuccess implements Action {
 export class DeleteSubcategories implements Action {
   readonly type = DELETE_SUBCATEGORIES;
 
-  constructor(public payload: {subcategories: any[]}) {}
+  constructor(public payload: {subcategories: string}) {}
 }
 
 export class DeleteSubcategoriesSuccess implements Action {
@@ -112,6 +114,12 @@ export class RemoveCategoryWasAdded implements Action {
 
 // _____________________________________________________
 
+export class RemoveSubcategoryWasAdded implements Action {
+  readonly type = REMOVE_SUBCATEGORY_WAS_ADDED;
+
+  constructor() {}
+}
+
 export type categoriesActions =
   AddCategory |
   AddCategorySuccess |
@@ -125,4 +133,5 @@ export type categoriesActions =
   FetchCategoriesSuccess |
   SaveAdditionalSubcategory |
   SaveAdditionalSubcategorySuccess |
-  RemoveCategoryWasAdded;
+  RemoveCategoryWasAdded |
+  RemoveSubcategoryWasAdded;

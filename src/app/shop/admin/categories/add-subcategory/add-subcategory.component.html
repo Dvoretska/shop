@@ -16,7 +16,8 @@
         </label>
         <input type="text" class="form-control" name="subcategory" id="adSubcategory" [(ngModel)]="adSubcategory">
       </div>
-      <app-button [text]="'Save subcategory'" (onClick)="onSaveAdSubcategory()" [disabled]="!subcategory && !selectedCategory"></app-button>
+      <app-button [text]="'Save subcategory'" (onClick)="onSaveAdSubcategory()" [disabled]="!adSubcategory || !selectedCategory"></app-button>
+      <app-back-link path="../../categories"></app-back-link>
     </form>
   </ng-template>
 </div>

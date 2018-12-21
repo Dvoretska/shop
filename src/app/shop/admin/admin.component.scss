@@ -1,5 +1,35 @@
+@import '../../../variables';
+
 .admin-main {
   background-color: white;
-  min-height: 100vh;
-  padding: 50px 70px;
+  padding-top: 30px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  .admin-menu {
+    width: 300px;
+    height: auto;
+    background-color: #eee;
+    border-radius: 5px;
+    li {
+      cursor: pointer;
+      &:hover {
+        background-color: #ccc;
+        border-radius: 5px;
+      }
+      .nav-link {
+        cursor: pointer;
+        position: relative;
+        color: #000;
+        &.active {
+          color: $red_color;
+        }
+      }
+    }
+  }
+  .admin-content {
+    width: 100%;
+    padding-left: 30px;
+  }
 }

@@ -12,8 +12,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import {ToastrService} from "ngx-toastr";
 import {Product} from '../../models/product.model';
-import {skip} from 'rxjs/operators'
+import {skip} from 'rxjs/operators';
 import * as wishlistActions from "../../store/actions/wishlist.actions";
+import {AuthService} from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-product-details',
@@ -40,10 +41,13 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
               private router: Router,
               private modalService: BsModalService,
               private route: ActivatedRoute,
-              private store: Store<fromRoot.AppState>) { }
+              private store: Store<fromRoot.AppState>,
+              private authService: AuthService) { }
 
   ngOnInit() {
-    this.store.dispatch(new wishlistActions.FetchWishlist());
+    if(this.authService.isAuthenticated()) {
+      this.store.dispatch(new wishlistActions.FetchWishlist());
+    }
     this.galleryOptions = [
       {
         width: '100%',
@@ -119,12 +123,16 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
   }
 
   openModalCart() {
-    if(this.selectedSize) {
-      this.store.dispatch(new cartActions.AddProductToCart({
-        size: this.selectedSize, quantity: 1, product_id: this.product['id']
-      }));
+    if(this.authService.isAuthenticated()) {
+      if(this.selectedSize) {
+        this.store.dispatch(new cartActions.AddProductToCart({
+          size: this.selectedSize, quantity: 1, product_id: this.product['id']
+        }));
+      } else {
+        this.toastr.error('Please Choose a Size!');
+      }
     } else {
-      this.toastr.error('Please Choose a Size!');
+      this.toastr.error('Please log in to add the product to cart');
     }
   }
 
@@ -138,9 +146,13 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
   }
 
   addProductToWishlist(product_id) {
-    this.store.dispatch(new wishlistActions.AddProductToWishlist({
-      product_id: product_id
-    }));
+    if(this.authService.isAuthenticated()) {
+      this.store.dispatch(new wishlistActions.AddProductToWishlist({
+        product_id: product_id
+      }));
+    } else {
+      this.toastr.error('Please log in to add the product to wishlist');
+    }
   }
 
   RemoveProductFromWishlist(product_id) {

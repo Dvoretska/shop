@@ -3,6 +3,7 @@ import * as categoriesActions from "../../../store/actions/categories.actions";
 import {select, Store} from "@ngrx/store";
 import * as fromRoot from "../../../store/reducers/reducer.factory";
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -12,9 +13,10 @@ import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 })
 export class AddSubcategoryComponent implements OnInit {
   selectedCategory: string;
-  adSubcategory: string;
+  adSubcategory: string = '';
   categories: any;
-  constructor(private store: Store<fromRoot.AppState>) { }
+  subcategoryWasAdded: boolean;
+  constructor(private store: Store<fromRoot.AppState>, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.store.dispatch(new categoriesActions.FetchCategories());
@@ -22,6 +24,11 @@ export class AddSubcategoryComponent implements OnInit {
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.categories = state.categories;
+      this.subcategoryWasAdded = state.subcategoryWasAdded;
+      if(this.subcategoryWasAdded) {
+        this.toastr.success('Subcategory was saved successfully!');
+        this.adSubcategory = '';
+      }
     });
   }
 
@@ -29,6 +36,8 @@ export class AddSubcategoryComponent implements OnInit {
     this.store.dispatch(new categoriesActions.SaveAdditionalSubcategory({category_id: this.selectedCategory, subcategory: this.adSubcategory}));
   }
 
-  ngOnDestroy(){}
+  ngOnDestroy(){
+    this.store.dispatch(new categoriesActions.RemoveSubcategoryWasAdded());
+  }
 
 }

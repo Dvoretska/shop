@@ -94,9 +94,10 @@ export class CategoriesEffects {
             body: payload,
           };
           return this.http.delete(`${environment.API_URL}/subcategories/delete`, options).pipe(
-            map((res) => {
-              return new CategoriesActions.DeleteSubcategoriesSuccess();
-            }),
+            switchMap(res => [
+              new CategoriesActions.DeleteSubcategoriesSuccess(),
+              new CategoriesActions.FetchCategoriesTree()
+            ]),
             catchError(error => {
               return from([new ErrorsActions.LoadError(error)]);
             })

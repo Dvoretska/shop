@@ -5,12 +5,12 @@
     (selectedChange)="onSelectedChange($event)">
   </ngx-treeview>
   <div class="button-container">
-    <app-button [text]="'Delete selected'" (onClick)="onDelete()" [disabled]="!selectedSubcategories.length"></app-button>
+    <app-button [text]="'Delete selected'" (onClick)="onDeleteSubcategories()" [disabled]="!selectedSubcategories.length"></app-button>
     <div class="button-wrapper">
-      <app-button [text]="'Create new category'" (onClick)="showFormCreateCategory()"></app-button>
+      <app-button [text]="'Create new category'" routerLink="../category/add"></app-button>
     </div>
     <div class="button-wrapper">
-      <app-button [text]="'Add new subcategory'" (onClick)="showFormCreateSubcategory()"></app-button>
+      <app-button [text]="'Add new subcategory'" routerLink="../subcategory/add"></app-button>
     </div>
   </div>
 </div>

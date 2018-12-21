@@ -29,7 +29,7 @@ const appRoutes: Routes = [
   { path: 'shop', component: ShopComponent, children: [
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], children: [
       { path: 'categories', component: CategoriesListComponent },
-      { path: 'categories/add', component: AddCategoryComponent },
+      { path: 'category/add', component: AddCategoryComponent },
       { path: 'subcategory/add', component: AddSubcategoryComponent },
     ]},
     { path: 'products', component: ProductsComponent},

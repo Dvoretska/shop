@@ -79,6 +79,7 @@ import { CategoriesListComponent } from './shop/admin/categories/categories-list
 import { TreeComponent } from './UI/tree/tree.component';
 import { AddCategoryComponent } from './shop/admin/categories/add-category/add-category.component';
 import { AddSubcategoryComponent } from './shop/admin/categories/add-subcategory/add-subcategory.component';
+import { BackLinkComponent } from './UI/back-link/back-link.component';
 
 
 @NgModule({
@@ -125,7 +126,8 @@ import { AddSubcategoryComponent } from './shop/admin/categories/add-subcategory
     CategoriesListComponent,
     TreeComponent,
     AddCategoryComponent,
-    AddSubcategoryComponent
+    AddSubcategoryComponent,
+    BackLinkComponent
   ],
   imports: [
     BrowserModule,

@@ -13,8 +13,5 @@
     <input type="text" class="form-control" name="subcategory" id="subcategory" [(ngModel)]="subcategory">
   </div>
   <app-button [text]="'Save category'" (onClick)="onSaveCategory()" [disabled]="!category"></app-button>
-  <a class="back-link" routerLink="../">
-    <img src="/assets/back.jpg" class="arrow" alt="avatar">
-    <span class="back">Back to Categories</span>
-  </a>
+  <app-back-link path="../../categories"></app-back-link>
 </form>

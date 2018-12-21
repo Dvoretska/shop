@@ -1,11 +1,12 @@
 <div class="admin-main">
-  <ul>
+  <ul class="admin-menu">
     <li class="nav-item">
-      <a class="nav-link nav-link-profile" (click)="onViewDetails('categories')">
+      <a class="nav-link nav-link-profile" routerLink="./categories" routerLinkActive="active">
         <span class="username">Categories</span>
       </a>
     </li>
   </ul>
-  <router-outlet></router-outlet>
+  <div class="admin-content">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-

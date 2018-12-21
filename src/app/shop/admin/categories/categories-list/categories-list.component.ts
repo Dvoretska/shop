@@ -4,8 +4,7 @@ import {select, Store} from "@ngrx/store";
 import * as fromRoot from "../../../store/reducers/reducer.factory";
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import {TreeviewItem} from 'ngx-treeview';
-import {ActivatedRoute, Router} from "@angular/router";
-
+import { skip} from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-category',
@@ -15,16 +14,16 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class CategoriesListComponent implements OnInit {
   categoriesTree: any[];
   nodes: any[];
-  selectedSubcategories: number[];
+  selectedSubcategories: number[] = [];
   config = {
     hasAllCheckBox: false
   };
 
-  constructor(private store: Store<fromRoot.AppState>, private router: Router, private route: ActivatedRoute) { }
+  constructor(private store: Store<fromRoot.AppState>) { }
 
   ngOnInit() {
     this.store.dispatch(new categoriesActions.FetchCategoriesTree());
-    this.store.pipe(select(fromRoot.getCategories)).pipe(
+    this.store.pipe(select(fromRoot.getCategories), skip(1)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.categoriesTree = state.categoriesTree;
@@ -36,13 +35,10 @@ export class CategoriesListComponent implements OnInit {
     this.selectedSubcategories = event;
   }
 
-  showFormCreateCategory() {
-    this.router.navigate(['/add'], {relativeTo: this.route});
+  onDeleteSubcategories() {
+    this.store.dispatch(new categoriesActions.DeleteSubcategories({subcategories: this.selectedSubcategories.join()}));
   }
 
-  showFormCreateSubcategory() {
-    this.router.navigate(['../subcategory/add'], {relativeTo: this.route});
-  }
 
   ngOnDestroy(){}
 

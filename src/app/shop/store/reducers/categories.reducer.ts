@@ -1,16 +1,12 @@
 import * as categoriesActions from '../actions/categories.actions';
-import {ADD_CATEGORY} from "../actions/categories.actions";
-import {SAVE_ADDITIONAL_SUBCATEGORIES} from "../actions/categories.actions";
-import {SAVE_ADDITIONAL_SUBCATEGORIES_SUCCESS} from "../actions/categories.actions";
-import * as productsActions from "../actions/products.actions";
-
 
 export class CategoriesState {
   constructor(
     public categories: any[],
     public subcategories: any,
     public categoriesTree: any[],
-    public categoryWasAdded: boolean
+    public categoryWasAdded: boolean,
+    public subcategoryWasAdded: boolean,
   ) { }
 }
 
@@ -19,7 +15,8 @@ export const initialState: CategoriesState = {
   categories: [],
   subcategories: [],
   categoriesTree: [],
-  categoryWasAdded: false
+  categoryWasAdded: false,
+  subcategoryWasAdded: false
 };
 
 export function categoriesReducer(state: CategoriesState =initialState, action: categoriesActions.categoriesActions) {
@@ -66,10 +63,29 @@ export function categoriesReducer(state: CategoriesState =initialState, action: 
         categoryWasAdded: true
       };
 
+    case categoriesActions.SAVE_ADDITIONAL_SUBCATEGORIES:
+      return {
+        ...state,
+        subcategoryWasAdded: false
+      };
+
+    case categoriesActions.SAVE_ADDITIONAL_SUBCATEGORIES_SUCCESS:
+      return {
+        ...state,
+        subcategoryWasAdded: true
+      };
+
+
     case categoriesActions.REMOVE_CATEGORY_WAS_ADDED:
       return {
         ...state,
         categoryWasAdded: false
+      };
+
+    case categoriesActions.REMOVE_SUBCATEGORY_WAS_ADDED:
+      return {
+        ...state,
+        subcategoryWasAdded: false
       };
 
 
