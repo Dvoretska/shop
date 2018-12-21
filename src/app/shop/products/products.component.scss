@@ -1,18 +1,8 @@
- .heading {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  height: 100px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  font-family: 'goudy_old_style_small_caps_Rg';
-}
 .wrapper {
   display: flex;
   width: 100%;
+  margin-top: 70px;
+  margin-left: 30px;
   .content-wrapper {
     width: 100%;
     text-align: center;
