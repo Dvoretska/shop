@@ -36,6 +36,11 @@
   font-weight: normal;
   font-style: normal;
 }
+
+a:hover, a:active, a:visited, a:focus {
+  text-decoration: none;
+}
+
 button:focus, input:focus, .form-control:focus {
   outline: none;
   outline-color: transparent;
