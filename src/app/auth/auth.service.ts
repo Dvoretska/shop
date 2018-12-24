@@ -30,4 +30,8 @@ export class AuthService {
     let user = JSON.parse(localStorage.getItem('user'));
     return !!user && !!user.token;
   }
+
+  getUser() {
+    return JSON.parse(localStorage.getItem('user'));
+  }
 }

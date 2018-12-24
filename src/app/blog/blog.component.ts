@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-blog',
@@ -7,11 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogComponent implements OnInit {
   myRole: string;
-
-  constructor() { }
+  user: any;
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.myRole = JSON.parse(localStorage.getItem('user')).role;
+    if(this.authService.getUser()) {
+      this.user = this.authService.getUser();
+      this.myRole = this.user.role;
+    }
   }
 
 }

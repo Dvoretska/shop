@@ -7,7 +7,7 @@
         <li [routerLink]="['./']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
           <span>DISCOVER</span>
         </li>
-        <li [routerLink]="['post/create']" routerLinkActive="active-link" *ngIf="myRole !== 'admin'">
+        <li [routerLink]="['post/create']" routerLinkActive="active-link" *ngIf="user && myRole !== 'admin'">
           <span>CREATE POST</span>
         </li>
       </ul>

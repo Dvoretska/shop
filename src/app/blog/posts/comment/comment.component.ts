@@ -3,6 +3,7 @@ import {Comment} from "../../comment.model";
 import {ToastrService} from "ngx-toastr";
 import {BlogService} from "../../blog.service";
 import {Post} from "../../post.model";
+import {AuthService} from "../../../auth/auth.service";
 
 @Component({
   selector: 'app-comment',
@@ -19,10 +20,10 @@ export class CommentComponent implements OnInit {
   isViewMode: boolean = true;
   selectedComment: number;
 
-  constructor(private toastr: ToastrService, private blogService: BlogService) { }
+  constructor(private toastr: ToastrService, private blogService: BlogService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = this.authService.getUser();
   }
 
   formattedDate(date) {
@@ -68,8 +69,10 @@ export class CommentComponent implements OnInit {
   }
 
   isUpdateCommentAllowed(email) {
-    if(this.post) {
+    if(this.post && this.user) {
       return this.user['role'] == 'admin' || this.user['role'] == 'premium' && this.user['email'] == email;
+    } else {
+      return false;
     }
   }
 

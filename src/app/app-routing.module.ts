@@ -43,7 +43,7 @@ const appRoutes: Routes = [
     { path: 'orders', component: OrdersListComponent }
   ]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
-  { path: 'blog', component: BlogComponent, canActivate: [AuthGuardService], children: [
+  { path: 'blog', component: BlogComponent, children: [
     { path: '', component: PostsComponent },
     { path: 'post/create', component: EditPostComponent },
     { path: 'post/edit/:id', component: EditPostComponent }

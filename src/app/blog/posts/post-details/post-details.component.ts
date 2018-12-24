@@ -7,6 +7,7 @@ import { Comment } from "../../comment.model";
 import { environment } from "src/environments/environment";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../auth/auth.service';
 
 
 @Component({
@@ -33,12 +34,13 @@ export class PostDetailsComponent implements OnInit {
               private route: ActivatedRoute,
               public modalService: BsModalService,
               private blogService: BlogService,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.getPostDetails();
     this.id = this.postsIds[this.modalIndex];
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = this.authService.getUser();
   }
 
   getPostDetails() {
@@ -89,14 +91,18 @@ export class PostDetailsComponent implements OnInit {
   }
 
   isEditPostAllowed() {
-    if(this.post) {
+    if(this.user && this.post) {
       return this.user['role'] == 'admin' || this.user['email'] == this.post.user_id.email;
+    } else {
+      return false;
     }
   }
 
   isAddCommentAllowed() {
-    if(this.post) {
+    if(this.user && this.post) {
       return this.user['role'] !== 'user' || this.user['email'] == this.post.user_id.email;
+    } else {
+      return false;
     }
   }
 
