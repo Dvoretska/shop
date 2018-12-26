@@ -80,15 +80,8 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getCurrentUser() {
-    this.currentUser = JSON.parse(localStorage.getItem('user'));
-    if(this.currentUser) {
-      if(this.currentUser.image) {
-        this.imageUrl = `${environment.API_URL}/${this.currentUser.image}`;
-      } else {
-        this.imageUrl = this.defaultImageUrl;
-      }
-      this.username = this.currentUser.email.substring(0, this.currentUser.email.lastIndexOf('@'));
-    }
+    this.imageUrl = this.authService.getUserImage();
+    this.username = this.authService.getUsername();
   }
 
   openModalRegister() {
@@ -101,6 +94,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onLogout() {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     this.store.dispatch(new cartActions.ClearCart());
     this.router.navigate(['/']);
   }

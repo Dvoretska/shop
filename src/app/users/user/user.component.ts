@@ -4,6 +4,7 @@ import { Role } from '../role.model';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../user.service';
 import { environment } from 'src/environments/environment';
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: '[app-user]',
@@ -20,16 +21,19 @@ export class UserComponent implements OnInit {
   newPassword: string = '';
   errors: {};
   selectedFile: File;
-  myRole: string = JSON.parse(localStorage.getItem('user')).role;
+  currentUserRole: string;
 
-  constructor(private userService: UserService, private toastr: ToastrService) {}
+  constructor(private userService: UserService,
+              private toastr: ToastrService,
+              private authService: AuthService) {}
 
   ngOnInit() {
-    if(this.user['image']) {
+    if(this.user['image'] && !/^https?:\/\//i.test(this.user['image'])) {
       this.user.image = `${environment.API_URL}/${this.user['image']}`;
-    } else {
+    } else if(!this.user['image']){
       this.user.image = this.defaultImageUrl;
     }
+    this.currentUserRole = this.authService.getUserRole();
     this.selectedRole = this.user['role_id']['role'];
   }
   openFileBrowser() {

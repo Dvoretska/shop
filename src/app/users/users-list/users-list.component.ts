@@ -6,6 +6,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { environment } from 'src/environments/environment';
 import {RegisterModalComponent} from "../../auth/register-modal/register-modal.component";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-users-list',
@@ -16,19 +17,16 @@ export class UsersListComponent implements OnInit {
   users: User[];
   roles: Role[];
   errorMsg: string = '';
-  myRole: string;
-  myAvatarUrl: string;
+  currentUserRole: string;
+  currentUserAvatarUrl: string;
   modalRef: BsModalRef;
-  defaultImageUrl: string = '../../assets/default-picture_0_0.png';
-  constructor(private userService: UserService, private modalService: BsModalService) { }
+  constructor(private userService: UserService,
+              private modalService: BsModalService,
+              private authService: AuthService) { }
 
   ngOnInit() {
-    this.myRole = JSON.parse(localStorage.getItem('user')).role;
-    if (JSON.parse(localStorage.getItem('user')).image) {
-      this.myAvatarUrl = `${environment.API_URL}/${JSON.parse(localStorage.getItem('user')).image}`;
-    } else {
-      this.myAvatarUrl = this.defaultImageUrl;
-    }
+    this.currentUserRole = this.authService.getUserRole();
+    this.currentUserAvatarUrl = this.authService.getUserImage();
     this.userService.getUsers().subscribe(
       (res: {results: User[], meta: Role[]}) => {
         this.users = res.results;

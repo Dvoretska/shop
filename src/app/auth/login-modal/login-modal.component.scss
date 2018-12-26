@@ -43,4 +43,26 @@ form {
       box-shadow: 0 0 0 1px rgb(77, 144, 254);
     }
   }
+  .separate {
+    margin: 0 0 15px;
+    text-align: center;
+  }
+  .social-auth-link {
+    box-shadow: 0 0 0 1px #CFD9E0;
+    width: 200px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    margin: 0 auto;
+    .social-auth-icon {
+      width: 15px;
+      height: 15px;
+      margin-right: 10px;
+    }
+    .social-auth-text {
+      color: black;
+    }
+  }
 }

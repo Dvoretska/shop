@@ -19,6 +19,7 @@ export class AuthService {
         catchError(this.handleError)
     )
   }
+
   loginUser(email: string, password: string) {
     return this.http.post(`${environment.API_URL}/login`,
       {email: email, password: password}).pipe(
@@ -26,12 +27,49 @@ export class AuthService {
     )
   }
 
+  tokenVerify() {
+    return this.http.get(`${environment.API_URL}/token-verify`).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   isAuthenticated() {
-    let user = JSON.parse(localStorage.getItem('user'));
-    return !!user && !!user.token;
+    let token = JSON.parse(localStorage.getItem('token'));
+    return !!token;
   }
 
   getUser() {
     return JSON.parse(localStorage.getItem('user'));
+  }
+
+  getUserImage() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    let imageUrl = 'src/assets/default-picture_0_0.png';
+    if(user && user.image) {
+      if(!/^https?:\/\//i.test(user.image)) {
+        imageUrl = `${environment.API_URL}/${user.image}`;
+      } else {
+        imageUrl = user.image;
+      }
+    }
+    return imageUrl;
+  }
+
+  getUsername() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if(user && user.email) {
+      return user.email.substring(0, user.email.lastIndexOf('@'));
+    } else {
+      return '';
+    }
+  }
+
+  getUserRole() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if(user && user.role) {
+      return user.role;
+    } else {
+      return 'user'
+    }
   }
 }

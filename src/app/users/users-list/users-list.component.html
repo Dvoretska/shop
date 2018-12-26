@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
 <div class="table-wrapper">
   <nav class="navbar-user">
-    <button *ngIf="myRole == 'admin'" (click)="onCreateUser()">+CREATE</button>
-    <img [src]="myAvatarUrl" alt="" class="my-avatar">
-    <span class="my-role">{{ myRole }}</span>
+    <button *ngIf="currentUserRole == 'admin'" (click)="onCreateUser()">+CREATE</button>
+    <img [src]="currentUserAvatarUrl" alt="" class="my-avatar">
+    <span class="my-role">{{ currentUserRole }}</span>
   </nav>
   <table style="width:100%">
     <tr>

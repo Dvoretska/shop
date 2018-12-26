@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from '../storage.service';
 import { environment } from 'src/environments/environment';
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-profile',
@@ -13,31 +14,21 @@ export class ProfileComponent implements OnInit {
   isChanged: boolean = false;
   selectedFile: File;
   newPassword: string = '';
-  url: string;
-  defaultImageUrl: string = 'src/assets/default-picture_0_0.png';
+  imageUrl: string;
   errors: {};
   username: string = '';
   constructor(private http: HttpClient,
               private toastr: ToastrService,
-              private storageService: StorageService) { }
+              private storageService: StorageService,
+              private authService: AuthService) { }
 
   ngOnInit() {
-    if(this.getObject('user').image) {
-      const image = this.getObject('user').image;
-      this.url = `${environment.API_URL}/${image}`;
-    } else {
-      this.url = this.defaultImageUrl;
-    }
-    if(this.getObject('user').email) {
-      this.username = this.getObject('user').email.substring(0, this.getObject('user').email.lastIndexOf('@'));
-    }
-  }
-  getObject(key) {
-    return JSON.parse(localStorage.getItem(key));
+    this.imageUrl = this.authService.getUserImage();
+    this.username = this.authService.getUsername();
   }
 
   imageUrlHandler($event) {
-    this.url = $event;
+    this.imageUrl = $event;
   }
 
   fileUploaded($event) {

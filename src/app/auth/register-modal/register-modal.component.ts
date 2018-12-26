@@ -20,7 +20,6 @@ export class RegisterModalComponent implements OnInit {
   @Output() createdUser = new EventEmitter<any>();
   @Input() createUserMode: boolean = false;
   selectedRole: string = 'user';
-  user;
   userRole;
   users: User[];
   roles: Role[];
@@ -32,10 +31,7 @@ export class RegisterModalComponent implements OnInit {
               private userService: UserService) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user'));
-    if(this.user) {
-      this.userRole = this.user.role;
-    }
+    this.userRole = this.authService.getUserRole();
     if(this.createUserMode) {
       this.userService.getUsers().subscribe(
         (res: {results: User[], meta: Role[]}) => {
@@ -60,7 +56,8 @@ export class RegisterModalComponent implements OnInit {
     if(!this.createUserMode) {
       this.authService.signupUser(email, password)
         .subscribe((res)=>{
-            this.storageService.setItem('user', JSON.stringify(res));
+            this.storageService.setItem('token', JSON.stringify(res['token']));
+            this.storageService.setItem('user', JSON.stringify(res['user']));
             this.modalRef.hide();
             window.location.reload();
           },

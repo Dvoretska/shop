@@ -19,7 +19,7 @@
   <select [(ngModel)]="selectedRole">
     <option *ngFor="let role of roles"
           [ngValue]="role.role"
-          [disabled]="myRole == 'premium'">
+          [disabled]="currentUserRole == 'premium'">
           {{ role.role }}
     </option>
   </select>
