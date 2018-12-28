@@ -1,0 +1,8 @@
+.svg-container {
+  cursor: pointer;
+  display: flex;
+  .first-svg, .second-svg {
+    width: 10px;
+    height: 20px;
+  }
+}

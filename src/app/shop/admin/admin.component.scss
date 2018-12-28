@@ -14,6 +14,9 @@
     border-radius: 5px;
     li {
       cursor: pointer;
+      border-bottom: 2px solid #ccc;
+      outline: 1px solid white;
+      border-radius: 5px;
       &:hover {
         background-color: #ccc;
         border-radius: 5px;
@@ -22,8 +25,12 @@
         cursor: pointer;
         position: relative;
         color: #000;
+        border-radius: 5px;
         &.active {
           color: $red_color;
+        }
+        .nav-link-text {
+          text-shadow: 1px 1px 1px #fff;
         }
       }
     }
@@ -31,5 +38,19 @@
   .admin-content {
     width: 100%;
     padding-left: 30px;
+    .breadcrumb {
+      background-color: #eee;
+      .breadcrumb-item {
+        &.active {
+          .breadcrumb-text {
+            pointer-events: none;
+            color: black;
+          }
+        }
+        .breadcrumb-text {
+          color: rgba(0,0,0,.6);
+        }
+      }
+    }
   }
 }

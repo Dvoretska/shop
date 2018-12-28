@@ -34,6 +34,7 @@ import { NgxMasonryModule } from 'ngx-masonry';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { TreeviewModule } from 'ngx-treeview';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { FileUploadDirective } from './directives/file-upload.directive';
 import { HoverDirective } from './directives/hover.directive';
@@ -79,7 +80,11 @@ import { CategoriesListComponent } from './shop/admin/categories/categories-list
 import { TreeComponent } from './UI/tree/tree.component';
 import { AddCategoryComponent } from './shop/admin/categories/add-category/add-category.component';
 import { AddSubcategoryComponent } from './shop/admin/categories/add-subcategory/add-subcategory.component';
-import { BackLinkComponent } from './UI/back-link/back-link.component';
+import { SizesListComponent } from './shop/admin/sizes/sizes-list/sizes-list.component';
+import { AdminProductsComponent } from './shop/admin/products/admin-products/admin-products.component';
+import { AdminProductComponent } from './shop/admin/products/admin-product/admin-product.component';
+import { AdminProductDetailsComponent } from './shop/admin/products/admin-product-details/admin-product-details.component';
+import { OrderSvgComponent } from './UI/order-svg/order-svg.component';
 
 
 @NgModule({
@@ -127,7 +132,11 @@ import { BackLinkComponent } from './UI/back-link/back-link.component';
     TreeComponent,
     AddCategoryComponent,
     AddSubcategoryComponent,
-    BackLinkComponent
+    SizesListComponent,
+    AdminProductsComponent,
+    AdminProductComponent,
+    AdminProductDetailsComponent,
+    OrderSvgComponent
   ],
   imports: [
     BrowserModule,
@@ -148,12 +157,14 @@ import { BackLinkComponent } from './UI/back-link/back-link.component';
     NgxPageScrollModule,
     InViewportModule,
     NgxMasonryModule,
+    NgxPaginationModule,
     TreeviewModule.forRoot(),
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([CartEffects, ProductsEffects, ErrorsEffects, WishlistEffects, OrderEffects, CategoriesEffects]),
     NgxGalleryModule
   ],
-  providers: [AuthService, {
+  providers: [AuthService,
+    {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true

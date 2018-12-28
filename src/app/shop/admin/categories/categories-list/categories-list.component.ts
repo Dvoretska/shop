@@ -39,7 +39,6 @@ export class CategoriesListComponent implements OnInit {
     this.store.dispatch(new categoriesActions.DeleteSubcategories({subcategories: this.selectedSubcategories.join()}));
   }
 
-
   ngOnDestroy(){}
 
 }

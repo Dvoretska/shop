@@ -1,12 +1,24 @@
 <div class="admin-main">
   <ul class="admin-menu">
     <li class="nav-item">
-      <a class="nav-link nav-link-profile" routerLink="./categories" routerLinkActive="active">
-        <span class="username">Categories</span>
+      <a class="nav-link" routerLink="./categories" routerLinkActive="active">
+        <span class="nav-link-text">Categories</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="./products" routerLinkActive="active">
+        <span class="nav-link-text">Products</span>
       </a>
     </li>
   </ul>
   <div class="admin-content">
+    <ol class="breadcrumb">
+      <ng-container *ngFor="let breadLink of displayBreadcrumbList; let i = index" >
+        <li *ngIf="breadLink.name" class="breadcrumb-item active" [class.active]="i===displayBreadcrumbList.length-1">
+          <a [routerLink]="breadLink.url" class="breadcrumb-text">{{breadLink.name | titlecase }}</a>
+        </li>
+      </ng-container>
+    </ol>
     <router-outlet></router-outlet>
   </div>
 </div>

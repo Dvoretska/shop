@@ -4,8 +4,9 @@
   margin-top: 70px;
   margin-left: 30px;
   .content-wrapper {
-    width: 100%;
+    width: calc(100% - 200px);
     text-align: center;
+    margin-right: 40px;
     .content {
       width: 100%;
       display: grid;

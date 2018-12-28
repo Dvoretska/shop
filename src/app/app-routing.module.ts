@@ -22,6 +22,8 @@ import { AdminComponent } from './shop/admin/admin.component';
 import { CategoriesListComponent } from './shop/admin/categories/categories-list/categories-list.component';
 import { AddCategoryComponent } from './shop/admin/categories/add-category/add-category.component';
 import { AddSubcategoryComponent } from './shop/admin/categories/add-subcategory/add-subcategory.component';
+import { AdminProductsComponent } from './shop/admin/products/admin-products/admin-products.component';
+import { AdminProductDetailsComponent } from './shop/admin/products/admin-product-details/admin-product-details.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -29,8 +31,10 @@ const appRoutes: Routes = [
   { path: 'shop', component: ShopComponent, children: [
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], children: [
       { path: 'categories', component: CategoriesListComponent },
-      { path: 'category/add', component: AddCategoryComponent },
-      { path: 'subcategory/add', component: AddSubcategoryComponent },
+      { path: 'categories/add', component: AddCategoryComponent },
+      { path: 'categories/subcategory-add', component: AddSubcategoryComponent },
+      { path: 'products', component: AdminProductsComponent },
+      { path: 'products/:product_id', component: AdminProductDetailsComponent },
     ]},
     { path: 'products', component: ProductsComponent},
     { path: 'products/:product_id', component: ProductDetailsComponent},
