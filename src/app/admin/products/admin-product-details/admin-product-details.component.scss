@@ -1,0 +1,31 @@
+.product-details-wrapper {
+  width: calc(100% - 20px);
+  table {
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    tr {
+      border-bottom: 1px solid rgba(0,0,0,.12);
+      th {
+        font-weight: 300;
+        padding: 15px 5px;
+        display: table-cell;
+        text-align: left;
+        vertical-align: middle;
+        border-radius: 2px;
+        width: 50%;
+      }
+      td {
+        padding: 15px 5px;
+        display: table-cell;
+        text-align: left;
+        vertical-align: middle;
+        border-radius: 2px;
+        width: 50%;
+        font-weight: 600;
+      }
+    }
+  }
+}
+

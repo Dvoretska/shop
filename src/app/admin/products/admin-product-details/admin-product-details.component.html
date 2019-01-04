@@ -1,0 +1,29 @@
+<div *ngIf="product" class="box-with-shadow product-details-wrapper">
+  <table>
+    <tr>
+      <th>Brand</th>
+      <td>{{product.brand}}</td>
+    </tr>
+    <tr>
+      <th>Category</th>
+      <td>{{product.subcategory.category.name}}</td>
+    </tr>
+    <tr>
+      <th>Subcategory</th>
+      <td>{{product.subcategory.name}}</td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td>{{product.description}}</td>
+    </tr>
+    <tr>
+      <th>Price</th>
+      <td>${{product.price}}</td>
+    </tr>
+    <tr>
+      <th>Price with Discount</th>
+      <td>${{product.discount}}</td>
+    </tr>
+  </table>
+</div>
+

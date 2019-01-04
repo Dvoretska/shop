@@ -1,0 +1,7 @@
+<ul class="breadcrumb">
+  <ng-container *ngFor="let breadLink of displayBreadcrumbList; let i = index" >
+    <li *ngIf="breadLink.name" class="breadcrumb-item active" [class.active]="i===displayBreadcrumbList.length-1">
+      <a [routerLink]="breadLink.url" class="breadcrumb-text">{{breadLink.name | titlecase }}</a>
+    </li>
+  </ng-container>
+</ul>

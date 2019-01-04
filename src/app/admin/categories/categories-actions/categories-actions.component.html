@@ -1,0 +1,11 @@
+<div class="actions-container">
+  <div>
+    <app-button [text]="'Delete selected'" (onClick)="onDeleteSubcategories()" [disabled]="!selectedSubcategories.length"></app-button>
+  </div>
+  <div class="button-wrapper">
+    <app-button [text]="'Create new category'" routerLink="./add"></app-button>
+  </div>
+  <div class="button-wrapper">
+    <app-button [text]="'Add new subcategory'" routerLink="./subcategory-add"></app-button>
+  </div>
+</div>

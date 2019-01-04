@@ -1,0 +1,96 @@
+@import '../../variables';
+
+.admin-main {
+  background-color: #efefef;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  .menu-header {
+    background-image: url('/assets/menu-header.jpg');
+    background-position: center;
+    background-size: 100% 100%;
+    width: 300px;
+    height: 170px;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .header-img-wrapper {
+      width: 70px;
+      height: 70px;
+      background-color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
+      .menu-header-img {
+        width:30px;
+        height: 40px;
+      }
+    }
+    .menu-header-text {
+      font-size: 18px;
+      margin-top: 12px;
+    }
+  }
+  .admin-menu {
+    width: 300px;
+    height: calc(100vh - 170px);
+    background-color: white;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
+    margin-right: 10px;
+    li {
+      cursor: pointer;
+      padding: 7px 5px;
+      &:hover {
+        background-color: #F3B2B9;
+      }
+      &.active {
+        background-color: #EA7884;
+      }
+      .nav-link {
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: #000;
+        border-radius: 5px;
+        .link-icon {
+          width: 20px;
+          height: 20px;
+          display: inline-block;
+          margin-right:10px;
+        }
+      }
+    }
+  }
+  .admin-content {
+    margin-bottom: 10px;
+    width: 100%;
+    margin-top: 70px;
+    .admin-header {
+      background-color: #474747;
+      color: white;
+      height: 60px;
+      font-size: 20px;
+      padding-left: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: calc(100% - 300px);
+      z-index: 2;
+    }
+  }
+}

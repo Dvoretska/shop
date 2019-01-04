@@ -35,6 +35,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { TreeviewModule } from 'ngx-treeview';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 import { FileUploadDirective } from './directives/file-upload.directive';
 import { HoverDirective } from './directives/hover.directive';
@@ -75,17 +78,22 @@ import { OrdersListComponent } from './shop/order/orders-list/orders-list.compon
 import { OrderItemComponent } from './shop/order/order-item/order-item.component';
 import { FilterComponent } from './shop/products/filter/filter.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AdminComponent } from './shop/admin/admin.component';
-import { CategoriesListComponent } from './shop/admin/categories/categories-list/categories-list.component';
+import { AdminComponent } from './admin/admin.component';
+import { CategoriesListComponent } from './admin/categories/categories-list/categories-list.component';
 import { TreeComponent } from './UI/tree/tree.component';
-import { AddCategoryComponent } from './shop/admin/categories/add-category/add-category.component';
-import { AddSubcategoryComponent } from './shop/admin/categories/add-subcategory/add-subcategory.component';
-import { SizesListComponent } from './shop/admin/sizes/sizes-list/sizes-list.component';
-import { AdminProductsComponent } from './shop/admin/products/admin-products/admin-products.component';
-import { AdminProductComponent } from './shop/admin/products/admin-product/admin-product.component';
-import { AdminProductDetailsComponent } from './shop/admin/products/admin-product-details/admin-product-details.component';
+import { AddCategoryComponent } from './admin/categories/add-category/add-category.component';
+import { AddSubcategoryComponent } from './admin/categories/add-subcategory/add-subcategory.component';
+import { SizesListComponent } from './admin/sizes/sizes-list/sizes-list.component';
+import { AdminProductsComponent } from './admin/products/admin-products/admin-products.component';
+import { AdminProductComponent } from './admin/products/admin-product/admin-product.component';
+import { AdminProductDetailsComponent } from './admin/products/admin-product-details/admin-product-details.component';
 import { OrderSvgComponent } from './UI/order-svg/order-svg.component';
+import { CategoriesActionsComponent } from './admin/categories/categories-actions/categories-actions.component';
+import { BreadcrumbsComponent } from './admin/breadcrumbs/breadcrumbs.component';
 
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: false
+};
 
 @NgModule({
   declarations: [
@@ -136,7 +144,9 @@ import { OrderSvgComponent } from './UI/order-svg/order-svg.component';
     AdminProductsComponent,
     AdminProductComponent,
     AdminProductDetailsComponent,
-    OrderSvgComponent
+    OrderSvgComponent,
+    CategoriesActionsComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     BrowserModule,
@@ -158,6 +168,7 @@ import { OrderSvgComponent } from './UI/order-svg/order-svg.component';
     InViewportModule,
     NgxMasonryModule,
     NgxPaginationModule,
+    PerfectScrollbarModule,
     TreeviewModule.forRoot(),
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([CartEffects, ProductsEffects, ErrorsEffects, WishlistEffects, OrderEffects, CategoriesEffects]),
@@ -168,6 +179,10 @@ import { OrderSvgComponent } from './UI/order-svg/order-svg.component';
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
+    },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
   StorageService,
   UserService,

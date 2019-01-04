@@ -1,0 +1,32 @@
+<div class="admin-main">
+  <perfect-scrollbar style="max-width: 300px; max-height: 100vh;">
+    <div class="menu-header">
+      <div class="header-img-wrapper">
+        <img src="../../assets/default-avatar.png" alt="" class="menu-header-img">
+      </div>
+      <span class="menu-header-text">Admin</span>
+    </div>
+    <ul class="admin-menu">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="./categories" routerLinkActive="active">
+          <img src="/assets/admin-icons/folder.svg" alt="" class="link-icon">
+          <span class="nav-link-text">Categories</span>
+        </a>
+      </li>
+      <li class="nav-item"  routerLinkActive="active">
+        <a class="nav-link" routerLink="./products" routerLinkActive="active">
+          <img src="/assets/admin-icons/box.svg" alt="" class="link-icon">
+          <span class="nav-link-text">Products</span>
+        </a>
+      </li>
+    </ul>
+  </perfect-scrollbar>
+  <perfect-scrollbar style="max-width: 100%; max-height: 100vh;">
+  <div class="admin-content">
+    <header class="admin-header">
+      <app-breadcrumbs></app-breadcrumbs>
+    </header>
+    <router-outlet></router-outlet>
+  </div>
+  </perfect-scrollbar>
+</div>

@@ -1,0 +1,12 @@
+<div class="box">
+  <div class="treeview-container">
+    <ngx-treeview
+      [items]="nodes"
+      [config]="config"
+      (selectedChange)="onSelectedChange($event)">
+    </ngx-treeview>
+  </div>
+  <div class="categories-actions-container">
+    <app-categories-actions [selectedSubcategories]="selectedSubcategories"></app-categories-actions>
+  </div>
+</div>

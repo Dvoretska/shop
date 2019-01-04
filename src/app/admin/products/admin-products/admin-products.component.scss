@@ -1,0 +1,47 @@
+@import '../../../../variables';
+
+.products-box {
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 20px);
+}
+
+table {
+  text-align: center;
+  display: table;
+  overflow-x: auto;
+  width: 100%;
+  margin-bottom: auto;
+  tr {
+    height: 50px;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    .image {
+     width: 10%;
+    }
+    .brand {
+      width: 15%;
+    }
+    .category {
+      width: 25%;
+    }
+    .subcategory {
+      width: 25%;
+    }
+    .price {
+      width: 10%;
+    }
+    .discount {
+      width: 15%;
+    }
+  }
+}
+/deep/ .ngx-pagination .current, /deep/ .ngx-pagination .current:focus {
+  background: $red_color !important;
+}
+/deep/ .ngx-pagination li a, /deep/ .ngx-pagination li a:focus, /deep/ .ngx-pagination li a:active {
+  outline: none !important;
+}
