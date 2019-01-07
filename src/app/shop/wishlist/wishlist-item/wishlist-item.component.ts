@@ -41,7 +41,7 @@ export class WishlistItemComponent implements OnInit, OnDestroy {
         this.selectedProduct = null;
       }
     });
-    this.imagePath = `${environment.API_URL}/${this.wishlistItem.images[0]}`;
+    this.imagePath = this.wishlistItem.images[0];
   }
 
   deleteProductFromWishlist() {

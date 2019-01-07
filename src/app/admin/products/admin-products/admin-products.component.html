@@ -14,6 +14,6 @@
           (click)="openProductDetails(product.id)"></tr>
     </ng-container>
   </table>
-  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+  <pagination-controls *ngIf="products.length > itemsPerPage" (pageChange)="pageChanged($event)"></pagination-controls>
 </div>
 

@@ -12,5 +12,7 @@
     </label>
     <input type="text" class="form-control" name="subcategory" id="subcategory" [(ngModel)]="subcategory">
   </div>
-  <app-button [text]="'Save category'" (onClick)="onSaveCategory()" [disabled]="!category"></app-button>
+  <div class="btn-wrapper">
+    <app-button [text]="'Save category'" (onClick)="onSaveCategory()" [disabled]="!category"></app-button>
+  </div>
 </form>

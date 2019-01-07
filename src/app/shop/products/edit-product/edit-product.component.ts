@@ -70,7 +70,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
         this.warning = 'Download images with extension jpeg, jpg or png.'
       } else {
         if(this.files.length) {
-          if(this.files.length >= 3) {
+          if(this.files.length >= 12) {
             this.warning = ' The uploaded files exceed the limit.';
             return this.files;
           }
@@ -116,7 +116,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
     }
   }
 
-  subjectSignsLeft () {
+  subjectSignsLeft() {
     if(this.brand) {
       return this.subjectMaxLength - this.brand.length
     }
@@ -138,7 +138,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
     }
     savedData.append('subcategory_id', this.selectedSubcategory);
     if (this.files.length) {
-      let a = this.files.splice(this.selectedImgKey, 1)
+      let a = this.files.splice(this.selectedImgKey, 1);
       this.files.unshift(a[0]);
       for (let i = 0; i < this.files.length; i++) {
         let file = this.files[i].file;

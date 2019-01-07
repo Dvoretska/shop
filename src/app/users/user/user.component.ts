@@ -28,9 +28,9 @@ export class UserComponent implements OnInit {
               private authService: AuthService) {}
 
   ngOnInit() {
-    if(this.user['image'] && !/^https?:\/\//i.test(this.user['image'])) {
-      this.user.image = `${environment.API_URL}/${this.user['image']}`;
-    } else if(!this.user['image']){
+    if(this.user['image']) {
+      this.user.image = this.user['image'];
+    } else {
       this.user.image = this.defaultImageUrl;
     }
     this.currentUserRole = this.authService.getUserRole();

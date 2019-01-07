@@ -6,6 +6,7 @@ nav {
   border-image-width: 25px;
   padding:0 10px 0 0;
   background-color: white;
+  height:60px;
   .logo-icon {
     background-image: url('../../assets/TAODress.png');
     background-repeat: no-repeat;
@@ -72,8 +73,8 @@ nav {
         visibility: visible;
       }
       .user-avatar {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         overflow: hidden;
         border-radius: 50%;
         object-fit: cover;

@@ -90,9 +90,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
         this.galleryImages = [];
         for(let image of this.product['images']) {
           let settings = {};
-          settings['small'] = `${environment.API_URL}/${image}`;
-          settings['medium'] = `${environment.API_URL}/${image}`;
-          settings['big'] = `${environment.API_URL}/${image}`;
+          settings['small'] = image;
+          settings['medium'] = image;
+          settings['big'] = image;
           this.galleryImages.push(settings);
         }
       }

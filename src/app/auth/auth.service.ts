@@ -46,11 +46,7 @@ export class AuthService {
     const user = JSON.parse(localStorage.getItem('user'));
     let imageUrl = 'src/assets/default-picture_0_0.png';
     if(user && user.image) {
-      if(!/^https?:\/\//i.test(user.image)) {
-        imageUrl = `${environment.API_URL}/${user.image}`;
-      } else {
-        imageUrl = user.image;
-      }
+      imageUrl = user.image;
     }
     return imageUrl;
   }

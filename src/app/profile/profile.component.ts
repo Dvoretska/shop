@@ -4,6 +4,9 @@ import { ToastrService } from 'ngx-toastr';
 import { StorageService } from '../storage.service';
 import { environment } from 'src/environments/environment';
 import {AuthService} from "../auth/auth.service";
+import * as errorsActions from '../shop/store/actions/errors.actions';
+import { Store} from '@ngrx/store';
+import * as fromRoot from '../shop/store/reducers/reducer.factory';
 
 @Component({
   selector: 'app-profile',
@@ -20,7 +23,8 @@ export class ProfileComponent implements OnInit {
   constructor(private http: HttpClient,
               private toastr: ToastrService,
               private storageService: StorageService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+             private store: Store<fromRoot.AppState>) { }
 
   ngOnInit() {
     this.imageUrl = this.authService.getUserImage();
@@ -55,6 +59,7 @@ export class ProfileComponent implements OnInit {
         },
         (err) => {
           this.errors = err.error;
+          this.store.dispatch(new errorsActions.LoadError(err));
         });
   }
 

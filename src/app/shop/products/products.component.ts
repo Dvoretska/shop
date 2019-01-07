@@ -64,7 +64,6 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
       untilComponentDestroyed(this)
     ).subscribe((state) => {
         this.categoriesTree = state.categoriesTree;
-        console.log(this.categoriesTree)
     });
     this.route.queryParams.subscribe(params => {
       if (this.targetId) {

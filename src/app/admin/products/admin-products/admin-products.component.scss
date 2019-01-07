@@ -45,3 +45,13 @@ table {
 /deep/ .ngx-pagination li a, /deep/ .ngx-pagination li a:focus, /deep/ .ngx-pagination li a:active {
   outline: none !important;
 }
+
+/deep/ .form-check-label {
+  padding: 3px;
+}
+
+/deep/ .form-inline .form-check-input {
+  width: 15px;
+  height: 15px;
+  margin-left:3px;
+}

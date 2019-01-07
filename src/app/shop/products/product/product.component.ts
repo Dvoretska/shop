@@ -1,5 +1,4 @@
 import {Component, OnInit, Input} from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { Router } from "@angular/router";
 import * as wishlistActions from "../../store/actions/wishlist.actions";
 import {Store} from "@ngrx/store";
@@ -21,7 +20,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     if(this.product && this.product.images) {
-      this.imageUrl = `${environment.API_URL}/${this.product.images[0]}`;
+      this.imageUrl = this.product.images[0];
     } else {
       this.imageUrl = this.defaultImageUrl;
     }
