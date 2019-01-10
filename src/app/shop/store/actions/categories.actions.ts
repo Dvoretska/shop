@@ -53,7 +53,7 @@ export class FetchCategoriesSuccess implements Action {
 export class FetchSubcategories implements Action {
   readonly type = FETCH_SUBCATEGORIES;
 
-  constructor(public payload: {category_id: number}) {}
+  constructor(public payload: string) {}
 }
 
 export class FetchSubcategoriesSuccess implements Action {

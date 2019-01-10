@@ -21,6 +21,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    box-shadow: inset -4px 1px 5px -2px #ccc;
     .header-img-wrapper {
       width: 70px;
       height: 70px;
@@ -44,7 +45,7 @@
     width: 300px;
     height: calc(100vh - 170px);
     background-color: white;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
+    box-shadow: inset -4px 1px 5px -2px #ccc;
     margin-right: 10px;
     li {
       cursor: pointer;
@@ -75,7 +76,7 @@
   .admin-content {
     margin-bottom: 10px;
     width: 100%;
-    margin-top: 70px;
+    margin-top: 65px;
     .admin-header {
       background-color: #474747;
       color: white;
@@ -85,7 +86,7 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
       position: fixed;
       top: 0;
       right: 0;

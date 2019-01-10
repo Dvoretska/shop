@@ -5,7 +5,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import * as productsActions from "../../store/actions/products.actions";
 import * as cartActions from "../../store/actions/cart.actions";
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation,NgxGalleryImageSize } from 'ngx-gallery';
-import { environment } from 'src/environments/environment';
 import {CartModalComponent} from "../../cart/cart-modal/cart-modal.component";
 import {BsModalService} from "ngx-bootstrap/modal";
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -34,8 +33,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
   isAddedToCart: boolean;
   totalNumberOfProducts: number;
   productQuantity;
-  wishlist: any[];
+  wishlist: any[] = [];
   productIsInWishlist: boolean = false;
+  defaultImageUrl: string = 'src/assets/no-img.jpg';
 
   constructor(private toastr: ToastrService,
               private router: Router,
@@ -78,7 +78,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
       .subscribe((params) => {
         this.store.dispatch(new productsActions.FetchProductDetails(+params['product_id']));
       });
-   this.store.pipe(select(fromRoot.getProducts)).pipe(
+    this.store.pipe(select(fromRoot.getProducts)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.products = state.products;
@@ -86,7 +86,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
       this.sizes = state.sizes;
       this.productDetailsLoading = state.productDetailsLoading;
       this.sizes = state.sizes;
-      if(this.product) {
+      if(this.product && this.product['images']) {
         this.galleryImages = [];
         for(let image of this.product['images']) {
           let settings = {};
@@ -95,6 +95,13 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
           settings['big'] = image;
           this.galleryImages.push(settings);
         }
+      } else {
+        this.galleryImages = [];
+        let settings = {};
+        settings['small'] = this.defaultImageUrl;
+        settings['medium'] = this.defaultImageUrl;
+        settings['big'] = this.defaultImageUrl;
+        this.galleryImages.push(settings);
       }
     });
     this.store.pipe(select(fromRoot.getCart)).pipe(

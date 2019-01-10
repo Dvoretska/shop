@@ -54,7 +54,7 @@ export class CategoriesEffects {
       ofType(CategoriesActions.FETCH_SUBCATEGORIES),
       map((action: CategoriesActions.FetchSubcategories) => action.payload),
       switchMap((payload) =>
-        this.http.get(`${environment.API_URL}/subcategories/${payload.category_id}`).pipe(
+        this.http.get(`${environment.API_URL}/subcategories/${payload}`).pipe(
           map((subcategories)=>{
             return new CategoriesActions.FetchSubcategoriesSuccess({subcategories});
           }),

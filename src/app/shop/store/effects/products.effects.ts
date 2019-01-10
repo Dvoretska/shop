@@ -18,8 +18,8 @@ export class ProductsEffects {
     map((action: ProductsActions.AddProduct) => action.payload),
     switchMap((payload) =>
       this.http.post(`${environment.API_URL}/product`, payload).pipe(
-        map((product)=>{
-          return new ProductsActions.AddProductSuccess({product});
+        map((res)=>{
+          return new ProductsActions.AddProductSuccess({product_id: res['product_id']});
         }),
         catchError(error => {
           return from([new ErrorsActions.LoadError(error), new ProductsActions.AddProductFailure()]);
@@ -28,57 +28,73 @@ export class ProductsEffects {
     )
   );
 
+  @Effect()
+  updateProduct = this.actions$
+  .pipe(
+    ofType(ProductsActions.UPDATE_PRODUCT),
+    map((action: ProductsActions.UpdateProduct) => action.payload),
+    switchMap((payload) =>
+      this.http.post(`${environment.API_URL}/product/update`, payload).pipe(
+        map((res)=>{
+          return new ProductsActions.UpdateProductSuccess({product_id: res['product_id']});
+        }),
+        catchError(error => {
+          return from([new ErrorsActions.LoadError(error)]);
+        })
+      )
+    )
+  );
 
   @Effect()
   fetchProducts = this.actions$
-    .pipe(
-      ofType(ProductsActions.FETCH_PRODUCTS, ProductsActions.FETCH_PRODUCTS_INIT),
-      map((action: ProductsActions.FetchProducts) => action.payload),
-      switchMap((payload) =>
-        this.http.get(`${environment.API_URL}/products/${payload}`).pipe(
-          map((res)=>{
-            return new ProductsActions.FetchProductsSuccess({products: res['products'], totalAmount: res['totalAmount']});
-          }),
-          catchError(error => {
-            return from([new ErrorsActions.LoadError(error), new ProductsActions.FetchProductsFailure()]);
-          })
-        )
+  .pipe(
+    ofType(ProductsActions.FETCH_PRODUCTS, ProductsActions.FETCH_PRODUCTS_INIT),
+    map((action: ProductsActions.FetchProducts) => action.payload),
+    switchMap((payload) =>
+      this.http.get(`${environment.API_URL}/products/${payload}`).pipe(
+        map((res)=>{
+          return new ProductsActions.FetchProductsSuccess({products: res['products'], totalAmount: res['totalAmount']});
+        }),
+        catchError(error => {
+          return from([new ErrorsActions.LoadError(error), new ProductsActions.FetchProductsFailure()]);
+        })
       )
-    );
+    )
+  );
 
   @Effect()
   fetchProductsBySearch = this.actions$
-    .pipe(
-      ofType(ProductsActions.FETCH_PRODUCTS_BY_SEARCH, ProductsActions.FETCH_PRODUCTS_BY_SEARCH_INIT),
-      map((action: ProductsActions.FetchProductsBySearch) => action.payload),
-      switchMap((payload) =>
-        this.http.get(`${environment.API_URL}/products/search${payload}`).pipe(
-          map((res)=>{
-            return new ProductsActions.FetchProductsBySearchSuccess({products: res['products'], totalAmount: res['totalAmount']});
-          }),
-          catchError(error => {
-            return from([new ErrorsActions.LoadError(error), new ProductsActions.FetchProductsBySearchFailure()]);
-          })
-        )
+  .pipe(
+    ofType(ProductsActions.FETCH_PRODUCTS_BY_SEARCH, ProductsActions.FETCH_PRODUCTS_BY_SEARCH_INIT),
+    map((action: ProductsActions.FetchProductsBySearch) => action.payload),
+    switchMap((payload) =>
+      this.http.get(`${environment.API_URL}/products/search${payload}`).pipe(
+        map((res)=>{
+          return new ProductsActions.FetchProductsBySearchSuccess({products: res['products'], totalAmount: res['totalAmount']});
+        }),
+        catchError(error => {
+          return from([new ErrorsActions.LoadError(error), new ProductsActions.FetchProductsBySearchFailure()]);
+        })
       )
-    );
+    )
+  );
 
   @Effect()
   fetchProductDetails = this.actions$
-    .pipe(
-      ofType(ProductsActions.FETCH_PRODUCT_DETAILS),
-      map((action: ProductsActions.FetchProductDetails) => action.payload),
-      switchMap((payload) =>
-        this.http.get(`${environment.API_URL}/product/${payload}`).pipe(
-          map((res)=>{
-            return new ProductsActions.FetchProductDetailsSuccess({product: res});
-          }),
-          catchError(error => {
-            return from([new ErrorsActions.LoadError(error), new ProductsActions.FetchProductDetailsFailure()]);
-          })
-        )
+  .pipe(
+    ofType(ProductsActions.FETCH_PRODUCT_DETAILS),
+    map((action: ProductsActions.FetchProductDetails) => action.payload),
+    switchMap((payload) =>
+      this.http.get(`${environment.API_URL}/product/${payload}`).pipe(
+        map((res)=>{
+          return new ProductsActions.FetchProductDetailsSuccess({product: res});
+        }),
+        catchError(error => {
+          return from([new ErrorsActions.LoadError(error), new ProductsActions.FetchProductDetailsFailure()]);
+        })
       )
-    );
+    )
+  );
 
   constructor(private actions$: Actions, private http: HttpClient) {
 

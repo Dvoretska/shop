@@ -13,7 +13,7 @@ export class AdminProductComponent implements OnInit {
 
   ngOnInit() {
     if(this.product && this.product.images) {
-      this.imageUrl = `${environment.API_URL}/${this.product.images[0]}`;
+      this.imageUrl = this.product.images[0];
     }
   }
 

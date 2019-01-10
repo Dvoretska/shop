@@ -58,7 +58,7 @@ import { BlogComponent } from './blog/blog.component';
 import { ShopComponent } from './shop/shop.component';
 import { CornersComponent } from './UI/corners/corners.component';
 import { ProductComponent } from './shop/products/product/product.component';
-import { EditProductComponent } from './shop/products/edit-product/edit-product.component';
+import { EditProductComponent } from './admin/products/edit-product/edit-product.component';
 import { ProductsComponent } from './shop/products/products.component';
 import { ProductDetailsComponent } from './shop/products/product-details/product-details.component';
 import { CartListComponent } from './shop/cart/cart-list/cart-list.component';

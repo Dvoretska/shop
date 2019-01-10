@@ -1,4 +1,5 @@
-<form #productForm="ngForm">
+<app-ripple *ngIf="!subcategories.length || !product"></app-ripple>
+<form #productForm="ngForm" class="box-with-shadow" *ngIf="subcategories.length || product">
   <div class="form-group">
     <label for="title">
       <strong>Brand</strong>
@@ -10,13 +11,13 @@
     <label for="price">
       <strong>Price</strong>
     </label>
-    <input type="number" class="form-control" name="price" id="price" [(ngModel)]="price">
+    <input type="number" min="0" step="1" class="form-control" name="price" id="price" [(ngModel)]="price">
   </div>
   <div class="form-group">
     <label for="discount">
       <strong>With Discount</strong>
     </label>
-    <input type="number" class="form-control" name="discount" id="discount" [(ngModel)]="discount">
+    <input type="number" min="0" step="1" class="form-control" name="discount" id="discount" [(ngModel)]="discount">
   </div>
   <div class="form-group">
     <label for="material">
@@ -37,7 +38,7 @@
                (change)="fetchSubcategories(selectedCategory)">
     </ng-select>
   </div>
-  <div class="form-group" *ngIf="subcategories && subcategories.length">
+  <div class="form-group" *ngIf="subcategories && subcategories.length || selectedSubcategory">
     <strong>Subcategory</strong>
     <ng-select  [items]="subcategories"
                bindLabel="name"
@@ -51,7 +52,7 @@
       <div class="fileform"
          (drop)="onUpload($event)"
          (dragover)="allowDrop($event)"
-         (dragleave)="fade()"
+         (dragleave)="isHighlight = false"
           [ngClass]="{highlight: isHighlight}">
           <span>Click or drop your files here</span>
           <img src="/assets/cloud-download-interface-symbol.svg" alt="" class="icon-cloud-download">
@@ -61,7 +62,7 @@
     </label>
     <div class="img-valid">You can upload at most <strong>12</strong> images.</div>
     <div class="wrapper-file-list" *ngIf="files.length">
-      <div *ngFor="let file of files; let key = index" class="file-list" (click)="makeMainImg(key)">
+      <div *ngFor="let file of files; let key = index" class="file-list" (click)="selectedImgKey = key">
         <img *ngIf="imageUrls.length" [src]="imageUrls[file.id]" [ngClass]="{'highlight-main-img': key == selectedImgKey}"/>
         <div class="remove-container">
           <a class="remove" (click)="removeFile(key, $event)" href="#">
@@ -72,7 +73,7 @@
     </div>
   </div>
 
-  <button type="submit" class="my-button" (click)="onCreateProduct()" [disabled]="isFormInvalid()">
+  <button type="submit" class="my-button" (click)="onSubmit()" [disabled]="isFormInvalid()">
     <app-spinner *ngIf="loading"></app-spinner>
     <span *ngIf="!loading">Save product</span>
   </button>

@@ -12,7 +12,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class AdminProductsComponent implements OnInit,OnDestroy {
   page: number = 1;
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 15;
   products: any[];
   order:string = 'desc';
   totalAmount: number;
@@ -39,6 +39,10 @@ export class AdminProductsComponent implements OnInit,OnDestroy {
     this.page = event;
     let queryString = `?skip=${(this.itemsPerPage * this.page) - this.itemsPerPage}&limit=${this.itemsPerPage}`;
     this.store.dispatch(new productsActions.FetchProductsInit(queryString));
+  }
+
+  onEditProduct() {
+    this.router.navigate(['add'],{relativeTo:this.route} );
   }
 
   ngOnDestroy() {}

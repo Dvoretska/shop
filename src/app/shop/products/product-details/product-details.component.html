@@ -1,4 +1,4 @@
-<div class="back-block" (click)="backToSearch(product.id)" *ngIf="products.length">
+<div class="back-block" (click)="backToSearch(product.id)" *ngIf="products && products.length">
   <img src="/assets/back.jpg" alt="back-arrow" class="back-icon">
   <span>Back to search</span>
 </div>

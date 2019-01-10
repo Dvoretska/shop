@@ -26,6 +26,8 @@ export class ErrorsEffects {
             this.toastr.error('No Internet Connection.');
           } else if(error.status == 500 && !error.error.message) {
              this.toastr.error(`Something went wrong. Try again later.`);
+          } else if(error.status == 0) {
+            this.toastr.error(`Something went wrong. Try again later.`);
           } else if(error.status == 404 && !error.error.message) {
              this.toastr.error(`${error.status} - Not found.`);
           } else if(error.error.message) {

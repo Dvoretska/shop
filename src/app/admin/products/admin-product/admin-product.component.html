@@ -5,4 +5,4 @@
 <td class="category">{{product.subcategory.category.name}}</td>
 <td class="subcategory">{{product.subcategory.name}}</td>
 <td class="price">${{product.price}}</td>
-<td class="discount">${{product.discount}}</td>
+<td class="discount"><span *ngIf="product.discount">${{product.discount}}</span><span *ngIf="!product.discount">-</span></td>

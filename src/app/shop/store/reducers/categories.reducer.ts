@@ -7,6 +7,7 @@ export class CategoriesState {
     public categoriesTree: any[],
     public categoryWasAdded: boolean,
     public subcategoryWasAdded: boolean,
+    public fetchSubcategoriesLoading: boolean
   ) { }
 }
 
@@ -16,7 +17,8 @@ export const initialState: CategoriesState = {
   subcategories: [],
   categoriesTree: [],
   categoryWasAdded: false,
-  subcategoryWasAdded: false
+  subcategoryWasAdded: false,
+  fetchSubcategoriesLoading: false
 };
 
 export function categoriesReducer(state: CategoriesState =initialState, action: categoriesActions.categoriesActions) {
@@ -30,13 +32,15 @@ export function categoriesReducer(state: CategoriesState =initialState, action: 
     case categoriesActions.FETCH_SUBCATEGORIES:
       return {
         ...state,
+        fetchSubcategoriesLoading: true,
         subcategories: []
       };
 
     case categoriesActions.FETCH_SUBCATEGORIES_SUCCESS:
       return {
         ...state,
-        subcategories: action.payload.subcategories
+        subcategories: action.payload.subcategories,
+        fetchSubcategoriesLoading: false
       };
 
     case categoriesActions.FETCH_CATEGORIES_TREE:

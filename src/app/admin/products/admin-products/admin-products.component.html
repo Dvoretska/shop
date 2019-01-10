@@ -14,6 +14,7 @@
           (click)="openProductDetails(product.id)"></tr>
     </ng-container>
   </table>
-  <pagination-controls *ngIf="products.length > itemsPerPage" (pageChange)="pageChanged($event)"></pagination-controls>
+  <pagination-controls *ngIf="totalAmount > itemsPerPage" (pageChange)="pageChanged($event)"></pagination-controls>
+  <a class="btn-add" (click)="onEditProduct()"><i class="material-icons">add</i></a>
 </div>
 

@@ -17,13 +17,26 @@
       <td>{{product.description}}</td>
     </tr>
     <tr>
+    <tr>
+      <th>Material</th>
+      <td>{{product.material}}</td>
+    </tr>
+    <tr>
       <th>Price</th>
       <td>${{product.price}}</td>
     </tr>
     <tr>
       <th>Price with Discount</th>
-      <td>${{product.discount}}</td>
+      <td><span *ngIf="product.discount">${{product.discount}}</span><span *ngIf="!product.discount">-</span></td>
     </tr>
   </table>
+  <div class="btn-container">
+    <div class="btn-wrapper">
+      <app-button [text]="'Change'" routerLink="./change"></app-button>
+    </div>
+    <div class="btn-wrapper">
+      <app-button [text]="'Delete'" routerLink="./delete"></app-button>
+    </div>
+  </div>
 </div>
 

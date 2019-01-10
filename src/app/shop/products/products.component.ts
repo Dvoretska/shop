@@ -67,6 +67,8 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
     });
     this.route.queryParams.subscribe(params => {
       if (this.targetId) {
+        this.skipProducts = 0;
+        this.skipSearchedProducts = 0;
         setTimeout(()=>{
           let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#item'+this.targetId);
           this.pageScrollService.start(pageScrollInstance);

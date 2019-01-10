@@ -1,5 +1,5 @@
 .product-details-wrapper {
-  width: calc(100% - 20px);
+  width: calc(100% - 10px);
   table {
     display: table;
     border-collapse: collapse;
@@ -25,6 +25,15 @@
         width: 50%;
         font-weight: 600;
       }
+    }
+  }
+  .btn-container {
+    display: flex;
+    margin-top: 25px;
+    justify-content: flex-end;
+    .btn-wrapper {
+      margin-left: 7px;
+      margin-right: 7px;
     }
   }
 }

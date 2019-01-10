@@ -25,6 +25,7 @@ export class WishlistItemComponent implements OnInit, OnDestroy {
   selectedSize: string;
   productQuantity: number;
   selectedProduct;
+  defaultImageUrl: string = 'src/assets/no-img.jpg';
   constructor(private store: Store<fromRoot.AppState>, private router: Router, private modalService: BsModalService) { }
 
   ngOnInit() {
@@ -41,7 +42,7 @@ export class WishlistItemComponent implements OnInit, OnDestroy {
         this.selectedProduct = null;
       }
     });
-    this.imagePath = this.wishlistItem.images[0];
+    this.wishlistItem.images &&  this.wishlistItem.images.length ? this.imagePath = this.wishlistItem.images[0] : this.imagePath = this.defaultImageUrl;
   }
 
   deleteProductFromWishlist() {

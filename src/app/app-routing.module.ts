@@ -9,7 +9,7 @@ import { PostsComponent } from './blog/posts/posts.component';
 import { EditPostComponent } from './blog/edit-post/edit-post.component';
 import { ShopComponent } from './shop/shop.component';
 import { AuthGuardService } from './auth/auth-guard.service';
-import { EditProductComponent } from './shop/products/edit-product/edit-product.component';
+import { EditProductComponent } from './admin/products/edit-product/edit-product.component';
 import { ProductsComponent } from './shop/products/products.component';
 import { ProductDetailsComponent } from './shop/products/product-details/product-details.component';
 import { CartListComponent } from './shop/cart/cart-list/cart-list.component';
@@ -34,12 +34,13 @@ const appRoutes: Routes = [
     { path: 'categories/add', component: AddCategoryComponent },
     { path: 'categories/subcategory-add', component: AddSubcategoryComponent },
     { path: 'products', component: AdminProductsComponent },
+    { path: 'products/add', component: EditProductComponent},
     { path: 'products/:product_id', component: AdminProductDetailsComponent },
+    { path: 'products/:product_id/change', component: EditProductComponent }
   ]},
   { path: 'shop', component: ShopComponent, children: [
     { path: 'products', component: ProductsComponent},
     { path: 'products/:product_id', component: ProductDetailsComponent},
-    { path: 'product', component: EditProductComponent},
     { path: 'wishlist', component: WishlistComponent },
     { path: 'cart', component: CartListComponent, children: [
       { path: 'order', component: OrderFormComponent},

@@ -5,7 +5,10 @@ export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const ADD_PRODUCT_SUCCESS = 'ADD_PRODUCT_SUCCESS';
 export const ADD_PRODUCT_FAILURE = 'ADD_PRODUCT_FAILURE';
 
-export const REMOVE_PRODUCT_WAS_ADDED = 'REMOVE_PRODUCT_WAS_ADDED';
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
+
+export const REMOVE_PRODUCT_WAS_ADDED_OR_UPDATED = 'REMOVE_PRODUCT_WAS_ADDED_OR_UPDATED';
 
 export const FETCH_PRODUCTS_INIT = 'FETCH_PRODUCTS_INIT';
 
@@ -37,7 +40,7 @@ export class AddProduct implements Action {
 export class AddProductSuccess implements Action {
   readonly type = ADD_PRODUCT_SUCCESS;
 
-  constructor(public payload: {product: any}) {}
+  constructor(public payload: {product_id: number}) {}
 }
 
 export class AddProductFailure implements Action {
@@ -48,8 +51,22 @@ export class AddProductFailure implements Action {
 
 // _____________________________________________________
 
-export class RemoveProductWasAdded implements Action {
-  readonly type = REMOVE_PRODUCT_WAS_ADDED;
+export class UpdateProduct implements Action {
+  readonly type = UPDATE_PRODUCT;
+
+  constructor(public payload: any) {}
+}
+
+export class UpdateProductSuccess implements Action {
+  readonly type = UPDATE_PRODUCT_SUCCESS;
+
+  constructor(public payload: {product_id: number}) {}
+}
+
+// _____________________________________________________
+
+export class RemoveProductWasAddedOrUpdated implements Action {
+  readonly type = REMOVE_PRODUCT_WAS_ADDED_OR_UPDATED;
 
   constructor() {}
 }
@@ -150,7 +167,7 @@ export class RemoveTargetId implements Action {
 export type productsActions = AddProduct |
             AddProductSuccess |
             AddProductFailure |
-            RemoveProductWasAdded |
+            RemoveProductWasAddedOrUpdated |
             FetchProducts |
             FetchProductsSuccess |
             FetchProductsFailure |
@@ -162,5 +179,7 @@ export type productsActions = AddProduct |
             FetchProductsBySearchSuccess |
             FetchProductsBySearchFailure |
             FetchProductsBySearchInit |
+            UpdateProduct |
+            UpdateProductSuccess |
             SetTargetId |
             RemoveTargetId;
