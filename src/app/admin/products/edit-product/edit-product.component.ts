@@ -43,6 +43,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
   subcategories: any[] = [];
   count: number = 0;
   productWasUpdated: boolean;
+  removedFiles: string[] = [];
 
   constructor(private store: Store<fromRoot.AppState>,
               private toastr: ToastrService,
@@ -68,6 +69,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
       this.categories = categories.categories;
       if(this.route.snapshot.params['product_id']) {
         this.product = products.product;
+        console.log('count', this.count)
         if (this.product && categories.subcategories.length && this.count == 0) {
           this.price = +this.product.price;
           this.brand = this.product.brand;
@@ -75,13 +77,12 @@ export class EditProductComponent implements OnInit, OnDestroy {
           this.material = this.product.material;
           this.discount = +this.product.discount || null;
           this.selectedCategory = this.product.subcategory.category.id;
-          this.selectedSubcategory = categories.subcategories.find(x => x.id == this.product.subcategory.id).id;
-          this.productImages = this.product.images;
-          this.productWasUpdated = products.productWasUpdated;
-          if(this.productWasUpdated) {
-            this.toastr.success('Product was updated successfully!');
-            this.router.navigate(['../'], {relativeTo:this.route});
+          if(categories.subcategories.find(x => x.id == this.product.subcategory.id)) {
+            this.selectedSubcategory = categories.subcategories.find(x => x.id == this.product.subcategory.id).id;
+          } else {
+            this.selectedSubcategory = null;
           }
+          this.productImages = this.product.images;
           if(this.productImages) {
             for (let i = 0; i < this.productImages.length ; i++){
               this.files.push({file: this.productImages[i], id: i});
@@ -89,6 +90,18 @@ export class EditProductComponent implements OnInit, OnDestroy {
           }
           this.getImagePreviews();
         }
+      }
+      this.productWasAdded = products.productWasAdded;
+      this.loading = products.addProductLoading;
+      this.addedProductId = products.addedProductId;
+      if(this.productWasAdded && this.addedProductId) {
+        this.toastr.success('Product was saved successfully!');
+        this.router.navigate(['../', this.addedProductId], {relativeTo:this.route});
+      }
+      this.productWasUpdated = products.productWasUpdated;
+      if(this.productWasUpdated) {
+        this.toastr.success('Product was updated successfully!');
+        this.router.navigate(['../'], {relativeTo:this.route});
       }
     });
   }
@@ -125,7 +138,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
       } else {
         if(this.files.length) {
           if(this.files.length >= 12) {
-            this.warning = ' The uploaded files exceed the limit.';
+            this.warning = 'The uploaded files exceed the limit.';
             return this.files;
           }
           let prevId = this.files[this.files.length - 1].id;
@@ -143,10 +156,14 @@ export class EditProductComponent implements OnInit, OnDestroy {
     this.isHighlight = true;
   }
 
-  removeFile(id, event) {
+  removeFile(id, event, file) {
     event.preventDefault();
     event.stopPropagation();
     this.files.splice(id, 1);
+    if(typeof file.file == 'string') {
+      this.removedFiles.push(file.file);
+    }
+    console.log('file', this.removedFiles);
   }
 
   getImagePreviews() {
@@ -168,12 +185,13 @@ export class EditProductComponent implements OnInit, OnDestroy {
 
   subjectSignsLeft() {
     if(this.brand) {
-      return this.subjectMaxLength - this.brand.length
+      return this.subjectMaxLength - this.brand.length;
     }
-    return this.subjectMaxLength
+    return this.subjectMaxLength;
   }
 
   fetchSubcategories(selectedCategory) {
+    this.selectedSubcategory = null;
     this.store.dispatch(new categoriesActions.FetchSubcategories(`?category_id=${selectedCategory}`));
   }
 
@@ -201,17 +219,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
       }
     }
     this.store.dispatch(new productsActions.AddProduct(savedData));
-    this.store.pipe(select(fromRoot.getProducts)).pipe(
-      untilComponentDestroyed(this)
-    ).subscribe((state) => {
-      this.productWasAdded = state.productWasAdded;
-      this.loading = state.addProductLoading;
-      this.addedProductId = state.addedProductId;
-      if(this.productWasAdded && this.addedProductId) {
-        this.toastr.success('Product was saved successfully!');
-        this.router.navigate(['../', this.addedProductId], {relativeTo:this.route});
-      }
-    });
   }
 
   onUpdateProduct() {

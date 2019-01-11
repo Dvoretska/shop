@@ -65,7 +65,7 @@
       <div *ngFor="let file of files; let key = index" class="file-list" (click)="selectedImgKey = key">
         <img *ngIf="imageUrls.length" [src]="imageUrls[file.id]" [ngClass]="{'highlight-main-img': key == selectedImgKey}"/>
         <div class="remove-container">
-          <a class="remove" (click)="removeFile(key, $event)" href="#">
+          <a class="remove" (click)="removeFile(key, $event, file)" href="#">
             <img src="/assets/icon-close.png" alt="" class="icon-close">
           </a>
         </div>
