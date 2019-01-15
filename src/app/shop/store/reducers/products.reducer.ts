@@ -16,7 +16,8 @@ export class ProductsState {
     public fetchProductsBySearchLoading: boolean,
     public targetId: number,
     public addedProductId: number,
-    public productWasUpdated: boolean
+    public productWasUpdated: boolean,
+    public productWasDeleted: boolean
   ) { }
 }
 
@@ -35,7 +36,8 @@ export const initialState: ProductsState = {
   totalAmount: null,
   targetId: null,
   addedProductId: null,
-  productWasUpdated: false
+  productWasUpdated: false,
+  productWasDeleted: false
 };
 
 export function productsReducer(state: ProductsState =initialState, action: productsActions.productsActions) {
@@ -68,6 +70,16 @@ export function productsReducer(state: ProductsState =initialState, action: prod
       return {
         ...state,
         productWasUpdated: true
+      };
+     case productsActions.DELETE_PRODUCT:
+      return {
+        ...state,
+        productWasDeleted: false
+      };
+    case productsActions.DELETE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        productWasDeleted: true
       };
     case productsActions.REMOVE_PRODUCT_WAS_ADDED_OR_UPDATED:
       return {
@@ -159,6 +171,12 @@ export function productsReducer(state: ProductsState =initialState, action: prod
         ...state,
         targetId: null
       };
+    case productsActions.REMOVE_PRODUCT_WAS_DELETED:
+      return {
+        ...state,
+        productWasDeleted: false
+      };
+
 
 
     default:

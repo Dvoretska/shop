@@ -8,6 +8,9 @@ export const ADD_PRODUCT_FAILURE = 'ADD_PRODUCT_FAILURE';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
 
+export const DELETE_PRODUCT = 'DELETE_PRODUCT';
+export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
+
 export const REMOVE_PRODUCT_WAS_ADDED_OR_UPDATED = 'REMOVE_PRODUCT_WAS_ADDED_OR_UPDATED';
 
 export const FETCH_PRODUCTS_INIT = 'FETCH_PRODUCTS_INIT';
@@ -28,6 +31,7 @@ export const FETCH_PRODUCT_DETAILS_FAILURE = 'FETCH_PRODUCT_DETAILS_FAILURE';
 
 export const SET_TARGET_ID = 'SET_TARGET_ID';
 export const REMOVE_TARGET_ID = 'REMOVE_TARGET_ID';
+export const REMOVE_PRODUCT_WAS_DELETED = 'REMOVE_PRODUCT_WAS_DELETED';
 
 // _____________________________________________________
 
@@ -61,6 +65,20 @@ export class UpdateProductSuccess implements Action {
   readonly type = UPDATE_PRODUCT_SUCCESS;
 
   constructor(public payload: {product_id: number}) {}
+}
+
+// _____________________________________________________
+
+export class DeleteProduct implements Action {
+  readonly type = DELETE_PRODUCT;
+
+  constructor(public payload: {product_id: number}) {}
+}
+
+export class DeleteProductSuccess implements Action {
+  readonly type = DELETE_PRODUCT_SUCCESS;
+
+  constructor() {}
 }
 
 // _____________________________________________________
@@ -162,6 +180,13 @@ export class RemoveTargetId implements Action {
 
   constructor() {}
 }
+// _____________________________________________________
+
+export class RemoveProductWasDeleted implements Action {
+  readonly type = REMOVE_PRODUCT_WAS_DELETED;
+
+  constructor() {}
+}
 
 
 export type productsActions = AddProduct |
@@ -181,5 +206,8 @@ export type productsActions = AddProduct |
             FetchProductsBySearchInit |
             UpdateProduct |
             UpdateProductSuccess |
+            DeleteProduct |
+            DeleteProductSuccess |
             SetTargetId |
-            RemoveTargetId;
+            RemoveTargetId |
+            RemoveProductWasDeleted;

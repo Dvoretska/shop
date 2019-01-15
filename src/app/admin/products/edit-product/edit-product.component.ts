@@ -69,7 +69,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
       this.categories = categories.categories;
       if(this.route.snapshot.params['product_id']) {
         this.product = products.product;
-        console.log('count', this.count)
         if (this.product && categories.subcategories.length && this.count == 0) {
           this.price = +this.product.price;
           this.brand = this.product.brand;
@@ -163,7 +162,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
     if(typeof file.file == 'string') {
       this.removedFiles.push(file.file);
     }
-    console.log('file', this.removedFiles);
   }
 
   getImagePreviews() {
@@ -231,6 +229,9 @@ export class EditProductComponent implements OnInit, OnDestroy {
     savedData.append('material', this.material);
     savedData.append('discount', JSON.stringify(this.discount));
     savedData.append('subcategory_id', this.selectedSubcategory);
+    if(this.removedFiles) {
+      savedData.append('removedFiles', JSON.stringify(this.removedFiles));
+    }
     if (this.files.length) {
       let a = this.files.splice(this.selectedImgKey, 1);
       this.files.unshift(a[0]);

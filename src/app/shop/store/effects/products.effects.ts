@@ -46,6 +46,30 @@ export class ProductsEffects {
   );
 
   @Effect()
+  deleteProduct = this.actions$
+  .pipe(
+    ofType(ProductsActions.DELETE_PRODUCT),
+    map((action: ProductsActions.DeleteProduct) => action.payload.product_id),
+    exhaustMap((payload)=> {
+      console.log(payload)
+      let options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        body: {product_id: payload}
+      };
+      return this.http.delete(`${environment.API_URL}/product/delete`, options).pipe(
+        map(() => {
+          return new ProductsActions.DeleteProductSuccess();
+        }),
+        catchError(error => {
+          return from([new ErrorsActions.LoadError(error)]);
+        })
+      )
+    })
+  );
+
+  @Effect()
   fetchProducts = this.actions$
   .pipe(
     ofType(ProductsActions.FETCH_PRODUCTS, ProductsActions.FETCH_PRODUCTS_INIT),

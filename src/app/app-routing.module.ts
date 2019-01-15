@@ -10,6 +10,7 @@ import { EditPostComponent } from './blog/edit-post/edit-post.component';
 import { ShopComponent } from './shop/shop.component';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { EditProductComponent } from './admin/products/edit-product/edit-product.component';
+import { DeleteProductComponent } from './admin/products/delete-product/delete-product.component';
 import { ProductsComponent } from './shop/products/products.component';
 import { ProductDetailsComponent } from './shop/products/product-details/product-details.component';
 import { CartListComponent } from './shop/cart/cart-list/cart-list.component';
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     { path: 'products', component: AdminProductsComponent },
     { path: 'products/add', component: EditProductComponent},
     { path: 'products/:product_id', component: AdminProductDetailsComponent },
-    { path: 'products/:product_id/change', component: EditProductComponent }
+    { path: 'products/:product_id/change', component: EditProductComponent },
+    { path: 'products/:product_id/delete', component: DeleteProductComponent },
   ]},
   { path: 'shop', component: ShopComponent, children: [
     { path: 'products', component: ProductsComponent},
