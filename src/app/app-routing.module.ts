@@ -9,6 +9,7 @@ import { PostsComponent } from './blog/posts/posts.component';
 import { EditPostComponent } from './blog/edit-post/edit-post.component';
 import { ShopComponent } from './shop/shop.component';
 import { AuthGuardService } from './auth/auth-guard.service';
+import { AdminGuard } from './auth/admin.guard';
 import { EditProductComponent } from './admin/products/edit-product/edit-product.component';
 import { DeleteProductComponent } from './admin/products/delete-product/delete-product.component';
 import { ProductsComponent } from './shop/products/products.component';
@@ -24,13 +25,15 @@ import { CategoriesListComponent } from './admin/categories/categories-list/cate
 import { AddCategoryComponent } from './admin/categories/add-category/add-category.component';
 import { AddSubcategoryComponent } from './admin/categories/add-subcategory/add-subcategory.component';
 import { AdminProductsComponent } from './admin/products/admin-products/admin-products.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminProductDetailsComponent } from './admin/products/admin-product-details/admin-product-details.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'users', component: UsersListComponent, canActivate: [AuthGuardService] },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuardService], children: [
-    { path:'', redirectTo: 'categories', pathMatch: 'full'},
+{ path: 'admin/login', component: AdminLoginComponent},
+  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard], children: [
+    { path: '', component: CategoriesListComponent },
     { path: 'categories', component: CategoriesListComponent },
     { path: 'categories/add', component: AddCategoryComponent },
     { path: 'categories/subcategory-add', component: AddSubcategoryComponent },

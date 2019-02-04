@@ -22,6 +22,7 @@ import { StorageService } from './storage.service';
 import { UserService } from './users/user.service';
 import { BlogService } from './blog/blog.service';
 import { AuthGuardService } from './auth/auth-guard.service';
+import { AdminGuard } from './auth/admin.guard';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -91,6 +92,7 @@ import { OrderSvgComponent } from './UI/order-svg/order-svg.component';
 import { CategoriesActionsComponent } from './admin/categories/categories-actions/categories-actions.component';
 import { BreadcrumbsComponent } from './admin/breadcrumbs/breadcrumbs.component';
 import { DeleteProductComponent } from './admin/products/delete-product/delete-product.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: false
@@ -148,7 +150,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     OrderSvgComponent,
     CategoriesActionsComponent,
     BreadcrumbsComponent,
-    DeleteProductComponent
+    DeleteProductComponent,
+    AdminLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -190,6 +193,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   UserService,
   BlogService,
   AuthGuardService,
+    AdminGuard,
   { provide: 'Window',  useValue: window }],
   bootstrap: [AppComponent],
   entryComponents: [RegisterModalComponent, LoginModalComponent, PostDetailsComponent, CartModalComponent, SaleComponent]
