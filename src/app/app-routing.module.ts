@@ -31,10 +31,10 @@ import { AdminProductDetailsComponent } from './admin/products/admin-product-det
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'users', component: UsersListComponent, canActivate: [AuthGuardService] },
-{ path: 'admin/login', component: AdminLoginComponent},
+  { path: 'admin/login', component: AdminLoginComponent},
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard], children: [
-    { path: '', component: CategoriesListComponent },
-    { path: 'categories', component: CategoriesListComponent },
+    { path: '', redirectTo: 'categories', pathMatch: 'full' },
+    { path: 'categories', component: CategoriesListComponent},
     { path: 'categories/add', component: AddCategoryComponent },
     { path: 'categories/subcategory-add', component: AddSubcategoryComponent },
     { path: 'products', component: AdminProductsComponent },

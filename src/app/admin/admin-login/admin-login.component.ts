@@ -25,6 +25,8 @@ export class AdminLoginComponent implements OnInit {
         if(res['user']['role'] !== 'admin') {
           this.toastr.error('Access denied - Admins only');
         } else {
+          localStorage.setItem('token', JSON.stringify(res['token']));
+          localStorage.setItem('user', JSON.stringify(res['user']));
           this.router.navigate(['admin']);
         }
       },

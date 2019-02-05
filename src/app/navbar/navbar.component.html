@@ -19,7 +19,7 @@
         <a class="nav-link" routerLink="/blog" routerLinkActive="active">BLOG</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/users" *ngIf="isAuthorized()" routerLinkActive="active">USERS</a>
+        <a class="nav-link" routerLink="/users" *ngIf="isAuthorized() && currentRole() !== 'user'" routerLinkActive="active">USERS</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/shop/products" routerLinkActive="active">SHOP</a>

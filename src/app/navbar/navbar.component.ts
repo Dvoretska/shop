@@ -70,6 +70,10 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.authService.isAuthenticated();
   }
 
+  currentRole() {
+    return this.authService.getUserRole();
+  }
+
   ngAfterViewInit() {
     if(this.cartElement) {
       this.store.dispatch(new cartActions.GetTotalNumberOfProducts());
