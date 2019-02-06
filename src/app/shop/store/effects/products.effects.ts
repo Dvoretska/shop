@@ -87,6 +87,23 @@ export class ProductsEffects {
   );
 
   @Effect()
+  fetchProductsFromStock = this.actions$
+  .pipe(
+    ofType(ProductsActions.FETCH_PRODUCTS_FROM_STOCK),
+    map((action: ProductsActions.FetchProductsFromStock) => action.payload),
+    switchMap((payload) =>
+      this.http.get(`${environment.API_URL}/stock-products/${payload}`).pipe(
+        map((res)=>{
+          return new ProductsActions.FetchProductsFromStockSuccess({'productsFromStock': res['products'], 'totalAmount': res['totalAmount']});
+        }),
+        catchError(error => {
+          return from([new ErrorsActions.LoadError(error)]);
+        })
+      )
+    )
+  );
+
+  @Effect()
   fetchProductsBySearch = this.actions$
   .pipe(
     ofType(ProductsActions.FETCH_PRODUCTS_BY_SEARCH, ProductsActions.FETCH_PRODUCTS_BY_SEARCH_INIT),

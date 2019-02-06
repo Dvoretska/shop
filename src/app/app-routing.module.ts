@@ -27,6 +27,7 @@ import { AddSubcategoryComponent } from './admin/categories/add-subcategory/add-
 import { AdminProductsComponent } from './admin/products/admin-products/admin-products.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminProductDetailsComponent } from './admin/products/admin-product-details/admin-product-details.component';
+import { ChangeQuantityComponent } from './admin/products/change-quantity/change-quantity.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
     { path: 'products/:product_id', component: AdminProductDetailsComponent },
     { path: 'products/:product_id/change', component: EditProductComponent },
     { path: 'products/:product_id/delete', component: DeleteProductComponent },
+    { path: 'products/:product_id/quantity', component: ChangeQuantityComponent },
   ]},
   { path: 'shop', component: ShopComponent, children: [
     { path: 'products', component: ProductsComponent},

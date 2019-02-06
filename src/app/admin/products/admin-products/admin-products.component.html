@@ -7,6 +7,7 @@
       <th class="subcategory">Subcategory</th>
       <th class="price">Price</th>
       <th class="discount">With Discount</th>
+      <th class="quantity">Quantity</th>
     </tr>
     <ng-container *ngIf="products.length">
       <tr app-admin-product *ngFor="let product of products | paginate: { itemsPerPage: itemsPerPage, currentPage: page, totalItems: totalAmount }"

@@ -44,6 +44,9 @@ table {
     height: 50px;
     border-bottom: 1px solid #ccc;
     width: 100%;
+    th {
+      font-size: 14px;
+    }
     .image {
      width: 10%;
     }
@@ -54,13 +57,16 @@ table {
       width: 25%;
     }
     .subcategory {
-      width: 25%;
+      width: 20%;
     }
     .price {
       width: 10%;
     }
     .discount {
-      width: 15%;
+      width: 10%;
+    }
+    .quantity {
+      width: 10%;
     }
   }
 }

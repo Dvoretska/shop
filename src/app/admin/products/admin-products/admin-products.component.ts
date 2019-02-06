@@ -15,19 +15,19 @@ export class AdminProductsComponent implements OnInit,OnDestroy {
   itemsPerPage: number = 15;
   products: any[];
   order:string = 'desc';
-  totalAmount: number;
+  totalAmountStockProducts: number;
   constructor(private store: Store<fromRoot.AppState>,
               private router: Router, private route:ActivatedRoute) {
   }
 
   ngOnInit() {
-    let queryString = `?skip=0&limit=${this.itemsPerPage}`;
-    this.store.dispatch(new productsActions.FetchProductsInit(queryString));
+    let queryString = `?offset=0&limit=${this.itemsPerPage}`;
+    this.store.dispatch(new productsActions.FetchProductsFromStock(queryString));
     this.store.pipe(select(fromRoot.getProducts)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
-      this.products = state.products;
-      this.totalAmount = state.totalAmount;
+      this.products = state.productsFromStock;
+      this.totalAmountStockProducts = state.totalAmount;
     });
   }
 
@@ -37,8 +37,8 @@ export class AdminProductsComponent implements OnInit,OnDestroy {
 
   pageChanged(event) {
     this.page = event;
-    let queryString = `?skip=${(this.itemsPerPage * this.page) - this.itemsPerPage}&limit=${this.itemsPerPage}`;
-    this.store.dispatch(new productsActions.FetchProductsInit(queryString));
+    let queryString = `?offset=${(this.itemsPerPage * this.page) - this.itemsPerPage}&limit=${this.itemsPerPage}`;
+    this.store.dispatch(new productsActions.FetchProductsFromStock(queryString));
   }
 
   onEditProduct() {

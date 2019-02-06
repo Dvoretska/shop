@@ -19,6 +19,9 @@ export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
 export const FETCH_PRODUCTS_FAILURE = 'FETCH_PRODUCTS_FAILURE';
 
+export const FETCH_PRODUCTS_FROM_STOCK = 'FETCH_PRODUCTS_FROM_STOCK';
+export const FETCH_PRODUCTS_FROM_STOCK_SUCCESS = 'FETCH_PRODUCTS_FROM_STOCK_SUCCESS';
+
 export const FETCH_PRODUCTS_BY_SEARCH_INIT = 'FETCH_PRODUCTS_BY_SEARCH_INIT';
 
 export const FETCH_PRODUCTS_BY_SEARCH = 'FETCH_PRODUCTS_BY_SEARCH';
@@ -119,6 +122,20 @@ export class FetchProductsFailure implements Action {
 
 // _____________________________________________________
 
+export class FetchProductsFromStock implements Action {
+  readonly type = FETCH_PRODUCTS_FROM_STOCK;
+
+  constructor(public payload: string) {}
+}
+
+export class FetchProductsFromStockSuccess implements Action {
+  readonly type = FETCH_PRODUCTS_FROM_STOCK_SUCCESS;
+
+  constructor(public payload: {productsFromStock: any, totalAmount: any}) {}
+}
+
+// _____________________________________________________
+
 export class FetchProductsBySearchInit implements Action {
   readonly type = FETCH_PRODUCTS_BY_SEARCH_INIT;
 
@@ -210,4 +227,6 @@ export type productsActions = AddProduct |
             DeleteProductSuccess |
             SetTargetId |
             RemoveTargetId |
-            RemoveProductWasDeleted;
+            RemoveProductWasDeleted |
+            FetchProductsFromStock |
+            FetchProductsFromStockSuccess;

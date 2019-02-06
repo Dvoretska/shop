@@ -1,8 +1,22 @@
 <td>
   <img [src]="imageUrl" alt="" class="image">
 </td>
-<td class="brand">{{product.brand}}</td>
-<td class="category">{{product.subcategory.category.name}}</td>
-<td class="subcategory">{{product.subcategory.name}}</td>
-<td class="price">${{product.price}}</td>
-<td class="discount"><span *ngIf="product.discount">${{product.discount}}</span><span *ngIf="!product.discount">-</span></td>
+<td>{{product.brand}}</td>
+<td>{{product.category_name}}</td>
+<td>{{product.subcategory_name}}</td>
+<td>${{product.price}}</td>
+<td>
+  <span *ngIf="product.discount">${{product.discount}}</span>
+  <span *ngIf="!product.discount">-</span>
+</td>
+<td>
+  <div class="qnt-wrapper">
+    <div *ngIf="product.quantity">{{product.quantity}}</div>
+    <div *ngIf="!product.quantity">0</div>
+    <button class="btn-edit" (click)="changeQuantity()">
+      <span class="tooltiptext">Change</span>
+      <img src="/assets/pencil-edit-button.svg" alt="">
+    </button>
+  </div>
+</td>
+

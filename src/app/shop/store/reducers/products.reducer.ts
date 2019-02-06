@@ -4,6 +4,9 @@ import * as productsActions from '../actions/products.actions';
 export class ProductsState {
   constructor(
     public products: any[],
+    public productsFromStock: any[],
+    public totalAmountStockProducts: number,
+    public fetchProductsFromStockLoading: boolean,
     public sizes: string[],
     public loading: boolean,
     public productWasAdded: boolean,
@@ -24,8 +27,11 @@ export class ProductsState {
 
 export const initialState: ProductsState = {
   products: [],
+  productsFromStock: [],
+  totalAmountStockProducts: null,
   sizes: ['XS', 'S', 'M', 'L', 'XL'],
   loading: false,
+  fetchProductsFromStockLoading: false,
   addProductLoading: false,
   productDetailsLoading: false,
   fetchProductsLoading: false,
@@ -116,6 +122,20 @@ export function productsReducer(state: ProductsState =initialState, action: prod
         ...state,
         fetchProductsLoading: false,
         fetchProductsInitLoading: false
+      };
+
+      case productsActions.FETCH_PRODUCTS_FROM_STOCK:
+        return {
+          ...state,
+          fetchProductsFromStockLoading: true
+        };
+
+     case productsActions.FETCH_PRODUCTS_FROM_STOCK_SUCCESS:
+      return {
+        ...state,
+        fetchProductsFromStockLoading: false,
+        productsFromStock: [...action.payload.productsFromStock],
+        totalAmountStockProducts: parseInt(action.payload.totalAmount)
       };
 
     case productsActions.FETCH_PRODUCTS_BY_SEARCH:

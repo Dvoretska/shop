@@ -93,6 +93,7 @@ import { CategoriesActionsComponent } from './admin/categories/categories-action
 import { BreadcrumbsComponent } from './admin/breadcrumbs/breadcrumbs.component';
 import { DeleteProductComponent } from './admin/products/delete-product/delete-product.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { ChangeQuantityComponent } from './admin/products/change-quantity/change-quantity.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: false
@@ -151,7 +152,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CategoriesActionsComponent,
     BreadcrumbsComponent,
     DeleteProductComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    ChangeQuantityComponent
   ],
   imports: [
     BrowserModule,
