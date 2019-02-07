@@ -1,3 +1,21 @@
-<p>
-  change-quantity works!
-</p>
+<form #productForm="ngForm" class="box-with-shadow">
+  <div class="form-group title-wrapper">
+    <div class="size">Size</div>
+    <div class="quantity">Quantity</div>
+  </div>
+  <ng-container *ngIf="sizesQuantity.length">
+    <div *ngFor="let item of sizesQuantity;let index = index;">
+      <div class="form-group">
+        <span class="strong">{{sizesQuantity[index].size}}</span>
+        <input type="number" min="0" step="1" class="form-control form-input" name=a{{index}} [(ngModel)]="sizesQuantity[index]['quantity']">
+      </div>
+    </div>
+    <button type="submit" class="my-button">
+      <app-spinner *ngIf="loading"></app-spinner>
+      <span *ngIf="!loading">Save</span>
+    </button>
+  </ng-container>
+  <ng-container *ngIf="!sizesQuantity.length">
+    <div class="no-content">There are no items yet</div>
+  </ng-container>
+</form>

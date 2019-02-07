@@ -5,6 +5,8 @@ export class ProductsState {
   constructor(
     public products: any[],
     public productsFromStock: any[],
+    public fetchSizesQuantityLoading: boolean,
+    public sizesQuantity: any[],
     public totalAmountStockProducts: number,
     public fetchProductsFromStockLoading: boolean,
     public sizes: string[],
@@ -28,6 +30,8 @@ export class ProductsState {
 export const initialState: ProductsState = {
   products: [],
   productsFromStock: [],
+  fetchSizesQuantityLoading: false,
+  sizesQuantity: [],
   totalAmountStockProducts: null,
   sizes: ['XS', 'S', 'M', 'L', 'XL'],
   loading: false,
@@ -124,18 +128,31 @@ export function productsReducer(state: ProductsState =initialState, action: prod
         fetchProductsInitLoading: false
       };
 
-      case productsActions.FETCH_PRODUCTS_FROM_STOCK:
-        return {
-          ...state,
-          fetchProductsFromStockLoading: true
-        };
-
-     case productsActions.FETCH_PRODUCTS_FROM_STOCK_SUCCESS:
+    case productsActions.FETCH_PRODUCTS_FROM_STOCK:
       return {
         ...state,
-        fetchProductsFromStockLoading: false,
-        productsFromStock: [...action.payload.productsFromStock],
-        totalAmountStockProducts: parseInt(action.payload.totalAmount)
+        fetchProductsFromStockLoading: true
+      };
+
+   case productsActions.FETCH_PRODUCTS_FROM_STOCK_SUCCESS:
+    return {
+      ...state,
+      fetchProductsFromStockLoading: false,
+      productsFromStock: [...action.payload.productsFromStock],
+      totalAmountStockProducts: parseInt(action.payload.totalAmount)
+    };
+
+    case productsActions.FETCH_SIZES_QUANTITY:
+      return {
+        ...state,
+        fetchSizesQuantityLoading: true
+      };
+
+     case productsActions.FETCH_SIZES_QUANTITY_SUCCESS:
+      return {
+        ...state,
+        fetchSizesQuantityLoading: false,
+        sizesQuantity: [...action.payload.sizesQuantity]
       };
 
     case productsActions.FETCH_PRODUCTS_BY_SEARCH:

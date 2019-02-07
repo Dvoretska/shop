@@ -104,6 +104,23 @@ export class ProductsEffects {
   );
 
   @Effect()
+  fetchSizesQuantity = this.actions$
+  .pipe(
+    ofType(ProductsActions.FETCH_SIZES_QUANTITY),
+    map((action: ProductsActions.FetchSizesQuantity) => action.payload),
+    switchMap((payload) =>
+      this.http.get(`${environment.API_URL}/product/quantity/${payload}`).pipe(
+        map((res)=>{
+          return new ProductsActions.FetchSizesQuantitySuccess({'sizesQuantity': res['result']});
+        }),
+        catchError(error => {
+          return from([new ErrorsActions.LoadError(error)]);
+        })
+      )
+    )
+  );
+
+  @Effect()
   fetchProductsBySearch = this.actions$
   .pipe(
     ofType(ProductsActions.FETCH_PRODUCTS_BY_SEARCH, ProductsActions.FETCH_PRODUCTS_BY_SEARCH_INIT),

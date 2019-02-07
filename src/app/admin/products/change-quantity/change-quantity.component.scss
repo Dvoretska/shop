@@ -1,0 +1,35 @@
+form {
+  max-width: 300px;
+  .form-group {
+    display: flex;
+    align-items: center;
+    .strong {
+      width: 30%;
+      font-weight: 700;
+      display: inline-block;
+      padding-right: 15px;
+      text-align: center;
+    }
+    .form-input {
+      width: 70%;
+    }
+  }
+  .title-wrapper {
+    .size {
+      width: 30%;
+      padding-right: 15px;
+      text-align: center;
+    }
+    .quantity {
+      width: 70%;
+      text-align: center;
+    }
+  }
+  .no-content {
+    width: 100%;
+    font-size: 16px;
+    font-style: italic;
+    padding-left: 15px;
+    color: #ccc;
+  }
+}

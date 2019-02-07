@@ -31,11 +31,11 @@ td {
   .btn-edit {
     display: inline-block;
     cursor: pointer;
-    background-color: #EA7884;
+    background-color: #eee;
     border: 1px solid grey;
     border-radius: 5px;
     margin-left: 5px;
-    padding: 2px 5px;
+    padding: 1px 6px;
     position: relative;
     &:hover .tooltiptext {
       visibility: visible;
