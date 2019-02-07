@@ -10,7 +10,7 @@
         <input type="number" min="0" step="1" class="form-control form-input" name=a{{index}} [(ngModel)]="sizesQuantity[index]['quantity']">
       </div>
     </div>
-    <button type="submit" class="my-button">
+    <button type="submit" class="my-button" (click)="onSubmit()">
       <app-spinner *ngIf="loading"></app-spinner>
       <span *ngIf="!loading">Save</span>
     </button>
@@ -18,4 +18,7 @@
   <ng-container *ngIf="!sizesQuantity.length">
     <div class="no-content">There are no items yet</div>
   </ng-container>
+  <div class="button-wrapper">
+    <app-button [text]="'Add'" routerLink="./add"></app-button>
+  </div>
 </form>

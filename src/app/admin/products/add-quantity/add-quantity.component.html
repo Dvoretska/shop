@@ -1,0 +1,17 @@
+ <form #productForm="ngForm" class="box-with-shadow">
+  <div class="form-group title-wrapper">
+    <div class="size">Size</div>
+    <div class="quantity">Quantity</div>
+  </div>
+  <div class="form-group">
+    <ng-select *ngIf="sizes && sizes.length" [items]="sizes"
+               bindLabel="name"
+               bindValue="id"
+               [(ngModel)]="selectedSize" name="sizes" placeholder="Choose a size">
+    </ng-select>
+    <input type="number" min="0" step="1" class="form-control form-input" name="size" [(ngModel)]="quantity">
+  </div>
+  <button type="submit" class="my-button" (click)="onSave()">
+    <span>Save</span>
+  </button>
+</form>

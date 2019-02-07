@@ -1,16 +1,6 @@
-<div class="box">
-  <ngx-treeview
-    [items]="nodes"
-    [config]="config"
-    (selectedChange)="onSelectedChange($event)">
-  </ngx-treeview>
-  <div class="button-container">
-    <app-button [text]="'Delete selected'" (onClick)="onDeleteSubcategories()" [disabled]="!selectedSubcategories.length"></app-button>
-    <div class="button-wrapper">
-      <app-button [text]="'Create new category'" routerLink="../category/add"></app-button>
-    </div>
-    <div class="button-wrapper">
-      <app-button [text]="'Add new subcategory'" routerLink="../subcategory/add"></app-button>
-    </div>
+<div class="box-with-shadow">
+  <div *ngFor="let size of sizes;let index = index;" class="checkbox-wrapper">
+    <input type="checkbox" id={{index}}>
+    <label for={{index}}>{{size.name}}</label>
   </div>
 </div>

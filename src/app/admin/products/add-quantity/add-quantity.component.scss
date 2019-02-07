@@ -1,0 +1,25 @@
+form {
+  max-width: 400px;
+  .form-group {
+    display: flex;
+    align-items: center;
+    /deep/ .ng-select {
+      width: 50%;
+      padding-right: 15px;
+    }
+    .form-input {
+      width: 50%;
+    }
+  }
+  .title-wrapper {
+    .size {
+      width: 50%;
+      padding-right: 15px;
+      text-align: center;
+    }
+    .quantity {
+      width: 50%;
+      text-align: center;
+    }
+  }
+}

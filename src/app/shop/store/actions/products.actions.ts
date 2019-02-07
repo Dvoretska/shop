@@ -25,6 +25,15 @@ export const FETCH_PRODUCTS_FROM_STOCK_SUCCESS = 'FETCH_PRODUCTS_FROM_STOCK_SUCC
 export const FETCH_SIZES_QUANTITY = 'FETCH_SIZES_QUANTITY';
 export const FETCH_SIZES_QUANTITY_SUCCESS = 'FETCH_SIZES_QUANTITY_SUCCESS';
 
+export const UPDATE_SIZES_QUANTITY = 'UPDATE_SIZES_QUANTITY';
+export const UPDATE_SIZES_QUANTITY_SUCCESS = 'UPDATE_SIZES_QUANTITY_SUCCESS';
+
+export const GET_SIZES = 'GET_SIZES';
+export const GET_SIZES_SUCCESS = 'GET_SIZES_SUCCESS';
+
+export const ADD_QUANTITY_TO_STOCK = 'ADD_QUANTITY_TO_STOCK';
+export const ADD_QUANTITY_TO_STOCK_SUCCESS = 'ADD_QUANTITY_TO_STOCK_SUCCESS';
+
 export const FETCH_PRODUCTS_BY_SEARCH_INIT = 'FETCH_PRODUCTS_BY_SEARCH_INIT';
 
 export const FETCH_PRODUCTS_BY_SEARCH = 'FETCH_PRODUCTS_BY_SEARCH';
@@ -33,7 +42,6 @@ export const FETCH_PRODUCTS_BY_SEARCH_FAILURE = 'FETCH_PRODUCTS_BY_SEARCH_FAILUR
 
 export const FETCH_PRODUCT_DETAILS = 'FETCH_PRODUCT_DETAILS';
 export const FETCH_PRODUCT_DETAILS_SUCCESS = 'FETCH_PRODUCT_DETAILS_SUCCESS';
-export const FETCH_PRODUCT_DETAILS_FAILURE = 'FETCH_PRODUCT_DETAILS_FAILURE';
 
 export const SET_TARGET_ID = 'SET_TARGET_ID';
 export const REMOVE_TARGET_ID = 'REMOVE_TARGET_ID';
@@ -153,6 +161,48 @@ export class FetchSizesQuantitySuccess implements Action {
 
 // _____________________________________________________
 
+export class UpdateSizesQuantity implements Action {
+  readonly type = UPDATE_SIZES_QUANTITY;
+
+  constructor(public payload: {savedData: any, callback: any}) {}
+}
+
+export class UpdateSizesQuantitySuccess implements Action {
+  readonly type = UPDATE_SIZES_QUANTITY_SUCCESS;
+
+  constructor() {}
+}
+
+// _____________________________________________________
+
+export class GetSizes implements Action {
+  readonly type = GET_SIZES;
+
+  constructor() {}
+}
+
+export class GetSizesSuccess implements Action {
+  readonly type = GET_SIZES_SUCCESS;
+
+  constructor(public payload: {sizes: string[]}) {}
+}
+
+// _____________________________________________________
+
+export class AddQuantityToStock implements Action {
+  readonly type = ADD_QUANTITY_TO_STOCK;
+
+  constructor(public payload: {size_id: string, product_id: number, quantity: number, showToast: any}) {}
+}
+
+export class AddQuantityToStockSuccess implements Action {
+  readonly type = ADD_QUANTITY_TO_STOCK_SUCCESS;
+
+  constructor() {}
+}
+
+// _____________________________________________________
+
 export class FetchProductsBySearchInit implements Action {
   readonly type = FETCH_PRODUCTS_BY_SEARCH_INIT;
 
@@ -193,12 +243,6 @@ export class FetchProductDetailsSuccess implements Action {
   constructor(public payload: {product: any}) {}
 }
 
-export class FetchProductDetailsFailure implements Action {
-  readonly type = FETCH_PRODUCT_DETAILS_FAILURE;
-
-  constructor() {}
-}
-
 // _____________________________________________________
 
 export class SetTargetId implements Action {
@@ -233,7 +277,6 @@ export type productsActions = AddProduct |
             FetchProductsInit |
             FetchProductDetails |
             FetchProductDetailsSuccess |
-            FetchProductDetailsFailure |
             FetchProductsBySearch |
             FetchProductsBySearchSuccess |
             FetchProductsBySearchFailure |
@@ -248,4 +291,10 @@ export type productsActions = AddProduct |
             FetchProductsFromStock |
             FetchProductsFromStockSuccess |
             FetchSizesQuantity |
-            FetchSizesQuantitySuccess;
+            FetchSizesQuantitySuccess |
+            UpdateSizesQuantity |
+            UpdateSizesQuantitySuccess |
+            GetSizes |
+            GetSizesSuccess |
+            AddQuantityToStock |
+            AddQuantityToStockSuccess;

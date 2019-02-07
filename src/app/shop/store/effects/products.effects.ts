@@ -121,6 +121,60 @@ export class ProductsEffects {
   );
 
   @Effect()
+  updateSizesQuantity = this.actions$
+  .pipe(
+    ofType(ProductsActions.UPDATE_SIZES_QUANTITY),
+    map((action: ProductsActions.UpdateSizesQuantity) => action.payload),
+    switchMap((payload) =>
+      this.http.post(`${environment.API_URL}/product/quantity/update`, payload.savedData).pipe(
+        map(()=>{
+          payload.callback.success('Your changes were successfully saved');
+          return new ProductsActions.UpdateSizesQuantitySuccess();
+        }),
+        catchError(error => {
+          return from([new ErrorsActions.LoadError(error)]);
+        })
+      )
+    )
+  );
+
+  @Effect()
+  getSizes = this.actions$
+  .pipe(
+    ofType(ProductsActions.GET_SIZES),
+    switchMap(() =>
+      this.http.get(`${environment.API_URL}/sizes`).pipe(
+        map((res)=>{
+          return new ProductsActions.GetSizesSuccess({'sizes': res});
+        }),
+        catchError(error => {
+          return from([new ErrorsActions.LoadError(error)]);
+        })
+      )
+    )
+  );
+
+  @Effect()
+  addQuantityToStock = this.actions$
+  .pipe(
+    ofType(ProductsActions.ADD_QUANTITY_TO_STOCK),
+    map((action: ProductsActions.AddQuantityToStock) => action.payload),
+    switchMap((payload) =>
+      this.http.post(`${environment.API_URL}/stock/add`,
+        {size_id: payload.size_id, product_id: payload.product_id, quantity: payload.quantity}
+      ).pipe(
+        map(()=>{
+          payload.showToast.success('Your changes were successfully saved');
+          return new ProductsActions.AddQuantityToStockSuccess();
+        }),
+        catchError(error => {
+          return from([new ErrorsActions.LoadError(error)]);
+        })
+      )
+    )
+  );
+
+  @Effect()
   fetchProductsBySearch = this.actions$
   .pipe(
     ofType(ProductsActions.FETCH_PRODUCTS_BY_SEARCH, ProductsActions.FETCH_PRODUCTS_BY_SEARCH_INIT),
@@ -148,7 +202,7 @@ export class ProductsEffects {
           return new ProductsActions.FetchProductDetailsSuccess({product: res});
         }),
         catchError(error => {
-          return from([new ErrorsActions.LoadError(error), new ProductsActions.FetchProductDetailsFailure()]);
+          return from([new ErrorsActions.LoadError(error)]);
         })
       )
     )
