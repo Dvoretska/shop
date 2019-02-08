@@ -1,0 +1,9 @@
+.size-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 300px;
+  .btn-size {
+    margin-top: 20px;
+  }
+}

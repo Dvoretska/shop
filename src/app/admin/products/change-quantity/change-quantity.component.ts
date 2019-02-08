@@ -26,14 +26,14 @@ export class ChangeQuantityComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     let savedData:FormData = new FormData();
-    savedData.append('product_id', +this.route.snapshot.params['product_id']);
+    savedData.append('product_id', this.route.snapshot.params['product_id']);
     let dataArr = [];
     for(let i = 0; i < this.sizesQuantity.length; i++) {
       dataArr.push({size_id: this.sizesQuantity[i].size_id, quantity: this.sizesQuantity[i].quantity});
     }
     savedData.append('dataArr', JSON.stringify(dataArr));
     this.store.dispatch(new productsActions.UpdateSizesQuantity(
-      {savedData, callback: this.toastr}
+      {savedData: savedData, callback: this.toastr}
     ))
   }
 

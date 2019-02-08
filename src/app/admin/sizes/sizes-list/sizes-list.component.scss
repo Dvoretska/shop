@@ -1,9 +1,24 @@
-.checkbox-wrapper {
+.size-container {
   display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  label {
-    margin-left: 10px;
-    margin-bottom: 0;
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  .size-box {
+    width: 70%;
+    .checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      label {
+        margin-left: 10px;
+        margin-bottom: 0;
+      }
+    }
+  }
+  .size-actions-container {
+    width: 30%;
+    position: sticky;
+    top: 65px;
   }
 }

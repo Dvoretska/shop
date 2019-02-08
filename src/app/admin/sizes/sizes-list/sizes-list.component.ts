@@ -4,7 +4,6 @@ import {ActivatedRoute} from "@angular/router";
 import {select, Store} from "@ngrx/store";
 import * as fromRoot from "../../../shop/store/reducers/reducer.factory";
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
-import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-sizes-list',
@@ -13,7 +12,8 @@ import {ToastrService} from "ngx-toastr";
 })
 export class SizesListComponent implements OnInit, OnDestroy {
   sizes: string[];
-  constructor(private store: Store<fromRoot.AppState>, private route:ActivatedRoute) { }
+  checkedSizes: number[] = [];
+  constructor(private store: Store<fromRoot.AppState>) { }
 
   ngOnInit() {
     this.store.dispatch(new productsActions.GetSizes())
@@ -22,6 +22,12 @@ export class SizesListComponent implements OnInit, OnDestroy {
     ).subscribe((state) => {
       this.sizes = state.sizes;
     });
+  }
+
+  onSelect(event, id) {
+    if ( event.target.checked ) {
+      this.checkedSizes.push(id);
+    }
   }
 
   ngOnDestroy() {}

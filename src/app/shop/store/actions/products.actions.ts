@@ -34,6 +34,12 @@ export const GET_SIZES_SUCCESS = 'GET_SIZES_SUCCESS';
 export const ADD_QUANTITY_TO_STOCK = 'ADD_QUANTITY_TO_STOCK';
 export const ADD_QUANTITY_TO_STOCK_SUCCESS = 'ADD_QUANTITY_TO_STOCK_SUCCESS';
 
+export const DELETE_SIZES = 'DELETE_SIZES';
+export const DELETE_SIZES_SUCCESS = 'DELETE_SIZES_SUCCESS';
+
+export const ADD_SIZE='ADD_SIZE';
+export const ADD_SIZE_SUCCESS='ADD_SIZE_SUCCESS';
+
 export const FETCH_PRODUCTS_BY_SEARCH_INIT = 'FETCH_PRODUCTS_BY_SEARCH_INIT';
 
 export const FETCH_PRODUCTS_BY_SEARCH = 'FETCH_PRODUCTS_BY_SEARCH';
@@ -184,7 +190,7 @@ export class GetSizes implements Action {
 export class GetSizesSuccess implements Action {
   readonly type = GET_SIZES_SUCCESS;
 
-  constructor(public payload: {sizes: string[]}) {}
+  constructor(public payload: {sizes: any}) {}
 }
 
 // _____________________________________________________
@@ -192,11 +198,39 @@ export class GetSizesSuccess implements Action {
 export class AddQuantityToStock implements Action {
   readonly type = ADD_QUANTITY_TO_STOCK;
 
-  constructor(public payload: {size_id: string, product_id: number, quantity: number, showToast: any}) {}
+  constructor(public payload: {size_id: number | string, product_id: number, quantity: number, showToast: any}) {}
 }
 
 export class AddQuantityToStockSuccess implements Action {
   readonly type = ADD_QUANTITY_TO_STOCK_SUCCESS;
+
+  constructor() {}
+}
+
+// _____________________________________________________
+
+export class DeleteSizes implements Action {
+  readonly type = DELETE_SIZES;
+
+  constructor(public payload: {sizes: string}) {}
+}
+
+export class DeleteSizesSuccess implements Action {
+  readonly type = DELETE_SIZES_SUCCESS;
+
+  constructor() {}
+}
+
+// _____________________________________________________
+
+export class AddSize implements Action {
+  readonly type = ADD_SIZE;
+
+  constructor(public payload: {size: string, showToast: any, clearFields: any}) {}
+}
+
+export class AddSizeSuccess implements Action {
+  readonly type = ADD_SIZE_SUCCESS;
 
   constructor() {}
 }
@@ -297,4 +331,8 @@ export type productsActions = AddProduct |
             GetSizes |
             GetSizesSuccess |
             AddQuantityToStock |
-            AddQuantityToStockSuccess;
+            AddQuantityToStockSuccess |
+            DeleteSizes |
+            DeleteSizesSuccess |
+            AddSize |
+            AddSizeSuccess;

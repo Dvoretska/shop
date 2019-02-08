@@ -51,7 +51,6 @@ export class ProductsEffects {
     ofType(ProductsActions.DELETE_PRODUCT),
     map((action: ProductsActions.DeleteProduct) => action.payload.product_id),
     exhaustMap((payload)=> {
-      console.log(payload)
       let options = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -166,6 +165,50 @@ export class ProductsEffects {
         map(()=>{
           payload.showToast.success('Your changes were successfully saved');
           return new ProductsActions.AddQuantityToStockSuccess();
+        }),
+        catchError(error => {
+          return from([new ErrorsActions.LoadError(error)]);
+        })
+      )
+    )
+  );
+
+  @Effect()
+  deleteSizes = this.actions$
+  .pipe(
+    ofType(ProductsActions.DELETE_SIZES),
+    map((action: ProductsActions.DeleteSizes) => action.payload),
+    exhaustMap((payload)=> {
+      let options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        body: payload
+      };
+      return this.http.delete(`${environment.API_URL}/sizes/delete`, options).pipe(
+        map(() => {
+          return new ProductsActions.GetSizes();
+        }),
+        catchError(error => {
+          return from([new ErrorsActions.LoadError(error)]);
+        })
+      )
+    })
+  );
+
+  @Effect()
+  addSize = this.actions$
+  .pipe(
+    ofType(ProductsActions.ADD_SIZE),
+    map((action: ProductsActions.AddSize) => action.payload),
+    switchMap((payload) =>
+      this.http.post(`${environment.API_URL}/sizes/add`,
+        {size: payload.size}
+      ).pipe(
+        map(()=>{
+          payload.showToast.success('The size was successfully added');
+          payload.clearFields();
+          return new ProductsActions.AddSizeSuccess();
         }),
         catchError(error => {
           return from([new ErrorsActions.LoadError(error)]);

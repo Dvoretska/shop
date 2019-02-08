@@ -1,5 +1,7 @@
-<app-ripple *ngIf="!subcategories.length || !product"></app-ripple>
-<form #productForm="ngForm" class="box-with-shadow" *ngIf="subcategories.length || product">
+<div class="loading-wrapper">
+  <app-ripple *ngIf="!categories && !categories.length"></app-ripple>
+</div>
+<form #productForm="ngForm" class="box-with-shadow" *ngIf="categories && categories.length">
   <div class="form-group">
     <label for="title">
       <strong>Brand</strong>
@@ -31,7 +33,7 @@
   </div>
   <div class="form-group">
     <strong>Category</strong>
-    <ng-select *ngIf="categories && categories.length" [items]="categories"
+    <ng-select [items]="categories"
                bindLabel="name"
                bindValue="id"
                [(ngModel)]="selectedCategory" name="category" placeholder="Choose category"

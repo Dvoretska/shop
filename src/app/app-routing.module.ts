@@ -30,6 +30,7 @@ import { AdminProductDetailsComponent } from './admin/products/admin-product-det
 import { ChangeQuantityComponent } from './admin/products/change-quantity/change-quantity.component';
 import { SizesListComponent } from './admin/sizes/sizes-list/sizes-list.component';
 import { AddQuantityComponent } from './admin/products/add-quantity/add-quantity.component';
+import { AddSizeComponent } from './admin/sizes/add-size/add-size.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent },
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
     { path: 'products/:product_id/quantity', component: ChangeQuantityComponent },
     { path: 'products/:product_id/quantity/add', component: AddQuantityComponent },
     { path: 'sizes', component: SizesListComponent },
+    { path: 'sizes/add', component: AddSizeComponent },
   ]},
   { path: 'shop', component: ShopComponent, children: [
     { path: 'products', component: ProductsComponent},

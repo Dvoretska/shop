@@ -62,7 +62,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
         this.initForm();
       }
     );
-    combineLatest(this.store.pipe(select(fromRoot.getProducts), skip(1)), this.store.pipe(select(fromRoot.getCategories),skip(1))).pipe(
+    combineLatest(this.store.pipe(select(fromRoot.getProducts)), this.store.pipe(select(fromRoot.getCategories))).pipe(
       untilComponentDestroyed(this)
     ).subscribe(([products, categories]) => {
       this.subcategories = categories.subcategories;

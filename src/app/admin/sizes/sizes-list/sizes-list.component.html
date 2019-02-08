@@ -1,6 +1,11 @@
-<div class="box-with-shadow">
-  <div *ngFor="let size of sizes;let index = index;" class="checkbox-wrapper">
-    <input type="checkbox" id={{index}}>
-    <label for={{index}}>{{size.name}}</label>
+<div class="size-container">
+  <div class="box-with-shadow  size-box">
+     <div *ngFor="let size of sizes;let index = index;" class="checkbox-wrapper">
+      <input type="checkbox" id={{index}} (change)="onSelect($event, sizes[index]['id'])">
+      <label for={{index}}>{{size.name}}</label>
+    </div>
+  </div>
+  <div class="box-with-shadow size-actions-container">
+    <app-sizes-actions [checkedSizes]="checkedSizes"></app-sizes-actions>
   </div>
 </div>

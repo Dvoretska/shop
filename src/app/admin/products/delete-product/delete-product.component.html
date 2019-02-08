@@ -1,5 +1,5 @@
 <div class="box-with-shadow" *ngIf="product">
-  <h3 class="delete-title">Are you sure you want to delete {{product.brand}} {{product.subcategory.category.name}}?</h3>
+  <h5 class="delete-title">Are you sure you want to delete {{product.brand}} {{product.subcategory.category.name}}?</h5>
   <div class="btn-wrapper">
     <app-button [text]="'YES, I\'M SURE'" (onClick)="onDeleteItem()"></app-button>
   </div>

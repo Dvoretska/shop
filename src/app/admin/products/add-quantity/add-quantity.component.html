@@ -11,7 +11,7 @@
     </ng-select>
     <input type="number" min="0" step="1" class="form-control form-input" name="size" [(ngModel)]="quantity">
   </div>
-  <button type="submit" class="my-button" (click)="onSave()">
+  <button type="submit" class="my-button" (click)="onSave()" [disabled]="!selectedSize">
     <span>Save</span>
   </button>
 </form>

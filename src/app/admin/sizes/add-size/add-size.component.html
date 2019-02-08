@@ -1,0 +1,7 @@
+<div class="box-with-shadow size-box">
+  <label for="size">Size</label>
+  <input type="text" [(ngModel)]="size" id="size">
+  <button type="submit" class="my-button btn-size" (click)="onSave()" [disabled]="!size">
+    <span>Save</span>
+  </button>
+</div>
