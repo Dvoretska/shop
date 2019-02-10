@@ -36,7 +36,7 @@ export class UserComponent implements OnInit {
     this.currentUserRole = this.authService.getUserRole();
     this.selectedRole = this.user['role_id']['role'];
   }
-  openFileBrowser() {
+  openFileBrowser(event) {
     let el: HTMLElement = this.inputFile.nativeElement as HTMLElement;
     el.click();
   }
