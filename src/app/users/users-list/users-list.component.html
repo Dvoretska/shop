@@ -14,11 +14,11 @@
       <th>Save changes</th>
       <th>Delete user</th>
     </tr>
-    <tr *ngIf="errorMsg; else usersList">
+    <tr *ngIf="errorMsg">
       <td colspan="6" class="td-error">{{ errorMsg }}</td>
     </tr>
-    <ng-container *ngIf="users">
-      <tr app-user *ngFor="let user of users" [user]="user" [roles]="roles" #usersList (deletedUser)="onClearUsers($event)"></tr>
+    <ng-container *ngIf="users && !errorMsg">
+      <tr app-user *ngFor="let user of users" [user]="user" [roles]="roles"  (deletedUser)="onClearUsers($event)"></tr>
     </ng-container>
   </table>
 </div>

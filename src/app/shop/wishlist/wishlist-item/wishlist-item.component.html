@@ -10,7 +10,7 @@
     </div>
     <div class="block">
       <div class="price-wrapper">
-        <div class="price" [ngStyle]="{textDecoration : wishlistItem.discount ? 'line-through' : none, color : wishlistItem.discount ? 'grey' : 'black'}">${{wishlistItem.price}}</div>
+        <div class="price" [ngStyle]="{textDecoration : wishlistItem.discount ? 'line-through' : 'none', color : wishlistItem.discount ? 'grey' : 'black'}">${{wishlistItem.price}}</div>
         <div class="discount" *ngIf="wishlistItem.discount">${{wishlistItem.discount}}</div>
       </div>
       <div class="additional-block details-block" #detailsBlock (click)="openProductDetails()">
@@ -18,11 +18,11 @@
         <div class="text add-text">Watch Details</div>
       </div>
       <div class="additional-block" #addBlock (click)="addProductToCart()">
-        <ng-container *ngIf="!addToCartWasClicked && !addToCartLoading">
+        <ng-container *ngIf="!addToCartWasClicked">
           <img src="/assets/shop/bag.svg" alt="" class="icon">
           <div class="text">Add to Cart</div>
         </ng-container>
-        <ng-select *ngIf="addToCartWasClicked && !addToCartLoading" [items]="sizes"
+        <ng-select *ngIf="addToCartWasClicked" [items]="sizes"
                    [(ngModel)]="selectedSize" placeholder="Choose a size" class="custom">
         </ng-select>
       </div>
