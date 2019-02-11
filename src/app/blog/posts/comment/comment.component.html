@@ -2,20 +2,21 @@
   <div class="comment-heading">
     <span class="heading-item" *ngIf="comment && comment.email">{{ comment.email.substring(0, comment.email.lastIndexOf('@')) }}</span>
     <span class="heading-item date-item" *ngIf="comment">{{ formattedDate(comment.created) }}</span>
-    <img src="/assets/cancel.svg"
+    <div class="action-wrapper">
+      <img src="/assets/cancel.svg"
          alt="close"
          class="close-icon"
          *ngIf="isUpdateCommentAllowed(comment.email)"
-         (click)="onDeleteComment(comment.id)">
+         (click)="deleteComment(comment.id)">
+    <button class="cta"
+          (click)="onEditComment(comment.id, comment.text)"
+          *ngIf="isUpdateCommentAllowed(comment.email)">
+      <img src="/assets/pencil.svg" alt="" class="pencil-icon">
+    </button>
+    </div>
   </div>
   <div class="comment-body" *ngIf="isViewMode || selectedComment !== comment.id">
     <div>{{ comment.text }}</div>
-    <button class="cta"
-            (click)="onEditComment(comment.id, comment.text)"
-            *ngIf="isUpdateCommentAllowed(comment.email)">
-      <img src="/assets/pencil.svg" alt="" class="pencil-icon">
-      <span>Edit</span>
-    </button>
   </div>
   <div class="edit-input-wrapper" *ngIf="selectedComment == comment.id && isEditMode">
     <input type="text"

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {Comment} from "../../comment.model";
 import {ToastrService} from "ngx-toastr";
 import {BlogService} from "../../blog.service";
@@ -19,15 +19,23 @@ export class CommentComponent implements OnInit {
   isEditMode: boolean = false;
   isViewMode: boolean = true;
   selectedComment: number;
-
+  @Output() onDeleteComment = new EventEmitter<number>();
   constructor(private toastr: ToastrService, private blogService: BlogService, private authService: AuthService) { }
 
   ngOnInit() {
     this.user = this.authService.getUser();
   }
 
-  formattedDate(date) {
-    return new Date(date)['toGMTString']();
+  formattedDate(time) {
+    var date = new Date(time);
+    var hours = date.getHours();
+    var minutes: string | number  = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes= minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
   }
 
   onUpdateComment(id) {
@@ -55,12 +63,10 @@ export class CommentComponent implements OnInit {
     this.changedCommentText = text;
   }
 
-  onDeleteComment(id) {
+  deleteComment(id) {
     this.blogService.deleteComment(id).subscribe(
       () => {
-        this.comments = this.comments.filter((comment) => {
-          return comment.id !== id
-        })
+        this.onDeleteComment.emit(id)
       },
       (err) => {
         this.toastr.error(`${err.error.rights}`);

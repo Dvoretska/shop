@@ -24,9 +24,8 @@ import { BlogService } from './blog/blog.service';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { AdminGuard } from './auth/admin.guard';
 
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
 import { NgxPageScrollModule } from 'ngx-page-scroll';

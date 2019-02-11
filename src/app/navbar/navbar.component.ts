@@ -28,16 +28,14 @@ export interface CurrentUser {
 })
 
 export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
-  isCollapsed = true;
   modalRef: BsModalRef;
-  currentUser: CurrentUser;
   username: string;
   imageUrl: string = '';
   quantity: number;
   totalNumberOfProducts: number;
   totalNumOfProductsInWishlist: number;
-  defaultImageUrl: string = '../../assets/default-picture_0_0.png';
   private subscription: Subscription;
+  isCollapsed = true;
   @ViewChild('cartElement') cartElement:ElementRef;
   @ViewChild('cartElement') wishlistElement:ElementRef;
 

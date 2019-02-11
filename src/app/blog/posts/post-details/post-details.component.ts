@@ -105,5 +105,11 @@ export class PostDetailsComponent implements OnInit {
     }
   }
 
+  onDeleteComment(id) {
+     this.comments = this.comments.filter((comment) => {
+        return comment.id !== id
+     })
+  }
+
 }
 
