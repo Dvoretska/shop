@@ -22,7 +22,7 @@ export class PostComponent implements OnInit {
   constructor(private modalService: BsModalService, private renderer: Renderer2) { }
 
   ngOnInit() {
-    this.imageUrl = `${environment.API_URL}/${this.post['image']}`;
+    this.imageUrl = this.post['image'];
     this.renderer.setStyle(this.changedBlock.nativeElement, 'top', `${this.getRandomTopPosition()}%`);
   }
 

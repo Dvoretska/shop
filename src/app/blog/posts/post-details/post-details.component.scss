@@ -51,14 +51,19 @@
   border-top: none;
   border-bottom: 10px solid black;
 }
-/deep/ .close span {
+/deep/ .close {
   display: inline-block;
   width: 25px;
   height: 25px;
   position: absolute;
   right: 0;
   top: 0;
-  border: 1px solid black;
+  border: 1px solid black !important;
+}
+/deep/ .close span {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 
 .post-wrapper {

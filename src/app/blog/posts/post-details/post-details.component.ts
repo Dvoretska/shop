@@ -21,7 +21,6 @@ export class PostDetailsComponent implements OnInit {
   id: number;
   post: Post;
   comments: Comment[];
-  url: string = environment.API_URL;
   displayComments: boolean = false;
   commentText: string = '';
   text: string;

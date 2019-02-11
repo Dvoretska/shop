@@ -4,7 +4,6 @@ import { User } from '../user.model';
 import { Role } from '../role.model';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { environment } from 'src/environments/environment';
 import {RegisterModalComponent} from "../../auth/register-modal/register-modal.component";
 import {AuthService} from "../../auth/auth.service";
 

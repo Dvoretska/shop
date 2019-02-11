@@ -4,7 +4,7 @@
       <span aria-hidden="true">&times;</span>
     </button>
     <div class="post-wrapper">
-      <img [src]="url + '/' + post['image']" alt="" class="post-image">
+      <img [src]="post['image']" alt="" class="post-image">
       <div [innerHTML]="post.content" class="post-content"></div>
       <span class="post-owner">{{ postOwner }}</span>
     </div>

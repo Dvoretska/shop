@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { RegisterModalComponent } from '../auth/register-modal/register-modal.component';
 import { LoginModalComponent } from '../auth/login-modal/login-modal.component';
 import { StorageService } from '../storage.service';
-import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
 import {select, Store} from "@ngrx/store";
 import * as fromRoot from "../shop/store/reducers/reducer.factory";
@@ -37,7 +36,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   quantity: number;
   totalNumberOfProducts: number;
   totalNumOfProductsInWishlist: number;
-  defaultImageUrl: string = 'src/assets/default-picture_0_0.png';
+  defaultImageUrl: string = '../../assets/default-picture_0_0.png';
   private subscription: Subscription;
   @ViewChild('cartElement') cartElement:ElementRef;
   @ViewChild('cartElement') wishlistElement:ElementRef;

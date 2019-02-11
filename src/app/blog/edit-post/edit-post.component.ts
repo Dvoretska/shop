@@ -57,7 +57,7 @@ export class EditPostComponent implements OnInit {
           this.post = res.post;
           this.title = this.post.title;
           this.text = this.post.content;
-          this.imageURL = `${environment.API_URL}/${this.post['image']}`;
+          this.imageURL = this.post['image'];
         },
         (err) => {
           console.log(err)

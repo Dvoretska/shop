@@ -8,7 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class AdminProductComponent implements OnInit {
   @Input() product: any;
-  imageUrl: string = 'src/assets/no-img.jpg';
+  imageUrl: string = '../../../../assets/no-img.jpg';
   constructor(private router: Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
