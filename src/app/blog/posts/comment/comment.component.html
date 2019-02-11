@@ -2,7 +2,7 @@
   <div class="comment-heading">
     <span class="heading-item" *ngIf="comment && comment.email">{{ comment.email.substring(0, comment.email.lastIndexOf('@')) }}</span>
     <span class="heading-item date-item" *ngIf="comment">{{ formattedDate(comment.created) }}</span>
-    <img src="src/assets/cancel.svg"
+    <img src="/assets/cancel.svg"
          alt="close"
          class="close-icon"
          *ngIf="isUpdateCommentAllowed(comment.email)"

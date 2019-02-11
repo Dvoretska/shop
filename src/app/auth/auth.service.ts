@@ -44,7 +44,7 @@ export class AuthService {
 
   getUserImage() {
     const user = JSON.parse(localStorage.getItem('user'));
-    let imageUrl = 'src/assets/default-picture_0_0.png';
+    let imageUrl = '/assets/default-picture_0_0.png';
     if(user && user.image) {
       imageUrl = user.image;
     }

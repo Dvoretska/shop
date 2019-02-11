@@ -57,7 +57,7 @@
          (dragleave)="isHighlight = false"
           [ngClass]="{highlight: isHighlight}">
           <span>Click or drop your files here</span>
-          <img src="../../../../assets/cloud-download-interface-symbol.svg" alt="" class="icon-cloud-download">
+          <img src="/assets/cloud-download-interface-symbol.svg" alt="" class="icon-cloud-download">
           <span class="warning" *ngIf="warning">{{warning}}</span>
       </div>
       <input name="file" type="file" class="inputfile" multiple="multiple" (change)="onUpload($event)">
