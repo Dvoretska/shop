@@ -46,7 +46,7 @@
   border-top: none;
   border-bottom: 10px solid black;
 }
-/deep/ .close {
+/deep/ .post-details-modal .close {
   display: inline-block;
   width: 25px;
   height: 25px;
@@ -55,7 +55,7 @@
   top: 0;
   border: 1px solid black !important;
 }
-/deep/ .close span {
+/deep/ .post-details-modal .close span {
   display: inline-block;
   width: 100%;
   height: 100%;
