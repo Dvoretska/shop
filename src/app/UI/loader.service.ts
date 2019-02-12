@@ -13,7 +13,7 @@ export class LoaderService {
 
   constructor() { }
 
-  show() {
+  reveal() {
     this.loaderSubject.next(<LoaderState>{ show: true });
   }
 
