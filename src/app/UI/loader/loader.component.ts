@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { LoaderService } from '../loader.service';
-import { LoaderState } from '../loader';
+import { LoaderService } from './loader.service';
+import { LoaderState } from './loader';
 
 @Component({
   selector: 'app-loader',
@@ -11,7 +11,7 @@ import { LoaderState } from '../loader';
 })
 export class LoaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  show;
+  show = false;
 
   private subscription: Subscription;
 

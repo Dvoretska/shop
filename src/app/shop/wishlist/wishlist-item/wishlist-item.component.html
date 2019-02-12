@@ -13,22 +13,24 @@
         <div class="price" [ngStyle]="{textDecoration : wishlistItem.discount ? 'line-through' : 'none', color : wishlistItem.discount ? 'grey' : 'black'}">${{wishlistItem.price}}</div>
         <div class="discount" *ngIf="wishlistItem.discount">${{wishlistItem.discount}}</div>
       </div>
-      <div class="additional-block details-block" #detailsBlock (click)="openProductDetails()">
-        <img src="/assets/shop/eye.svg" alt="" class="icon">
-        <div class="text add-text">Watch Details</div>
-      </div>
-      <div class="additional-block" #addBlock (click)="addProductToCart()">
-        <ng-container *ngIf="!addToCartWasClicked">
-          <img src="/assets/shop/bag.svg" alt="" class="icon">
-          <div class="text">Add to Cart</div>
-        </ng-container>
-        <ng-select *ngIf="addToCartWasClicked" [items]="sizes"
-                   [(ngModel)]="selectedSize" placeholder="Choose a size" class="custom">
-        </ng-select>
-      </div>
-      <div class="additional-block delete-block" #deleteBlock (click)="deleteProductFromWishlist()">
-        <img src="/assets/waste-bin.svg" alt="" class="icon">
-        <div class="text delete-text">Delete</div>
+      <div class="actions-block">
+        <div class="additional-block details-block" #detailsBlock (click)="openProductDetails()">
+          <img src="/assets/shop/eye.svg" alt="" class="icon">
+          <div class="text add-text">Watch Details</div>
+        </div>
+        <div class="additional-block" #addBlock (click)="addProductToCart()">
+          <ng-container *ngIf="!addToCartWasClicked">
+            <img src="/assets/shop/bag.svg" alt="" class="icon">
+            <div class="text">Add to Cart</div>
+          </ng-container>
+          <ng-select *ngIf="addToCartWasClicked" [items]="sizes"
+                     [(ngModel)]="selectedSize" placeholder="Choose a size" class="custom">
+          </ng-select>
+        </div>
+        <div class="additional-block delete-block" #deleteBlock (click)="deleteProductFromWishlist()">
+          <img src="/assets/waste-bin.svg" alt="" class="icon">
+          <div class="text delete-text">Delete</div>
+        </div>
       </div>
     </div>
   </div>

@@ -9,14 +9,14 @@
 }
 .bottom-left-corner {
   background-image: url('/assets/land-bor-b-l.png');
-  bottom: -4px;
+  bottom: 0;
   left: 0;
 }
 .bottom-right-corner {
   background-image: url('/assets/land-bor-b-r.png');
   width: 188px;
   height: 183px;
-  bottom: -1px;
+  bottom: -7px;
   right: 0;
 }
 .top-left-corner {
@@ -28,4 +28,14 @@
   background-image: url('/assets/land-bor-t-r.png');
   top: 0;
   right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .corner {
+    width:110px;
+    height:105px;
+  }
+  .bottom-right-corner {
+    right: -2px;
+  }
 }

@@ -15,7 +15,9 @@ export class HoverDirective  {
 
   @HostListener('mouseleave') onMouseleave() {
     for(let i = 0; i < this.el.length; i++) {
-      this.renderer.removeClass(this.el[i], this.activeClass);
+      if(window.innerWidth > 768) {
+        this.renderer.removeClass(this.el[i], this.activeClass);
+      }
     }
   }
 

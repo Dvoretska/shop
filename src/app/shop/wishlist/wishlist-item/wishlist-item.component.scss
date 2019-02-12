@@ -54,43 +54,116 @@
             margin-left: 5px;
           }
         }
-        .additional-block {
+        .actions-block {
           display: flex;
-          align-items: center;
-          cursor: pointer;
-          opacity: 0;
-          transition: opacity 0.5s ease;
-          position: relative;
-          .icon {
-            width: 20px;
-            height: 20px;
+          flex-direction: column;
+          height: 100%;
+          align-items: flex-end;
+          justify-content: space-between;
+          margin-top:25px;
+          .additional-block {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            position: relative;
+            .icon {
+              width: 20px;
+              height: 20px;
+            }
+            .text {
+              font-size: 14px;
+              line-height: 14px;
+              margin-left: 3px;
+              margin-top: 4px;
+            }
           }
-          .text {
-            font-size: 14px;
-            line-height: 14px;
-            margin-left: 3px;
-            margin-top: 4px;
+          .ng-select.custom {
+            width: 140px;
+          }
+          .ng-select.custom .ng-select-container  {
+            width: 140px;
+          }
+          /deep/ .ng-select .ng-select-container {
+            height: 33px;
+            min-height:27px;
+          }
+          .delete-block {
+            margin-left: 15px;
+            .delete-text {
+              color: #e23f50;
+            }
+          }
+          .active {
+            opacity: 1;
+            transition: opacity 0.7s ease-out;
           }
         }
-        .ng-select.custom {
-          width: 140px;
-        }
-        .ng-select.custom .ng-select-container  {
-          width: 140px;
-        }
-        /deep/ .ng-select .ng-select-container {
-          height: 33px;
-          min-height:27px;
-        }
-        .delete-block {
-          margin-left: 15px;
-          .delete-text {
-            color: #e23f50;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wishlist-item-container {
+    .content-box {
+      .block {
+        &:nth-child(2) {
+          .actions-block {
+            .additional-block {
+              opacity: 1;
+            }
           }
         }
-        .active {
-          opacity: 1;
-          transition: opacity 0.7s ease-out;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .wishlist-item-container {
+    .content-box {
+      .block {
+        &:nth-child(2) {
+          .actions-block {
+           .additional-block {
+            .text {
+              display: none;
+            }
+          }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .wishlist-item-container {
+    .content-box {
+      flex-direction: column;
+      justify-content: flex-start;
+      .block {
+        &:nth-child(1) {
+          width: 100%;
+        }
+        &:nth-child(2) {
+          margin-left: 20px;
+          height: 100%;
+          width: 100%;
+          align-items: flex-start;
+          justify-content: space-between;
+          .price-wrapper {
+            margin-top: 5px;
+          }
+          .actions-block {
+            flex-direction: row;
+            margin-top: 10px;
+            .details-block {
+              margin-right: 15px;
+            }
+          }
         }
       }
     }

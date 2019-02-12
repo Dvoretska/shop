@@ -9,7 +9,7 @@ import { reducers } from './shop/store/reducers/reducer.factory';
 import { AppRoutingModule } from './app-routing.module';
 import { EffectsModule } from "@ngrx/effects";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoaderInterceptorService } from './UI/loader-interceptor.service';
+import { LoaderInterceptorService } from './UI/loader/loader-interceptor.service';
 
 import { CartEffects } from "./shop/store/effects/cart.effects";
 import { ErrorsEffects } from "./shop/store/effects/errors.effects";
