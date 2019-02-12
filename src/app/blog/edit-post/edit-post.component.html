@@ -27,9 +27,16 @@
       <div *ngIf="errorImgMessage" class="validate-error">{{ errorImgMessage }}</div>
     </div>
   </div>
-  <button type="submit" class="my-button button-update" (click)="onSubmit()"  [disabled]="isDisabled(appForm)"><span>Save post</span></button>
+  <button type="submit" class="my-button button-update"
+          (click)="onSubmit()"
+          [disabled]="isDisabled(appForm)">
+    <app-loader></app-loader><span>Save post</span>
+  </button>
   <span *ngIf="editMode">
-    <button type="button" class="my-button button-delete" (click)="openModal(modalDialog)"><span>Delete post</span></button>
+    <button type="button" class="my-button button-delete"
+            (click)="openModal(modalDialog)">
+      <span>Delete post</span>
+    </button>
     <ng-template #modalDialog>
       <div class="modal-body text-center confirm-body">
         <p>Do you want to delete the post?</p>

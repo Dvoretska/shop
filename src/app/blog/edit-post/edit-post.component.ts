@@ -3,7 +3,6 @@ import { BlogService } from '../blog.service';
 import { Post } from "../post.model";
 import { Comment } from "../comment.model";
 import { ActivatedRoute, Router, Params } from "@angular/router";
-import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';

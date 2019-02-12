@@ -9,6 +9,7 @@ import { reducers } from './shop/store/reducers/reducer.factory';
 import { AppRoutingModule } from './app-routing.module';
 import { EffectsModule } from "@ngrx/effects";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoaderInterceptorService } from './UI/loader-interceptor.service';
 
 import { CartEffects } from "./shop/store/effects/cart.effects";
 import { ErrorsEffects } from "./shop/store/effects/errors.effects";
@@ -96,6 +97,7 @@ import { ChangeQuantityComponent } from './admin/products/change-quantity/change
 import { AddQuantityComponent } from './admin/products/add-quantity/add-quantity.component';
 import { SizesActionsComponent } from './admin/sizes/sizes-actions/sizes-actions.component';
 import { AddSizeComponent } from './admin/sizes/add-size/add-size.component';
+import { LoaderComponent } from './UI/loader/loader.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: false
@@ -158,7 +160,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ChangeQuantityComponent,
     AddQuantityComponent,
     SizesActionsComponent,
-    AddSizeComponent
+    AddSizeComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -190,6 +193,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
+    multi: true
+    },
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoaderInterceptorService,
     multi: true
     },
     {

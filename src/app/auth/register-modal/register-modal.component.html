@@ -60,7 +60,11 @@
         <option *ngFor="let role of roles">{{ role.role }}</option>
       </select>
     </div>
-    <button type="submit" [disabled]="isDisabled()" class="btn btn-primary" *ngIf="!createUserMode">Sign up</button>
-    <button type="submit" [disabled]="isDisabled()" class="btn btn-primary" *ngIf="createUserMode">Create</button>
+    <button type="submit" [disabled]="isDisabled()" class="btn btn-primary" *ngIf="!createUserMode">
+      <app-loader></app-loader>Sign up
+    </button>
+    <button type="submit" [disabled]="isDisabled()" class="btn btn-primary" *ngIf="createUserMode">
+      <app-loader></app-loader>Create
+    </button>
   </div>
 </form>

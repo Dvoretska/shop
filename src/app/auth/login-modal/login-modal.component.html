@@ -38,7 +38,9 @@
         [ngClass]="{'input-error': checkErrors()}">
     </div>
     <div *ngIf="checkErrors()" class="validate-error">{{ checkErrors() }}</div>
-    <button type="submit" [disabled]="!appForm.valid" class="btn btn-primary">Login</button>
+    <button type="submit" [disabled]="!appForm.valid" class="btn btn-primary">
+      <app-loader></app-loader>Login
+    </button>
     <div class="separate">OR</div>
     <a (click)="goToGoogleAuth()" class="social-auth-link">
       <img src="/assets/google.svg" alt="" class="social-auth-icon">
