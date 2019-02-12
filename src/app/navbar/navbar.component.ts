@@ -64,7 +64,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   isAuthorized() {
-    return this.authService.isAuthenticated();
+    return this.authService.isAuthenticated() && this.authService.getUser();
   }
 
   currentRole() {

@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AuthService } from '../auth.service';
 import { StorageService } from '../../storage.service';
-
+import {environment} from '../../../environments/environment'
 
 @Component({
   selector: 'app-login-modal',
@@ -17,6 +17,10 @@ export class LoginModalComponent implements OnInit {
               private storageService: StorageService) { }
 
   ngOnInit() {
+  }
+
+  goToGoogleAuth() {
+    window.location.href=`${environment.API_URL}/auth/google`
   }
 
   onLogin(form: NgForm) {

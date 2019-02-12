@@ -28,10 +28,10 @@ export class ErrorsEffects {
              this.toastr.error(`Something went wrong. Try again later.`);
           } else if(error.status == 0) {
             this.toastr.error(`Something went wrong. Try again later.`);
-          } else if(error.status == 404 || !error.error.message) {
+          } else if(error.status == 404) {
              this.toastr.error(`${error.status} - Not found.`);
           } else if(error.error.message) {
-             this.toastr.error(`${error.error.message}`);
+             this.toastr.error(`${error.status} - ${error.error.message}`);
           } else {
             this.toastr.error(`${error.status} - ${error.statusText}`);
           }
