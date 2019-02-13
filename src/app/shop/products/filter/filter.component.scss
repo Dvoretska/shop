@@ -48,6 +48,9 @@
 
 @media screen and (max-width:450px){
   .filters {
+    width: 100%;
+    margin-left: 0;
+    padding: 0 10px;
     .container-search {
       margin-top: 0;
     }
