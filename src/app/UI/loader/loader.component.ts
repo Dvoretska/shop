@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { LoaderService } from './loader.service';
@@ -9,7 +9,7 @@ import { LoaderState } from './loader';
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.scss']
 })
-export class LoaderComponent implements OnInit, OnDestroy, AfterViewInit {
+export class LoaderComponent implements OnInit, OnDestroy {
 
   show = false;
 
@@ -18,11 +18,7 @@ export class LoaderComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private loaderService: LoaderService) { }
 
   ngOnInit() {
-
-  }
-
-  ngAfterViewInit() {
-     this.subscription = this.loaderService.loaderState
+  this.subscription = this.loaderService.loaderState
     .subscribe((state: LoaderState) => {
       setTimeout(() => {
         this.show = state.show;

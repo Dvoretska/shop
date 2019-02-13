@@ -1,5 +1,7 @@
 .product-details-wrapper {
   width: calc(100% - 10px);
+  min-height: 50vh;
+  position: relative;
   table {
     display: table;
     border-collapse: collapse;

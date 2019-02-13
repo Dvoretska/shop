@@ -7,11 +7,11 @@ import { LoaderState } from './loader';
   providedIn: 'root'
 })
 export class LoaderService {
-  show;
   private loaderSubject = new Subject<LoaderState>();
   loaderState = this.loaderSubject.asObservable();
 
-  constructor() { }
+  constructor() {
+  }
 
   reveal() {
     this.loaderSubject.next(<LoaderState>{ show: true });

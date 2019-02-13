@@ -27,8 +27,10 @@ export class ProfileComponent implements OnInit {
              private store: Store<fromRoot.AppState>) { }
 
   ngOnInit() {
-    this.imageUrl = this.authService.getUserImage();
-    this.username = this.authService.getUsername();
+    this.authService.tokenVerify().subscribe((res) => {
+      this.imageUrl = res['user']['image'];
+      this.username = res['user']['email'].substring(0, res['user']['email'].lastIndexOf('@'));
+    });
   }
 
   imageUrlHandler($event) {

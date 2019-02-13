@@ -1,7 +1,7 @@
 .corner {
   position: absolute;
-  width: 170px;
-  height: 162px;
+  width:110px;
+  height:105px;
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 10;
@@ -14,9 +14,7 @@
 }
 .bottom-right-corner {
   background-image: url('/assets/land-bor-b-r.png');
-  width: 188px;
-  height: 183px;
-  bottom: -7px;
+  bottom: -2px;
   right: 0;
 }
 .top-left-corner {
@@ -30,12 +28,3 @@
   right: 0;
 }
 
-@media screen and (max-width: 768px) {
-  .corner {
-    width:110px;
-    height:105px;
-  }
-  .bottom-right-corner {
-    right: -2px;
-  }
-}

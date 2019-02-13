@@ -16,6 +16,7 @@ export class AdminProductsComponent implements OnInit,OnDestroy {
   products: any[];
   order:string = 'desc';
   totalAmountStockProducts: number;
+  loading:boolean;
   constructor(private store: Store<fromRoot.AppState>,
               private router: Router, private route:ActivatedRoute) {
   }
@@ -26,6 +27,7 @@ export class AdminProductsComponent implements OnInit,OnDestroy {
     this.store.pipe(select(fromRoot.getProducts)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
+      this.loading = state.fetchProductsFromStockLoading;
       this.products = state.productsFromStock;
       this.totalAmountStockProducts = state.totalAmount;
     });

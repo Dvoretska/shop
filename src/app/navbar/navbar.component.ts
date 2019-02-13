@@ -46,7 +46,10 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
               private store: Store<fromRoot.AppState>) {}
 
   ngOnInit() {
-    this.getCurrentUser();
+     this.authService.tokenVerify().subscribe((res) => {
+      this.imageUrl = res['user']['image'];
+      this.username = res['user']['email'].substring(0, res['user']['email'].lastIndexOf('@'));
+    });
     this.subscription = this.storageService.watchStorage().subscribe(() => {
         this.getCurrentUser();
     });
@@ -82,7 +85,6 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getCurrentUser() {
     this.imageUrl = this.authService.getUserImage();
-    this.username = this.authService.getUsername();
   }
 
   openModalRegister() {

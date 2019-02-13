@@ -12,6 +12,7 @@ import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 })
 export class AdminProductDetailsComponent implements OnInit, OnDestroy {
   product: any;
+  loading: boolean;
   constructor(private store: Store<fromRoot.AppState>, private route:ActivatedRoute) { }
 
   ngOnInit() {
@@ -22,6 +23,7 @@ export class AdminProductDetailsComponent implements OnInit, OnDestroy {
     this.store.pipe(select(fromRoot.getProducts)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
+      this.loading = state.productDetailsLoading;
       this.product = state.product;
     });
   }
