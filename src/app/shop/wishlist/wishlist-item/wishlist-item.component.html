@@ -23,14 +23,21 @@
             <img src="/assets/shop/bag.svg" alt="" class="icon">
             <div class="text">Add to Cart</div>
           </ng-container>
-          <ng-select *ngIf="addToCartWasClicked" [items]="sizes"
-                     [(ngModel)]="selectedSize" placeholder="Choose a size" class="custom">
-          </ng-select>
+          <!--<ng-select *ngIf="addToCartWasClicked" [items]="sizes"-->
+                     <!--[(ngModel)]="selectedSize" placeholder="Choose a size" class="custom">-->
+          <!--</ng-select>-->
         </div>
-        <div class="additional-block delete-block" #deleteBlock (click)="deleteProductFromWishlist()">
+        <div class="additional-block delete-block" #deleteBlock (click)="openModal(modalDialog)">
           <img src="/assets/waste-bin.svg" alt="" class="icon">
           <div class="text delete-text">Delete</div>
         </div>
+        <ng-template #modalDialog>
+          <div class="modal-body text-center confirm-body">
+            <p>Do you want to delete this product from wishlist?</p>
+            <button type="button" class="btn btn-primary cta" (click)="confirm()">Yes</button>
+            <button type="button" class="btn btn-danger cta" (click)="decline()">No</button>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

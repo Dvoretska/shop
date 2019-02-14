@@ -7,6 +7,7 @@ export class CartState {
     public isAddedToCart: boolean,
     public getCartLoading: boolean,
     public cart: any[],
+    public message: string,
     public totalAmount: number,
     public totalNumOfProductsInCart: number,
     public productQty: number,
@@ -21,6 +22,7 @@ export const initialState: CartState = {
   isAddedToCart: null,
   getCartLoading: false,
   cart: [],
+  message: '',
   totalAmount: null,
   totalNumOfProductsInCart: 0,
   productQty: null,
@@ -34,6 +36,7 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
     case cartActions.ADD_PRODUCT_TO_CART:
       return {
         ...state,
+        message: '',
         addToCartLoading: true,
         isAddedToCart: null
       };
@@ -52,6 +55,12 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
         totalAmount: action.payload.totalAmount,
         productQty: action.payload.quantity,
         totalNumOfProductsInCart: action.payload.totalNumberOfProducts
+      };
+     case cartActions.OUT_OF_STOCK_CART:
+      return {
+        ...state,
+        addToCartLoading: false,
+        message: action.payload.message
       };
     case cartActions.ADD_PRODUCT_TO_CART_FAILURE:
       return {
@@ -113,7 +122,7 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
     case cartActions.DECREASE_QUANTITY_OF_PRODUCT_IN_CART_SUCCESS:
       let changedCart = [...state.cart];
       let newCart = changedCart.map(el => {
-        if(el.product_id == action.payload.product.product_id.id && el.size == action.payload.product.size)
+        if(el.product_id == +action.payload.product.product_id && el.size_id == +action.payload.product.size_id)
           return Object.assign({}, el, {amount:action.payload.amount}, {quantity: action.payload.quantity});
         return el;
       });

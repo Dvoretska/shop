@@ -10,6 +10,7 @@ export class ProductsState {
     public totalAmountStockProducts: number,
     public fetchProductsFromStockLoading: boolean,
     public sizes: string[],
+    public availableSizes: any[],
     public getSizesLoading: boolean,
     public loading: boolean,
     public productWasAdded: boolean,
@@ -35,6 +36,7 @@ export const initialState: ProductsState = {
   sizesQuantity: [],
   totalAmountStockProducts: null,
   sizes: [],
+  availableSizes: [],
   getSizesLoading: false,
   loading: false,
   fetchProductsFromStockLoading: false,
@@ -168,6 +170,12 @@ export function productsReducer(state: ProductsState =initialState, action: prod
         ...state,
         getSizesLoading: false,
         sizes: [...action.payload.sizes]
+      };
+
+      case productsActions.GET_AVAILABLE_SIZES_SUCCESS:
+      return {
+        ...state,
+        availableSizes: [...action.payload.availableSizes]
       };
 
     case productsActions.FETCH_PRODUCTS_BY_SEARCH:

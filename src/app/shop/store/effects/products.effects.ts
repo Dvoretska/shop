@@ -154,6 +154,23 @@ export class ProductsEffects {
   );
 
   @Effect()
+  getAvailableSizes = this.actions$
+  .pipe(
+    ofType(ProductsActions.GET_AVAILABLE_SIZES),
+    map((action: ProductsActions.GetAvailableSizes) => action.payload),
+    switchMap((payload) =>
+      this.http.get(`${environment.API_URL}/sizes/available/${payload}`).pipe(
+        map((res)=>{
+          return new ProductsActions.GetAvailableSizesSuccess({'availableSizes': res['availableSizes']});
+        }),
+        catchError(error => {
+          return from([new ErrorsActions.LoadError(error)]);
+        })
+      )
+    )
+  );
+
+  @Effect()
   addQuantityToStock = this.actions$
   .pipe(
     ofType(ProductsActions.ADD_QUANTITY_TO_STOCK),

@@ -11,14 +11,15 @@
   </div>
   <ng-container *ngIf="cart.length">
     <header class="cart-header">
-      <div class="amount">{{totalNumberOfProducts}} PRODUCTS</div>
+      <div class="amount">{{totalNumberOfProducts}} PRODUCT(S)</div>
       <div class="text qty">Quantity</div>
       <div class="text price">Price</div>
     </header>
     <app-cart-item *ngFor="let cartItem of cart"
                    [cartItem]="cartItem"
                    [totalNumberOfProducts]="totalNumberOfProducts"
-                   [isAddedToCart]="isAddedToCart"></app-cart-item>
+                   [isAddedToCart]="isAddedToCart"
+                   [message]="message"></app-cart-item>
     <div class="total-wrapper">
       <h5>Total amount:</h5>
       <strong>${{totalAmount}}</strong>

@@ -21,6 +21,7 @@ export class CartListComponent implements OnInit, OnDestroy {
   getCartLoading: boolean;
   decreaseCartLoading: boolean;
   deleteFromCartLoading: boolean;
+  message: string;
 
   constructor(private store: Store<fromRoot.AppState>,
               private toastr: ToastrService,
@@ -33,6 +34,7 @@ export class CartListComponent implements OnInit, OnDestroy {
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.cart = state.cart;
+      this.message = state.message;
       this.totalAmount = state.totalAmount;
       this.totalNumberOfProducts = state.totalNumOfProductsInCart;
       this.addToCartLoading = state.addToCartLoading;

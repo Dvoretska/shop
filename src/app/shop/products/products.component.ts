@@ -17,7 +17,7 @@ import {AuthService} from '../../auth/auth.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
   products: any[];
-  limit: number = 3;
+  limit: number = 6;
   skipProducts: number;
   skipSearchedProducts: number;
   totalAmount: number;

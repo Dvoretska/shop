@@ -22,13 +22,19 @@ export class CartEffects {
       exhaustMap((payload) =>
         this.http.post(`${environment.API_URL}/cart`, payload).pipe(
           map((res)=>{
-            return new CartActions.AddProductToCartSuccess({
-              quantity: res['productQty'].quantity,
-              amount: res['amount'],
-              product: res['product'],
-              totalAmount: res['totalAmount'],
-              totalNumberOfProducts: res['totalNumberOfProducts']
-            });
+            if(res['product']) {
+              return new CartActions.AddProductToCartSuccess({
+                quantity: res['productQty'].quantity,
+                amount: res['amount'],
+                product: res['product'],
+                totalAmount: res['totalAmount'],
+                totalNumberOfProducts: res['totalNumberOfProducts']
+              });
+            } else {
+              return new CartActions.OutOfStockCart({
+                message: res['message']
+              });
+            }
           }),
           catchError(error => {
             return from([new ErrorsActions.LoadError(error), new CartActions.AddProductToCartFailure()]);
@@ -93,7 +99,7 @@ export class CartEffects {
       exhaustMap((payload)=> {
         return this.http.post(`${environment.API_URL}/cart/decrease`, {
           product_id: payload.product_id,
-          size: payload.size
+          size_id: payload.size_id
         }).pipe(
           map((res) => {
             return new CartActions.DecreaseQuantityOfProductInCartSuccess({

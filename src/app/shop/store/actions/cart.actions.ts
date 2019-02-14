@@ -4,6 +4,8 @@ export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
 export const ADD_PRODUCT_TO_CART_SUCCESS = 'ADD_PRODUCT_TO_CART_SUCCESS';
 export const ADD_PRODUCT_TO_CART_FAILURE = 'ADD_PRODUCT_TO_CART_FAILURE';
 
+export const OUT_OF_STOCK_CART = 'OUT_OF_STOCK_CART';
+
 export const REMOVE_IS_ADDED_TO_CART = 'REMOVE_IS_ADDED_TO_CART';
 
 export const FETCH_CART = 'FETCH_CART';
@@ -27,19 +29,31 @@ export const GET_TOTAL_NUMBER_OF_PRODUCTS_SUCCESS = 'GET_TOTAL_NUMBER_OF_PRODUCT
 export class AddProductToCart implements Action {
   readonly type = ADD_PRODUCT_TO_CART;
 
-  constructor(public payload: {product_id: number, size: string, quantity: number }) {}
+  constructor(public payload: {product_id: number, size_id: number, quantity: number }) {}
 }
 
 export class AddProductToCartSuccess implements Action {
   readonly type = ADD_PRODUCT_TO_CART_SUCCESS;
 
-  constructor(public payload: {quantity: number, amount: number, product: any, totalAmount: number, totalNumberOfProducts: number}) {}
+  constructor(public payload: {
+    quantity: number,
+    amount: number,
+    product: any,
+    totalAmount: number,
+    totalNumberOfProducts: number
+  }) {}
 }
 
 export class AddProductToCartFailure implements Action {
   readonly type = ADD_PRODUCT_TO_CART_FAILURE;
 
   constructor() {}
+}
+
+export class OutOfStockCart implements Action {
+  readonly type = OUT_OF_STOCK_CART;
+
+  constructor(public payload: {message: string}) {}
 }
 
 export class RemoveIsAddedToCart implements Action {
@@ -93,7 +107,7 @@ export class DeleteProductFromCartFailure implements Action {
 export class DecreaseQuantityOfProductInCart implements Action {
   readonly type = DECREASE_QUANTITY_OF_PRODUCT_IN_CART;
 
-  constructor(public payload: {product_id: number, size: string}) {}
+  constructor(public payload: {product_id: number, size_id: number}) {}
 }
 
 export class DecreaseQuantityOfProductInCartSuccess implements Action {
@@ -138,4 +152,5 @@ export type cartActions =
             DecreaseQuantityOfProductInCartSuccess |
             DecreaseQuantityOfProductInCartFailure |
             GetTotalNumberOfProducts |
-            GetTotalNumberOfProductsSuccess;
+            GetTotalNumberOfProductsSuccess |
+            OutOfStockCart;

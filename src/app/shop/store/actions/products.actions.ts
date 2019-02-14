@@ -31,6 +31,9 @@ export const UPDATE_SIZES_QUANTITY_SUCCESS = 'UPDATE_SIZES_QUANTITY_SUCCESS';
 export const GET_SIZES = 'GET_SIZES';
 export const GET_SIZES_SUCCESS = 'GET_SIZES_SUCCESS';
 
+export const GET_AVAILABLE_SIZES = 'GET_AVAILABLE_SIZES';
+export const GET_AVAILABLE_SIZES_SUCCESS = 'GET_AVAILABLE_SIZES_SUCCESS';
+
 export const ADD_QUANTITY_TO_STOCK = 'ADD_QUANTITY_TO_STOCK';
 export const ADD_QUANTITY_TO_STOCK_SUCCESS = 'ADD_QUANTITY_TO_STOCK_SUCCESS';
 
@@ -195,6 +198,20 @@ export class GetSizesSuccess implements Action {
 
 // _____________________________________________________
 
+export class GetAvailableSizes implements Action {
+  readonly type = GET_AVAILABLE_SIZES;
+
+  constructor(public payload: number) {}
+}
+
+export class GetAvailableSizesSuccess implements Action {
+  readonly type = GET_AVAILABLE_SIZES_SUCCESS;
+
+  constructor(public payload: {availableSizes: any[]}) {}
+}
+
+// _____________________________________________________
+
 export class AddQuantityToStock implements Action {
   readonly type = ADD_QUANTITY_TO_STOCK;
 
@@ -335,4 +352,6 @@ export type productsActions = AddProduct |
             DeleteSizes |
             DeleteSizesSuccess |
             AddSize |
-            AddSizeSuccess;
+            AddSizeSuccess |
+            GetAvailableSizes |
+            GetAvailableSizesSuccess;

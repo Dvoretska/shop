@@ -24,7 +24,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
   product: Product;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[] = [];
-  sizes: string[];
+  availableSizes: any[];
   selectedSize: string;
   modalRef: BsModalRef;
   productDetailsLoading: boolean;
@@ -34,8 +34,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
   totalNumberOfProducts: number;
   productQuantity;
   wishlist: any[] = [];
+  message: string;
   productIsInWishlist: boolean = false;
-  defaultImageUrl: string = 'src/assets/no-img.jpg';
+  defaultImageUrl: string = '/assets/no-img.jpg';
 
   constructor(private toastr: ToastrService,
               private router: Router,
@@ -77,15 +78,15 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
     this.route.params
       .subscribe((params) => {
         this.store.dispatch(new productsActions.FetchProductDetails(+params['product_id']));
+        this.store.dispatch(new productsActions.GetAvailableSizes(+params['product_id']));
       });
     this.store.pipe(select(fromRoot.getProducts)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.products = state.products;
       this.product = state.product;
-      this.sizes = state.sizes;
       this.productDetailsLoading = state.productDetailsLoading;
-      this.sizes = state.sizes;
+      this.availableSizes = state.availableSizes;
       if(this.product && this.product['images']) {
         this.galleryImages = [];
         for(let image of this.product['images']) {
@@ -108,11 +109,15 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.isAddedToCart = state.isAddedToCart;
+      this.message = state.message;
+      if(this.message) {
+         this.toastr.info(`${this.message}`);
+      }
       this.totalNumberOfProducts = state.totalNumOfProductsInCart;
       this.addToCartLoading = state.addToCartLoading;
       this.productQuantity = state.productQty;
       if(this.isAddedToCart && this.product) {
-        const initialState = {currentProduct: this.product, size: this.selectedSize, quantity: this.productQuantity};
+        const initialState = {currentProduct: this.product, size: this.selectedSize['label'], quantity: this.productQuantity};
         this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
       }
     });
@@ -133,7 +138,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
     if(this.authService.isAuthenticated()) {
       if(this.selectedSize) {
         this.store.dispatch(new cartActions.AddProductToCart({
-          size: this.selectedSize, quantity: 1, product_id: this.product['id']
+          size_id: this.selectedSize['value'], quantity: 1, product_id: this.product['id']
         }));
       } else {
         this.toastr.error('Please Choose a Size!');

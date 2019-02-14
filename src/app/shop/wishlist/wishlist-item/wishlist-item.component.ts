@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import {environment} from "../../../../environments/environment";
+import { Component, OnInit, Input, OnDestroy, TemplateRef } from '@angular/core';
 import {select, Store} from "@ngrx/store";
 import * as fromRoot from "../../store/reducers/reducer.factory";
 import * as wishlistActions from "../../store/actions/wishlist.actions";
@@ -55,10 +54,23 @@ export class WishlistItemComponent implements OnInit, OnDestroy {
     this.addToCartWasClicked = true;
     this.selectedProduct = this.wishlistItem;
     if(this.selectedSize) {
-      this.store.dispatch(new cartActions.AddProductToCart({
-        size: this.selectedSize, quantity: 1, product_id: this.wishlistItem['product_id']
-      }));
+      // this.store.dispatch(new cartActions.AddProductToCart({
+      //   size: this.selectedSize, quantity: 1, product_id: this.wishlistItem['product_id']
+      // }));
     }
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  confirm(): void {
+    this.deleteProductFromWishlist();
+    this.modalRef.hide();
+  }
+
+  decline(): void {
+    this.modalRef.hide();
   }
 
   openProductDetails() {
