@@ -15,8 +15,9 @@ export class WishlistComponent implements OnInit, OnDestroy {
   totalNumOfProductsInWishlist: number;
   getWishlistLoading: boolean;
   deleteFromWishlistLoading: boolean;
-  sizes: string[];
+  availableSizes: any[];
   addToCartLoading: boolean;
+  message: string;
 
   constructor(private store: Store<fromRoot.AppState>) { }
 
@@ -33,11 +34,12 @@ export class WishlistComponent implements OnInit, OnDestroy {
     this.store.pipe(select(fromRoot.getProducts)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
-      this.sizes = state.sizes;
+      this.availableSizes = state.availableSizes;
     });
     this.store.pipe(select(fromRoot.getCart)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {
+      this.message = state.message;
       this.addToCartLoading = state.addToCartLoading;
     })
 

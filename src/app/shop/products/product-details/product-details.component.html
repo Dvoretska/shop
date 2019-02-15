@@ -16,9 +16,9 @@
     <div class="material"><span class="title">Material:</span> {{product.material}}</div>
     <div class="material">
       <span class="title size">Sizes:</span>
-      <ng-select [items]="availableSizes"
+      <ng-select [items]="availableSizes" (open)="fetchAvailableSizes($event)"
          [(ngModel)]="selectedSize" name="size" placeholder="Choose a size" class="custom">
-    </ng-select>
+      </ng-select>
     </div>
   </div>
   <div class="sidebar-wrapper">

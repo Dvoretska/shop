@@ -1,31 +1,37 @@
-import { Component, OnInit, Input, OnDestroy, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, TemplateRef, OnChanges, SimpleChanges } from '@angular/core';
 import {select, Store} from "@ngrx/store";
 import * as fromRoot from "../../store/reducers/reducer.factory";
 import * as wishlistActions from "../../store/actions/wishlist.actions";
+import * as productsActions from "../../store/actions/products.actions";
 import {Router} from "@angular/router";
 import * as cartActions from "../../store/actions/cart.actions";
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import {CartModalComponent} from "../../cart/cart-modal/cart-modal.component";
 import {BsModalService} from "ngx-bootstrap/modal";
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-wishlist-item',
   templateUrl: './wishlist-item.component.html',
   styleUrls: ['./wishlist-item.component.scss']
 })
-export class WishlistItemComponent implements OnInit, OnDestroy {
+export class WishlistItemComponent implements OnInit, OnDestroy, OnChanges {
   @Input() wishlistItem;
-  @Input() sizes: string[];
   @Input() addToCartWasClicked: boolean;
+  @Input() availableSizes: any[];
+  @Input() message: string;
   isAddedToCart:  boolean;
   modalRef: BsModalRef;
   imagePath: string;
-  selectedSize: string;
+  selectedSize: any;
   productQuantity: number;
   selectedProduct;
   defaultImageUrl: string = '/assets/no-img.jpg';
-  constructor(private store: Store<fromRoot.AppState>, private router: Router, private modalService: BsModalService) { }
+  constructor(private store: Store<fromRoot.AppState>,
+              private router: Router,
+              private toastr: ToastrService,
+              private modalService: BsModalService) { }
 
   ngOnInit() {
     this.store.pipe(select(fromRoot.getCart)).pipe(
@@ -33,15 +39,28 @@ export class WishlistItemComponent implements OnInit, OnDestroy {
     ).subscribe((state) => {
       this.isAddedToCart = state.isAddedToCart;
       this.productQuantity = state.productQty;
+      console.log(this.isAddedToCart, this.productQuantity)
       if(this.isAddedToCart && this.selectedProduct) {
         this.addToCartWasClicked = false;
-        const initialState = {currentProduct: this.selectedProduct, size: this.selectedSize, quantity: this.productQuantity};
+        const initialState = {currentProduct: this.selectedProduct, size: this.selectedSize['label'], quantity: this.productQuantity};
         this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
         this.selectedSize = null;
         this.selectedProduct = null;
       }
     });
     this.wishlistItem.images &&  this.wishlistItem.images.length ? this.imagePath = this.wishlistItem.images[0] : this.imagePath = this.defaultImageUrl;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes['message'] && changes['message'].currentValue) {
+      setTimeout(() => {
+        this.toastr.info(`${this.message}`);
+      }, 0);
+    }
+  }
+
+  openSelect() {
+    this.store.dispatch(new productsActions.GetAvailableSizes(this.wishlistItem['product_id']));
   }
 
   deleteProductFromWishlist() {
@@ -54,9 +73,9 @@ export class WishlistItemComponent implements OnInit, OnDestroy {
     this.addToCartWasClicked = true;
     this.selectedProduct = this.wishlistItem;
     if(this.selectedSize) {
-      // this.store.dispatch(new cartActions.AddProductToCart({
-      //   size: this.selectedSize, quantity: 1, product_id: this.wishlistItem['product_id']
-      // }));
+       this.store.dispatch(new cartActions.AddProductToCart({
+        size_id: this.selectedSize['value'], quantity: 1, product_id: this.wishlistItem['product_id']
+      }));
     }
   }
 

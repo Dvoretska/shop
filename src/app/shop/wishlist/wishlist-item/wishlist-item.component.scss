@@ -62,6 +62,7 @@
           align-items: flex-end;
           justify-content: space-between;
           margin-top:25px;
+          flex-wrap: wrap;
           .additional-block {
             display: flex;
             align-items: center;
@@ -91,7 +92,6 @@
             min-height:27px;
           }
           .delete-block {
-            margin-left: 15px;
             .delete-text {
               color: #e23f50;
             }
@@ -137,11 +137,23 @@
       .block {
         &:nth-child(2) {
           .actions-block {
-           .additional-block {
-            .text {
-              display: none;
+            .ng-select.custom {
+              width: 110px;
             }
-          }
+            .ng-select.custom .ng-select-container  {
+              width: 110px;
+            }
+            /deep/ .ng-select .ng-select-container .ng-value-container .ng-placeholder{
+              font-size: 12px;
+            }
+            /deep/ .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-disabled {
+              font-size: 12px;
+            }
+            .additional-block {
+              .text {
+                display: none;
+              }
+            }
           }
         }
       }
@@ -175,7 +187,12 @@
           .actions-block {
             flex-direction: row;
             margin-top: 10px;
+            justify-content: flex-start;
+            align-items: center;
             .details-block {
+              margin-right: 15px;
+            }
+            .cart-block {
               margin-right: 15px;
             }
           }

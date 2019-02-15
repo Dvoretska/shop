@@ -15,7 +15,8 @@
     </header>
     <app-wishlist-item *ngFor="let wishlistItem of wishlist"
                    [wishlistItem]="wishlistItem"
-                   [sizes]="sizes"
+                   [availableSizes]="availableSizes"
+                   [message]="message"
                    [addToCartWasClicked]="addToCartWasClicked">
     </app-wishlist-item>
   </ng-container>

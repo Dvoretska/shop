@@ -78,7 +78,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
     this.route.params
       .subscribe((params) => {
         this.store.dispatch(new productsActions.FetchProductDetails(+params['product_id']));
-        this.store.dispatch(new productsActions.GetAvailableSizes(+params['product_id']));
       });
     this.store.pipe(select(fromRoot.getProducts)).pipe(
       untilComponentDestroyed(this)
@@ -132,6 +131,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
         this.productIsInWishlist = false;
       }
     });
+  }
+
+  fetchAvailableSizes() {
+    this.store.dispatch(new productsActions.GetAvailableSizes(+this.route.snapshot.params['product_id']));
   }
 
   openModalCart() {
