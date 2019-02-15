@@ -139,7 +139,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {;
 
   openModalCart() {
     if(this.authService.isAuthenticated()) {
-      if(this.selectedSize) {
+      if(this.selectedSize && this.selectedSize['value']) {
         this.store.dispatch(new cartActions.AddProductToCart({
           size_id: this.selectedSize['value'], quantity: 1, product_id: this.product['id']
         }));

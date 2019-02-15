@@ -60,6 +60,7 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
       return {
         ...state,
         addToCartLoading: false,
+        isAddedToCart: false,
         message: action.payload.message
       };
     case cartActions.ADD_PRODUCT_TO_CART_FAILURE:

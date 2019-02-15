@@ -23,7 +23,7 @@
             <img src="/assets/shop/bag.svg" alt="" class="icon" (click)="openSelect($event)">
             <div class="text">Add to Cart</div>
           </ng-container>
-          <ng-select (open)="openSelect($event)" [items]="availableSizes" *ngIf="addToCartWasClicked"
+          <ng-select (change)="openSelect($event)" [items]="availableSizes" *ngIf="addToCartWasClicked"
              [(ngModel)]="selectedSize" name="size" placeholder="Choose a size" class="custom">
           </ng-select>
         </div>

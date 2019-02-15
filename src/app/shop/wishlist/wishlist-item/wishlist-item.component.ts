@@ -39,7 +39,6 @@ export class WishlistItemComponent implements OnInit, OnDestroy, OnChanges {
     ).subscribe((state) => {
       this.isAddedToCart = state.isAddedToCart;
       this.productQuantity = state.productQty;
-      console.log(this.isAddedToCart, this.productQuantity)
       if(this.isAddedToCart && this.selectedProduct) {
         this.addToCartWasClicked = false;
         const initialState = {currentProduct: this.selectedProduct, size: this.selectedSize['label'], quantity: this.productQuantity};
@@ -61,6 +60,11 @@ export class WishlistItemComponent implements OnInit, OnDestroy, OnChanges {
 
   openSelect() {
     this.store.dispatch(new productsActions.GetAvailableSizes(this.wishlistItem['product_id']));
+    if(this.selectedSize && this.selectedSize['value']) {
+     this.store.dispatch(new cartActions.AddProductToCart({
+        size_id: this.selectedSize['value'], quantity: 1, product_id: this.wishlistItem['product_id']
+     }));
+    }
   }
 
   deleteProductFromWishlist() {
@@ -72,11 +76,6 @@ export class WishlistItemComponent implements OnInit, OnDestroy, OnChanges {
   addProductToCart() {
     this.addToCartWasClicked = true;
     this.selectedProduct = this.wishlistItem;
-    if(this.selectedSize) {
-       this.store.dispatch(new cartActions.AddProductToCart({
-        size_id: this.selectedSize['value'], quantity: 1, product_id: this.wishlistItem['product_id']
-      }));
-    }
   }
 
   openModal(template: TemplateRef<any>) {
