@@ -9,7 +9,7 @@
     <img [src]="imagePath" alt="" class="cart-img">
     <div class="block">
       <div class="title brand">{{currentProduct.brand}}</div>
-      <div><span class="title">Category:</span> {{currentProduct.subcategory.category.name}}</div>
+      <div><span class="title">Category:</span> {{currentProduct.subcategory.category['name']}}</div>
       <div><span class="title">Size:</span> {{size}}</div>
     </div>
     <div class="block">

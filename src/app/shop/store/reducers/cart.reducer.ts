@@ -73,7 +73,8 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
     case cartActions.REMOVE_IS_ADDED_TO_CART:
       return {
         ...state,
-        isAddedToCart: null
+        isAddedToCart: null,
+        message: ''
       };
     case cartActions.FETCH_CART:
       return {

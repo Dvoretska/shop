@@ -39,6 +39,7 @@ export class WishlistItemComponent implements OnInit, OnDestroy, OnChanges {
     ).subscribe((state) => {
       this.isAddedToCart = state.isAddedToCart;
       this.productQuantity = state.productQty;
+      console.log(this.selectedProduct)
       if(this.isAddedToCart && this.selectedProduct && this.selectedSize) {
         this.addToCartWasClicked = false;
         const initialState = {currentProduct: this.selectedProduct, size: this.selectedSize['label'], quantity: this.productQuantity};
@@ -98,5 +99,7 @@ export class WishlistItemComponent implements OnInit, OnDestroy, OnChanges {
     this.router.navigate(['shop/products', this.wishlistItem.product_id]);
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.store.dispatch(new cartActions.RemoveIsAddedToCart());
+  }
 }

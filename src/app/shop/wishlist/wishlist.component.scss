@@ -48,6 +48,7 @@
   position: absolute;
   top: 70px;
   left: 50%;
+  transform: translateY(-50%);
 }
 
 @media screen and (max-width:991px){
