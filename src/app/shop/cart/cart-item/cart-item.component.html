@@ -28,9 +28,16 @@
         <span>${{cartItem.amount}}</span>
       </div>
     </div>
-    <div class="delete-block" #deleteBlock (click)="deleteProductFromCart()">
+    <div class="delete-block" #deleteBlock (click)="openModal(modalDialog)">
       <img src="/assets/waste-bin.svg" alt="" class="waste-icon">
       <div class="delete-text">Delete</div>
     </div>
+    <ng-template #modalDialog>
+      <div class="modal-body text-center confirm-body">
+        <p>Do you want to delete this product from cart?</p>
+        <button type="button" class="btn btn-primary cta" (click)="confirm()">Yes</button>
+        <button type="button" class="btn btn-danger cta" (click)="decline()">No</button>
+      </div>
+    </ng-template>
   </div>
 </div>

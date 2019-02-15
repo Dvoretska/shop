@@ -117,6 +117,7 @@ export function cartReducer(state: CartState =initialState, action: cartActions.
     case cartActions.DECREASE_QUANTITY_OF_PRODUCT_IN_CART:
       return {
         ...state,
+        message: '',
         decreaseCartLoading: true
       };
     case cartActions.DECREASE_QUANTITY_OF_PRODUCT_IN_CART_SUCCESS:

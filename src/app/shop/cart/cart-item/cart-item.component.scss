@@ -106,3 +106,74 @@
     }
   }
 }
+/deep/ .modal.show .modal-sm {
+  top: 70px;
+}
+/deep/ .confirm-body {
+  .cta {
+    display: inline-block;
+    margin: 0 7px;
+  }
+}
+
+@media screen and (max-width:768px){
+  .card-item-container {
+    .content-box {
+      .block {
+        button {
+          opacity: 1;
+          .invisible {
+            visibility: visible;
+          }
+        }
+      }
+      .delete-block {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@media screen and (max-width:576px){
+  .card-item-container {
+    .content-box {
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .block:nth-child(2) {
+        width: auto;
+      }
+      .block:nth-child(3) {
+        margin-left: 20px;
+        text-align: left;
+        width: 70%;
+      }
+      .price-wrapper {
+        color: #FF6347;
+      }
+    }
+  }
+}
+
+@media screen and (max-width:576px){
+   .card-item-container {
+    .content-box {
+      flex-direction: column;
+      .block:nth-child(1) {
+        order: 2;
+        width: 90%;
+      }
+      .block:nth-child(2) {
+        order: 1;
+        margin-bottom: 10px;
+      }
+      .block:nth-child(3) {
+        order: 3;
+      }
+      .delete-block {
+        .delete-text {
+          display: none;
+        }
+      }
+    }
+  }
+}

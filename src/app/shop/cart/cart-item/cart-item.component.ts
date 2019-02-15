@@ -1,9 +1,11 @@
-import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges, TemplateRef } from '@angular/core';
 import * as cartActions from "../../store/actions/cart.actions";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../store/reducers/reducer.factory";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {BsModalService} from "ngx-bootstrap/modal";
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-cart-item',
@@ -16,10 +18,12 @@ export class CartItemComponent implements OnInit, OnChanges {
   @Input() isAddedToCart;
   @Input() message;
   imagePath: string;
+  modalRef: BsModalRef;
 
   constructor(private store: Store<fromRoot.AppState>,
               private router: Router,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private modalService: BsModalService) { }
 
   ngOnInit() {
     this.imagePath = this.cartItem.images[0];
@@ -31,6 +35,19 @@ export class CartItemComponent implements OnInit, OnChanges {
         this.toastr.info(`${this.message}`);
       }, 0);
     }
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  confirm(): void {
+    this.deleteProductFromCart();
+    this.modalRef.hide();
+  }
+
+  decline(): void {
+    this.modalRef.hide();
   }
 
   increaseProductsQuantity() {
