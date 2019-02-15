@@ -172,6 +172,12 @@ export function productsReducer(state: ProductsState =initialState, action: prod
         sizes: [...action.payload.sizes]
       };
 
+     case productsActions.GET_AVAILABLE_SIZES:
+      return {
+        ...state,
+        availableSizes: []
+      };
+
       case productsActions.GET_AVAILABLE_SIZES_SUCCESS:
       return {
         ...state,

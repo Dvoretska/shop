@@ -18,12 +18,12 @@
           <img src="/assets/shop/eye.svg" alt="" class="icon">
           <div class="text add-text">Watch Details</div>
         </div>
-        <div class="additional-block cart-block" #addBlock (click)="addProductToCart()">
-          <ng-container *ngIf="!addToCartWasClicked">
-            <img src="/assets/shop/bag.svg" alt="" class="icon" (click)="openSelect($event)">
+        <div class="additional-block cart-block" #addBlock>
+          <div class="wrapper" *ngIf="!addToCartWasClicked" (click)="openSelect($event)">
+            <img src="/assets/shop/bag.svg" alt="" class="icon">
             <div class="text">Add to Cart</div>
-          </ng-container>
-          <ng-select (change)="openSelect($event)" [items]="availableSizes" *ngIf="addToCartWasClicked"
+          </div>
+          <ng-select (open)="chooseSize($event)" (change)="addToCart($event)" [items]="availableSizes" *ngIf="addToCartWasClicked"
              [(ngModel)]="selectedSize" name="size" placeholder="Choose a size" class="custom">
           </ng-select>
         </div>

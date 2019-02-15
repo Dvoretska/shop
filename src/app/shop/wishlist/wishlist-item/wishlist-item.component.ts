@@ -39,7 +39,7 @@ export class WishlistItemComponent implements OnInit, OnDestroy, OnChanges {
     ).subscribe((state) => {
       this.isAddedToCart = state.isAddedToCart;
       this.productQuantity = state.productQty;
-      if(this.isAddedToCart && this.selectedProduct) {
+      if(this.isAddedToCart && this.selectedProduct && this.selectedSize) {
         this.addToCartWasClicked = false;
         const initialState = {currentProduct: this.selectedProduct, size: this.selectedSize['label'], quantity: this.productQuantity};
         this.modalRef = this.modalService.show(CartModalComponent, { class : 'cart-modal', initialState });
@@ -58,8 +58,11 @@ export class WishlistItemComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  openSelect() {
+  chooseSize() {
     this.store.dispatch(new productsActions.GetAvailableSizes(this.wishlistItem['product_id']));
+  }
+
+  addToCart() {
     if(this.selectedSize && this.selectedSize['value']) {
      this.store.dispatch(new cartActions.AddProductToCart({
         size_id: this.selectedSize['value'], quantity: 1, product_id: this.wishlistItem['product_id']
@@ -73,7 +76,7 @@ export class WishlistItemComponent implements OnInit, OnDestroy, OnChanges {
     }));
   }
 
-  addProductToCart() {
+  openSelect() {
     this.addToCartWasClicked = true;
     this.selectedProduct = this.wishlistItem;
   }
