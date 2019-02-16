@@ -42,7 +42,7 @@ export class WishlistEffects {
           map((res)=>{
             return new WishlistActions.AddProductToWishlistSuccess({
              item: res['item'],
-             totalNumOfProductsInWishlist: res['count'].count
+             totalNumOfProductsInWishlist: res['count']
             });
           }),
           catchError(error => {
@@ -68,7 +68,7 @@ export class WishlistEffects {
           map((res) => {
             return new WishlistActions.DeleteProductFromWishlistSuccess({
               product_id: res['product_id'],
-              totalNumOfProductsInWishlist: res['count'][0].count
+              totalNumOfProductsInWishlist: res['count']
             });
           }),
           catchError(error => {

@@ -7,7 +7,7 @@ import * as orderActions from "../../store/actions/order.actions";
 import {select, Store} from "@ngrx/store";
 import * as fromRoot from "../../store/reducers/reducer.factory";
 import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
-
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-order',
@@ -19,11 +19,11 @@ export class OrderFormComponent implements OnInit,OnDestroy {
   orderForm: OrderForm = {
     phone: '',
     city: '',
-    first_name: '',
+    firstName: '',
     surname: '',
     email: '',
     comment: '',
-    post_code:  '',
+    postCode:  '',
     country: ''
   };
   order_number: number;
@@ -34,12 +34,17 @@ export class OrderFormComponent implements OnInit,OnDestroy {
               private router: Router,
               private pageScrollService: PageScrollService,
               @Inject(DOCUMENT) private document: any,
-              private store: Store<fromRoot.AppState>) {
+              private store: Store<fromRoot.AppState>,
+              private authService: AuthService,) {
     PageScrollConfig.defaultDuration = 1500;
   }
 
   ngOnInit() {
-    this.orderForm.email = JSON.parse(localStorage.getItem('user')).email;
+    this.authService.tokenVerify().subscribe((res) => {
+       if(res['user']) {
+          this.orderForm.email = res['user']['email'];
+       }
+    });
     let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#formContainer');
     this.pageScrollService.start(pageScrollInstance);
   }

@@ -32,15 +32,9 @@ export function orderReducer(state: OrderState = initialState, action: orderActi
         saveOrderLoading: true
       };
     case orderActions.SAVE_ORDER_SUCCESS:
-
       return {
         ...state,
         order_number: action.payload.order_number,
-        saveOrderLoading: false
-      };
-    case orderActions.SAVE_ORDER_FAILURE:
-      return {
-        ...state,
         saveOrderLoading: false
       };
     case orderActions.FETCH_ORDER:

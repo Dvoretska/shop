@@ -26,7 +26,7 @@ export class OrderEffects {
             });
           }),
           catchError(error => {
-            return from([new ErrorsActions.LoadError(error), new OrderActions.SaveOrderFailure()]);
+            return from([new ErrorsActions.LoadError(error)]);
           })
         )
       )

@@ -64,7 +64,10 @@ export class CartItemComponent implements OnInit, OnChanges {
 
   deleteProductFromCart() {
     this.store.dispatch(new cartActions.DeleteProductFromCart({
-      id: this.cartItem['id']
+      id: this.cartItem['id'],
+      product_id: this.cartItem.product_id,
+      size_id: this.cartItem.size_id,
+      quantity: this.cartItem.quantity
     }));
   }
 

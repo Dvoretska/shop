@@ -50,17 +50,23 @@ export class AddProductToCartFailure implements Action {
   constructor() {}
 }
 
+// _____________________________________________________
+
 export class OutOfStockCart implements Action {
   readonly type = OUT_OF_STOCK_CART;
 
   constructor(public payload: {message: string}) {}
 }
 
+// _____________________________________________________
+
 export class RemoveIsAddedToCart implements Action {
   readonly type = REMOVE_IS_ADDED_TO_CART;
 
   constructor() {}
 }
+
+// _____________________________________________________
 
 export class FetchCart implements Action {
   readonly type = FETCH_CART;
@@ -80,16 +86,20 @@ export class FetchCartFailure implements Action {
   constructor() {}
 }
 
+// _____________________________________________________
+
 export class ClearCart implements Action {
   readonly type = CLEAR_CART;
 
   constructor() {}
 }
 
+// _____________________________________________________
+
 export class DeleteProductFromCart implements Action {
   readonly type = DELETE_PRODUCT_FROM_CART;
 
-  constructor(public payload: {id: number}) {}
+  constructor(public payload: {id: number, product_id: number, size_id: number, quantity: number}) {}
 }
 
 export class DeleteProductFromCartSuccess implements Action {
@@ -103,6 +113,8 @@ export class DeleteProductFromCartFailure implements Action {
 
   constructor() {}
 }
+
+// _____________________________________________________
 
 export class DecreaseQuantityOfProductInCart implements Action {
   readonly type = DECREASE_QUANTITY_OF_PRODUCT_IN_CART;
@@ -121,6 +133,8 @@ export class DecreaseQuantityOfProductInCartFailure implements Action {
 
   constructor() {}
 }
+
+// _____________________________________________________
 
 export class GetTotalNumberOfProducts implements Action {
   readonly type = GET_TOTAL_NUMBER_OF_PRODUCTS;

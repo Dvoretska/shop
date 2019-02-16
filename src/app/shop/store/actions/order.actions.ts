@@ -1,9 +1,7 @@
 import { Action } from '@ngrx/store';
-import { OrderForm } from "../../models/orderForm.model";
 
 export const SAVE_ORDER = 'SAVE_ORDER';
 export const SAVE_ORDER_SUCCESS = 'SAVE_ORDER_SUCCESS';
-export const SAVE_ORDER_FAILURE = 'SAVE_ORDER_FAILURE';
 
 export const FETCH_ORDER = 'FETCH_ORDER';
 export const FETCH_ORDER_SUCCESS = 'FETCH_ORDER_SUCCESS';
@@ -26,11 +24,7 @@ export class SaveOrderSuccess implements Action {
   constructor(public payload: {order_number: number}) {}
 }
 
-export class SaveOrderFailure implements Action {
-  readonly type = SAVE_ORDER_FAILURE;
-
-  constructor() {}
-}
+// _____________________________________________________
 
 export class FetchOrder implements Action {
   readonly type = FETCH_ORDER;
@@ -50,6 +44,8 @@ export class FetchOrderFailure implements Action {
   constructor() {}
 }
 
+// _____________________________________________________
+
 export class FetchOrders implements Action {
   readonly type = FETCH_ORDERS;
 
@@ -68,10 +64,11 @@ export class FetchOrdersFailure implements Action {
   constructor() {}
 }
 
+// _____________________________________________________
+
 export type orderActions =
   SaveOrder |
   SaveOrderSuccess |
-  SaveOrderFailure |
   FetchOrder |
   FetchOrderSuccess |
   FetchOrderFailure |

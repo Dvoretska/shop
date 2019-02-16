@@ -3,23 +3,23 @@
   <div class="content-box">
     <div class="block">
       <div class="title brand">{{cartItem.brand}}</div>
-      <div><span class="title">Category:</span> {{cartItem.category}}</div>
+      <div>{{cartItem.category}}, {{cartItem.subcategory}}</div>
       <div><span class="title">Size:</span> {{cartItem.size}}</div>
     </div>
     <div class="block">
-      <button #button1 (click)="increaseProductsQuantity()">
-        <svg class="icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-           viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">
-          <path d="M55,24H34V3c0-2.762-2.238-3-5-3s-5,0.238-5,3v21H3c-2.762,0-3,2.238-3,5s0.238,5,3,5h21v21
-              c0,2.762,2.238,3,5,3s5-0.238,5-3V34h21c2.762,0,3-2.238,3-5S57.762,24,55,24z"/>
-        </svg>
-      </button>
-      <div class="quantity">{{cartItem.quantity}}</div>
-      <button  #button2 [ngClass]="{'invisible' : cartItem.quantity <= 1}" (click)="decreaseProductsQuantity()">
+      <button  #button1 [ngClass]="{'invisible' : cartItem.quantity <= 1}" (click)="decreaseProductsQuantity()">
         <svg class="icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
            viewBox="0 0 42 42" style="enable-background:new 0 0 42 42;" xml:space="preserve">
           <path d="M37.059,16H26H16H4.941C2.224,16,0,18.282,0,21s2.224,5,4.941,5H16h10h11.059C39.776,26,42,23.718,42,21
           S39.776,16,37.059,16z"/>
+        </svg>
+      </button>
+      <div class="quantity">{{cartItem.quantity}}</div>
+      <button #button2 (click)="increaseProductsQuantity()">
+        <svg class="icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+           viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">
+          <path d="M55,24H34V3c0-2.762-2.238-3-5-3s-5,0.238-5,3v21H3c-2.762,0-3,2.238-3,5s0.238,5,3,5h21v21
+              c0,2.762,2.238,3,5,3s5-0.238,5-3V34h21c2.762,0,3-2.238,3-5S57.762,24,55,24z"/>
         </svg>
       </button>
     </div>

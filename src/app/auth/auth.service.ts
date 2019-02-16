@@ -51,6 +51,10 @@ export class AuthService {
     return imageUrl;
   }
 
+  getDefaultUserImage() {
+    return '/assets/default-picture_0_0.png'
+  }
+
   getUsername() {
     const user = JSON.parse(localStorage.getItem('user'));
     if(user && user.email) {

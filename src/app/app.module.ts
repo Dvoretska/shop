@@ -70,13 +70,13 @@ import { WishlistItemComponent } from './shop/wishlist/wishlist-item/wishlist-it
 import { CommentComponent } from './blog/posts/comment/comment.component';
 import { SaleComponent } from './UI/sale/sale.component';
 import { ClockComponent } from './UI/clock/clock.component';
-import { OrderFormComponent } from './shop/order/order-form/order-form.component';
+import { OrderFormComponent } from './shop/orders/order-form/order-form.component';
 import { SpinnerComponent } from './UI/spinner/spinner.component';
-import { CurrentOrderComponent } from './shop/order/current-order/current-order.component';
+import { CurrentOrderComponent } from './shop/orders/current-order/current-order.component';
 import { RippleComponent } from './UI/ripple/ripple.component';
 import { ButtonComponent } from './UI/button/button.component';
-import { OrdersListComponent } from './shop/order/orders-list/orders-list.component';
-import { OrderItemComponent } from './shop/order/order-item/order-item.component';
+import { OrdersListComponent } from './shop/orders/orders-list/orders-list.component';
+import { OrderItemComponent } from './shop/orders/order-item/order-item.component';
 import { FilterComponent } from './shop/products/filter/filter.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminComponent } from './admin/admin.component';

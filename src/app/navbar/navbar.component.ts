@@ -47,8 +47,10 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
      this.authService.tokenVerify().subscribe((res) => {
-      this.imageUrl = res['user']['image'];
-      this.username = res['user']['email'].substring(0, res['user']['email'].lastIndexOf('@'));
+       if(res['user']) {
+          this.imageUrl = res['user']['image'] || this.authService.getDefaultUserImage();
+          this.username = res['user']['email'].substring(0, res['user']['email'].lastIndexOf('@'));
+       }
     });
     this.subscription = this.storageService.watchStorage().subscribe(() => {
         this.getCurrentUser();
@@ -58,7 +60,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.totalNumberOfProducts = state.totalNumOfProductsInCart;
-    })
+    });
     this.store.pipe(select(fromRoot.getWishlist), skip(1)).pipe(
       untilComponentDestroyed(this)
     ).subscribe((state) => {

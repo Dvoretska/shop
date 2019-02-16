@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.authService.tokenVerify().subscribe((res) => {
-      this.imageUrl = res['user']['image'];
+      this.imageUrl = res['user']['image'] || this.authService.getDefaultUserImage();
       this.username = res['user']['email'].substring(0, res['user']['email'].lastIndexOf('@'));
     });
   }
