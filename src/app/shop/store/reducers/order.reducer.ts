@@ -7,8 +7,6 @@ export class OrderState {
     public fetchOrdersLoading: boolean,
     public order_number: number,
     public order: any,
-    public orderInfo: any,
-    public orderPerson: any,
     public orders: any
   ) { }
 }
@@ -18,9 +16,7 @@ export const initialState: OrderState = {
   fetchOrderLoading: false,
   fetchOrdersLoading: false,
   order_number: null,
-  order: [],
-  orderInfo: null,
-  orderPerson: null,
+  order: null,
   orders: []
 };
 
@@ -46,13 +42,6 @@ export function orderReducer(state: OrderState = initialState, action: orderActi
       return {
         ...state,
         order: action.payload.order,
-        orderInfo: action.payload.order_info,
-        orderPerson: action.payload.order_person,
-        fetchOrderLoading: false
-      };
-    case orderActions.FETCH_ORDER_FAILURE:
-      return {
-        ...state,
         fetchOrderLoading: false
       };
 

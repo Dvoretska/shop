@@ -7,6 +7,7 @@
   width: 70%;
   margin: 0 auto;
   font-family: 'goudy_old_stylebold';
+  overflow: visible;
   .title {
     margin: 0 auto 15px;
     color: $red_color;
@@ -27,17 +28,27 @@
     width: 100%;
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
     .item-title {
-      width: 20%;
+      margin-right: 15px;
     }
     .item-text {
-      width: 80%;
     }
   }
   .total {
     margin: 15px 0;
     font-size: 22px;
-    text-decoration: underline;
+    display: inline-block;
+    position: relative;
+    &:before {
+      content: "";
+      position: absolute;
+      height: 1px;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      background-color: black;
+    }
   }
   table {
     text-align: center;
@@ -55,6 +66,7 @@
       }
       th, td{
         border: 1px solid black;
+        padding: 0 3px;
       }
     }
   }
@@ -65,7 +77,17 @@
   }
 }
 
+.html2canvas-container { width: 3000px !important; height: 3000px !important; }
+
 .loader-wrapper {
   text-align: center;
   margin-top: 50px;
+}
+
+@media screen and (max-width: 767px) {
+  .checkout-wrapper {
+    table {
+      display: block;
+    }
+  }
 }

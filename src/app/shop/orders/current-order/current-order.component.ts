@@ -7,17 +7,13 @@ import {untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 
-
 @Component({
   selector: 'app-checkout',
   templateUrl: './current-order.component.html',
   styleUrls: ['./current-order.component.scss']
 })
 export class CurrentOrderComponent implements OnInit, OnDestroy {
-  orderInfo: string;
-  orderPerson: any;
-  orders: any;
-  email:string = '';
+  order: any;
   fetchOrderLoading: boolean;
   showDetails: boolean = false;
 
@@ -30,11 +26,7 @@ export class CurrentOrderComponent implements OnInit, OnDestroy {
       untilComponentDestroyed(this)
     ).subscribe((state) => {
       this.fetchOrderLoading = state.fetchOrderLoading;
-      if(state.orderInfo) {
-        this.orderInfo = state.orderInfo;
-        this.orderPerson = state.orderPerson;
-        this.orders = state.order;
-      }
+      this.order = state.order;
     });
   }
 

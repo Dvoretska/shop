@@ -41,14 +41,11 @@ export class OrderEffects {
         this.http.get(`${environment.API_URL}/order/${payload.order_number}`).pipe(
           map((res)=>{
             return new OrderActions.FetchOrderSuccess({
-             order_info: res['order_info'],
-             order: res['order'],
-             order_person: res['order_person']
+             order: res['order']
             });
           }),
           catchError(error => {
-            return from([new ErrorsActions.LoadError(error),
-              new OrderActions.FetchOrderFailure()]);
+            return from([new ErrorsActions.LoadError(error)]);
           })
         )
       )
