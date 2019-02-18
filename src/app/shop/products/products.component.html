@@ -16,7 +16,7 @@
       </div>
       <div class="button-wrapper" *ngIf="products.length >= 3 && products.length < totalAmount && (!initLoading || !loading)">
         <button (click)="loadMore()" class="my-button load">
-          <span *ngIf="!loading">Load more</span>
+          <span>Load more</span>
           <app-spinner *ngIf="loading"></app-spinner>
         </button>
       </div>
