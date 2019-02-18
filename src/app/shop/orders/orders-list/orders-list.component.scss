@@ -4,7 +4,7 @@
   left: 50%;
 }
 .container {
-  padding: 60px 0 30px;
+  padding: 40px 0 30px;
   width: 70%;
   margin: 0 auto;
   .no-content-box {
@@ -39,8 +39,36 @@
     border-bottom: 3px solid black;
     padding: 0 15px 5px 15px;
     margin-bottom: 15px;
-    div {
+    font-family: 'goudy_old_stylebold';
+    font-size: 18px;
+    .header-item {
       flex: 1;
+      text-align: center;
     }
   }
 }
+
+@media screen and (max-width:991px){
+  .container {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width:768px){
+  .container {
+    .orders-header {
+      font-size: 14px;
+      .number {
+        flex: 2;
+      }
+    }
+  }
+}
+
+@media screen and (max-width:576px){
+  .container {
+    width: 100%;
+  }
+}
+
+

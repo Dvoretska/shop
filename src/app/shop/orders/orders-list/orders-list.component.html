@@ -10,9 +10,9 @@
   </div>
   <ng-container *ngIf="orders.length">
     <header class="orders-header">
-      <div class="amount">Order number</div>
-      <div class="text price">Total amount</div>
-      <div class="text price">Date</div>
+      <div class="header-item number">Order number</div>
+      <div class="header-item">Total amount</div>
+      <div class="header-item">Date</div>
     </header>
     <app-order-item *ngFor="let order of orders" [order]="order"></app-order-item>
   </ng-container>

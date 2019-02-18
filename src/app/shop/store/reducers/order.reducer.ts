@@ -56,11 +56,6 @@ export function orderReducer(state: OrderState = initialState, action: orderActi
         orders: action.payload.orders,
         fetchOrdersLoading: false
       };
-    case orderActions.FETCH_ORDERS_FAILURE:
-      return {
-        ...state,
-        fetchOrdersLoading: false
-      };
 
     default:
       return state;

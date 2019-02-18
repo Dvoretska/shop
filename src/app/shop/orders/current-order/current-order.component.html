@@ -1,8 +1,12 @@
 <div class="checkout-wrapper" *ngIf="!fetchOrderLoading">
   <h3 class="title" *ngIf="!showDetails">Congratulations! Your order has been placed.</h3>
+  <div class="back-block" routerLink="../../orders" *ngIf="showDetails">
+    <img src="/assets/back.jpg" alt="back-arrow" class="back-icon">
+    <span>Back to orders</span>
+  </div>
   <div id="checkout">
     <div class="order-title">
-      <span>Your order number: №{{order['order_number']}}</span>
+      <span>Order number: №{{order['order_number']}}</span>
     </div>
     <div class="info-title">Customer information:</div>
     <div>
@@ -52,9 +56,6 @@
         </tr>
       </ng-container>
     </table>
-  </div>
-  <div class="button-wrapper">
-    <app-button [text]="'Download PDF'" (onClick)="downloadPdf()"></app-button>
   </div>
 </div>
 <div class="loader-wrapper">

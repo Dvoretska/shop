@@ -8,6 +8,25 @@
   margin: 0 auto;
   font-family: 'goudy_old_stylebold';
   overflow: visible;
+  .back-block {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-family: 'goudy_old_stylebold';
+    cursor: pointer;
+    &:focus {
+      outline: none;
+      outline-color: transparent;
+    }
+    .back-icon {
+      width: 30px;
+      height: 20px;
+    }
+  }
   .title {
     margin: 0 auto 15px;
     color: $red_color;

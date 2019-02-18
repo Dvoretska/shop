@@ -8,7 +8,6 @@ export const FETCH_ORDER_SUCCESS = 'FETCH_ORDER_SUCCESS';
 
 export const FETCH_ORDERS = 'FETCH_ORDERS';
 export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
-export const FETCH_ORDERS_FAILURE = 'FETCH_ORDERS_FAILURE';
 
 
 export class SaveOrder implements Action {
@@ -48,13 +47,7 @@ export class FetchOrders implements Action {
 export class FetchOrdersSuccess implements Action {
   readonly type = FETCH_ORDERS_SUCCESS;
 
-  constructor(public payload: {orders: any}) {}
-}
-
-export class FetchOrdersFailure implements Action {
-  readonly type = FETCH_ORDERS_FAILURE;
-
-  constructor() {}
+  constructor(public payload: {orders: any[]}) {}
 }
 
 // _____________________________________________________
@@ -65,5 +58,4 @@ export type orderActions =
   FetchOrder |
   FetchOrderSuccess |
   FetchOrders |
-  FetchOrdersSuccess |
-  FetchOrdersFailure;
+  FetchOrdersSuccess;

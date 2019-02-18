@@ -63,8 +63,7 @@ export class OrderEffects {
             });
           }),
           catchError(error => {
-            return from([new ErrorsActions.LoadError(error),
-              new OrderActions.FetchOrdersFailure()]);
+            return from([new ErrorsActions.LoadError(error)]);
           })
         )
       )
