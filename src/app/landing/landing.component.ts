@@ -1,7 +1,4 @@
 import { Component, OnInit, HostListener, ElementRef, Renderer2, ViewChild } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {StorageService} from "../storage.service";
-import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-landing',
@@ -12,23 +9,9 @@ export class LandingComponent implements OnInit {
   @ViewChild('triggerSection') triggerSection: ElementRef;
   state = 'hide';
 
-  constructor(private renderer: Renderer2,
-              private route: ActivatedRoute,
-              private storageService: StorageService,
-              private authService: AuthService,
-              private router: Router) { }
+  constructor(private renderer: Renderer2) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      if(params.token) {
-        this.storageService.setItem('token', JSON.stringify(params.token));
-        this.authService.tokenVerify()
-          .subscribe((res)=>{
-             this.storageService.setItem('user', JSON.stringify(res['user']));
-            this.router.navigate(['']);
-            })
-      }
-    });
   }
 
   public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {

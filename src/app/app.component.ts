@@ -10,7 +10,4 @@ export class AppComponent {
   title = 'my-project';
   constructor(private router: Router, private route: ActivatedRoute) {}
 
-  ifAdminRouter() {
-    return /^\/admin/g.test(location.pathname)
-  }
 }

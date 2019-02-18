@@ -98,6 +98,7 @@ import { AddQuantityComponent } from './admin/products/add-quantity/add-quantity
 import { SizesActionsComponent } from './admin/sizes/sizes-actions/sizes-actions.component';
 import { AddSizeComponent } from './admin/sizes/add-size/add-size.component';
 import { LoaderComponent } from './UI/loader/loader.component';
+import { MainLayoutComponent } from './main-layout/main-layout.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: false
@@ -161,7 +162,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AddQuantityComponent,
     SizesActionsComponent,
     AddSizeComponent,
-    LoaderComponent
+    LoaderComponent,
+    MainLayoutComponent
   ],
   imports: [
     BrowserModule,

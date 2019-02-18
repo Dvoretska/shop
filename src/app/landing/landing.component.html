@@ -1,5 +1,4 @@
-<app-navbar id="nav" id="topPage"></app-navbar>
-<div class="row first-row">
+<div class="row first-row" id="nav" id="topPage">
 	<div class="col-12 my-col">
       <div class="heading-section">
         <div class="heading-section-border curly-border">
@@ -28,7 +27,7 @@
       </div>
 	</div>
 </div>
-<button class="scroll-up" pageScroll href="#topPage" [ngClass]="state ==='show' ? 'active' : 'inactive'">
+<button class="scroll-up" pageScroll href="#topPage" [pageScrollOffset]="200" [ngClass]="state ==='show' ? 'active' : 'inactive'">
   <span class="arrow-up-icon"></span>
   <span class="top">TOP</span>
 </button>

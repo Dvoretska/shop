@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { RegisterModalComponent } from '../auth/register-modal/register-modal.component';
 import { LoginModalComponent } from '../auth/login-modal/login-modal.component';
 import { StorageService } from '../storage.service';
@@ -43,14 +43,27 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
               private router: Router,
               private storageService: StorageService,
               private authService: AuthService,
-              private store: Store<fromRoot.AppState>) {}
+              private store: Store<fromRoot.AppState>,
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
-     this.authService.tokenVerify().subscribe((res) => {
-       if(res['user']) {
-          this.imageUrl = res['user']['image'] || this.authService.getDefaultUserImage();
-          this.username = res['user']['email'].substring(0, res['user']['email'].lastIndexOf('@'));
-       }
+    this.route.queryParams.subscribe(params => {
+      if(params.token) {
+        this.storageService.setItem('token', JSON.stringify(params.token));
+        this.authService.tokenVerify()
+          .subscribe((res)=>{
+            this.storageService.setItem('user', JSON.stringify(res['user']));
+            this.imageUrl = res['user']['image'] || this.authService.getDefaultUserImage();
+            this.username = res['user']['email'].substring(0, res['user']['email'].lastIndexOf('@'));
+            this.router.navigate(['']);
+          })
+      } else {
+        this.authService.tokenVerify()
+          .subscribe((res)=>{
+            this.imageUrl = res['user']['image'] || this.authService.getDefaultUserImage();
+            this.username = res['user']['email'].substring(0, res['user']['email'].lastIndexOf('@'));
+          })
+      }
     });
     this.subscription = this.storageService.watchStorage().subscribe(() => {
         this.getCurrentUser();
@@ -98,8 +111,10 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onLogout() {
-    localStorage.removeItem('user');
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.imageUrl = this.authService.getDefaultUserImage();
+    this.username = '';
     this.store.dispatch(new cartActions.ClearCart());
     this.router.navigate(['/']);
   }

@@ -31,10 +31,29 @@ import { ChangeQuantityComponent } from './admin/products/change-quantity/change
 import { SizesListComponent } from './admin/sizes/sizes-list/sizes-list.component';
 import { AddQuantityComponent } from './admin/products/add-quantity/add-quantity.component';
 import { AddSizeComponent } from './admin/sizes/add-size/add-size.component';
+import { MainLayoutComponent } from './main-layout/main-layout.component';
 
 const appRoutes: Routes = [
-  { path: '', component: LandingComponent },
-  { path: 'users', component: UsersListComponent, canActivate: [AuthGuardService] },
+  { path: '', component: MainLayoutComponent, children: [
+    { path: '', component: LandingComponent },
+    { path: 'users', component: UsersListComponent, canActivate: [AuthGuardService] },
+    { path: 'shop', component: ShopComponent, children: [
+      { path: 'products', component: ProductsComponent},
+      { path: 'products/:product_id', component: ProductDetailsComponent},
+      { path: 'wishlist', component: WishlistComponent },
+      { path: 'cart', component: CartListComponent, children: [
+        { path: 'order', component: OrderFormComponent},
+      ]},
+      { path: 'order/:order_number', component: CurrentOrderComponent },
+      { path: 'orders', component: OrdersListComponent }
+    ]},
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
+    { path: 'blog', component: BlogComponent, children: [
+      { path: '', component: PostsComponent },
+      { path: 'post/create', component: EditPostComponent },
+      { path: 'post/edit/:id', component: EditPostComponent }
+    ]},
+  ]},
   { path: 'admin/login', component: AdminLoginComponent},
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard], children: [
     { path: '', redirectTo: 'categories', pathMatch: 'full' },
@@ -50,22 +69,6 @@ const appRoutes: Routes = [
     { path: 'products/:product_id/quantity/add', component: AddQuantityComponent },
     { path: 'sizes', component: SizesListComponent },
     { path: 'sizes/add', component: AddSizeComponent },
-  ]},
-  { path: 'shop', component: ShopComponent, children: [
-    { path: 'products', component: ProductsComponent},
-    { path: 'products/:product_id', component: ProductDetailsComponent},
-    { path: 'wishlist', component: WishlistComponent },
-    { path: 'cart', component: CartListComponent, children: [
-      { path: 'order', component: OrderFormComponent},
-    ]},
-    { path: 'order/:order_number', component: CurrentOrderComponent },
-    { path: 'orders', component: OrdersListComponent }
-  ]},
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
-  { path: 'blog', component: BlogComponent, children: [
-    { path: '', component: PostsComponent },
-    { path: 'post/create', component: EditPostComponent },
-    { path: 'post/edit/:id', component: EditPostComponent }
   ]},
   { path: '**',  component: NotFoundComponent }
 ];
