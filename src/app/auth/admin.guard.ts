@@ -13,13 +13,13 @@ export class AdminGuard implements CanActivate {
 
   canActivate() {
     if(!this.authService.isAuthenticated()) {
-      this.router.navigate(['admin/login']);
+      this.router.navigate(['/']);
       return false;
     } else {
       const token = localStorage.getItem('token');
       const tokenPayload = decode(token);
       if(tokenPayload.role !== 'admin') {
-        this.router.navigate(['admin/login']);
+        this.router.navigate(['/']);
         return false;
       }
     }
